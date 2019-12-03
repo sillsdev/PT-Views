@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+    <!--
+    #############################################################
+    # Name:     	TNDD-table-view.xslt
+    # Purpose:  	Provide a table view of TNDD data with \sl1 and up to three columns of \ml1 data.
+    # Part of:  	PT-Views - https://github.com/SILAsiaPub/PT-Views
+    # Concept:	Mark Penny
+    # XSLT:		Ian McQuay <ian_mcquay@sil.org>
+    # CSS:		Ian McQuay, Mark Penny
+    # Created:  	2019-12-04
+    # Copyright:	(c) 2019 SIL International
+    # Licence:  	<MIT>
+    ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!-- Credits: Mark Penny for the idea; Ian McQuay for the XSLT and CSS details to make it all work! -->
     <xsl:output method="html"/>
