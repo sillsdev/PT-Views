@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!--
+<!--
     #############################################################
     # Name:     		TNDD-ml1-option2.xslt
     # Purpose:  		Provide a view of the second \ml1 after the \sl1 .
@@ -33,14 +33,24 @@
         </span>
         <xsl:choose>
             <xsl:when test="$post-style-2 = 'ml1' and $post-style-4 = 'ml1' and $post-style-3 = 'mlor'">
+                <!-- handle \p after \sl1 -->
                 <xsl:apply-templates select="following-sibling::*[4]" mode="only"/>
             </xsl:when>
             <xsl:when test="$post-style-1 = 'ml1' and $post-style-3 = 'ml1'  and $post-style-2 = 'mlor'">
+                <!-- handle \ml1 in the correct order -->
                 <xsl:apply-templates select="following-sibling::*[3]" mode="only"/>
+            </xsl:when>
+            <xsl:when test="$post-style-2 = 'ml1'">
+                <!-- handle \p after \sl1 but no 2nd \ml1 -->
+                <xsl:text>((</xsl:text>
+                <xsl:apply-templates select="following-sibling::*[2]" mode="only"/>
+                <xsl:text>))</xsl:text>
             </xsl:when>
             <xsl:otherwise>
                 <span class="{@style}">
-                    <xsl:text>((...))</xsl:text>
+                    <xsl:text>((</xsl:text>
+<xsl:apply-templates select="following-sibling::*[1]" mode="only"/>
+                    <xsl:text>))</xsl:text>
                 </span>
             </xsl:otherwise>
         </xsl:choose>
