@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!--
+<!--
     #############################################################
     # Name:     	TNDD-1st-mng-line.xslt
     # Purpose:  	Provide a view of the first \ml1 after the \sl1 .
@@ -19,12 +19,12 @@
         </div>
     </xsl:template>
     <xsl:template match="para">
-        <xsl:text><!-- Do nothing for most --></xsl:text>
+        <!-- Do nothing for most -->
         <xsl:apply-templates select="verse"/>
     </xsl:template>
     <xsl:template match="para[@style='sl1']">
         <span class="verse">
-        <xsl:apply-templates select="text()[1]" mode="verse"/>
+            <xsl:apply-templates select="text()[1]" mode="verse"/>
         </span>
     </xsl:template>
     <xsl:template match="para[@style='ml1']">
@@ -67,6 +67,9 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:if test="translate(normalize-space($v),'a','')= normalize-space($v)">
+            <xsl:text> </xsl:text>
+        </xsl:if>
         <xsl:value-of select="normalize-space($v)"/>
     </xsl:template>
 </xsl:stylesheet>

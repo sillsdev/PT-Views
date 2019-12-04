@@ -53,7 +53,7 @@
         <xsl:variable name="post-style-1" select="following-sibling::*[1]/@style"/>
         <xsl:variable name="post-style-2" select="following-sibling::*[2]/@style"/>
         <xsl:variable name="post-style-3" select="following-sibling::*[3]/@style"/>
-        <xsl:variable name="child-style-1" select="child::*[1]/@style"/>
+        <xsl:variable name="child-style-1" select="*[1]/@style"/>
         <xsl:variable name="v" select="normalize-space(preceding-sibling::*[@style = 'sl1'][1]/text()[1])"/>
         <xsl:if test="$post-style-1 = 'ml1'">
             <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>There is a missing \mlor marker between this \ml1 and the next \ml1</div>
@@ -96,12 +96,19 @@
             <xsl:when test="@style = 'imp'">
                 <xsl:variable name="pre-style-1" select="preceding-sibling::*[1]/@style"/>
                 <xsl:variable name="post-style-1" select="following-sibling::*[1]/@style"/>
-                <xsl:if test="$pre-style-1 = not('brk')">
-                    <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>This marker containing <span class="example"><xsl:value-of select="$text"/></span> should be preceded by <span class="example">\brk ⌊\brk*</span></div>
-                </xsl:if>
-                <xsl:if test="$post-style-1 = not('brk')">
-                    <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>This marker containing <span class="example"><xsl:value-of select="$text"/></span> should be followed by <span class="example">\brk ⌋\brk*</span></div>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="string-length(normalize-space(.))= 0">
+                        <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>This marker has no purpose being empty! It should contain words or be removed.</div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="$pre-style-1 = not('brk')">
+                            <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>This marker containing <span class="example"><xsl:value-of select="$text"/></span> should be preceded by <span class="example">\brk ⌊\brk*</span></div>
+                        </xsl:if>
+                        <xsl:if test="$post-style-1 = not('brk')">
+                            <div class="error"><span class="verse"><xsl:value-of select="$v"/> \<xsl:value-of select="@style"/>&#x2003;</span>This marker containing <span class="example"><xsl:value-of select="$text"/></span> should be followed by <span class="example">\brk ⌋\brk*</span></div>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
