@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
     #############################################################
-    # Name:     		TNDD-ml1-option3.xslt
+    # Name:     		TNDD-3rd-mng-line.xslt
     # Purpose:  		Provide a view of the third \ml1 after the \sl1 .
     # Part of:  		PT-Views - https://github.com/SILAsiaPub/PT-Views
     # Concept:		Mark Penny
@@ -11,7 +11,7 @@
     # Licence:  		<MIT>
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="html" version="5" indent="yes"/>
+    <xsl:output method="html" version="5" indent="no"/>
     <xsl:strip-space elements="*"/>
     <xsl:template match="/*">
         <div class="usfm">

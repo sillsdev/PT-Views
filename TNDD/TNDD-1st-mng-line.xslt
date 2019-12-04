@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <!--
     #############################################################
-    # Name:     	TNDD-ml1-option1.xslt
+    # Name:     	TNDD-1st-mng-line.xslt
     # Purpose:  	Provide a view of the first \ml1 after the \sl1 .
-    # Part of:  	PT-Views - https://github.com/SILAsiaPub/PT-Views
+    # Part of:  		PT-Views - https://github.com/SILAsiaPub/PT-Views
     # Concept:	Mark Penny
     # XSLT:		Ian McQuay <ian_mcquay@sil.org>
     # CSS:		Ian McQuay
@@ -44,12 +44,12 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-    <xsl:template match="verse">
+    <xsl:template match="verse[@number]">
         <br/>
     </xsl:template>
     <xsl:template match="chapter">
         <style type="text/css">
-            .ml1 {display:inline-block;vertical-align: text-top;}
+            .ml1 {}
 		.imp {color:blue}
 		.tr {font-size:120%;font-weight:bold}
 		.brk {vertical-align: sub;}
