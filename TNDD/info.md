@@ -8,22 +8,30 @@ This set of files is to help content creators and checkers to see the data in di
 - TNDD-3rd-mng-line -- This displays the 3rd meaning line and is similar to the 1st and 2nd line, but if there no data for a third meaning (\ml1) line the then that data is displayed in (( with a brown color if it comes from the 2nd meaning and a red-brown if it come from he 1st first line.
 - TNDD-schema-check -- This aids content creators to see that there is a markup error that PT does not catch. This is an initial attempt, so may have issues.
 
-## Automated install
+## Installion methods
 
-- Download **Paratext-TNDD-Views-installer.exe** from the https://github.com/SILAsiaPub/PT-Views/releases from the latest release.
-- Double click on the **Paratext-TNDD-Views-installer.exe** file, in your Downloads folder.
-- Wait while your Antivirus inspects it, ignore error messages. These are caused by the Antivirus interupting installer.
-- When the User Account Control appears asking "Do you want to allow this app from and unknown publisher to make changes to this device?" click Yes.
-- Follow the prompts.
+### Do the following for all methods
+- Download **Views.zip** from the https://github.com/SILAsiaPub/PT-Views/releases from the latest release.
+- In your Downloads folder, right click on the Views.zip file
+- Select Extract all...
+- Ensuring "Show extracted files when complete" is checked, click on **Extract**.
+
+### Option 1 script install
+- Double click on the **install_Paratext_TNDD_Views.cmd**
+  - If all went well the black box dissappears. If not it will stay and give failure info
+- Press any key to close the Command window. Or click on the X box in the top right corner
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 
+### Option 2 Drag and drop with mouse
+  - Click and drag the Views folder into the **My Paratext 8(or 9) Project**
+- Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
+- If the Views do not show you may have dragged the Views folder to the wrong place.
 
-## Manual install
-
-- Download **Source code (zip)** from the https://github.com/SILAsiaPub/PT-Views/releases from the latest release.
-- Unzip the file
-- Copy the *.xml and *.xslt files from the TNDD folder
+### Option 3 Copy files manually
+- Copy the *.xml and *.xslt files from the Views folder
+- Navigate to your My Paratext 8(or 9) Projects folder
+- Look for the **Views** folder
+- If the **Views** folder does not exist then create it
 - Paste the copied files into your 'My Paratext 8(or 9) Projects\Views' folder
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
-
-
+- If the Views do not show you may have copied the file to the wrong place.
