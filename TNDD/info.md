@@ -1,4 +1,4 @@
-# TNDD Paratext Views release
+# Paratext TNDD Views release
 
 This set of files is to help content creators and checkers to see the data in different ways. There are 5 views:
 
