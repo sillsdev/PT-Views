@@ -21,7 +21,7 @@ This set of files is to help content creators and checkers to see the data in di
 ## Manual install
 
 - Download **Source code (zip)** from the https://github.com/SILAsiaPub/PT-Views/releases from the latest release.
-- Unzip the source.zip file
+- Unzip the file
 - Copy the *.xml and *.xslt files from the TNDD folder
 - Paste the copied files into your 'My Paratext 8(or 9) Projects\Views' folder
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
