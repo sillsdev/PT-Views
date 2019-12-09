@@ -45,7 +45,7 @@
         </span>
     </xsl:template>
     <xsl:template match="verse[@number]">
-        <br/>
+        <br/><verse number="{@number}"/>
     </xsl:template>
     <xsl:template match="chapter">
         <style type="text/css">
