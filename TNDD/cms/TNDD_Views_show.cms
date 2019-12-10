@@ -1,6 +1,6 @@
 \check Show TNDD Views
 \submenu Custom Views
-\description (Ignore the "Input Project" box above.) TNDD Views aids content creators and checkers in viewing the data in various ways. Thre are five views.
+\description (Ignore the "Input Project" box above.) This tool will show hidden TNDD Views in the Views menu, after restart. \n TNDD Views aids content creators and checkers in viewing the data in various ways. Thre are five views.
 \programToRun Python
 \script TNDD_show.py
 \helpFile TNDD-Views Help.txt
