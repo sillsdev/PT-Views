@@ -1,0 +1,14 @@
+\check Show TNDD Views
+\submenu Custom Views
+\description (Ignore the "Input Project" box above.) TNDD Views aids content creators and checkers in viewing the data in various ways. Thre are five views.
+\programToRun Python
+\script TNDD_show.py
+\helpFile TNDD-Views Help.txt
+\noText
+\rank 1
+\utf8
+
+\optionName ptviewsfolder
+\optionLocalizedName Folder location of the Paratext Projects.
+\optionDescription This setting should be checked for your machine.
+\optionDefault D:\My Paratext 8 Projects\Views\

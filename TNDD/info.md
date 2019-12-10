@@ -17,6 +17,7 @@ This set of files is to help content creators and checkers to see the data in di
 
 ### Option 2 Drag and drop with mouse
 - Click and drag the Views folder into the **My Paratext 8(or 9) Project** folder
+- Select the four files in the cms folder and drag them to your **cms** folder in your **My Paratext 8(or 9) Project** folder
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 - If the Views do not show you may have dragged the Views folder to the wrong place.
 
@@ -25,14 +26,47 @@ This set of files is to help content creators and checkers to see the data in di
 - Navigate to your My Paratext 8(or 9) Projects folder
 - Look for the **Views** folder
 - If the **Views** folder does not exist then create it
-- Paste the copied files into your 'My Paratext 8(or 9) Projects\Views' folder
+- Paste the copied files into your **My Paratext 8(or 9) Projects\Views** folder
+- Copy the four files from the **My Paratext 8(or 9) Projects\Views\cms** folder
+- Navigate to your **My Paratext 8(or 9) Projects** folder
+- Look for the **cms** folder
+- Paste the copied files into your **My Paratext 8(or 9) Projects\cms** folder
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
+- Under the **Project Tools > Custom Tools > Custom Views ** menu you will have two items to hide or show the TNDD Views as part of your views.
 - If the Views do not show you may have copied the file to the wrong place.
 
+## Managing Custom Views
+
+### Hiding TNDD Views
+- In Paratext click on the hamburger icon in any project.
+- In the **Tools** menu hover over or click on **Custom tools**
+- In  **Custom tools** click on **Custom Views**
+- Click on **Hide TNDD Views**
+  - The first time only, 
+  - In the **Hide TNDD Views** dialog click the **Options...** button.
+  - Check the path to Paratext 8/9 Projects is correct. Adjust if needed.
+  - Click **OK** to close the **Options** dialog
+- Click the **OK** on the **Hide TNDD Views** dialog
+- Restart Paratext
+
+### Show TNDD Views tha were previously hidden
+- In Paratext click on the hamburger icon in any project.
+- In the **Tools** menu hover over or click on **Custom tools**
+- In  **Custom tools** click on **Custom Views**
+- Click on **Show TNDD Views**
+  - The first time only, in the dialog that pops up
+  - In the **Show TNDD Views** dialog click the **Options...** button.
+  - Check the path to Paratext 8/9 Projects is correct. Adjust if needed.
+  - Click **OK** to close the **Options** dialog
+- Click the **OK** on the **Show TNDD Views** dialog
+- Restart Paratext
+
 ## Uninstall
-- You could just delete the Views folder if you only have TNDD views,
+- Just double click the **Uninstall-TNDD-Views.cmd** in original extracted View.zip folder.
+- or You could just delete the Views folder if you only have TNDD views,
 - or You could just delete the .xml files in the Views folder and those views would no longer appear,
 - or you could delete all the files in the Views folder.
+- also delete all files starting with TNDD from the **My Paratext 8(or 9) Projects\Views\cms** folder if not using the uninstaller.
 
 ## Views
 
