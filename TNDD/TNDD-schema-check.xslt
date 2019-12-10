@@ -381,21 +381,21 @@ e=\tr </xsl:text>
                 <xsl:with-param name="curcontent" select="."/>
             </xsl:call-template>
         </xsl:if>
-<xsl:if test="count(char[@style = 'tbb'])  != 1">
-<!-- SC1 -->
-<xsl:variable name="data">
-<xsl:text>t=SC1 There should be one 
+        <xsl:if test="count(char[@style = 'tbb'])  != 1">
+            <!-- SC1 -->
+            <xsl:variable name="data">
+                <xsl:text>t=SC1 There should be one 
 e=\tbb __\tbb*
 t= element in this 
 e=\tr </xsl:text>
-</xsl:variable>
-<xsl:call-template name="error">
-<xsl:with-param name="v" select="$v"/>
-<xsl:with-param name="sty" select="@style"/>
-<xsl:with-param name="data" select="$data"/>
-<xsl:with-param name="curcontent" select="."/>
-</xsl:call-template>
-</xsl:if>
+            </xsl:variable>
+            <xsl:call-template name="error">
+                <xsl:with-param name="v" select="$v"/>
+                <xsl:with-param name="sty" select="@style"/>
+                <xsl:with-param name="data" select="$data"/>
+                <xsl:with-param name="curcontent" select="."/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
     <xsl:template name="error">
         <xsl:param name="v"/>
