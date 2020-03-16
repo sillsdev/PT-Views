@@ -1,14 +1,14 @@
 \check Show TNDD Views
 \submenu Custom Views
-\description (Ignore the "Input Project" box above.) This tool will show hidden TNDD Views in the Views menu, after restart. \n TNDD Views aids content creators and checkers in viewing the data in various ways. Thre are five views.
+\description (Ignore the "Input Project" box above.) This tool will show hidden TNDD Views in the Views menu, after restart. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. Thre are five views.
 \programToRun Python
-\script TNDD_show.py
-\helpFile TNDD-Views Help.txt
+\script TNDD_Views_action.py
+\helpFile info.md
 \noText
 \rank 1
 \utf8
 
-\optionName ptviewsfolder
-\optionLocalizedName Folder location of the Paratext Projects.
-\optionDescription This setting should be checked for your machine.
-\optionDefault D:\My Paratext 8 Projects\Views\
+\optionName action
+\optionLocalizedName Action to be done.
+\optionDescription Do not change the default.
+\optionDefault show
