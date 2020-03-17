@@ -65,7 +65,7 @@ This set of files is to help content creators and checkers to see the data in di
 
 ## Uninstall
 - Just double click the **Uninstall-TNDD-Views.cmd** in original extracted View.zip folder.
-- Or find in: **C:\Users\Public\TNdd-Views** folder the file **Uninstall-TNDD-Views.cmd** and double click that 
+- Or find in: **C:\Users\Public\TNdd-Views** folder, the file **Uninstall-TNDD-Views.cmd** and double click that 
 - or You could just delete the Views folder if you only have TNDD views,
 - or You could just delete the .xml files in the Views folder and those views would no longer appear,
 - or you could delete all the files in the Views folder.
