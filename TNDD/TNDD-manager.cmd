@@ -1,5 +1,5 @@
 @echo off
-set tnddappdata=%USERPROFILE%\AppData\Roaming\TNDD-Views
+set tnddappdata=C:\Users\Public\TNDD-Views
 set action=%1
 if not defined action (
   if exist "%tnddappdata%\TNDD-action.cmd" (
