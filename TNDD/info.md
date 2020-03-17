@@ -24,7 +24,7 @@ This set of files is to help content creators and checkers to see the data in di
 ### Option 3 Drag and drop with mouse
 - Click and drag the Views folder into the **My Paratext 8(or 9) Project** folder
 - Select the four files in the cms folder and drag them to your **cms** folder in your **My Paratext 8(or 9) Project** folder
-- Create a folder: %USERPROFILE%\AppData\Roaming\TNDD-Views
+- Create a folder: **C:\Users\Public\TNdd-Views**
 - Select the TNDD-manager.cmd and the Uninstall-TNDD-Views.cmd filea and drag them to folder created in the previous line
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 - If the Views do not show you may have dragged the Views folder to the wrong place.
@@ -39,7 +39,7 @@ This set of files is to help content creators and checkers to see the data in di
 - Navigate to your **My Paratext 8(or 9) Projects** folder
 - Look for the **cms** folder
 - Paste the copied files into your **My Paratext 8(or 9) Projects\cms** folder
-- Create a folder: %USERPROFILE%\AppData\Roaming\TNDD-Views
+- Create a folder: **C:\Users\Public\TNdd-Views**
 - Select the TNDD-manager.cmd and the Uninstall-TNDD-Views.cmd filea and copy them to folder created in the previous line
 - Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 - Under the **Project Tools > Custom Tools > Custom Views ** menu you will have two items to hide or show the TNDD Views as part of your views.
@@ -65,7 +65,7 @@ This set of files is to help content creators and checkers to see the data in di
 
 ## Uninstall
 - Just double click the **Uninstall-TNDD-Views.cmd** in original extracted View.zip folder.
-- Or find in: %userprofile%\AppData\Roaming\TNdd-Views the file **Uninstall-TNDD-Views.cmd** and double click that 
+- Or find in: **C:\Users\Public\TNdd-Views** folder the file **Uninstall-TNDD-Views.cmd** and double click that 
 - or You could just delete the Views folder if you only have TNDD views,
 - or You could just delete the .xml files in the Views folder and those views would no longer appear,
 - or you could delete all the files in the Views folder.
