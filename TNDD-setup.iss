@@ -6,7 +6,7 @@
 #define MyAppPublisher "SILAisaPub"
 #define MyAppURL "https://github.com/SILAsiaPub/PT-Views/tree/master/TNDD"
 #define MPP "{code:GetPTProjectFolder}"
-#define MAppData "{%USERPROFILE}\AppData\Roaming\TNDD-Views"
+#define MAppData "C:\Users\Public\TNDD-Views"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -39,6 +39,7 @@ Source: "TNDD\*.xml"; DestDir: "{app}"
 Source: "TNDD\*.xslt"; DestDir: "{app}"
 Source: "TNDD\cms\*.py"; DestDir: "{#MPP}\cms"
 Source: "TNDD\cms\*.cms"; DestDir: "{#MPP}\cms"
+Source: "TNDD\info.md"; DestDir: "{#MPP}\cms"
 Source: "TNDD\TNDD*.cmd"; DestDir: "{#MAppData}"
 Source: "TNDD\Uninstall*.cmd"; DestDir: "{#MAppData}"
 
@@ -59,6 +60,6 @@ function GetPTProjectFolder(Default: String): String;
     else if RegQueryStringValue(HKLM,'SOFTWARE\WOW6432Node\Paratext\9','Settings_Directory',ResultStr) then
        Result:=ResultStr
      else
-       Result:='C:\My Paratext 8 Projects\Views'
+       Result:='C:\My Paratext 8 Projects'
     end;  
   end.

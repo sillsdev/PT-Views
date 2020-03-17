@@ -7,7 +7,6 @@
 \noText
 \rank 1
 \utf8
-
 \optionName action
 \optionLocalizedName Action to be done.
 \optionDescription Do not change the default.

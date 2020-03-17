@@ -3,8 +3,8 @@
 
 # Import OS to be able to output correctly to Windows 
 import os
-actionbatchfile = "%USERPROFILE%\AppData\Roaming\TNDD-Views\TNDD-action.cmd"
-batchfile = "%USERPROFILE%\AppData\Roaming\TNDD-Views\TNDD-manager.cmd"
+actionbatchfile = "C:\Users\Public\TNDD-Views\TNDD-action.cmd"
+batchfile = "C:\Users\Public\TNDD-Views\TNDD-manager.cmd"
 commandstring = "echo set action=" + action + " > " + actionbatchfile
 os.system(commandstring)
 os.startfile(batchfile)

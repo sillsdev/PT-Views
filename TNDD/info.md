@@ -14,7 +14,7 @@ This set of files is to help content creators and checkers to see the data in di
 
 
 ### Option 1 Use the Paratext-TNDD-Views-installer.exe 
-- This is an unsigned installer so your Anti Virus may object.
+- This is an unsigned installer so your Anti-Virus may object.
 
 ### Option 2 script install
 - Double click on the **install_Paratext_TNDD_Views.cmd**
