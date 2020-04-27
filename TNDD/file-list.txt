@@ -1,5 +1,7 @@
 info.md
 install_Paratext_TNDD_Views.cmd
+Uninstall-TNDD-Views.cmd
+TNDD-manager.cmd
 TNDD-1st-mng-line.xml
 TNDD-1st-mng-line.xslt
 TNDD-2nd-mng-line.xml
@@ -10,11 +12,8 @@ TNDD-table-view.xml
 TNDD-table-view.xslt
 TNDD-tag-errors.xml
 TNDD-tag-errors.xslt
-TNDD-Views-cmd-shell.cmd
-Uninstall-TNDD-Views.cmd
-cms\TNDD_hide.py
-cms\TNDD_show.py
+cms\TNDD_Views_action.py
 cms\TNDD_Views_hide.cms
 cms\TNDD_Views_show.cms
-cmd\hide.cmd
-cmd\show.cmd
+cms\TNDD_Views_uninstall.cms
+
