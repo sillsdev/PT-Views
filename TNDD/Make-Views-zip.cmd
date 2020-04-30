@@ -7,4 +7,4 @@ echo off
 @echo Making Zip of distribution files
 @echo.
 if exist Views.zip del Views.zip
-7z a -tzip ..\Installers\Views.zip @file-list.txt
+7z a -tzip ..\Installers\TNDD-Views.zip @file-list.txt
