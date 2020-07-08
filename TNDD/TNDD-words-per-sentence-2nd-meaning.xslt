@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     #############################################################
-    # Name:     	TNDD-words-per-sentence-1st-meaning.xslt
-    # Purpose:  	Combine first \ml1 and make into paragraphs count words per sentence.
+    # Name:     	TNDD-words-per-sentence-2nd-meaning.xslt
+    # Purpose:  	Combine second \ml1 and make into paragraphs count words per sentence.
     # Part of:  		https://github.com/SILAsiaPub/PT-views
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
     # Created:  	2020-07-08
@@ -155,8 +155,8 @@
         <xsl:value-of select="."/>
     </xsl:template>
     <xsl:template match="*[@style = 'ml1']" mode="s1">
-        <xsl:variable name="pre-style" select="preceding-sibling::*[1]/@style"/>
-        <xsl:variable name="pre-style2" select="preceding-sibling::*[2]/@style"/>
+        <xsl:variable name="pre-style" select="preceding-sibling::*[3]/@style"/>
+        <xsl:variable name="pre-style2" select="preceding-sibling::*[4]/@style"/>
         <xsl:if test="$pre-style = 'sl1' or $pre-style2 = 'sl1' ">
             <xsl:apply-templates mode="s1"/>
             <xsl:text> </xsl:text>
