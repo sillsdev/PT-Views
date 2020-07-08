@@ -38,16 +38,16 @@
             .words {display:inline-block;padding: 0 0 3pt 3pt;}
             .count {display:inline-block;width:35px;font-weight:bold;padding: 0 1em 0 1em}
             .lt9, .green {background:lawngreen}
-.gt8lt11, .yellow {background:yellow}
-.gt11lt17, .gold {background:gold}
-.gt16lt21, .orange {background:orange}
-.gt20lt25, .darkorange {background:darkorange}
-.gt24lt29, .tomato {background:tomato}
-.gt28, .red {background:red}
-table {margin-left: 3em}
+            .yellow {background:yellow}
+            .gold {background:gold}
+            .orange {background:orange}
+            .darkorange {background:darkorange}
+            .tomato {background:tomato}
+            .red {background:red}
+            table {margin-left: 3em}
 </xsl:text>
         </xsl:element>
-        <xsl:element name="table">
+       <!--  <xsl:element name="table">
             <xsl:element name="tr">
                 <xsl:element name="th">
                     <xsl:text>Color key</xsl:text>
@@ -157,7 +157,7 @@ table {margin-left: 3em}
                     <xsl:text>-</xsl:text>
                 </xsl:element>
             </xsl:element>
-        </xsl:element>
+        </xsl:element> -->
         <xsl:call-template name="parse-sent">
             <xsl:with-param name="string" select="$step3"/>
         </xsl:call-template>
@@ -249,6 +249,9 @@ table {margin-left: 3em}
         <xsl:value-of select="."/>
         <xsl:text>}</xsl:text>
     </xsl:template>
+    <xsl:template match="annot" mode="s1">
+        <xsl:value-of select="."/>
+    </xsl:template>
     <xsl:template match="text()" mode="s1">
         <xsl:value-of select="."/>
     </xsl:template>
@@ -324,6 +327,7 @@ table {margin-left: 3em}
     <xsl:template name="reorder-quotes">
         <xsl:param name="string"/>
         <xsl:choose>
+<!-- handle double smart quotes after sentence end punct -->
             <xsl:when test="contains($string,'.”')">
                 <xsl:variable name="pre-str" select="substring-before($string,'.”')"/>
                 <xsl:variable name="post-str" select="substring-after($string,'.”')"/>
@@ -352,6 +356,36 @@ table {margin-left: 3em}
                     <xsl:with-param name="string" select="concat($pre-str,'”:',$post-str)"/>
                 </xsl:call-template>
             </xsl:when>
+<!-- handle single smart quotes after sentence end punct -->
+            <xsl:when test="contains($string,'.’')">
+                <xsl:variable name="pre-str" select="substring-before($string,'.’')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'.’')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'’.',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'?’')">
+                <xsl:variable name="pre-str" select="substring-before($string,'?’')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'?’')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'’?',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'!’')">
+                <xsl:variable name="pre-str" select="substring-before($string,'!’')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'!’')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'’!',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,':’')">
+                <xsl:variable name="pre-str" select="substring-before($string,':’')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'!’')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'’:',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+<!-- handle " double straight quotes after sentence end punct -->
             <xsl:when test="contains($string,'.&#34;')">
                 <xsl:variable name="pre-str" select="substring-before($string,'.&#34;')"/>
                 <xsl:variable name="post-str" select="substring-after($string,'.&#34;')"/>
@@ -375,9 +409,67 @@ table {margin-left: 3em}
             </xsl:when>
             <xsl:when test="contains($string,':&#34;')">
                 <xsl:variable name="pre-str" select="substring-before($string,':&#34;')"/>
-                <xsl:variable name="post-str" select="substring-after($string,'!&#34;')"/>
+                <xsl:variable name="post-str" select="substring-after($string,':&#34;')"/>
                 <xsl:call-template name="reorder-quotes">
                     <xsl:with-param name="string" select="concat($pre-str,'&#34;:',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+<!-- handle hair space u200A after sentence end punct assuming it is between a single and double quote -->
+            <xsl:when test="contains($string,'.&#x200A;')">
+                <xsl:variable name="pre-str" select="substring-before($string,'.&#x200A;')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'.&#x200A;')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'&#x200A;.',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'?&#x200A;')">
+                <xsl:variable name="pre-str" select="substring-before($string,'?&#x200A;')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'?&#x200A;')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'&#x200A;?',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'!&#x200A;')">
+                <xsl:variable name="pre-str" select="substring-before($string,'!&#x200A;')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'!&#x200A;')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'&#x200A;!',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,':&#x200A;')">
+                <xsl:variable name="pre-str" select="substring-before($string,':&#x200A;')"/>
+                <xsl:variable name="post-str" select="substring-after($string,':&#x200A;')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'&#x200A;:',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+<!-- handle } after sentence end punct -->
+            <xsl:when test="contains($string,'.}')">
+                <xsl:variable name="pre-str" select="substring-before($string,'.}')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'.}')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'}.',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'?}')">
+                <xsl:variable name="pre-str" select="substring-before($string,'?}')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'?}')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'}?',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,'!}')">
+                <xsl:variable name="pre-str" select="substring-before($string,'!}')"/>
+                <xsl:variable name="post-str" select="substring-after($string,'!}')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'}!',$post-str)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,':}')">
+                <xsl:variable name="pre-str" select="substring-before($string,':}')"/>
+                <xsl:variable name="post-str" select="substring-after($string,':}')"/>
+                <xsl:call-template name="reorder-quotes">
+                    <xsl:with-param name="string" select="concat($pre-str,'}:',$post-str)"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -387,7 +479,10 @@ table {margin-left: 3em}
     </xsl:template>
     <xsl:template name="count-color">
         <xsl:param name="words"/>
-        <xsl:choose>
+<xsl:if test="number($words) &gt; 17">
+tomato
+</xsl:if>
+        <!-- <xsl:choose>
             <xsl:when test="number($words) &lt; 9">
                 <xsl:text>green</xsl:text>
             </xsl:when>
@@ -409,6 +504,6 @@ table {margin-left: 3em}
             <xsl:otherwise>
                 <xsl:text>red</xsl:text>
             </xsl:otherwise>
-        </xsl:choose>
+        </xsl:choose> -->
     </xsl:template>
 </xsl:stylesheet>
