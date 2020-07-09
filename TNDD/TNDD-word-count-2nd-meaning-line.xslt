@@ -12,6 +12,14 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:str="http://exslt.org/strings" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl str">
     <xsl:output method="xml" version="1.0" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:strip-space elements="*"/>
+    <!-- Define the color levels and colors-->
+    <xsl:variable name="level1" select="17"/>
+    <xsl:variable name="color1" select="'orange'"/>
+    <xsl:variable name="level2" select="0"/>
+    <xsl:variable name="color2" select="'tomato'"/>
+    <xsl:variable name="level3" select="0"/>
+    <xsl:variable name="color3" select="'red'"/>
+    <!-- get the data in a string -->
     <xsl:variable name="step1">
         <xsl:apply-templates select="/*/*" mode="s1"/>
     </xsl:variable>
@@ -378,8 +386,19 @@
     </xsl:template>
     <xsl:template name="count-color">
         <xsl:param name="words"/>
-        <xsl:if test="number($words) &gt; 17">
-            <xsl:text>tomato</xsl:text>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="number($level3) &gt; number($level1) and number($words) &gt; number($level3)">
+                <xsl:value-of select="$color3"/>
+            </xsl:when>
+            <xsl:when test="number($level2) &gt; number($level1) and number($words) &gt; number($level2)">
+                <xsl:value-of select="$color2"/>
+            </xsl:when>
+            <xsl:when test="number($words) &gt; number($level1)">
+                <xsl:value-of select="$color1"/>
+            </xsl:when>
+            <xsl:otherwise>
+		<!-- no color -->
+	     </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
