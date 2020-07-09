@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     #############################################################
-    # Name:     	TNDD-words-per-sentence-1st-meaning.xslt
+    # Name:     	TNDD-word-count-1st-meaning-line.xslt
     # Purpose:  	Combine first \ml1 and make into paragraphs count words per sentence.
     # Part of:  		https://github.com/SILAsiaPub/PT-views
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
@@ -20,6 +20,7 @@
     <xsl:variable name="level3" select="0"/>
     <xsl:variable name="color3" select="'red'"/>
     <!-- get the data in a string -->
+    <xsl:variable name="step1">
         <xsl:apply-templates select="/*/*" mode="s1"/>
     </xsl:variable>
     <xsl:variable name="step2">
@@ -151,9 +152,9 @@
     </xsl:template>
     <xsl:template match="*" mode="s1"/>
     <xsl:template match="char[@style = 'imp']" mode="s1">
-        <xsl:text>{</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>}</xsl:text>
+        <xsl:text> ⌊</xsl:text>
+        <xsl:apply-templates mode="s1"/>
+        <xsl:text>⌋ </xsl:text>
     </xsl:template>
     <xsl:template match="annot" mode="s1">
         <xsl:value-of select="."/>
@@ -399,21 +400,5 @@
 		<!-- no color -->
 	     </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>    <xsl:template name="count-color">
-        <xsl:param name="words"/>
-        <xsl:choose>
-            <xsl:when test="number($level2) &gt; number($level1) and number($words) &gt; number($level2)">
-                <xsl:value-of select="$color2"/>
-            </xsl:when>
-            <xsl:when test="number($words) &gt; number($level1)">
-                <xsl:value-of select="$color1"/>
-            </xsl:when>
-            <xsl:otherwise>
-		<!-- no color -->
-	     </xsl:otherwise>
-        </xsl:choose>
-        <!-- <xsl:if test="number($words) &gt; 17">
-            <xsl:text>tomato</xsl:text>
-        </xsl:if> -->
     </xsl:template>
 </xsl:stylesheet>

@@ -152,9 +152,9 @@
     </xsl:template>
     <xsl:template match="*" mode="s1"/>
     <xsl:template match="char[@style = 'imp']" mode="s1">
-        <xsl:text>{</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>}</xsl:text>
+        <xsl:text> ⌊</xsl:text>
+        <xsl:apply-templates mode="s1"/>
+        <xsl:text>⌋ </xsl:text>
     </xsl:template>
     <xsl:template match="annot" mode="s1">
         <xsl:value-of select="."/>
