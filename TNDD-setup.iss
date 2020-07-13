@@ -56,10 +56,10 @@ function GetPTProjectFolder(Default: String): String;
   begin
     Result:='{app}';
     if RegQueryStringValue(HKLM,'SOFTWARE\WOW6432Node\Paratext\8','Settings_Directory',ResultStr) then
-       Result:=ResultStr
+       Result:=ResultStr;
     else if RegQueryStringValue(HKLM,'SOFTWARE\WOW6432Node\Paratext\9','Settings_Directory',ResultStr) then
-       Result:=ResultStr
+       Result:=ResultStr;
      else
-       Result:='C:\My Paratext 8 Projects'
+       Result:='C:\My Paratext 8 Projects';
     end;  
   end.

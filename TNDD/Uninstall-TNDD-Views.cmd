@@ -1,3 +1,3 @@
 @echo off
-call TNDD-manager.cmd uninstall
+call user-manager-manager.cmd uninstall TNDD
 

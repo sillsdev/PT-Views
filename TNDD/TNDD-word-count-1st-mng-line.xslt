@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     #############################################################
-    # Name:     	TNDD-word-count-1st-meaning-line.xslt
+    # Name:     	TNDD-word-count-1st-mng-line.xslt
     # Purpose:  	Combine first \ml1 and make into paragraphs count words per sentence.
     # Part of:  		https://github.com/SILAsiaPub/PT-views
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
@@ -15,7 +15,7 @@
     <!-- Define the color levels and colors-->
     <xsl:variable name="level1" select="17"/>
     <xsl:variable name="color1" select="'orange'"/>
-    <xsl:variable name="level2" select="0"/>
+    <xsl:variable name="level2" select="30"/>
     <xsl:variable name="color2" select="'tomato'"/>
     <xsl:variable name="level3" select="0"/>
     <xsl:variable name="color3" select="'red'"/>
