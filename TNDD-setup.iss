@@ -6,7 +6,7 @@
 #define MyAppPublisher "SILAisaPub"
 #define MyAppURL "https://github.com/SILAsiaPub/PT-Views/tree/master/TNDD"
 #define MPP "{code:GetPTProjectFolder}"
-#define MAppData "C:\Users\Public\TNDD-Views"
+#define MAppData "C:\Users\Public\PT-Views\TNDD"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -36,12 +36,18 @@ SolidCompression=yes
 
 [Files]
 Source: "TNDD\*.xml"; DestDir: "{app}"
+Source: "TNDD\*.xml"; DestDir: "{#MAppData}"
 Source: "TNDD\*.xslt"; DestDir: "{app}"
-Source: "TNDD\cms\*.py"; DestDir: "{#MPP}\cms"
+Source: "TNDD\*.xslt"; DestDir: "{#MAppData}"
+Source: "common\cms\*.py"; DestDir: "{#MPP}\cms"
+Source: "common\cms\*.py"; DestDir: "{#MAppData}\cms"
 Source: "TNDD\cms\*.cms"; DestDir: "{#MPP}\cms"
+Source: "TNDD\cms\*.cms"; DestDir: "{#MAppData}\cms"
+Source: "TNDD\TNDD-info.pdf"; DestDir: "{#MPP}\cms"
 Source: "TNDD\info.md"; DestDir: "{#MPP}\cms"
-Source: "TNDD\TNDD*.cmd"; DestDir: "{#MAppData}"
+Source: "user-views-manager.cmd"; DestDir: "{#MAppData}"
 Source: "TNDD\Uninstall*.cmd"; DestDir: "{#MAppData}"
+Source: "TNDD\install*.cmd"; DestDir: "{#MAppData}"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

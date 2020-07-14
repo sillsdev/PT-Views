@@ -1,3 +1,7 @@
 @echo off
-call user-manager-manager.cmd uninstall TNDD
+if exit user-manager-manager.cmd (
+  call user-manager-manager.cmd uninstall TNDD
+  ) else (
+  if exit ..\user-manager-manager.cmd call ..\user-manager-manager.cmd uninstall TNDD
+  )
 
