@@ -54,6 +54,7 @@
 		.tr {font-size:120%;font-weight:bold}
 		.brk {vertical-align: sub;}
 		.verse {vertical-align: super; color:forestgreen;font-size:85%}
+		.rgi , .rgm {vertical-align: super;}
         </style>
     </xsl:template>
     <xsl:template match="text()" mode="verse">

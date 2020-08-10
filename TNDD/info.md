@@ -17,7 +17,7 @@ This additional tool for Paratext is designed to help content creators and check
 
 
 ### Option 1: Use the Paratext-TNDD-Views-installer.exe 
-- Download [Paratext-TNDD-Views-installer.exe](https://github.com/SILAsiaPub/PT-Views/releases/download/2020-05-01/Paratext-TNDD-View-installer.exe)
+- Download [Paratext-TNDD-Views-installer.exe](https://github.com/SILAsiaPub/PT-Views/releases/download/2020-07-15/Paratext-TNDD-View-installer.exe)
 - The unsigned installer may cause Windows (or your Anti-Virus program) to object, but Keep the downloaded file anyway:
 ![download query](images/download-query.png)
 - When you eventually run the .exe installer, you may see further warnings - and will need to click the More info link:

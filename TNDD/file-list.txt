@@ -1,4 +1,4 @@
-TNDD\TNDD-info.pdf
+TNDD\cms\TNDD-info.pdf
 TNDD\install_Paratext_TNDD_Views.cmd
 TNDD\Uninstall-TNDD-Views.cmd
 user-views-manager.cmd

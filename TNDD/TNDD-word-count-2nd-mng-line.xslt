@@ -16,9 +16,9 @@
     <xsl:variable name="level1" select="17"/>
     <xsl:variable name="color1" select="'orange'"/>
     <xsl:variable name="level2" select="30"/>
-    <xsl:variable name="color2" select="'tomato'"/>
+    <xsl:variable name="color2" select="'red'"/>
     <xsl:variable name="level3" select="0"/>
-    <xsl:variable name="color3" select="'red'"/>
+    <xsl:variable name="color3" select="''"/>
     <!-- get the data in a string -->
     <xsl:variable name="step1">
         <xsl:apply-templates select="/*/*" mode="s1"/>
@@ -58,7 +58,30 @@
 	    </xsl:text>
         </xsl:element>
         <xsl:element name="table">
-            <caption>Word count per sentence<br/><span class="subcap">Red on the left marks sentences with over 17 words.</span></caption>
+                        <caption>
+                <xsl:text>Word count per sentence</xsl:text>
+                <xsl:if test="$level1 &gt; 0">
+                    <br/>
+                    <xsl:value-of select="$color1"/>
+                    <xsl:text> on the left marks sentences with over </xsl:text>
+                    <xsl:value-of select="$level1"/>
+                    <xsl:text> words.</xsl:text>
+                </xsl:if>
+                <xsl:if test="$level2 &gt; 0">
+                    <br/>
+                    <xsl:value-of select="$color2"/>
+                    <xsl:text> on the left marks sentences with over </xsl:text>
+                    <xsl:value-of select="$level2"/>
+                    <xsl:text> words.</xsl:text>
+                </xsl:if>
+                <xsl:if test="$level3 &gt; 0">
+                    <br/>
+                    <xsl:value-of select="$color3"/>
+                    <xsl:text> on the left marks sentences with over </xsl:text>
+                    <xsl:value-of select="$level3"/>
+                    <xsl:text> words.</xsl:text>
+                </xsl:if>
+            </caption>
             <xsl:element name="tr">
                 <xsl:element name="th">
                     <xsl:text>Word count</xsl:text>

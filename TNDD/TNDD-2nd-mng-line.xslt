@@ -102,6 +102,7 @@
 		.imp {color:blue}
             .brk {vertical-align: sub;font-size:70%;color:gray}
 		.verse {vertical-align: super; color:forestgreen;font-size:85%}
+		.rgi , .rgm {vertical-align: super;}
         </style>
     </xsl:template>
     <xsl:template match="text()" mode="verse">
