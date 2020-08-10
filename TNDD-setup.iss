@@ -7,6 +7,7 @@
 #define MyAppURL "https://github.com/SILAsiaPub/PT-Views/tree/master/TNDD"
 #define MPP "{code:GetPTProjectFolder}"
 #define MAppData "C:\Users\Public\PT-Views\TNDD"
+#define MAppManager "C:\Users\Public\PT-Views"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -43,9 +44,9 @@ Source: "common\cms\*.py"; DestDir: "{#MPP}\cms"
 Source: "common\cms\*.py"; DestDir: "{#MAppData}\cms"
 Source: "TNDD\cms\*.cms"; DestDir: "{#MPP}\cms"
 Source: "TNDD\cms\*.cms"; DestDir: "{#MAppData}\cms"
-Source: "TNDD\TNDD-info.pdf"; DestDir: "{#MPP}\cms"
+Source: "TNDD\cms\TNDD-info.pdf"; DestDir: "{#MPP}\cms"
 Source: "TNDD\info.md"; DestDir: "{#MPP}\cms"
-Source: "user-views-manager.cmd"; DestDir: "{#MAppData}"
+Source: "user-views-manager.cmd"; DestDir: "{#MAppManager}"
 Source: "TNDD\Uninstall*.cmd"; DestDir: "{#MAppData}"
 Source: "TNDD\install*.cmd"; DestDir: "{#MAppData}"
 
@@ -62,9 +63,9 @@ function GetPTProjectFolder(Default: String): String;
   begin
     Result:='{app}';
     if RegQueryStringValue(HKLM,'SOFTWARE\WOW6432Node\Paratext\8','Settings_Directory',ResultStr) then
-       Result:=ResultStr;
+       Result:=ResultStr
     else if RegQueryStringValue(HKLM,'SOFTWARE\WOW6432Node\Paratext\9','Settings_Directory',ResultStr) then
-       Result:=ResultStr;
+       Result:=ResultStr
      else
        Result:='C:\My Paratext 8 Projects';
     end;  

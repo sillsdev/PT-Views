@@ -6,6 +6,11 @@ set viewsappdata=C:\Users\Public\PT-Views
 set viewsaction=user-views-action.cmd
 set action=%1
 set matchstart=%2
+  set redbg=[101m
+  set magentabg=[105m
+  set green=[32m
+  set reset=[0m
+echo %CD%
 if not defined action (
   if exist "%viewsappdata%\%viewsaction%" (
     call "%viewsappdata%\%viewsaction%"
@@ -41,8 +46,8 @@ if errorlevel=0 (
 )
 pause
 echo.
-if exit "%viewspath%\%matchstart%*.hide" echo %matchstart% view/s will be hidden after restart.
-if exit "%viewspath%\%matchstart%*.xml" echo %matchstart% view/s will be shown after restart.
+if exist "%viewspath%\%matchstart%*.hide" echo %matchstart% view/s will be hidden after restart.
+if exist "%viewspath%\%matchstart%*.xml" echo %matchstart% view/s will be shown after restart.
 goto :eof
 
 :runaction
@@ -83,52 +88,74 @@ if not exist "%viewspath%\%file%" echo TNDD %file% file hidden after PT restart
 goto :eof
 
 :uninstall
-if exist "%viewspath%\%matchstart%*.*" del "%viewspath%\%matchstart%*.*"
-if not exist "%viewspath%\%matchstart%*.x*" echo %matchstart% Views files deleted
-if exist "%cmspath%\%matchstart%*.*" del "%cmspath%\%matchstart%*.*"
-if not exist "%cmspath%\%matchstart%*.cms" echo %matchstart% cms files deleted
-if exist "%viewsappdata%\%matchstart%\%matchstart%-*.*" rmdir /s /q "%viewsappdata%\%matchstart%"
-if not exist "%viewsappdata%\%matchstart%\%matchstart%-*.*" echo AppData %matchstart% files deleted
+:: Uninstall %matchstart% files
+call :remove del "%viewspath%\%matchstart%*.*"       "%matchstart% Views files deleted!"
+call :remove del "%cmspath%\%matchstart%*.*"         "%matchstart% cms files deleted!"
+call :remove del "%viewsappdata%\*%matchstart%*.cmd" "TNDD installer and uninstaller deleted from: %viewsappdata% "
+call :remove del "%viewsappdata%\%matchstart%\%matchstart%-*.*" "Public\PT-Views\%matchstart% files deleted!"
+call :remove "rmdir /s /q" "%viewsappdata%\%matchstart%\%matchstart%-*.*" "Public\PT-Views\%matchstart% folder removed!"
 goto :eof
 
 :install
+rem If not exist then create PT Views path and copy files
 if not exist "%viewspath%" md "%viewspath%"
 @echo.
-@echo Copying Views files to the folder: "%viewspath%"
+@echo %magentabg% Copying Views files to the folder: "%viewspath%" %reset%
+@echo.
 copy /y %cd%\%matchstart%\%matchstart%*.x* "%viewspath%"
-if not exist "%viewspath%\%matchstart%*.xslt" (
-  echo Something went wrong. The file is not where it should be.
-  echo Explorer will open where the files should be
-  pause
-  start explorer "%~1"
-)
+call :test "%viewspath%\%matchstart%*.xslt" "%viewspath%"
+
+rem If not exist create cms folder then copy to PT cms folder
 if not exist "%cmspath%" md "%cmspath%"
 @echo.
-@echo Copying CMS files to the folder: "%cmspath%"
-copy /y %cd%\%matchstart%\cms\%matchstart%*.* "%cmspath%"
-copy /y %cd%\common\cms\*.py "%cmspath%"
-copy /y %cd%\%matchstart%\%matchstart%-info.pdf "%cmspath%"
-
-if not exist "%cmspath%\%matchstart%*.*" (
-  echo Something went wrong. The file is not where it should be.
-  echo Explorer will open where the files should be
-  pause
-  start explorer "%cmspath%"
-)
-if not exist "%viewsappdata%\%matchstart%\cms" md "%viewsappdata%\%matchstart%\cms"
-
+@echo %magentabg% Copying CMS files to the folder: "%cmspath%" %reset%
 @echo.
-@echo Copying Views files to the folder: "%viewsappdata%"
-copy /y user-views-manager.cmd "%viewsappdata%"
-copy /y %cd%\%matchstart%\Uninstall*.cmd "%viewsappdata%"
-copy /y %cd%\%matchstart%\%matchstart%*.x* "%viewsappdata%\%matchstart%"
-copy /y %cd%\%matchstart%\cms\*.* "%viewsappdata%\%matchstart%\cms"
+copy /y "%cd%\%matchstart%\cms\%matchstart%*.*" "%cmspath%"
+copy /y common\cms\*.py "%cmspath%"
+copy /y "%cd%\%matchstart%\cms\%matchstart%-info.pdf" "%cmspath%"
+call :test "%cmspath%\%matchstart%*.*" "%cmspath%"
 
-if not exist "%viewsappdata%\%matchstart%\%matchstart%*.*" (
-  echo Something went wrong. The file is not where it should be.
-  echo Explorer will open where the files should be
-  pause
-  start explorer "%viewsappdata%\%matchstart%"
-)
+rem Now copy files to \Users\Public\PT-Views\%1
+if not exist "%viewsappdata%\%matchstart%\cms" md "%viewsappdata%\%matchstart%\cms"
+@echo.
+@echo %magentabg% Copying Views files to the folder: "%viewsappdata%\%matchstart%" %reset%
+@echo.
+copy /y "%cd%\%matchstart%\%matchstart%*.x*" "%viewsappdata%\%matchstart%"
+copy /y "%cd%\%matchstart%\cms\*.cms" "%viewsappdata%\%matchstart%\cms"
+copy /y "%cd%\%matchstart%\cms\*.pdf" "%viewsappdata%\%matchstart%\cms"
+copy /y "common\cms\*.py" "%viewsappdata%\%matchstart%\cms"
+call :test "%viewsappdata%\%matchstart%\%matchstart%*.*" "%viewsappdata%\%matchstart%"
+@echo.
+@echo %magentabg% Copying Views files to the folder: "%viewsappdata%\%matchstart%" %reset%
+@echo.
+copy /y user-views-manager.cmd "%viewsappdata%"
+call :test "%viewsappdata%\*manager.cmd" "%viewsappdata%"
+copy /y "%cd%\%matchstart%\Uninstall*.cmd" "%viewsappdata%\%matchstart%"
+copy /y "%cd%\%matchstart%\install*.cmd" "%viewsappdata%\%matchstart%"
+call :test "%viewsappdata%\%matchstart%\*%matchstart%*.cmd" "%viewsappdata%\%matchstart%"
 goto :eof
 
+:test
+set test=%~1
+set openpath=%~2
+if not exist "%test%" (
+  echo %redbg% Something went wrong. The files are not where they should be. %reset%
+  echo %redbg% Explorer will open where the files should be %reset%
+  pause
+  start explorer "%openpath%"
+  )
+if %errorlevel% == 0 (
+ if exist "%test%" echo %green% Success! %reset%
+ ) else (
+ echo %redbg% An error occured. Check! %reset%
+ pause
+ )
+goto :eof
+
+:remove
+set action=%~1
+set file=%~2
+set message=%~3
+if exist "%file%" %action% "%file%"
+if not exist "%file%" echo %green% %message% %reset%
+goto :eof
