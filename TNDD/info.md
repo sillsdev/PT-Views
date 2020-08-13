@@ -17,7 +17,7 @@ This additional tool for Paratext is designed to help content creators and check
 
 
 ### Option 1: Use the Paratext-TNDD-Views-installer.exe 
-- Download [Paratext-TNDD-Views-installer.exe](https://github.com/SILAsiaPub/PT-Views/releases/download/2020-07-15/Paratext-TNDD-View-installer.exe)
+- Download Paratext-TNDD-Views-installer.exe from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest)
 - The unsigned installer may cause Windows (or your Anti-Virus program) to object, but Keep the downloaded file anyway:
 ![download query](images/download-query.png)
 - When you eventually run the .exe installer, you may see further warnings - and will need to click the More info link:
@@ -29,7 +29,7 @@ This additional tool for Paratext is designed to help content creators and check
 
 
 ### Option 2: Run a script to install
-- Download [TNDD-Views.zip](https://github.com/SILAsiaPub/PT-Views/releases/download/2020-05-01/TNDD-Views.zip) 
+- Download TNDD-Views.zip from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest) 
 - Select the option "Show in folder", and then in your Downloads folder, right click on the Views.zip file
 - Then select your preferred UNZIP tool to Extract all... (preferably to a new folder called Views)
    (if given the option, ensure that "Show extracted files when complete" is checked).
