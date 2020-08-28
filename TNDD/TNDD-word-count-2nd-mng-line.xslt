@@ -58,7 +58,7 @@
 	    </xsl:text>
         </xsl:element>
         <xsl:element name="table">
-                        <caption>
+            <caption>
                 <xsl:text>Word count per sentence</xsl:text>
                 <xsl:if test="$level1 &gt; 0">
                     <br/>
@@ -186,11 +186,14 @@
         <xsl:value-of select="."/>
     </xsl:template>
     <xsl:template match="*[@style = 'ml1']" mode="s1">
-        <xsl:variable name="pre-style" select="preceding-sibling::*[3]/@style"/>
-        <xsl:variable name="pre-style2" select="preceding-sibling::*[4]/@style"/>
-        <xsl:if test="$pre-style = 'sl1' or $pre-style2 = 'sl1' ">
-            <xsl:apply-templates mode="s1"/>
-            <xsl:text> </xsl:text>
+        <xsl:variable name="pre-style1" select="preceding-sibling::*[1]/@style"/>
+        <xsl:variable name="pre-style3" select="preceding-sibling::*[3]/@style"/>
+        <xsl:variable name="pre-style4" select="preceding-sibling::*[4]/@style"/>
+        <xsl:if test="$pre-style1 = 'mlor'">
+            <xsl:if test="$pre-style3 = 'sl1' or $pre-style4 = 'sl1' ">
+                <xsl:apply-templates mode="s1"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*[@style = 'brk']" mode="s1"/>

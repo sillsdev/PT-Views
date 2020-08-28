@@ -1,8 +1,8 @@
 \check Hide TNDD Views
 \submenu Custom Views
-\description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are five views.
+\description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are ccurrently seven views.
 \programToRun Python
-\script user-views-manager.py
+\script update-TNDD-views.py
 \helpFile TNDD-info.pdf
 \noText
 \rank 1
@@ -10,7 +10,7 @@
 \optionName action
 \optionLocalizedName Action to be done.
 \optionDescription Do not change the default.
-\optionDefault hide
+\optionDefault updateviews
 
 \optionName matchstart
 \optionLocalizedName Start of the file name to be acted on.
