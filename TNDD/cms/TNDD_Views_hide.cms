@@ -2,7 +2,7 @@
 \submenu Custom Views
 \description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are ccurrently seven views.
 \programToRun Python
-\script user-views-manager.py
+\script userViewsManager.py
 \helpFile TNDD-info.pdf
 \noText
 \rank 1
