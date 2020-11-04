@@ -2,7 +2,7 @@
 \submenu Custom Views
 \description (Ignore the "Input Project" box above.) This will UNINSTALL TNDD Views in the Views menu and this Custom Tools > Custom Views, after restart. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. Thre are five views.
 \programToRun Python
-\script user-views-manager.py
+\script userViewsManager.py
 \helpFile TNDD-info.pdf
 \noText
 \rank 1
