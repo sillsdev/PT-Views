@@ -12,13 +12,19 @@ set matchstart=%2
   set reset=[0m
 echo %CD%
 if not defined action (
+  rem no action passed in at the commandline
+  rem so check if the user-views-action.cmd file exists
   if exist "%viewsappdata%\%viewsaction%" (
+    rem since it exists get the variables written to it
     call "%viewsappdata%\%viewsaction%"
+    rem now check if there is an action to do
     if not defined action echo No action found from command line or from %viewsaction%
   ) else (
     echo Did not find the %viewsaction% file  
   )
 )
+
+
 :main
 @echo.
 @echo Paratext Views manager for: %matchstart% 
@@ -158,4 +164,53 @@ set file=%~2
 set message=%~3
 if exist "%file%" %action% "%file%"
 if not exist "%file%" echo %green% %message% %reset%
+goto :eof
+
+:updateviews
+  set baseurl=https://raw.githubusercontent.com/SILAsiaPub/PT-Views/master/TNDD
+  call :loopstring :getfile "%filelist%" "" ""
+goto :eof
+
+:getfile
+  if exist "%drive%\%ptpathnodrive%\%~1.prev" del "%drive%\%ptpathnodrive%\%~1.prev"
+  if exist "%drive%\%ptpathnodrive%\%~1" ren "%drive%\%ptpathnodrive%\%~1" %~1.prev"
+  call curl %baseurl%/%~1 -o "%drive%\%ptpathnodrive%\%~1"
+  if exist "%drive%\%ptpathnodrive%\%~1" echo Downloaded %~1
+goto :eof
+
+
+
+:loopstring
+:: Description: Loops through a list supplied in a space separated string.
+:: Usage: call :loopstring grouporfunc "string" [param[3-9]]
+:: Depends on: appendnumbparam, last, taskgroup. Can also use any other function.
+:: Note: action may have multiple parts
+  rem @call :funcbegin %0 "'%~1' '%~2' '%~3'"
+  if defined fatal goto :eof
+  rem echo on
+  set grouporfunc=%~1
+  set string=%~2
+  set par3=%~3
+  set par4=%~4
+  set par5=%~5
+  set par6=%~6
+  set par7=%~7
+  set par8=%~8
+  set par9=%~9
+  if not defined grouporfunc echo Missing action parameter
+  if not defined grouporfunc echo %funcendtext% %0 
+  if not defined grouporfunc goto :eof
+  if not defined string echo Missing string parameter
+  if not defined string echo %funcendtext% %0 
+  if not defined string goto :eof
+  set numbparam=
+  set appendparam=
+  for /L %%v in (3,1,9) Do call :appendnumbparam numbparam par %%v 
+  for /L %%v in (3,1,9) Do call :last par %%v
+  if defined info3 set numbparam
+  if defined info2 echo %last%
+  if "%grouporfunc:~0,1%" == ":" FOR %%s IN (%string%) DO call %grouporfunc% "%%s" %numbparam%
+  if "%grouporfunc:~0,1%" neq ":" FOR %%s IN (%string%) DO call :taskgroup %grouporfunc% "%%s" %numbparam%
+  rem @call :funcend %0
+  rem @echo off
 goto :eof
