@@ -10,10 +10,10 @@
 
 \optionName action
 \optionLocalizedName Action to be done.
-\optionDescription Do not change the default.
+\optionDescription Do not change the default. It should be 'uninstall'.
 \optionDefault uninstall
 
 \optionName matchstart
 \optionLocalizedName Start of the file name to be acted on.
-\optionDescription Do not change the default.
+\optionDescription Do not change the default. It should be 'TNDD'.
 \optionDefault TNDD

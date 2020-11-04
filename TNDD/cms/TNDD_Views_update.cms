@@ -1,0 +1,18 @@
+\check Update TNDD Views
+\submenu Custom Views
+\description (Ignore the "Input Project" box above.) This tool will update TNDD Views from the Views menus \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are ccurrently seven views.
+\programToRun Python
+\script userViewsManager.py
+\helpFile TNDD-info.pdf
+\noText
+\rank 1
+\utf8
+\optionName action
+\optionLocalizedName Action to be done.
+\optionDescription This should be set to 'update'.
+\optionDefault update
+
+\optionName matchstart
+\optionLocalizedName Start of the file name to be acted on.
+\optionDescription Do not change the default. It shoud be 'TNDD'.
+\optionDefault TNDD
