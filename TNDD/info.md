@@ -50,6 +50,13 @@ This additional tool for Paratext is designed to help content creators and check
 - This will enable you to keep your normal workspace uncluttered, but the Table view will be easy to access from the right-hand column:
 ![PT-show-view](images/PT-show-view.png)
 
+
+## There are four **Tools > Custom Tools > Custom Views**
+- Hide TNDD Views 
+- Show TNDD Views 
+- Uninstall TNDD Views 
+- Update TNDD Views
+
 ### Hiding TNDD Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
@@ -66,7 +73,7 @@ This additional tool for Paratext is designed to help content creators and check
 - Click the **OK** on the **Show TNDD Views** dialog
 - Restart Paratext
 
-## Uninstall
+## Uninstall TNDD Views
 - Just double click the **Uninstall-TNDD-Views.cmd** in original extracted View.zip folder.
 - Or find in: **C:\Users\Public\TNdd-Views** folder, the file **Uninstall-TNDD-Views.cmd** and double click that 
 - or You could just delete the Views folder if you only have TNDD views,
@@ -74,8 +81,16 @@ This additional tool for Paratext is designed to help content creators and check
 - or you could delete all the files in the Views folder.
 - also delete all files starting with TNDD from the **My Paratext 8(or 9) Projects\cms** folder if not using the uninstaller.
 
+## Update the TNDD Views from the Github source
+- In Paratext click on the hamburger icon in any project.
+- In the **Tools** menu hover over or click on **Custom tools**
+- In  **Custom tools** click on **Custom Views**
+- Click on **Update TNDD Views**
+- Click the **OK** on the **Show TNDD Views** dialog
+- Restart Paratext
 
-## There are three **Tools > Custom Tools > Custom Views**
+
+## There are four **Tools > Custom Tools > Custom Views**
 - Hide TNDD Views 
 - Show TNDD Views 
 - Uninstall TNDD Views 
