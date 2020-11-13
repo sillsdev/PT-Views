@@ -59,6 +59,10 @@
 .err-para--no-content {border-bottom:2pt solid red}
 .err-para-b-not-b4-table::after {content:'This \\b SFM is not allowed here, After Verse 1 and before a section header in \\tr. #25';}
 .err-para-b-not-b4-table {border-bottom:2pt solid red}
+.err-para-gn-post-not-ml1::after {content:'The following paragraph is not \\ml1 #53';}
+.err-para-gn-post-not-ml1 {border-bottom:2pt solid red}
+.err-para-gn-pre-not-sl1-sla::after {content:'The preceding paragraph is not \\sl1 or \\sla #54';}
+.err-para-gn-pre-not-sl1-sla {border-top:2pt solid red}
 .err-para-ml1-pre-1-not-sl1-or-mlor::after {content:'The paragraph before this paragraph should be \\sl1 or \\mlor #30';}
 .err-para-ml1-pre-1-not-sl1-or-mlor {border-top:2pt solid red}
 .err-para-ml1-pre-has-tbb::after {content:'The preceding \\ml1 has a ¶\\tbb __\\tbb* so this one should too. #31';}
@@ -221,13 +225,13 @@
             </xsl:if>
             <!--ck-id 4 - rank=8-->
             <xsl:if test="contains(text(),'⌊')">
-               <xsl:if test="not(following-sibling::node()[1]/@style = 'imp')">
+               <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'imp'])">
                   <xsl:text> err-char-brk-post-not-imp</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ck-id 7 - rank=8-->
             <xsl:if test="contains(text(),'⌋')">
-               <xsl:if test="not(preceding-sibling::node()[1]/@style = 'imp' or preceding-sibling::node()[1]/@style = 'rgi')">
+               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'imp' or @style = 'rgi'])">
                   <xsl:text> err-char-brk-pre-not-imp</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -270,11 +274,11 @@
             </xsl:if>
             <!--style specific errors-->
             <!--12-->
-            <xsl:if test="not(following-sibling::node()[1]/@style = 'brk' or following-sibling::node()[1]/@style = 'rgi' )">
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'brk' or @style = 'rgi'])">
                <xsl:text> err-char-imp-post-not-bk</xsl:text>
             </xsl:if>
             <!--13-->
-            <xsl:if test="not(preceding-sibling::node()[1][@style = 'brk'] or preceding-sibling::node()[2][@style = 'rgi'])">
+            <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'brk' or @style = 'rgi'])">
                <xsl:text> err-char-imp-pre-not-correct-bk-text</xsl:text>
             </xsl:if>
          </xsl:attribute>
@@ -463,12 +467,37 @@
          <xsl:apply-templates select="node()"/>
       </xsl:element>
    </xsl:template>
+   <xsl:template match="para[@style = 'gn']">
+      <xsl:element name="div">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--53-->
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
+               <xsl:text> err-para-gn-post-not-ml1</xsl:text>
+            </xsl:if>
+            <!--54-->
+            <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'sl1' or @style = 'sla'])">
+               <xsl:text> err-para-gn-pre-not-sl1-sla</xsl:text>
+            </xsl:if>
+            <!--ck-id 43 - rank=0-->
+            <xsl:if test="string-length(text()) = 0 and not(*)">
+               <xsl:if test="not(@style = 'b' or @style = 'ntn' or @style = 'mt9')">
+                  <xsl:text> err-para--no-content</xsl:text>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:text>\</xsl:text>
+         <xsl:value-of select="@style"/>
+         <xsl:text> </xsl:text>
+         <xsl:apply-templates select="node()"/>
+      </xsl:element>
+   </xsl:template>
    <xsl:template match="para[@style = 'ml1']">
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--30-->
-            <xsl:if test="not(preceding-sibling::*[1][@style = 'mlor'] or preceding-sibling::*[1][@style = 'sl1'] or preceding-sibling::*[1][@style = 'sla'])">
+            <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'mlor' or @style = 'sl1' or @style = 'sla' or @style = 'gn'])">
                <xsl:text> err-para-ml1-pre-1-not-sl1-or-mlor</xsl:text>
             </xsl:if>
             <!--ck-id 31 - rank=5-->
@@ -521,11 +550,11 @@
                </xsl:if>
             </xsl:if>
             <!--35-->
-            <xsl:if test="not(following-sibling::*[1][@style = 'ml1']) and not(following-sibling::*[1][@style = 'rem'])">
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
                <xsl:text> err-para-mlor-post-not-ml1</xsl:text>
             </xsl:if>
             <!--36-->
-            <xsl:if test="not(preceding-sibling::*[1][@style = 'ml1'])">
+            <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
                <xsl:text> err-para-mlor-pre-not-ml1</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
@@ -571,7 +600,7 @@
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--50-->
-            <xsl:if test="not(following-sibling::para[1] [@style = 'sl1' or @style = 'sla'])">
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'sl1' or @style = 'sla'])">
                <xsl:text> err-para-pvr-post-not-sl1-or-sla</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
@@ -597,7 +626,7 @@
             </xsl:if>
             <!--ck-id 41 - rank=10-->
             <xsl:if test="not(child::char[@style = 'tei'])">
-               <xsl:if test="not(following-sibling::*[1][@style = 'ml1' or @style = 'sla' or @style = 'pvr'] )">
+               <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ml1' or @style = 'sla' or @style = 'pvr' or @style = 'gn'])">
                   <xsl:text> err-para-sl1-post-1-not-ml1</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -619,7 +648,7 @@
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--52-->
-            <xsl:if test="not(following-sibling::para[1] [@style = 'sl1' or @style = 'ml1'])">
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'gn' or @style = 'ml1'])">
                <xsl:text> err-para-sla-post-not-sl1-following</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
