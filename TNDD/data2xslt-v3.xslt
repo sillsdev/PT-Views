@@ -6,7 +6,8 @@
     # Part of:  		Xrunner - https://github.com/SILAsiaPub/xrunner
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
     # Created:  	2019-12-12
-    # Copyright:	(c) 2019 SIL International
+    # Modified:		2021-03-25
+    # Copyright:	(c) 2019-2021 SIL International
     # Licence:  	<MIT>
     ################################################################ -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:gen="dummy-namespace-for-the-generated-xslt" xmlns:f="myfunctions" exclude-result-prefixes="f">
@@ -31,12 +32,12 @@
     </xsl:variable>
     <xsl:variable name="g1">
         <xsl:for-each-group select="$x1/*[not(disable = 'TRUE')]" group-by="element">
+            <xsl:sort select="style"/>
             <!--  <xsl:element name="group">
                 <xsl:attribute name="id">
                     <xsl:value-of select="element[1]"/>
                 </xsl:attribute> -->
             <xsl:for-each-group select="current-group()" group-by="style">
-                <xsl:sort select="style"/>
                 <xsl:sort select="rank" data-type="number"/>
                 <xsl:element name="{element[1]}">
                     <xsl:attribute name="style">
@@ -102,7 +103,9 @@
                         <gen:text>
                             <xsl:text> </xsl:text>
                         </gen:text>
-                        <gen:apply-templates select="node()"/>
+                        <gen:apply-templates select="node()">
+                            <gen:with-param name="embedded" select="0"/>
+                        </gen:apply-templates>
                     </gen:element>
                 </gen:template>
             </xsl:when>
@@ -127,7 +130,9 @@
                                 <xsl:text> </xsl:text>
                             </gen:text>
                         </xsl:if>
-                        <gen:apply-templates select="node()"/>
+                        <gen:apply-templates select="node()">
+                            <gen:with-param name="embedded" select="0"/>
+                        </gen:apply-templates>
                     </gen:element>
                 </gen:template>
             </xsl:otherwise>
@@ -135,6 +140,7 @@
     </xsl:template>
     <xsl:template match="char[string-length(@style) = 0]">
         <gen:template match="char">
+            <gen:param name="embedded"/>
             <gen:element name="span">
                 <gen:attribute name="class">
                     <gen:value-of select="@style"/>
@@ -146,6 +152,7 @@
     </xsl:template>
     <xsl:template match="char">
         <gen:template match="char[@style = '{@style}']">
+            <gen:param name="embedded"/>
             <gen:element name="span">
                 <gen:attribute name="class">
                     <gen:value-of select="@style"/>
@@ -168,17 +175,40 @@
                     <xsl:comment select="'style specific errors'"/>
                     <xsl:apply-templates select="*"/>
                 </gen:attribute>
-                <xsl:call-template name="char-gen"/>
+                <xsl:call-template name="char-gen-note"/>
             </gen:element>
         </gen:template>
     </xsl:template>
     <xsl:template name="char-gen">
         <gen:text>\</gen:text>
+        <gen:if test="$embedded = '1' and name() = 'char'">
+            <gen:text>+</gen:text>
+        </gen:if>
         <gen:value-of select="@style"/>
         <gen:text>
             <xsl:text>&#160;</xsl:text>
         </gen:text>
-        <gen:apply-templates select="node()"/>
+        <gen:apply-templates select="node()">
+            <gen:with-param name="embedded" select="1"/>
+        </gen:apply-templates>
+        <gen:if test="not(@closed = 'false')">
+            <gen:text>\</gen:text>
+            <gen:if test="$embedded = '1' and name() = 'char'">
+                <gen:text>+</gen:text>
+            </gen:if>
+            <gen:value-of select="@style"/>
+            <gen:text>*</gen:text>
+        </gen:if>
+    </xsl:template>
+    <xsl:template name="char-gen-note">
+        <gen:text>\</gen:text>
+        <gen:value-of select="@style"/>
+        <gen:text>
+            <xsl:text>&#160;</xsl:text>
+        </gen:text>
+        <gen:apply-templates select="node()">
+            <gen:with-param name="embedded" select="0"/>
+        </gen:apply-templates>
         <gen:if test="not(@closed = 'false')">
             <gen:text>\</gen:text>
             <gen:value-of select="@style"/>
@@ -186,9 +216,10 @@
         </gen:if>
     </xsl:template>
     <xsl:template match="datarow">
+        <xsl:variable name="metalang" select="'^(pre=|post=|pre-char=|post-char=)'"/>
         <xsl:variable name="t1">
             <xsl:choose>
-                <xsl:when test="matches(test,'^(pre=|post=)')">
+                <xsl:when test="matches(test,$metalang)">
                     <xsl:call-template name="seq">
                         <xsl:with-param name="string" select="test"/>
                     </xsl:call-template>
@@ -200,7 +231,7 @@
         </xsl:variable>
         <xsl:variable name="t2">
             <xsl:choose>
-                <xsl:when test="matches(test2,'^(pre=|post=)')">
+                <xsl:when test="matches(test2,$metalang)">
                     <xsl:call-template name="seq">
                         <xsl:with-param name="string" select="test2"/>
                     </xsl:call-template>
@@ -313,10 +344,19 @@
         </xsl:result-document>
     </xsl:template>
     <xsl:template name="seq">
+        <!-- This is used to convert meta language rules to full xquery strings -->
         <xsl:param name="string"/>
         <xsl:variable name="part" select="tokenize($string,'=')"/>
+        <xsl:variable name="subpart" select="tokenize($part[1],'-')"/>
+        <!-- The following 2 var are only for character tests -->
+        <xsl:variable name="len" select="string-length($part[2])"/>
+        <xsl:variable name="plus" select="substring('++++++++++++++++++++++++++++++',1,number($len))"/>
+        <!-- Create an array of the sfm in the list for para tests -->
         <xsl:variable name="sfm" select="tokenize($part[2],' ')"/>
+        <xsl:variable name="parasfm" select="tokenize('pre post',' ')"/>
         <xsl:text>not(</xsl:text>
+        <xsl:choose>
+            <xsl:when test="$subpart[1] = $part[1]">
         <xsl:if test="normalize-space($part[1]) = 'pre'">
             <xsl:text>preceding-sibling::*[1][</xsl:text>
         </xsl:if>
@@ -345,7 +385,41 @@
                 <xsl:text> or </xsl:text>
             </xsl:if>
         </xsl:for-each>
-        <xsl:text>])</xsl:text>
+                <xsl:text>]</xsl:text>
+            </xsl:when>
+            <!-- <xsl:when test="$part[1] = 'pre-char'">
+                <xsl:value-of select="concat('translate(substring(preceding-sibling::node()[1],string-length(preceding-sibling::node()[1]),1),',$sq,'+',$part[2],$sq,',',$sq,'_',$plus,$sq,') = ',$sq,'+',$sq)"/>
+            </xsl:when>
+            <xsl:when test="$part[1] = 'post-char'">
+                <xsl:value-of select="concat('translate(substring(following-sibling::node()[1],1,1),',$sq,'+',$part[2],$sq,',',$sq,'_',$plus,$sq,') = ',$sq,'+',$sq)"/>
+            </xsl:when> -->
+            <xsl:when test="$subpart[2] = 'char'">
+                <xsl:text>translate(substring(</xsl:text>
+                <xsl:value-of select="if ($subpart[1] = 'pre') then 'preceding' else 'following'"/>
+                <xsl:text>-sibling::node()[1],</xsl:text>
+                <xsl:value-of select="if ($subpart[1] = 'pre') then 'string-length(preceding-sibling::node()[1])' else '1'"/>
+                <xsl:text>,1),'+</xsl:text>
+                <xsl:value-of select="$part[2]"/>
+                <xsl:text>','_</xsl:text>
+                <xsl:value-of select="$plus"/>
+                <xsl:text>') </xsl:text>
+                <xsl:value-of select="if ($subpart[3] = 'not') then '!=' else '='"/>
+                <xsl:text> '+'</xsl:text>
+            </xsl:when>
+            <!-- <xsl:when test="$subpart[2] = 'space'">
+                <xsl:text>substring(</xsl:text>
+                <xsl:value-of select="if ($subpart[1] = 'pre') then 'preceding' else 'following'"/>
+                <xsl:text>-sibling::node()[1],</xsl:text>
+                <xsl:value-of select="if ($subpart[1] = 'pre') then 'string-length(preceding-sibling::node()[1])' else '1'"/>
+                <xsl:text>,1) '</xsl:text>
+                <xsl:value-of select="if ($subpart[3] = 'not') then '!=' else '='"/>
+                <xsl:text> ' '</xsl:text>
+            </xsl:when> -->
+            <xsl:otherwise>
+                <xsl:text>invalid=</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text>)</xsl:text>
     </xsl:template>
 </xsl:stylesheet>
 <!--  <xsl:call-template name="handle-css">
