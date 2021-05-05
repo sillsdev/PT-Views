@@ -76,11 +76,15 @@ goto :eof
 goto :eof
 
 :show
+echo Show TNDD views
+pause
 if exist "%viewspath%\%matchstart%*.hide" ren "%viewspath%\%matchstart%*.hide" "*.xml"
 if exist "%viewspath%\%matchstart%*.xml" echo %matchstart% Views files showing after PT restart
 goto :eof
 
 :hide
+echo Hiding TNDD views
+pause
 if exist "%viewspath%\%matchstart%*.xml" ren "%viewspath%\%matchstart%*.xml" "*.hide" 
 if not exist "%viewspath%\%matchstart%*.xml" echo %matchstart% Views files hidden after PT restart
 goto :eof
