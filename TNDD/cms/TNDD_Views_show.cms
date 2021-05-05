@@ -7,7 +7,7 @@
 \noText
 \rank 1
 \utf8
-\optionName action
+\optionName actionshow
 \optionLocalizedName Action to be done.
 \optionDescription Do not change the default. It should be 'show'.
 \optionDefault show

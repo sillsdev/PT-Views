@@ -17,8 +17,10 @@ TNDD\TNDD-word-count-1st-mng-line.xslt
 TNDD\TNDD-word-count-2nd-mng-line.xml
 TNDD\TNDD-word-count-2nd-mng-line.xslt
 common\cms\userViewsManager.py
-TNDD\cms\TNDD_Views_hide.cms
-TNDD\cms\TNDD_Views_show.cms
+common\cms\userViewsHide.py
+common\cms\userViewsShow.py
+common\cms\TNDD_Views_hide.cms
+common\cms\TNDD_Views_show.cms
 TNDD\cms\TNDD_Views_uninstall.cms
 TNDD\cms\TNDD_Views_update.cms
 
