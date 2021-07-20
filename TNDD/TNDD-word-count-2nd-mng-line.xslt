@@ -189,11 +189,18 @@
         <xsl:variable name="pre-style1" select="preceding-sibling::*[1]/@style"/>
         <xsl:variable name="pre-style3" select="preceding-sibling::*[3]/@style"/>
         <xsl:variable name="pre-style4" select="preceding-sibling::*[4]/@style"/>
+        <xsl:variable name="post-style1" select="following-sibling::*[1]/@style"/>
+<xsl:variable name="post-elem1" select="following-sibling::*[1][@eid]/local-name()"/>
         <xsl:if test="$pre-style1 = 'mlor'">
             <xsl:if test="$pre-style3 = 'sl1' or $pre-style4 = 'sl1' ">
                 <xsl:apply-templates mode="s1"/>
                 <xsl:text> </xsl:text>
             </xsl:if>
+        </xsl:if>
+        <xsl:if test="($pre-style1 = 'sl1' or $pre-style1 = 'sla') and ($post-style1 = 'p' or $post-style1 = 'b' or $post-style1 = 'c' or $post-style1 = 'b2' or $post-style1 = 'b3' or $post-style1 = 'sl1' or $post-elem = 'chapter')">
+            <!-- Added to handle missing 2nd ml1, thus including 1st line in this precise circumstance -->
+            <xsl:apply-templates mode="s1"/>
+            <xsl:text> </xsl:text>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*[@style = 'brk']" mode="s1"/>
