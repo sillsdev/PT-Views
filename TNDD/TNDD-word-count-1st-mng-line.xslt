@@ -36,7 +36,7 @@
     <xsl:template match="/*">
         <xsl:apply-templates select="chapter"/>
     </xsl:template>
-    <xsl:template match="chapter">
+    <xsl:template match="chapter[@style]">
         <xsl:element name="style">
             <xsl:attribute name="type">
                 <xsl:text>text/css</xsl:text>
@@ -59,7 +59,7 @@
         </xsl:element>
         <xsl:element name="table">
             <caption>
-                <xsl:text>Word count per sentence</xsl:text>
+                <xsl:text>Word count per sentence for 1st meaning line,</xsl:text>
                 <xsl:if test="$level1 &gt; 0">
                     <br/>
                     <xsl:value-of select="$color1"/>
@@ -155,14 +155,14 @@
                         <xsl:attribute name="class">
                             <xsl:text>words</xsl:text>
                         </xsl:attribute>
-                        <xsl:value-of select="$string"/>
+                        <xsl:value-of select="translate($string,'^',':')"/>
                         <xsl:value-of select="$eosp"/>
                     </xsl:element>
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="verse|chapter" mode="s1">
+    <!-- <xsl:template match="verse|chapter" mode="s1">
         <xsl:if test="name() = 'chapter'">
             <xsl:text>[</xsl:text>
         </xsl:if>
@@ -172,7 +172,7 @@
         <xsl:if test="name() = 'chapter'">
             <xsl:text>]</xsl:text>
         </xsl:if>
-    </xsl:template>
+    </xsl:template> -->
     <xsl:template match="*" mode="s1"/>
     <xsl:template match="char[@style = 'imp']" mode="s1">
         <xsl:text> ⌊</xsl:text>
@@ -185,10 +185,15 @@
     <xsl:template match="text()" mode="s1">
         <xsl:value-of select="."/>
     </xsl:template>
+    <xsl:template match="*[@style = 'sl1']" mode="s1">
+        <xsl:text>[</xsl:text>
+        <xsl:value-of select="translate(text()[1],':','^')"/>
+        <xsl:text>]</xsl:text>
+    </xsl:template>
     <xsl:template match="*[@style = 'ml1']" mode="s1">
         <xsl:variable name="pre-style" select="preceding-sibling::*[1]/@style"/>
-        <xsl:variable name="pre-style2" select="preceding-sibling::*[2]/@style"/>
-        <xsl:if test="$pre-style = 'sl1' or $pre-style2 = 'sl1' ">
+         <!-- <xsl:variable name="pre-style2" select="preceding-sibling::*[2]/@style"/> -->
+        <xsl:if test="$pre-style = 'sl1' or $pre-style = 'sla'  or $pre-style = 'gn' ">
             <xsl:apply-templates mode="s1"/>
             <xsl:text> </xsl:text>
         </xsl:if>
@@ -216,33 +221,57 @@
                 <xsl:variable name="beforepara" select="substring-before($string,']¶')"/>
                 <xsl:variable name="bp-length" select="string-length($beforepara)"/>
                 <xsl:variable name="afterpara" select="substring-after($string,']¶')"/>
+                <xsl:variable name="before-7" select="substring($beforepara,$bp-length - 6,1)"/>
+                <xsl:variable name="before-6" select="substring($beforepara,$bp-length - 5,1)"/>
+                <xsl:variable name="before-5" select="substring($beforepara,$bp-length - 4,1)"/>
                 <xsl:variable name="before-4" select="substring($beforepara,$bp-length - 3,1)"/>
                 <xsl:variable name="before-3" select="substring($beforepara,$bp-length - 2,1)"/>
                 <xsl:variable name="before-2" select="substring($beforepara,$bp-length - 1,1)"/>
                 <xsl:choose>
+                    <xsl:when test="$before-7 = '['">
+                        <xsl:variable name="char-len" select="6"/>
+                        <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1)"/>
+                        <xsl:text>¶</xsl:text>
+                        <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) +2)"/>
+                        <xsl:text>]</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$before-6 = '['">
+                        <xsl:variable name="char-len" select="5"/>
+                        <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1)"/>
+                        <xsl:text>¶</xsl:text>
+                        <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) +2)"/>
+                        <xsl:text>]</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$before-5 = '['">
+                        <xsl:variable name="char-len" select="4"/>
+                        <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1)"/>
+                        <xsl:text>¶</xsl:text>
+                        <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) +2)"/>
+                        <xsl:text>]</xsl:text>
+                    </xsl:when>
                     <xsl:when test="$before-4 = '['">
                         <xsl:variable name="char-len" select="3"/>
                         <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1)"/>
-                        <xsl:text> ¶</xsl:text>
+                        <xsl:text>¶</xsl:text>
                         <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) +2)"/>
                         <xsl:text>]</xsl:text>
                     </xsl:when>
                     <xsl:when test="$before-3 = '['">
                         <xsl:variable name="char-len" select="2"/>
                         <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1)"/>
-                        <xsl:text> ¶</xsl:text>
+                        <xsl:text>¶</xsl:text>
                         <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) +2)"/>
                         <xsl:text>]</xsl:text>
                     </xsl:when>
                     <xsl:when test="$before-2 = '['">
                         <xsl:variable name="char-len" select="1"/>
                         <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1 )"/>
-                        <xsl:text> ¶</xsl:text>
+                        <xsl:text>¶</xsl:text>
                         <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) + 2)"/>
                         <xsl:text>]</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>fatal flaw</xsl:text>
+                        <xsl:text>fatal flaw </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="reorder-para">

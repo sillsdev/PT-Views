@@ -36,7 +36,7 @@
     <xsl:template match="/*">
         <xsl:apply-templates select="chapter"/>
     </xsl:template>
-    <xsl:template match="chapter">
+    <xsl:template match="chapter[@style]">
         <xsl:element name="style">
             <xsl:attribute name="type">
                 <xsl:text>text/css</xsl:text>
@@ -59,7 +59,7 @@
         </xsl:element>
         <xsl:element name="table">
             <caption>
-                <xsl:text>Word count per sentence</xsl:text>
+                <xsl:text>Word count per sentence for 2nd meaning line,</xsl:text>
                 <xsl:if test="$level1 &gt; 0">
                     <br/>
                     <xsl:value-of select="$color1"/>
@@ -282,7 +282,7 @@
                         <xsl:variable name="char-len" select="1"/>
                         <xsl:value-of select="substring($beforepara,1,$bp-length - number($char-len) - 1 )"/>
                         <xsl:text>¶</xsl:text>
-                        <xsl:value-of select="substring($beforepara,$bp-length - number($char-len) ,number($char-len) + 2)"/>
+                        <xsl:value-of select="substring($beforepara,$bp-length - number($char-len),number($char-len) + 2)"/>
                         <xsl:text>]</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
