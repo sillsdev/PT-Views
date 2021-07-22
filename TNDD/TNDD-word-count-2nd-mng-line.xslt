@@ -188,16 +188,16 @@
     <xsl:template match="*[@style = 'ml1']" mode="s1">
         <xsl:variable name="pre-style1" select="preceding-sibling::*[1]/@style"/>
         <xsl:variable name="pre-style3" select="preceding-sibling::*[3]/@style"/>
-        <xsl:variable name="pre-style4" select="preceding-sibling::*[4]/@style"/>
         <xsl:variable name="post-style1" select="following-sibling::*[1]/@style"/>
-<xsl:variable name="post-elem1" select="following-sibling::*[1][@eid]/local-name()"/>
+        <xsl:variable name="post-eid" select="following-sibling::chapter[1][@eid]/@eid"/>
         <xsl:if test="$pre-style1 = 'mlor'">
-            <xsl:if test="$pre-style3 = 'sl1' or $pre-style4 = 'sl1' ">
+            <xsl:if test="$pre-style3 = 'sl1' or $pre-style3 = 'sla' or $pre-style3 = 'gn'">
+                <!-- Find the second line -->
                 <xsl:apply-templates mode="s1"/>
                 <xsl:text> </xsl:text>
             </xsl:if>
         </xsl:if>
-        <xsl:if test="($pre-style1 = 'sl1' or $pre-style1 = 'sla') and ($post-style1 = 'p' or $post-style1 = 'b' or $post-style1 = 'c' or $post-style1 = 'b2' or $post-style1 = 'b3' or $post-style1 = 'sl1' or $post-elem = 'chapter')">
+        <xsl:if test="($pre-style1 = 'sl1' or $pre-style1 = 'sla' or $pre-style1 = 'gn') and ($post-style1 = 'p' or $post-style1 = 'b' or $post-style1 = 'c' or $post-style1 = 'b2' or $post-style1 = 'b3' or $post-style1 = 'sl1' or string-length($post-eid) &gt; 0)">
             <!-- Added to handle missing 2nd ml1, thus including 1st line in this precise circumstance -->
             <xsl:apply-templates mode="s1"/>
             <xsl:text> </xsl:text>
