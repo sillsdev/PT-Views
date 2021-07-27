@@ -1,17 +1,12 @@
 \check Uninstall TNDD Views
 \submenu Custom Views
+\script userViewsUninstall.py
 \description (Ignore the "Input Project" box above.) This will UNINSTALL TNDD Views in the Views menu and this Custom Tools > Custom Views, after restart. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. Thre are five views.
-\programToRun Python
-\script userViewsManager.py
 \helpFile TNDD-info.pdf
 \noText
 \rank 1
 \utf8
 
-\optionName action
-\optionLocalizedName Action to be done.
-\optionDescription Do not change the default. It should be 'uninstall'.
-\optionDefault uninstall
 
 \optionName matchstart
 \optionLocalizedName Start of the file name to be acted on.

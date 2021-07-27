@@ -10,7 +10,7 @@ set matchstart=%2
   set magentabg=[105m
   set green=[32m
   set reset=[0m
-echo %CD%
+@echo %CD%
 if not defined action (
   rem no action passed in at the commandline
   rem so check if the user-views-action.cmd file exists
@@ -18,9 +18,9 @@ if not defined action (
     rem since it exists get the variables written to it
     call "%viewsappdata%\%viewsaction%"
     rem now check if there is an action to do
-    if not defined action echo No action found from command line or from %viewsaction%
+    if not defined action echo %redbg% No action found from command line or from %viewsaction% %reset%
   ) else (
-    echo Did not find the %viewsaction% file  
+    echo %redbg% Did not find the %viewsaction% file   %reset%
   )
 )
 
@@ -50,10 +50,8 @@ if errorlevel=0 (
     pause
   )
 )
-pause
 echo.
-if exist "%viewspath%\%matchstart%*.hide" echo %matchstart% view/s will be hidden after restart.
-if exist "%viewspath%\%matchstart%*.xml" echo %matchstart% view/s will be shown after restart.
+pause
 goto :eof
 
 :runaction
@@ -76,17 +74,13 @@ goto :eof
 goto :eof
 
 :show
-echo Show TNDD views
-pause
 if exist "%viewspath%\%matchstart%*.hide" ren "%viewspath%\%matchstart%*.hide" "*.xml"
-if exist "%viewspath%\%matchstart%*.xml" echo %matchstart% Views files showing after PT restart
+if exist "%viewspath%\%matchstart%*.xml" echo %green%%matchstart% Views files showing after PT restart%reset%
 goto :eof
 
 :hide
-echo Hiding TNDD views
-pause
 if exist "%viewspath%\%matchstart%*.xml" ren "%viewspath%\%matchstart%*.xml" "*.hide" 
-if not exist "%viewspath%\%matchstart%*.xml" echo %matchstart% Views files hidden after PT restart
+if not exist "%viewspath%\%matchstart%*.xml" echo %green%%matchstart% Views files hidden after PT restart %reset%
 goto :eof
 
 
@@ -171,15 +165,18 @@ if not exist "%file%" echo %green% %message% %reset%
 goto :eof
 
 :updateviews
-  set baseurl=https://raw.githubusercontent.com/SILAsiaPub/PT-Views/master/TNDD
-  call :loopstring :getfile "%filelist%" "" ""
+  set baseurl=%baseurl%
+  call :loopstring :getfile "%filelist%"
+  echo.
+  echo %green%Updating of Views complete. %reset%
 goto :eof
 
 :getfile
-  if exist "%drive%\%ptpathnodrive%\%~1.prev" del "%drive%\%ptpathnodrive%\%~1.prev"
-  if exist "%drive%\%ptpathnodrive%\%~1" ren "%drive%\%ptpathnodrive%\%~1" %~1.prev"
-  call curl %baseurl%/%~1 -o "%drive%\%ptpathnodrive%\%~1"
-  if exist "%drive%\%ptpathnodrive%\%~1" echo Downloaded %~1
+  echo.
+  if exist "%ptpath%Views\TNDD*.xslt.old" "%ptpath%Views\TNDD*.xslt.old"
+  if exist "%ptpath%Views\%~1" ren "%ptpath%Views\%~1" "%~1.old"
+  call curl %baseurl%/%~1 >> "%ptpath%Views\%~1"
+  if exist "%ptpath%Views\%~1" echo %green%%~1 %reset% updated in %ptpath%Views folder.
 goto :eof
 
 
@@ -218,3 +215,27 @@ goto :eof
   rem @call :funcend %0
   rem @echo off
 goto :eof
+
+:appendnumbparam
+:: Description: Append numbered parameters on the end of a given variable name. Used from a loop like :loopfiles.
+:: Usage: call :appendnumbparam prepart-of-par-name seed-numb out_var_name
+  set outvar=%~1
+  set parpre=%~2
+  set numb=%~3
+  set calcnumb=%~4
+  if not defined calcnumb set calcnumb=+0
+  set /A newnumb=%numb%%calcnumb%
+  if not defined outvar echo Error: no var name defined at par3.& echo %funcendtext% %0  & goto :eof
+  if defined %parpre%%numb% set appendparam=%appendparam% "!%parpre%%newnumb%!"
+  set %outvar%=%appendparam%
+goto :eof
+
+:last
+:: Description: Find the last parameter in a set of numbered params. Usually called by a loop.
+:: Usage: call :last par_name number
+  if defined lastfound goto :eof
+  set last=!%~1%~2!
+  if defined last set lastfound=on
+  rem set utreturn=%last%, %~1, %~2
+goto :eof
+

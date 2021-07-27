@@ -1,16 +1,11 @@
 \check Show TNDD Views
 \submenu Custom Views
+\script userViewsShow.py
 \description (Ignore the "Input Project" box above.) This tool will show hidden TNDD Views in the Views menu, after restart. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. Thre are five views.
-\programToRun Python
-\script userViewsManager.py
 \helpFile TNDD-info.pdf
 \noText
 \rank 1
 \utf8
-\optionName actionshow
-\optionLocalizedName Action to be done.
-\optionDescription Do not change the default. It should be 'show'.
-\optionDefault show
 
 \optionName matchstart
 \optionLocalizedName Start of the file name to be acted on.

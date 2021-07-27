@@ -1,6 +1,3 @@
-TNDD\cms\TNDD-info.pdf
-TNDD\install_Paratext_TNDD_Views.cmd
-TNDD\Uninstall-TNDD-Views.cmd
 user-views-manager.cmd
 TNDD\TNDD-1st-mng-line.xml
 TNDD\TNDD-1st-mng-line.xslt
@@ -16,11 +13,14 @@ TNDD\TNDD-word-count-1st-mng-line.xml
 TNDD\TNDD-word-count-1st-mng-line.xslt
 TNDD\TNDD-word-count-2nd-mng-line.xml
 TNDD\TNDD-word-count-2nd-mng-line.xslt
+TNDD\install_Paratext_TNDD_Views.cmd
+TNDD\Uninstall-TNDD-Views.cmd
+TNDD\cms\TNDD-info.pdf
+TNDD\cms\TNDD_Views_hide.cms
+TNDD\cms\TNDD_Views_show.cms
+TNDD\cms\TNDD_Views_uninstall.cms
+TNDD\cms\TNDD_Views_update.cms
 common\cms\userViewsManager.py
 common\cms\userViewsHide.py
 common\cms\userViewsShow.py
-common\cms\TNDD_Views_hide.cms
-common\cms\TNDD_Views_show.cms
-TNDD\cms\TNDD_Views_uninstall.cms
-TNDD\cms\TNDD_Views_update.cms
 
