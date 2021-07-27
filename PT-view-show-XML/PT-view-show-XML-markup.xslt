@@ -46,7 +46,7 @@
         </span>
         <xsl:text>=</xsl:text>
         <xsl:text>"</xsl:text>
-        <span style="background:slategrey; color:white">
+        <span style="background:slategrey; color:white; padding: 0 3pt 0 3pt;">
             <xsl:value-of select="."/>
         </span>
         <xsl:text>"</xsl:text>
