@@ -1,5 +1,5 @@
 # PT-Views
-Set of files creating custom views in ParaTExt
+Set of files for creating custom views in ParaTExt
 
 
 ## Setup
