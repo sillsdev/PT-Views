@@ -11,3 +11,7 @@ Set of files for creating custom views in ParaTExt
 ## TNDD Views
 
 Find documentation for TNDD Views [here.](TNDD/info.md)
+
+The TNDD Views is the major sub-project implementation of Paratext Custom Views. Currently there are 7 views, for this particular sub-project.
+
+TNDD = Translation Notes Display Development.
