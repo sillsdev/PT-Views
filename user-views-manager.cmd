@@ -27,9 +27,9 @@ if not defined action (
 
 :main
 @echo.
-@echo Paratext Views manager for: %matchstart% 
+@if "%matchstart%" == "TNDD" echo Paratext Views manager for: %matchstart% 
 @echo.
-@echo Atempting to %action% %matchstart% Views
+@if "%matchstart%" == "TNDD" echo Atempting to %action% %matchstart% Views
 @echo.
 @echo Checking for Paratext settings
 @echo.
@@ -237,5 +237,23 @@ goto :eof
   set last=!%~1%~2!
   if defined last set lastfound=on
   rem set utreturn=%last%, %~1, %~2
+goto :eof
+
+:hello
+echo.
+echo Test output for issue: %matchstart%
+echo.
+echo hello
+echo.
+pause
+goto :eof
+
+:goodbye
+echo.
+echo Test output for issue: %matchstart%
+echo.
+echo goodbye
+echo.
+pause
 goto :eof
 
