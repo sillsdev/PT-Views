@@ -1,6 +1,6 @@
 \check Update TNDD Views
 \submenu Custom Views
-\script TNDD-Views-update.py
+\script TNDD_Views_update.py
 \description (Ignore the "Input Project" box above.) This tool will update TNDD Views from the Internet. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are seven views.
 \helpFile TNDD-info.pdf
 \noText
