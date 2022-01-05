@@ -1,22 +1,8 @@
 \check Update TNDD Views
 \submenu Custom Views
 \script TNDD_Views_update.py
-\description (Ignore the "Input Project" box above.) This tool will update TNDD Views from the Internet. \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are seven views.
+\description (Ignore the "Input Project" box above.) This tool will update TNDD Views from the Internet. These seven views will be updated: TNDD-1st-mng-line.xslt TNDD-2nd-mng-line.xslt TNDD-3rd-mng-line.xslt TNDD-table-view.xslt TNDD-tag-errors.xslt TNDD-word-count-1st-mng-line.xslt TNDD-word-count-2nd-mng-line.xslt.\n\n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
 \helpFile TNDD-info.pdf
 \noText
-\rank 600
+\rank 3
 \utf8
-\optionName baseurl
-\optionLocalizedName Action to be done.
-\optionDescription Do not change the default. It should be: https://raw.githubusercontent.com/SILAsiaPub/PT-Views/master/TNDD
-\optionDefault https://raw.githubusercontent.com/SILAsiaPub/PT-Views/master/TNDD
-
-\optionName matchstart
-\optionLocalizedName Start of the file name to be acted on.
-\optionDescription Do not change the default. It shoud be 'TNDD'.
-\optionDefault TNDD
-
-\optionName filelist
-\optionLocalizedName List of files to be updated.
-\optionDescription Do not change the default.
-\optionDefault TNDD-1st-mng-line.xslt TNDD-2nd-mng-line.xslt TNDD-3rd-mng-line.xslt TNDD-table-view.xslt TNDD-tag-errors.xslt TNDD-word-count-1st-mng-line.xslt TNDD-word-count-2nd-mng-line.xslt

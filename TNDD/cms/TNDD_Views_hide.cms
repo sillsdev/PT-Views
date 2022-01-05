@@ -1,12 +1,8 @@
 \check Hide TNDD Views
 \submenu Custom Views
-\script userViewsHide.py
-\description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus \n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. There are five views.
+\script TNDD_Views_hide.py
+\description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus after Paratext is restarted. There are seven TNDD views. \n\n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
 \helpFile TNDD-info.pdf
 \noText
-\rank 1
+\rank 2
 \utf8
-\optionName matchstart
-\optionLocalizedName Start of the file name to be acted on.
-\optionDescription Do not change the default. It should be 'TNDD'.
-\optionDefault TNDD
