@@ -4,7 +4,6 @@
 :: Date: 2019-12-10
 set view=%1
 :main
-call :detectdateformat
 call :date
 call :time
 call :created
@@ -24,9 +23,11 @@ goto :eof
 
 :date
 :: Description: Returns multiple variables with date in three formats, the year in two formats, month and day date.
-:: Required variables: detectdateformat
+:: Depends on: detectdateformat
+:: Required variables: dateseparator
 :: Created: 2016-05-04
 rem got this from: http://www.robvanderwoude.com/datetiment.php#IDate
+  if not defined dateseparator call :detectdateformat
   FOR /F "tokens=1-4 delims=%dateseparator% " %%A IN ("%date%") DO (
       IF "%dateformat%"=="0" (
           SET fdd=%%C
@@ -66,7 +67,7 @@ goto :eof
 :: Description: Retrieve time in several shorter formats than %time% provides
 :: Usage: call :time
 :: Created: 2016-05-05
-  FOR /F "tokens=1-4 delims=:%timeseparator%." %%A IN ("%time%") DO (
+  FOR /F "tokens=1-4 delims=:." %%A IN ("%time%") DO (
     set curhhmm=%%A%%B
     set curhhmmss=%%A%%B%%C
     set curisohhmmss=%%A-%%B-%%C
