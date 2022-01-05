@@ -164,7 +164,7 @@ if exist "%file%" %action% "%file%"
 if not exist "%file%" echo %green% %message% %reset%
 goto :eof
 
-:updateviews
+:update
   set baseurl=%baseurl%
   call :loopstring :getfile "%filelist%"
   echo.
