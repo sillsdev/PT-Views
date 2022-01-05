@@ -20,7 +20,8 @@ TNDD\cms\TNDD_Views_hide.cms
 TNDD\cms\TNDD_Views_show.cms
 TNDD\cms\TNDD_Views_uninstall.cms
 TNDD\cms\TNDD_Views_update.cms
-common\cms\userViewsManager.py
-common\cms\userViewsHide.py
-common\cms\userViewsShow.py
+TNDD\cms\TNDD_Views_hide.py
+TNDD\cms\TNDD_Views_show.py
+TNDD\cms\TNDD_Views_uninstall.py
+TNDD\cms\TNDD_Views_update.py
 
