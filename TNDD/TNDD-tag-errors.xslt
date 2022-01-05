@@ -59,7 +59,7 @@
 .err-para-sl1-not-contains-tbb {border-bottom:2pt solid red}
 .err-para-sl1-post-1-not-ml1::after {content:'The paragraph following this paragraph should be \\ml1 or \\sla or this should be a \\sla instead. #41';}
 .err-para-sl1-post-1-not-ml1 {border-bottom:2pt solid red}
-.err-para-sl1-looks-like-sla::after {content:'This \\sl1 looks like it should be a \\sla #67';}
+.err-para-sl1-looks-like-sla::after {content:'Footnotes are not allowed in the \\sl1 SFM #67';}
 .err-para-sl1-looks-like-sla {border-bottom:2pt solid red}
 .err-para-ml1-pre-1-not-sl1-or-mlor::after {content:'The paragraph before this paragraph should be \\sl1 or \\mlor #30';}
 .err-para-ml1-pre-1-not-sl1-or-mlor {border-top:2pt solid red}
@@ -79,10 +79,14 @@
 .err-para-p-pre-not-b-b2-ml1-c-tr-sl1-mt2 {border-top:2pt solid red}
 .err-para-p-pre-p-para-not-allowed::after {content:'The preceding \\p is not allowed here. #40';}
 .err-para-p-pre-p-para-not-allowed {border-top:2pt solid red}
-.err-para-pvr-pre-not-tr-sl1-ml1::after {content:'The preceding is not \\tr or \\sl1 or \\ml1 #72';}
-.err-para-pvr-pre-not-tr-sl1-ml1 {border-top:2pt solid red}
-.err-para-pra-pre-not-ntn::after {content:'The preceding is not \\ntn #73';}
+.err-para-pra-pre-not-ntn::after {content:'The preceding is not \\ntn #72';}
 .err-para-pra-pre-not-ntn {border-top:2pt solid red}
+.err-para-ntn-pre-not-tr-pra-ntn-mt#-li1::after {content:'The preceding is not \\tr or \\pra or \\ntn or \\mt# or \\li1 #73';}
+.err-para-ntn-pre-not-tr-pra-ntn-mt#-li1 {border-top:2pt solid red}
+.err-char-fr-verse-ref::after {content:'The verse reference is not a number. #76';}
+.err-char-fr-verse-ref {background:orange}
+.err-char-fr-chapt-ref::after {content:'The chapter reference is not a number #75';}
+.err-char-fr-chapt-ref {background:orange}
 .err-char-imp-post-not-bk::after {content:'This \\imp SFM should be followed like this \\imp...\\imp*\\bk ⌋\\bk* #12';}
 .err-char-imp-post-not-bk {border-right:5pt solid red;background:peachpuff}
 .err-char-imp-pre-not-correct-bk-text::after {content:'This \\imp...\\imp* should be preceded by \\bk ⌊\\bk* or a \\rgi and a space. #13';}
@@ -242,7 +246,7 @@
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                   <xsl:text> err-para--no-content</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:text>\</xsl:text>
@@ -269,8 +273,8 @@
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                   <xsl:text> err-para--no-content</xsl:text>
-            </xsl:if>
                </xsl:if>
+            </xsl:if>
          </xsl:attribute>
          <xsl:text>\</xsl:text>
          <xsl:value-of select="@style"/>
@@ -326,8 +330,8 @@
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
-            <xsl:text>\</xsl:text>
-            <xsl:value-of select="@style"/>
+         <xsl:text>\</xsl:text>
+         <xsl:value-of select="@style"/>
          <xsl:text> </xsl:text>
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="0"/>
@@ -351,7 +355,7 @@
             <!--ck-id 36 - rank=7-->
             <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
                <xsl:text> err-para-mlor-pre-not-ml1</xsl:text>
-         </xsl:if>
+            </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
@@ -390,15 +394,15 @@
                </xsl:if>
             </xsl:if>
             <!--ck-id 67 - rank=8-->
-            <xsl:if test="count(*[@style = 'ros']) &gt; 0">
+            <xsl:if test="count(*[@style = 'f']) &gt; 0">
                <xsl:text> err-para-sl1-looks-like-sla</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                   <xsl:text> err-para--no-content</xsl:text>
-            </xsl:if>
                </xsl:if>
+            </xsl:if>
          </xsl:attribute>
          <xsl:text>\</xsl:text>
          <xsl:value-of select="@style"/>
@@ -447,12 +451,12 @@
             <!--ck-id 33 - rank=10-->
             <xsl:if test="string-length(text()) = 0 and count(*) = 0">
                <xsl:text> err-para-ml1-no-text-or-child</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                   <xsl:text> err-para--no-content</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:text>\</xsl:text>
@@ -496,7 +500,7 @@
             <xsl:value-of select="@style"/>
             <!--ck-id 72 - rank=8-->
             <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ntn'])">
-               <xsl:text> err-para-pvr-pre-not-tr-sl1-ml1</xsl:text>
+               <xsl:text> err-para-pra-pre-not-ntn</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -505,8 +509,8 @@
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
-            <xsl:text>\</xsl:text>
-            <xsl:value-of select="@style"/>
+         <xsl:text>\</xsl:text>
+         <xsl:value-of select="@style"/>
          <xsl:text> </xsl:text>
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="0"/>
@@ -519,14 +523,14 @@
             <xsl:value-of select="@style"/>
             <!--ck-id 73 - rank=8-->
             <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or name() = 'table' or @style = 'pra' or @style = 'ntn' or substring(@style,1,2) = 'mt' or @style = 'li1'])">
-               <xsl:text> err-para-pra-pre-not-ntn</xsl:text>
+               <xsl:text> err-para-ntn-pre-not-tr-pra-ntn-mt#-li1</xsl:text>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                   <xsl:text> err-para--no-content</xsl:text>
                </xsl:if>
-         </xsl:if>
+            </xsl:if>
          </xsl:attribute>
          <xsl:text>\</xsl:text>
          <xsl:value-of select="@style"/>
@@ -534,6 +538,57 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="0"/>
          </xsl:apply-templates>
+      </xsl:element>
+   </xsl:template>
+   <xsl:template match="char[@style = 'fr']">
+      <xsl:param name="embedded"/>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--common char errors-->
+            <!--ck-id 23 - rank=0-->
+            <xsl:if test="string-length(text()) = 0 and not(*)">
+               <xsl:text> err-char--empty-text</xsl:text>
+            </xsl:if>
+            <!--ck-id 24 - rank=0-->
+            <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '">
+               <xsl:if test="count(following-sibling::node()) &gt; 0 and substring(@style,1,1) != 'f'">
+                  <xsl:text> err-char--space-b4-close-sfm</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ck-id 20 - rank=11-->
+            <xsl:if test="@closed = 'false'">
+               <xsl:if test="substring(@style,1,1) != 'f'">
+                  <xsl:text> err-char--not-closed</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--style specific errors-->
+            <!--ck-id 76 - rank=2-->
+            <xsl:if test="not(translate(substring(substring-after(.,':'),1,1),'123456789','000000000') = '0')">
+               <xsl:text> err-char-fr-verse-ref</xsl:text>
+            </xsl:if>
+            <!--ck-id 75 - rank=3-->
+            <xsl:if test="not(translate(substring(substring-before(.,':'),'123456789','000000000'),string-length(substring-before(.,':')),1) = '0')">
+               <xsl:text> err-char-fr-chapt-ref</xsl:text>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:text>\</xsl:text>
+         <xsl:if test="$embedded = '1' and name() = 'char'">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+         <xsl:value-of select="@style"/>
+         <xsl:text> </xsl:text>
+         <xsl:apply-templates select="node()">
+            <xsl:with-param name="embedded" select="1"/>
+         </xsl:apply-templates>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:text>\</xsl:text>
+            <xsl:if test="$embedded = '1' and name() = 'char'">
+               <xsl:text>+</xsl:text>
+            </xsl:if>
+            <xsl:value-of select="@style"/>
+            <xsl:text>*</xsl:text>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <xsl:template match="char[@style = 'imp']">
@@ -812,18 +867,18 @@
             <!--ck-id 23 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:text> err-char--empty-text</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 24 - rank=0-->
             <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '">
                <xsl:if test="count(following-sibling::node()) &gt; 0 and substring(@style,1,1) != 'f'">
                   <xsl:text> err-char--space-b4-close-sfm</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 20 - rank=11-->
             <xsl:if test="@closed = 'false'">
                <xsl:if test="substring(@style,1,1) != 'f'">
                   <xsl:text> err-char--not-closed</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--style specific errors-->
             <!--ck-id 6 - rank=0-->
@@ -836,23 +891,23 @@
             <xsl:if test="contains(text(),'⌋') and not(position() = last())">
                <xsl:if test="not(translate(substring(following-sibling::node()[1],1,1),'+ ,.?!:;”’)','_++++++++++') = '+')">
                   <xsl:text> err-char-brk-post-text-not-space-or-punc</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 10 - rank=5-->
             <xsl:if test="string-length(text()) != 1">
                <xsl:text> err-char-brk-illegal-char</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 4 - rank=8-->
             <xsl:if test="contains(text(),'⌊') and not(parent::*[@style = 'ros'])">
                <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'imp'])">
                   <xsl:text> err-char-brk-post-not-imp</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 7 - rank=8-->
             <xsl:if test="contains(text(),'⌋') and not(parent::*[@style = 'ros'])">
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'imp' or @style = 'rgi' or @style = ''])">
                   <xsl:text> err-char-brk-pre-not-imp</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 5 - rank=10-->
             <xsl:if test="contains(text(),'⌊')">
@@ -888,12 +943,12 @@
             <!--ck-id 23 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:text> err-char--empty-text</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 24 - rank=0-->
             <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '">
                <xsl:if test="count(following-sibling::node()) &gt; 0 and substring(@style,1,1) != 'f'">
                   <xsl:text> err-char--space-b4-close-sfm</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 20 - rank=11-->
             <xsl:if test="@closed = 'false'">
@@ -929,24 +984,24 @@
             <!--ck-id 23 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:text> err-char--empty-text</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 24 - rank=0-->
             <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '">
                <xsl:if test="count(following-sibling::node()) &gt; 0 and substring(@style,1,1) != 'f'">
                   <xsl:text> err-char--space-b4-close-sfm</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 20 - rank=11-->
             <xsl:if test="@closed = 'false'">
                <xsl:if test="substring(@style,1,1) != 'f'">
                   <xsl:text> err-char--not-closed</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--style specific errors-->
             <!--ck-id 56 - rank=5-->
             <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ros'])">
                <xsl:text> err-note-f-pre-not-ros</xsl:text>
-               </xsl:if>
+            </xsl:if>
             <!--ck-id 57 - rank=5-->
             <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ros'])">
                <xsl:text> err-note-f-post-not-ros</xsl:text>
@@ -959,8 +1014,8 @@
             <xsl:with-param name="embedded" select="0"/>
          </xsl:apply-templates>
          <xsl:if test="not(@closed = 'false')">
-         <xsl:text>\</xsl:text>
-         <xsl:value-of select="@style"/>
+            <xsl:text>\</xsl:text>
+            <xsl:value-of select="@style"/>
             <xsl:text>*</xsl:text>
          </xsl:if>
       </xsl:element>
@@ -998,7 +1053,7 @@
             <xsl:if test="not(count(*[@style = 'sbx']) = 2)">
                <xsl:if test="count(preceding-sibling::chapter) &gt; 0">
                   <xsl:text> err-cell-tc1-needs-2-sbx</xsl:text>
-            </xsl:if>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 3 - rank=10-->
             <xsl:if test="not(count(*[@style = 'tbb']) = 1)">
@@ -1018,14 +1073,14 @@
             <!--ck-id 44 - rank=5-->
             <xsl:if test="count(cell) != 1">
                <xsl:if test="count(preceding-sibling::chapter) &gt; 0">
-               <xsl:text> err-row-tr-only-tc1-allowed</xsl:text>
-            </xsl:if>
+                  <xsl:text> err-row-tr-only-tc1-allowed</xsl:text>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 45 - rank=10-->
             <xsl:if test="preceding-sibling::*[1][@style = 'tr']">
                <xsl:if test="preceding-sibling::chapter">
-               <xsl:text> err-row-tr-2nd-not-allowed</xsl:text>
-            </xsl:if>
+                  <xsl:text> err-row-tr-2nd-not-allowed</xsl:text>
+               </xsl:if>
             </xsl:if>
             <!--ck-id 43 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
