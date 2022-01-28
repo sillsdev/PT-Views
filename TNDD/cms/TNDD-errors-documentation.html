@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html>
+   <head>
+      <title>Rule Docs</title>
+      <meta charset="utf-8"/>
+      <meta name="description" content=""/>
+      <link rel="stylesheet" href="documentation.css" type="text/css"/>
+   </head>
+   <body>
+      <h1>TNDD error checks documentation.</h1>
+      <h4 id="index">Check number Index</h4>
+      <div class="index">
+         <a href="#err1">1</a> 
+         <a href="#err2">2</a> 
+         <a href="#err3">3</a> 
+         <a href="#err4">4</a> 
+         <a href="#err5">5</a> 
+         <a href="#err6">6</a> 
+         <a href="#err7">7</a> 
+         <span>8 disabled </span>
+         <a href="#err9">9</a> 
+         <a href="#err10">10</a> 
+         <span>11 disabled </span>
+         <a href="#err12">12</a> 
+         <a href="#err13">13</a> 
+         <span>14 disabled </span>
+         <a href="#err15">15</a> 
+         <a href="#err16">16</a> 
+         <a href="#err17">17</a> 
+         <a href="#err18">18</a> 
+         <a href="#err19">19</a> 
+         <a href="#err20">20</a> 
+         <span>21 disabled </span>
+         <span>22 disabled </span>
+         <a href="#err23">23</a> 
+         <a href="#err24">24</a> 
+         <a href="#err25">25</a> 
+         <a href="#err26">26</a> 
+         <span>27 disabled </span>
+         <span>28 disabled </span>
+         <a href="#err29">29</a> 
+         <a href="#err30">30</a> 
+         <a href="#err31">31</a> 
+         <a href="#err32">32</a> 
+         <a href="#err33">33</a> 
+         <span>34 disabled </span>
+         <a href="#err35">35</a> 
+         <a href="#err36">36</a> 
+         <a href="#err37">37</a> 
+         <span>38 disabled </span>
+         <span>39 disabled </span>
+         <a href="#err40">40</a> 
+         <a href="#err41">41</a> 
+         <span>42 disabled </span>
+         <a href="#err43">43</a> 
+         <a href="#err44">44</a> 
+         <a href="#err45">45</a> 
+         <a href="#err46">46</a> 
+         <a href="#err47">47</a> 
+         <a href="#err48">48</a> 
+         <a href="#err49">49</a> 
+         <a href="#err50">50</a> 
+         <a href="#err51">51</a> 
+         <a href="#err52">52</a> 
+         <a href="#err53">53</a> 
+         <a href="#err54">54</a> 
+         <a href="#err55">55</a> 
+         <a href="#err56">56</a> 
+         <a href="#err57">57</a> 
+         <a href="#err58">58</a> 
+         <a href="#err59">59</a> 
+         <a href="#err60">60</a> 
+         <a href="#err61">61</a> 
+         <a href="#err62">62</a> 
+         <a href="#err63">63</a> 
+         <a href="#err64">64</a> 
+         <a href="#err65">65</a> 
+         <a href="#err66">66</a> 
+         <span>67 disabled </span>
+         <a href="#err68">68</a> 
+         <a href="#err69">69</a> 
+         <a href="#err70">70</a> 
+         <a href="#err71">71</a> 
+         <a href="#err72">72</a> 
+         <a href="#err73">73</a> 
+         <span>74 disabled </span>
+         <a href="#err75">75</a> 
+         <a href="#err76">76</a> 
+         <span>77 disabled </span>
+         <a href="#err78">78</a> 
+         <a href="#err79">79</a> 
+         <a href="#err80">80</a> 
+         <a href="#err81">81</a> 
+      </div>
+      <h4 id="index2">SFM Index</h4>
+      <div class="index2">
+         <a href="#sfm-b">b</a> 
+         <a href="#sfm-brk">brk</a> 
+         <a href="#sfm-f">f</a> 
+         <a href="#sfm-fr">fr</a> 
+         <a href="#sfm-gn">gn</a> 
+         <a href="#sfm-heb">heb</a> 
+         <a href="#sfm-id">id</a> 
+         <a href="#sfm-imp">imp</a> 
+         <a href="#sfm-ml1">ml1</a> 
+         <a href="#sfm-mlor">mlor</a> 
+         <a href="#sfm-ntn">ntn</a> 
+         <a href="#sfm-p">p</a> 
+         <a href="#sfm-pra">pra</a> 
+         <a href="#sfm-pvr">pvr</a> 
+         <a href="#sfm-rgi">rgi</a> 
+         <a href="#sfm-rgm">rgm</a> 
+         <a href="#sfm-ros">ros</a> 
+         <a href="#sfm-sl1">sl1</a> 
+         <a href="#sfm-sla">sla</a> 
+         <a href="#sfm-tbb">tbb</a> 
+         <a href="#sfm-tc1">tc1</a> 
+         <a href="#sfm-tr">tr</a> 
+      </div>
+      <h2>USX: book SFM: id </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-id">id</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err1" href="#index">1</a> Message: Place holder. Impossible error Priority: 0</div>
+            <div class="note">This is an impossible error</div>
+            <div class="test">Test 1: not(@code)</div>
+         </div>
+      </div>
+      <h2>USX: cell SFM: tc1 </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tc1">tc1</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err2" href="#index">2</a> Message: This \tc1 SFM should have two \sbx SFMs Priority: 10</div>
+            <div class="test">Test 1: not(count(*[@style = 'sbx']) = 2)</div>
+            <div class="test2">Test 2: count(preceding-sibling::chapter) &gt; 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err3" href="#index">3</a> Message: This \tc1 SFM should have one \tbb __\tbb* SFM Priority: 10</div>
+            <div class="test">Test 1: not(count(*[@style = 'tbb']) = 1)</div>
+            <div class="test2">Test 2: count(preceding-sibling::chapter) &gt; 0</div>
+         </div>
+      </div>
+      <h2>USX: char SFM:  brk fr imp rgi rgm ros tbb </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-brk">brk</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err5" href="#index">5</a> Message: There should not be a space between this \brk and the following \imp. Priority: 10</div>
+            <div class="note">This rule is covered by rule 5</div>
+            <div class="test">Test 1: contains(text(),'⌊')</div>
+            <div class="test2">Test 2: following-sibling::node()[1] = ' '</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4" href="#index">4</a> Message: This \brk* SFM should only occur immediately before an \imp SFM. Priority: 8</div>
+            <div class="test">Test 1: contains(text(),'⌊') and not(parent::*[@style = 'ros'])</div>
+            <div class="test2">Test 2: post=imp</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7" href="#index">7</a> Message: This \brk SFM should only occur immediately after an \imp* SFM. Priority: 8</div>
+            <div class="test">Test 1: contains(text(),'⌋') and not(parent::*[@style = 'ros'])</div>
+            <div class="test2">Test 2: pre=imp rgi </div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err9" href="#index">9</a> Message: This \brk SFM is not followed by a space or punctuation Priority: 5</div>
+            <div class="test">Test 1: contains(text(),'⌋') and not(position() = last())</div>
+            <div class="test2">Test 2: post-char= ,.?!:;”’)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10" href="#index">10</a> Message: This \brk SFM can contain only ⌊ or ⌋ but this does not match either of those. Priority: 5</div>
+            <div class="test">Test 1: string-length(text()) != 1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err6" href="#index">6</a> Message: This \brk SFM is not preceded by a space or quotes or left parenthesis Priority: 0</div>
+            <div class="note">Removed a redundant and critera in test 1</div>
+            <div class="test">Test 1: contains(text(),'⌊') and position() &gt; 1 and not(preceding-sibling::node()[1][@style = 'tbb']) and not(substring(following-sibling::char[1][@style = 'imp'],1,1) = '’')</div>
+            <div class="test2">Test 2: pre-char= “/(‘</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-imp">imp</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err13" href="#index">13</a> Message: This \imp...\imp* should be preceded by \bk ⌊\bk* or a \rgi and a space. Priority: 8</div>
+            <div class="test">Test 1: pre=brk rgi</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12" href="#index">12</a> Message: This \imp SFM should be followed like this \imp...\imp*\bk ⌋\bk* Priority: 5</div>
+            <div class="test">Test 1: post=brk rgi</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-rgi">rgi</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15" href="#index">15</a> Message: This \rgi SFM should not be preceeded by a space. Priority: 5</div>
+            <div class="test">Test 1: preceding-sibling::node()[1] = preceding-sibling::text()[1]</div>
+            <div class="test2">Test 2: substring(preceding-sibling::text()[1],string-length(preceding-sibling::text()[1]),1) = ' '</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err47" href="#index">47</a> Message: This \rgi should only be followed by a space or colon  or right double quote or em dash. Priority: 5</div>
+            <div class="test">Test 1: following-sibling::node()[1] = following-sibling::text()[1]</div>
+            <div class="test2">Test 2: post-char= —’/”</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err49" href="#index">49</a> Message: This \rgi SFM should be embedded in a \imp SFM like this \+rgi Priority: 5</div>
+            <div class="note">working</div>
+            <div class="test">Test 1: not(parent::*[@style = 'imp'] or preceding-sibling::*[1][@style = 'imp'])</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-rgm">rgm</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err16" href="#index">16</a> Message: This \rgm SFM should not be preceeded by a space. Priority: 5</div>
+            <div class="test">Test 1: preceding-sibling::node()[1] = preceding-sibling::text()[1]</div>
+            <div class="test2">Test 2: substring(preceding-sibling::text()[1],string-length(preceding-sibling::text()[1]),1) = ' '</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err48" href="#index">48</a> Message: This \rgm should only be followed by a space or colon or right double quote or em dash. Priority: 5</div>
+            <div class="test">Test 1: following-sibling::node()[1] = following-sibling::text()[1]</div>
+            <div class="test2">Test 2: post-char= —’/”</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tbb">tbb</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19" href="#index">19</a> Message: There should not be a space after a \tbb* SFM Priority: 10</div>
+            <div class="test">Test 1: substring(following-sibling::node()[1],1,1) = ' '</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err17" href="#index">17</a> Message: There should be only two underscore characters in the \tbb __\tbb*. Priority: 5</div>
+            <div class="test">Test 1: not(text() = '__')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err18" href="#index">18</a> Message: There should not be a space before a \tbb SFM Priority: 5</div>
+            <div class="note">Modified so HTML matches PT</div>
+            <div class="test">Test 1: substring(preceding-sibling::node()[1],string-length(preceding-sibling::node()[1]),1) = ' '</div>
+         </div>
+      </div>
+      <div>
+         <h3>No style/SFM defined</h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err20" href="#index">20</a> Message: This character SFM is not closed. No end marker was found. Priority: 11</div>
+            <div class="test">Test 1: @closed = 'false'</div>
+            <div class="test2">Test 2: substring(@style,1,1) != 'f'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23" href="#index">23</a> Message: This character SFM is empty Priority: 0</div>
+            <div class="test">Test 1: string-length(text()) = 0 and not(*)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err24" href="#index">24</a> Message: There is a space before the closing SFM. Best to put the space after the close. Priority: 0</div>
+            <div class="test">Test 1: substring(node()[last()],string-length(text()[last()]),1) = ' '</div>
+            <div class="test2">Test 2: count(following-sibling::node()) &gt; 0 and substring(@style,1,1) != 'f'</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-ros">ros</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err66" href="#index">66</a> Message: There is no embedded \+brk in this \ros Priority: 5</div>
+            <div class="test">Test 1: not(count(char[@style = 'brk']) = 1) and not(text())</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-fr">fr</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err75" href="#index">75</a> Message: The chapter reference is not a number Priority: 3</div>
+            <div class="test">Test 1: not(translate(substring(substring-before(.,':'),string-length(substring-before(.,':')),1),'123456789','000000000') = '0')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err76" href="#index">76</a> Message: The verse reference is not a number. Priority: 2</div>
+            <div class="test">Test 1: not(translate(substring(substring-after(.,':'),1,1),'123456789','000000000') = '0')</div>
+         </div>
+      </div>
+      <h2>USX: note SFM: f </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-f">f</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err56" href="#index">56</a> Message: The preceding is not \ros Priority: 5</div>
+            <div class="test">Test 1: parent::*[@style = 'ml1']</div>
+            <div class="test2">Test 2: pre=ros</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err57" href="#index">57</a> Message: The following is not \ros Priority: 5</div>
+            <div class="test">Test 1: parent::*[@style = 'ml1']</div>
+            <div class="test2">Test 2: post=ros</div>
+         </div>
+      </div>
+      <h2>USX: para SFM:  b gn heb ml1 mlor ntn p pra pvr sl1 sla </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-b">b</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err25" href="#index">25</a> Message: This \b SFM is not allowed here, After Verse 1 and before a section header in \tr. Priority: 5</div>
+            <div class="test">Test 1: following-sibling::*[1][name() = 'table'] or following-sibling::*[1][@style = 'sl1']</div>
+            <div class="test2">Test 2: preceding::*[name() = 'verse'][1][@number = 1]</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err55" href="#index">55</a> Message: The following is not \p or \sl1 or \tr or \b3 or \c or \b or \mt_ or \ntn Priority: 5</div>
+            <div class="test">Test 1: post=p sl1 tr b3 c b mt_ ntn</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err58" href="#index">58</a> Message: The preceding is not \p or \io1 or \ml1 or \ntn or \b or \mt_ or \pra or \tr or \c Priority: 5</div>
+            <div class="test">Test 1: pre=p io1 ml1 ntn b mt_ pra tr c</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err80" href="#index">80</a> Message: A \b is not allowed between a \c and a \p Priority: 5</div>
+            <div class="note">Email: Steve C 2022-01-13;</div>
+            <div class="test">Test 1: preceding-sibling::*[1][@style = 'c']</div>
+            <div class="test2">Test 2: following-sibling::*[1][@style = 'p']</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err81" href="#index">81</a> Message: A \b is not allowed between a \p and a \sl1 or \tr Priority: 5</div>
+            <div class="note">Email: Steve C 2022-01-13;</div>
+            <div class="test">Test 1: preceding-sibling::*[1][@style = 'p'][child::*[@style = 'v']]</div>
+            <div class="test2">Test 2: following-sibling::*[1][@style = 'sl1'] or following-sibling::*[1][name() = 'table']</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-ml1">ml1</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err33" href="#index">33</a> Message: This \ml1 should not be empty. If there is no content, remove it and the \mlor preceding it. Priority: 10</div>
+            <div class="test">Test 1: string-length(text()) = 0 and count(*) = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err26" href="#index">26</a> Message: A Pilcrow character ¶ should be followed by a \tbb at the start of this paragraph Priority: 8</div>
+            <div class="note">Handled by rule 29</div>
+            <div class="test">Test 1: (*[@style = 'tbb'] and not(contains(text(),'¶'))) or (contains(text(),'¶') and not(*[@style = 'tbb']))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err29" href="#index">29</a> Message: The \tbb SFM should be second after a ¶ paragraph marker Priority: 8</div>
+            <div class="test">Test 1: count(char[@style = 'tbb']) = 1</div>
+            <div class="test2">Test 2: not(child::node()[2][@style = 'tbb'])</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err30" href="#index">30</a> Message: The paragraph before this paragraph should be \sl1 or \mlor Priority: 5</div>
+            <div class="test">Test 1: pre=mlor sl1 sla gn</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err31" href="#index">31</a> Message: The preceding \ml1 has a ¶\tbb __\tbb* so this one should too. Priority: 5</div>
+            <div class="test">Test 1: (contains( preceding-sibling::*[2][@style = 'ml1']/text(),'¶') or preceding-sibling::*[2][@style = 'ml1']/*[1][@style  = 'tbb']) and preceding-sibling::*[1][@style = 'mlor']</div>
+            <div class="test2">Test 2: not(child::node()[@style = 'tbb'])  or not(contains(text(),'¶'))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err32" href="#index">32</a> Message: There is no ¶\tbb __\tbb* in this paragraph. It follows a section header \tr so it is required. Priority: 5</div>
+            <div class="test">Test 1: preceding-sibling::*[2][name() = 'table']</div>
+            <div class="test2">Test 2: not(child::node()[@style = 'tbb'])</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err61" href="#index">61</a> Message: The following is not \mlor or \sl1 or \p or \b or \b3 or \c Priority: 5</div>
+            <div class="test">Test 1: count(following-sibling::*) &gt; 0</div>
+            <div class="test2">Test 2: post=mlor sl1 p b b3 c</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err78" href="#index">78</a> Message: There should be a \b immediately after this \ml1 Priority: 5</div>
+            <div class="note">Ian' alternate to 77. Not approved as at 2022-01-07</div>
+            <div class="test">Test 1: (contains(following-sibling::*[@style = 'ml1'][1]/text(),'¶') and not(following-sibling::*[2]/@style = 'c') and not(following-sibling::*[1]/@style = 'c')) and  not(following-sibling::*[1]/@style = 'mlor')</div>
+            <div class="test2">Test 2:  not(following-sibling::*[1]/@style = 'b')</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-mlor">mlor</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err35" href="#index">35</a> Message: There is no \ml1 line following this \mlor. Delete this line or addd a \ml1 line Priority: 7</div>
+            <div class="test">Test 1: post=ml1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err36" href="#index">36</a> Message: A \ml1 should preceed this \mlor Priority: 7</div>
+            <div class="test">Test 1: pre=ml1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err37" href="#index">37</a> Message: The content of this \\mlor SFM can only be: -or- Priority: 5</div>
+            <div class="test">Test 1: count(*) = 0</div>
+            <div class="test2">Test 2: not(text() = '-or-')</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-p">p</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err40" href="#index">40</a> Message: The preceding \p is not allowed here. Priority: 8</div>
+            <div class="test">Test 1: preceding-sibling::*[1][@style = 'p'] and child::verse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err62" href="#index">62</a> Message: The preceding is not \b or \b3 or \ml1 or \c or \tr or \sl1 or \mt2 Priority: 5</div>
+            <div class="test">Test 1: pre=b b3 ml1 c tr sl1 mt2</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err79" href="#index">79</a> Message: There should not be a \b after this, but it could go before Priority: 5</div>
+            <div class="note">Ian's check when \b follows \p containing a verse.</div>
+            <div class="test">Test 1: count(v) &gt; 0 and following-sibling::*[1][@style = 'b']</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-sl1">sl1</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err41" href="#index">41</a> Message: The paragraph following this paragraph should be \ml1 or \sla or this should be a \sla instead. Priority: 7</div>
+            <div class="test">Test 1: not(child::char[@style = 'tei'])</div>
+            <div class="test2">Test 2: post=ml1 sla pvr gn</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err51" href="#index">51</a> Message: This paragraph is missing a \tbb __\tbb* after the verse reference. Priority: 5</div>
+            <div class="test">Test 1: not(*[@style = 'tbb'])</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err68" href="#index">68</a> Message: The verse reference in \sl1 appears to have a space in it. Priority: 3</div>
+            <div class="test">Test 1: contains(text()[1],' ')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err69" href="#index">69</a> Message: The preceding is not \ml1 or \mlor or \mt9 or \ntn or \p or \pvr or \sla or \tr or \b3 or \b Priority: 3</div>
+            <div class="test">Test 1: pre=ml1 mlor mt9 ntn p pvr sla tr b3 b</div>
+         </div>
+      </div>
+      <div>
+         <h3>No style/SFM defined</h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err43" href="#index">43</a> Message: This paragraph marker is empty, and may not be allowed here. Priority: 0</div>
+            <div class="test">Test 1: string-length(text()) = 0 and not(*)</div>
+            <div class="test2">Test 2: not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-pvr">pvr</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err50" href="#index">50</a> Message: The preceding is not \p or \b2 or \b Priority: 5</div>
+            <div class="test">Test 1: post=sl1 sla b2</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err71" href="#index">71</a> Message: The preceding is not \tr or \sl1 or \ml1 Priority: 3</div>
+            <div class="test">Test 1: pre=tr sl1 ml1</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-sla">sla</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err52" href="#index">52</a> Message: The following is not \gn or \ml1 or \sl1 Priority: 5</div>
+            <div class="test">Test 1: post=gn ml1 sl1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err63" href="#index">63</a> Message: The preceding is not \sl1 or \pvr or \ml1 or \b2 Priority: 5</div>
+            <div class="test">Test 1: pre=sl1 pvr ml1 b2</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-gn">gn</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err53" href="#index">53</a> Message: The following is not \ml1 Priority: 5</div>
+            <div class="test">Test 1: post=ml1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err54" href="#index">54</a> Message: The preceding is not \sl1 or \sla Priority: 5</div>
+            <div class="test">Test 1: pre=sl1 sla</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-heb">heb</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err59" href="#index">59</a> Message: The preceding is not \sla Priority: 5</div>
+            <div class="test">Test 1: pre=sla</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err60" href="#index">60</a> Message: The following is not \ml1 Priority: 5</div>
+            <div class="test">Test 1: post=ml1</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-pra">pra</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err72" href="#index">72</a> Message: The preceding is not \ntn Priority: 8</div>
+            <div class="test">Test 1: pre=ntn</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-ntn">ntn</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err73" href="#index">73</a> Message: The preceding is not \tr or \pra or \ntn or \mt_ or \li1 Priority: 8</div>
+            <div class="test">Test 1: pre=tr pra ntn mt_ li1</div>
+         </div>
+      </div>
+      <h2>USX: row SFM: tr </h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tr">tr</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err45" href="#index">45</a> Message: Only one \tr is allowed in this positions. Priority: 10</div>
+            <div class="test">Test 1: preceding-sibling::*[1][@style = 'tr']</div>
+            <div class="test2">Test 2: preceding-sibling::chapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err44" href="#index">44</a> Message: The SFM \tr must have a \tc1 following. Priority: 5</div>
+            <div class="test">Test 1: count(cell) != 1</div>
+            <div class="test2">Test 2: count(preceding-sibling::chapter) &gt; 0</div>
+         </div>
+      </div>
+      <h2>USX: table SFM:  </h2>
+      <div>
+         <h3>No style/SFM defined</h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err46" href="#index">46</a> Message: There should only be one \tr here. Priority: 10</div>
+            <div class="test">Test 1: not(count(row) = 1)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err64" href="#index">64</a> Message: The preceding is not \b or \b3 Priority: 5</div>
+            <div class="test">Test 1: pre=b b3</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err65" href="#index">65</a> Message: The following is not \p or \sl1 Priority: 5</div>
+            <div class="test">Test 1: post=p sl1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err70" href="#index">70</a> Message: The preceding is not \p or \b2 or \b Priority: 3</div>
+            <div class="test">Test 1: pre=p b2 b</div>
+         </div>
+      </div>
+   </body>
+</html>

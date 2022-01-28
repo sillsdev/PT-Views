@@ -15,6 +15,7 @@ TNDD\TNDD-word-count-2nd-mng-line.xml
 TNDD\TNDD-word-count-2nd-mng-line.xslt
 TNDD\install_Paratext_TNDD_Views.cmd
 TNDD\Uninstall-TNDD-Views.cmd
+TNDD\TNDD-errors-documentation.html
 TNDD\cms\TNDD-info.pdf
 TNDD\cms\TNDD_Views_hide.cms
 TNDD\cms\TNDD_Views_show.cms

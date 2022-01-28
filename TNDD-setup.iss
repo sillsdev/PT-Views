@@ -49,6 +49,7 @@ Source: "TNDD\cms\TNDD-info.pdf"; DestDir: "{#MAppData}\cms"
 Source: "user-views-manager.cmd"; DestDir: "{#MAppManager}"
 Source: "TNDD\Uninstall*.cmd"; DestDir: "{#MAppData}"
 Source: "TNDD\install*.cmd"; DestDir: "{#MAppData}"
+Source: "TNDD\TNDD-errors-documentation.html"; DestDir: "{#MPP}\cms"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
