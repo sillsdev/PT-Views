@@ -179,6 +179,13 @@ goto :eof
   if exist "%ptpath%Views\%~1" echo %green%%~1 %reset% updated in %ptpath%Views folder.
 goto :eof
 
+:errorsdoc
+  echo.
+ 
+  cd /d "%ptpath%cms"
+  echo Starting %matchstart%-errors-documentation.html
+  start msedge "file://%ptpath%cms/%matchstart%-errors-documentation.html"
+goto :eof
 
 
 :loopstring
