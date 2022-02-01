@@ -1,3 +1,5 @@
+## This repository is no longer being developed as at 2022-02-02. See active project at https://github.com/sillsdev/PT-Views
+
 # PT-Views
 Set of files for creating custom views in ParaTExt
 
