@@ -18,24 +18,20 @@ This additional tool for Paratext is designed to help content creators and check
 
 ### Option 1: Use the Paratext-TNDD-Views-installer.exe 
 - Download Paratext-TNDD-Views-installer.exe from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest)
-- The unsigned installer may cause Windows (or your Anti-Virus program) to object, but Keep the downloaded file anyway:
-![download query](images/download-query.png)
-- When you eventually run the .exe installer, you may see further warnings - and will need to click the More info link:
-![win protect more info](images/win-protect-more-info.png)
-- And then you can select the option to Run anyway
-![win protect run anyway](images/win-protect-run-anyway.png)
-- The installer should now run and you will need to follow the usual steps to Install the Paratext Views
-- You might need to Restart Paratext in order to use the new views
+- Close Paratext if open.
+- Run the installer and follow the usual steps to Install the Paratext Views. Your antivirus may tell you this program is rarely downloaded. That is true, but you can ignore the warning. (Previous versions were not signed. This version is signed.)
+- Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 
 
 ### Option 2: Run a script to install
 - Download TNDD-Views.zip from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest) 
+- Close Paratext if open.
 - Select the option "Show in folder", and then in your Downloads folder, right click on the Views.zip file
-- Then select your preferred UNZIP tool to Extract all... (preferably to a new folder called Views)
+- Then select your preferred UNZIP tool to Extract all... (preferably to a new folder called Views).
    (if given the option, ensure that "Show extracted files when complete" is checked).
 - Double click on the **install_Paratext_TNDD_Views.cmd**
   - If all went well the black box dissappears. If not it will stay and give failure info
-- Restart or Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
+- Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 
 
 
