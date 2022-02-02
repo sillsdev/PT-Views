@@ -12,7 +12,7 @@ commandstring = "echo set action=update> " + actionbatchfile
 os.system(commandstring)
 commandstring = "echo set matchstart=TNDD>> " + actionbatchfile
 os.system(commandstring)
-commandstring = "echo set baseurl=https://raw.githubusercontent.com/SILAsiaPub/PT-Views/master/TNDD>> " + actionbatchfile
+commandstring = "echo set baseurl=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TNDD>> " + actionbatchfile
 os.system(commandstring)
 commandstring = "echo set filelist=TNDD-1st-mng-line.xslt TNDD-2nd-mng-line.xslt TNDD-3rd-mng-line.xslt TNDD-table-view.xslt TNDD-tag-errors.xslt TNDD-word-count-1st-mng-line.xslt TNDD-word-count-2nd-mng-line.xslt>> " + actionbatchfile
 os.system(commandstring)
