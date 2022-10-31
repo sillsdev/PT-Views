@@ -1,0 +1,8 @@
+\check TNND errors documentation
+\submenu Custom Views
+\script TNND_errors_documentation.py
+\description (Ignore the "Input Project" box above.) This tool will hide TNND Views from the Views menus after Paratext is restarted. There are seven TNND views. \n\n TNND Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
+\helpFile TNND-errors-documentation.html
+\noText
+\rank 10
+\utf8

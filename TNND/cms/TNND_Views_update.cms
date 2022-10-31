@@ -1,0 +1,8 @@
+\check TNND Update Views
+\submenu Custom Views
+\script TNND_Views_update.py
+\description (Ignore the "Input Project" box above.) This tool will update TNND Views from the Internet. These seven views will be updated: TNND-1st-mng-line.xslt TNND-2nd-mng-line.xslt TNND-3rd-mng-line.xslt TNND-table-view.xslt TNND-tag-errors.xslt TNND-word-count-1st-mng-line.xslt TNND-word-count-2nd-mng-line.xslt.\n\n TNND Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
+\helpFile TNND-info.pdf
+\noText
+\rank 10
+\utf8
