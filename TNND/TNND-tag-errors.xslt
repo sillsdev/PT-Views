@@ -152,7 +152,7 @@
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--ref 1.1 - rank=-->
-            <xsl:if test="not(child:verse)">
+            <xsl:if test="not(verse)">
                <xsl:text> err-para-b3--1-1</xsl:text>
             </xsl:if>
             <!--ref 7.1 - rank=-->
@@ -265,7 +265,7 @@
                <xsl:text> err-para-n1--10-5</xsl:text>
             </xsl:if>
             <!--ref 14.1 - rank=-->
-            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n2' or @style = 'n3' or @style = 'qp'])">
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'qp'])">
                <xsl:text> err-para-n1--14-1</xsl:text>
             </xsl:if>
             <!--ref 9.1 - rank=-->
