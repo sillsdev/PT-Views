@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-   <xsl:variable name="para-like" select="'para'"/>
-   <xsl:variable name="dq">"</xsl:variable>
-   <xsl:variable name="versepart">abcdefgh</xsl:variable>
-   <xsl:variable name="versepartbad">ijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="versepartgood">1234567890abcdefgh–:</xsl:variable>
-   <xsl:variable name="versepartbadsub">$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="numb">1234567890</xsl:variable>
-   <xsl:variable name="numbsub">##########</xsl:variable>
-   <xsl:variable name="versepartsub">$$$$$$$$</xsl:variable>
-   <xsl:variable name="gteq">&gt;=</xsl:variable>
-   <xsl:variable name="lteq">&lt;=</xsl:variable>
-   <xsl:variable name="alphalc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="teclast2bad">.,"’”</xsl:variable>
-   <xsl:variable name="tecfirstbad">"‘“</xsl:variable>
-   <xsl:variable name="teclast2badsub">%%%%%</xsl:variable>
-   <xsl:variable name="alphalcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="alphauc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+   <xsl:variable name="numb" select="'1234567890'"/>
+   <xsl:variable name="numbsub" select="'##########'"/>
+   <xsl:variable name="validvlet" select="'abcdefghij'"/>
+   <xsl:variable name="validvletpunc" select="'abcdefghij–'"/>
+   <xsl:variable name="validvletsub" select="'$$$$$$$$$$'"/>
+   <xsl:variable name="invalidvlet" select="'klmnopqrstuvwxyz'"/>
+   <xsl:variable name="validcvnumblet" select="'1234567890abcdefghij'"/>
+   <xsl:variable name="validcvnumbletsub" select="'##########$$$$$$$$$$'"/>
+   <xsl:variable name="validcvnumbletpunc" select="'1234567890abcdefghij–:'"/>
+   <xsl:variable name="letlc" select="'abcdefghijklmnopqrstuvwxyz'"/>
+   <xsl:variable name="letuc" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+   <xsl:variable name="letsub" select="'$$$$$$$$$$$$$$$$$$$$$$$$$$'"/>
+   <xsl:variable name="letulc"
+                 select="'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'"/>
+   <xsl:variable name="invalidtecendpunc" select="'.,’”'"/>
+   <xsl:variable name="invalidtecendpuncsub" select="'%%%%'"/>
+   <xsl:variable name="invalidtecfirstpunc" select="'‘“'"/>
+   <xsl:variable name="dq" select="'&#34;'"/>
    <xsl:template match="chapter[@number]">
       <style type="text/css">
                 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
@@ -50,27 +51,57 @@
 .err-para-s5--8-23 {border-bottom:2pt solid red}
 .err-para-s5--8-26::after {content:'The verse number in this \\s5 must be within the current verse range. #8.26';}
 .err-para-s5--8-26 {border-bottom:2pt solid red}
+.err-para-s5--8-3::after {content:'This verse part is invalid (a–j allowed). #8.3';}
+.err-para-s5--8-3 {border-bottom:2pt solid red}
 .err-para-s5--8-22::after {content:'The verse number before the en dash in \\s5 should match current verse number. #8.22';}
 .err-para-s5--8-22 {border-bottom:2pt solid red}
-.err-para-s5--8-3::after {content:'This verse part is invalid (a–h allowed) #8.3';}
-.err-para-s5--8-3 {border-bottom:2pt solid red}
+.err-para-s5--9-16::after {content:'The hyphen in a range in this paragraph should be an en dash. #9.16';}
+.err-para-s5--9-16 {border-bottom:2pt solid red}
 .err-para-s5--8-25::after {content:'This \\s5 must contain a colon between the chapter and verse. #8.25';}
 .err-para-s5--8-25 {border-bottom:2pt solid red}
-.err-para---9-1::after {content:'A verse range found in this paragraph, contains a hyphen instead of an en dash. #9.1';}
+.err-para---9-1::after {content:'The hyphen in a verse range in this paragraph should be an en dash. #9.1';}
 .err-para---9-1 {border-bottom:2pt solid red}
-.err-para---9-13::after {content:'The verse part range in this paragraph should not contain a hyphen but an en dash. #9.13';}
-.err-para---9-13 {border-bottom:2pt solid red}
 .err-para---23-1::after {content:'This paragraph type should not be empty. #23.1';}
 .err-para---23-1 {border-bottom:2pt solid red}
+.err-para-n1--9-13::after {content:'The hyphen in a range in this paragraph should be an en dash. #9.13';}
+.err-para-n1--9-13 {border-bottom:2pt solid red}
+.err-para-n1--10-2-1::after {content:'The \\tec ...\\tec* markup should be at the start of the \\n3 paragraph. #10.2.1';}
+.err-para-n1--10-2-1 {border-bottom:2pt solid red}
+.err-para-n1--12-1::after {content:'The contents of this \\n1 \\tec is a portion of the previous \\n1 \\tec. Perhaps this should be an \\n2? #12.1';}
+.err-para-n1--12-1 {border-bottom:2pt solid red}
+.err-para-n1-post-14-1::after {content:'Only these paragraphs: \\n1 \\n2 \\n3 \\ntn \\qp \\b \\b2 \\b3 \\p \\s5 \\li1 \\hb1 \\s3 are allowed after a \\n1 #14.1';}
+.err-para-n1-post-14-1 {border-bottom:2pt solid red}
+.err-para-n1--10-1::after {content:'There should be only one \\tec per \\n1 paragraph. #10.1';}
+.err-para-n1--10-1 {border-bottom:2pt solid red}
+.err-para-n1--10-1-4::after {content:'This paragraph is missing a \\tec ...\\tec* #10.1.4';}
+.err-para-n1--10-1-4 {border-bottom:2pt solid red}
+.err-para-n2--9-14::after {content:'The hyphen in a range in this paragraph should be an en dash. #9.14';}
+.err-para-n2--9-14 {border-bottom:2pt solid red}
 .err-para-n2--12-2::after {content:'The contents of this \\n2 \\tec is a portion of the previous \\n2 \\tec. Perhaps this should be an \\n3? #12.2';}
 .err-para-n2--12-2 {border-bottom:2pt solid red}
-.err-para-n2--12-8-1::after {content:'There is no \\n1 preceding this \\n2 it should be an \\n1 #12.8.1';}
+.err-para-n2--12-8-1::after {content:'There is no \\n1 preceding this \\n2. It should be an \\n1. #12.8.1';}
 .err-para-n2--12-8-1 {border-bottom:2pt solid red}
 .err-para-n2--12-7::after {content:'The contents of this \\n2 \\tec is not found in the preceding  \\n1 \\tec. #12.7';}
 .err-para-n2--12-7 {border-bottom:2pt solid red}
+.err-para-n3--9-15::after {content:'The hyphen in a range in this paragraph should be an en dash. #9.15';}
+.err-para-n3--9-15 {border-bottom:2pt solid red}
+.err-para-n3--10-2-2::after {content:'There should be text in \\tec formatting at the beginning of this paragraph #10.2.2';}
+.err-para-n3--10-2-2 {border-bottom:2pt solid red}
+.err-para-n3--12-8-2::after {content:'The \\n3 occurs before any \\n2 in this \\s5 note group #12.8.2';}
+.err-para-n3--12-8-2 {border-bottom:2pt solid red}
+.err-para-n3--12-8-3::after {content:'This should be an \\n1 paragraph since the content is not found in the preceding \\n1 \\tec. #12.8.3';}
+.err-para-n3--12-8-3 {border-bottom:2pt solid red}
+.err-para-n3--10-1-3::after {content:'There should be only one \\tec per \\n3 paragraph. #10.1.3';}
+.err-para-n3--10-1-3 {border-bottom:2pt solid red}
+.err-para-n3--10-1-5::after {content:'This paragraph is missing a \\tec ...\\tec* #10.1.5';}
+.err-para-n3--10-1-5 {border-bottom:2pt solid red}
+.err-para-n3--12-3::after {content:'The contents of this \\n3 \\tec should not be in the previous \\n3 \\tec #12.3';}
+.err-para-n3--12-3 {border-bottom:2pt solid red}
+.err-para-n3--12-6::after {content:'The contents of this \\n3 \\tec is not found in the preceding  \\n2 \\tec. #12.6';}
+.err-para-n3--12-6 {border-bottom:2pt solid red}
 .err-para-qp-pre-14-2::after {content:'Two \\qp paragraphs, one after the other, are not allowed, unless it is one example with two paragraphs #14.2';}
 .err-para-qp-pre-14-2 {border-top:2pt solid red}
-.err-para-ntn-pre-18-1::after {content:'an \\ntn should be preceeded by a \\s3 or \\s5 or \\tr or \\ntn #18.1';}
+.err-para-ntn-pre-18-1::after {content:'An \\ntn should be preceeded by a \\s3 or \\s5 or \\tr or \\ntn. #18.1';}
 .err-para-ntn-pre-18-1 {border-top:2pt solid red}
 .err-para-ntn--22-8::after {content:'This \\ntn paragraph is missing a \\f. #22.8';}
 .err-para-ntn--22-8 {border-bottom:2pt solid red}
@@ -82,37 +113,13 @@
 .err-para-b2--23-2 {border-bottom:2pt solid red}
 .err-para-b--23-3::after {content:'A \\b2 should not follow a \\b. #23.3';}
 .err-para-b--23-3 {border-bottom:2pt solid red}
-.err-para-n1--10-2-1::after {content:'The \\tec ...\\tec* markup should be at the start of the \\n3 paragraph. #10.2.1';}
-.err-para-n1--10-2-1 {border-bottom:2pt solid red}
-.err-para-n1--12-1::after {content:'The contents of this \\n1 \\tec is a portion of the previous \\n1 \\tec. Perhaps this should be an \\n2? #12.1';}
-.err-para-n1--12-1 {border-bottom:2pt solid red}
-.err-para-n1-post-14-1::after {content:'Only these paragraphs: \\n1 \\n2 \\n3 \\ntn \\qp \\b \\b2 \\b3 \\p \\s5 \\li1 \\hb1 \\s3 are allowed after a \\n1 #14.1';}
-.err-para-n1-post-14-1 {border-bottom:2pt solid red}
-.err-para-n1--10-1::after {content:'There should be only one \\tec per \\n1 paragraph. #10.1';}
-.err-para-n1--10-1 {border-bottom:2pt solid red}
-.err-para-n1--10-1-4::after {content:'This paragraph is missing a \\tec ...\\tec* #10.1.4';}
-.err-para-n1--10-1-4 {border-bottom:2pt solid red}
-.err-para-n3--10-2-2::after {content:'There should be text in \\tec formatting at the beginning of this paragraph #10.2.2';}
-.err-para-n3--10-2-2 {border-bottom:2pt solid red}
-.err-para-n3--12-8-2::after {content:'The \\n3 occurs before any \\n2 in this \\s5 note group #12.8.2';}
-.err-para-n3--12-8-2 {border-bottom:2pt solid red}
-.err-para-n3--12-8-3::after {content:'This should be an \\n1 paragraph since the content is not found in preceding \\n1 \\tec #12.8.3';}
-.err-para-n3--12-8-3 {border-bottom:2pt solid red}
-.err-para-n3--10-1-3::after {content:'There should be only one \\tec per \\n3 paragraph. #10.1.3';}
-.err-para-n3--10-1-3 {border-bottom:2pt solid red}
-.err-para-n3--10-1-5::after {content:'This paragraph is missing a \\tec ...\\tec* #10.1.5';}
-.err-para-n3--10-1-5 {border-bottom:2pt solid red}
-.err-para-n3--12-3::after {content:'The contents of this \\n3 \\tec should not be in the previous \\n3 \\tec #12.3';}
-.err-para-n3--12-3 {border-bottom:2pt solid red}
-.err-para-n3--12-6::after {content:'The contents of this \\n3 \\tec is not found in the preceding  \\n2 \\tec. #12.6';}
-.err-para-n3--12-6 {border-bottom:2pt solid red}
 .err-para-s3--19-4::after {content:'The verse number in this \\s3 does not match the preceding \\v number. #19.4';}
 .err-para-s3--19-4 {border-bottom:2pt solid red}
 .err-para-s3--19-5::after {content:'The verse number in this \\s3 does not match the preceding \\v number. #19.5';}
 .err-para-s3--19-5 {border-bottom:2pt solid red}
 .err-para-s3--19-6::after {content:'The last verse number in the range in this \\s3 does not match the preceding \\v number. #19.6';}
 .err-para-s3--19-6 {border-bottom:2pt solid red}
-.err-para-s3--19-7::after {content:'The ending sub verse part does not match the previous \\s5 sub verse ending. #19.7';}
+.err-para-s3--19-7::after {content:'The ending verse part does not match the previous \\s5 verse part. #19.7';}
 .err-para-s3--19-7 {border-bottom:2pt solid red}
 .err-para-s3--19-8::after {content:'An \\s3 can only be followed by an \\ntn #19.8';}
 .err-para-s3--19-8 {border-bottom:2pt solid red}
@@ -148,7 +155,7 @@
 .err-figure-fig--22-7 {}
 .err-link-jmp--22-4::after {content:'This \\jmp should occur as the third item, immediately after the \\f*. #22.4';}
 .err-link-jmp--22-4 {}
-.err-char-sbx--9-12::after {content:'The verse range in this \\sbx contains a hyphen, it should contain an en dash. #9.12';}
+.err-char-sbx--9-12::after {content:'The hyphen in the verse range in this \\sbx should be an en dash. #9.12';}
 .err-char-sbx--9-12 {background:orange}
 .err-char-trs-mid-10-4::after {content:'A \\tec should precede this \\trs in the paragraph. #10.4';}
 .err-char-trs-mid-10-4 {background:orange}
@@ -160,8 +167,6 @@
 .err-char-tbb-pre-17-2 {border-left:5pt solid red;background:peachpuff}
 .err-char-tbb-post-17-3::after {content:'There should not be a space after a \tbb* SFM #17.3';}
 .err-char-tbb-post-17-3 {border-right:5pt solid red;background:peachpuff}
-.err-char-tec-mid-10-33::after {content:'This \tec does not contain an ending colon. #10.33';}
-.err-char-tec-mid-10-33 {background:orange}
 .err-char-tec-mid-11-1::after {content:'The first character should not be punctuation #11.1';}
 .err-char-tec-mid-11-1 {background:orange}
 .err-char-tec-mid-11-2::after {content:'The last character before the colon should not be punctuation unless it is a question or exclamation mark. #11.2';}
@@ -178,15 +183,15 @@
 .err-cell-tc1--4-7 {background:orange}
 .err-cell-tc1--4-8::after {content:'The parts of the \\sbx should be separated by a \\+tbb __\\+tbb*. #4.8';}
 .err-cell-tc1--4-8 {background:orange}
-.err-cell-tc1--9-11::after {content:'A verse range in this \\tc1 contains a hyphen, it should contain an en dash. #9.11';}
+.err-cell-tc1--9-11::after {content:'The hyphen in the verse range in this \\tc1 should be an en dash. #9.11';}
 .err-cell-tc1--9-11 {background:orange}
 .err-row-td--4-2::after {content:'The second column must be a \\tc2 in \\tr #4.2';}
 .err-row-td--4-2 {}
 .err-row-td--4-3::after {content:'The first column must be a \\tc1 in \\tr #4.3';}
 .err-row-td--4-3 {}
-.err-verse-v--9-2::after {content:'The verse range in this verse number contains an en dash; it should contain a hyphen. #9.2';}
+.err-verse-v--9-2::after {content:'The en dash in the verse range in this \\v should be a hyphen. #9.2';}
 .err-verse-v--9-2 {background:orange}
-.err-verse-v--9-3::after {content:'This verse range should not start with a letter following the first number #9.3';}
+.err-verse-v--9-3::after {content:'A \\v cannot have verse parts in it. #9.3';}
 .err-verse-v--9-3 {background:orange}
 </style>
       <xsl:element name="div">
@@ -262,8 +267,10 @@
    </xsl:template>
    <!-- para @style=s5 -->
    <xsl:template match="para[@style = 's5']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
+      <xsl:variable name="cprecolon" select="substring-before(.,':')"/>
+      <xsl:variable name="vaftercolon" select="substring-after(.,':')"/>
+      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -272,32 +279,38 @@
                <xsl:text> err-para-s5--8-1</xsl:text>
             </xsl:if>
             <!--ref 8.21 - rank=-->
-            <xsl:if test="not(contains(preceding::verse[1]/@number,'-')) and not(contains(.,'–'))">
-               <xsl:if test="translate(substring-after(.,':'),$alphalc,'') != preceding::verse[1]/@number">
+            <xsl:if test="not(contains($preverse,'-')) and not(contains(.,'–'))">
+               <xsl:if test="translate(substring-after(.,':'),$letlc,'') != $preverse">
                   <xsl:text> err-para-s5--8-21</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 8.23 - rank=-->
-            <xsl:if test="contains(preceding::verse[1]/@number,'-') and contains(.,'–')">
-               <xsl:if test="not(translate(substring-before(substring-after(.,':'),'–'),$alphalc,'')  = substring-before(preceding::verse[1]/@number,'-'))">
+            <xsl:if test="contains($preverse,'-') and contains(.,'–')">
+               <xsl:if test="not(translate(substring-before(substring-after(.,':'),'–'),$letlc,'')  = substring-before($preverse,'-'))">
                   <xsl:text> err-para-s5--8-23</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 8.26 - rank=-->
-            <xsl:if test="contains(preceding::verse[1]/@number,'-') and not(contains(.,'–'))">
-               <xsl:if test="translate(substring-after(.,':'),$alphalc,'') &gt;= substring-before(preceding::verse[1]/@number,'-') and translate(substring-after(.,':'),$alphalc,'') &lt;= substring-after(preceding::verse[1]/@number,'-')">
+            <xsl:if test="contains($preverse,'-') and not(contains(.,'–'))">
+               <xsl:if test="not((translate(substring-after(.,':'),$letlc,'') = substring-before($preverse,'-') or  translate(substring-after(.,':'),$letlc,'') &gt; substring-before($preverse,'-')) and ( translate(substring-after(.,':'),$letlc,'') = substring-after($preverse,'-') )or  translate(substring-after(.,':'),$letlc,'') &lt; substring-after($preverse,'-') )">
                   <xsl:text> err-para-s5--8-26</xsl:text>
                </xsl:if>
             </xsl:if>
+            <!--ref 8.3 - rank=-->
+            <xsl:if test="string-length(translate(.,$validcvnumbletpunc,'')) &gt; 0">
+               <xsl:text> err-para-s5--8-3</xsl:text>
+            </xsl:if>
             <!--ref 8.22 - rank=5-->
-            <xsl:if test="not(contains(preceding::verse[1]/@number,'-')) and contains(.,'–')">
-               <xsl:if test="not(translate(substring-before(substring-after(.,':'),'–'),$alphalc,'')  = preceding::verse[1]/@number)">
+            <xsl:if test="not(contains($preverse,'-')) and contains(.,'–')">
+               <xsl:if test="not(translate(substring-before(substring-after(.,':'),'–'),$letlc,'')  = $preverse)">
                   <xsl:text> err-para-s5--8-22</xsl:text>
                </xsl:if>
             </xsl:if>
-            <!--ref 8.3 - rank=8-->
-            <xsl:if test="string-length(translate(.,$versepartgood,'')) &gt; 0">
-               <xsl:text> err-para-s5--8-3</xsl:text>
+            <!--ref 9.16 - rank=8-->
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+               <xsl:if test="contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-$') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-#') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'#-#')">
+                  <xsl:text> err-para-s5--9-16</xsl:text>
+               </xsl:if>
             </xsl:if>
             <!--ref 8.25 - rank=10-->
             <xsl:if test="not(contains(.,':'))">
@@ -312,20 +325,12 @@
    </xsl:template>
    <!-- para @style= -->
    <xsl:template match="para">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--ref 9.1 - rank=-->
-            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#') and contains(translate(translate(.,$alphalc,''),$numb,$numbsub),'#-#')">
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#') and contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
                <xsl:text> err-para---9-1</xsl:text>
-            </xsl:if>
-            <!--ref 9.13 - rank=-->
-            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-               <xsl:if test="contains(translate(.,$versepart,$versepartsub),'$-$')">
-                  <xsl:text> err-para---9-13</xsl:text>
-               </xsl:if>
             </xsl:if>
             <!--ref 23.1 - rank=-->
             <xsl:if test="string-length(text()) = 0">
@@ -338,21 +343,77 @@
          </xsl:apply-templates>
       </xsl:element>
    </xsl:template>
+   <!-- para @style=n1 -->
+   <xsl:template match="para[@style = 'n1']">
+      <xsl:variable name="pren1"
+                    select="count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pres5"
+                    select="count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pren1tec"
+                    select="preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="curtec" select="translate(*[@style = 'tec'][1]/text(), ':','')"/>
+      <xsl:element name="div">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--ref 9.13 - rank=-->
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+               <xsl:if test="contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-$') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-#') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'#-#')">
+                  <xsl:text> err-para-n1--9-13</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 10.2.1 - rank=-->
+            <xsl:if test="not(node()[1][@style = 'tec']) and count(char[@style = 'tec']) = 1">
+               <xsl:text> err-para-n1--10-2-1</xsl:text>
+            </xsl:if>
+            <!--ref 12.1 - rank=-->
+            <xsl:if test="child::*[@style = 'tec'] and contains($pren1tec,$curtec)">
+               <xsl:if test="$pres5 &lt; $pren1">
+                  <xsl:text> err-para-n1--12-1</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 14.1 - rank=-->
+            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter'])">
+               <xsl:text> err-para-n1-post-14-1</xsl:text>
+            </xsl:if>
+            <!--ref 10.1 - rank=5-->
+            <xsl:if test="count(char[@style = 'tec']) &gt; 1">
+               <xsl:text> err-para-n1--10-1</xsl:text>
+            </xsl:if>
+            <!--ref 10.1.4 - rank=5-->
+            <xsl:if test="count(*[@style = 'tec']) = 0">
+               <xsl:text> err-para-n1--10-1-4</xsl:text>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:apply-templates select="node()">
+            <xsl:with-param name="embedded" select="0"/>
+         </xsl:apply-templates>
+      </xsl:element>
+   </xsl:template>
    <!-- para @style=n2 -->
    <xsl:template match="para[@style = 'n2']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:variable name="pren1"
                     select="count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)"/>
       <xsl:variable name="pres5"
                     select="count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)"/>
       <xsl:variable name="pren2"
                     select="count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pren1tec"
+                    select="preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="pren2tec"
+                    select="preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="curtec" select="translate(*[@style = 'tec'][1]/text(), ':','')"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
+            <!--ref 9.14 - rank=-->
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+               <xsl:if test="contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-$') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-#') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'#-#')">
+                  <xsl:text> err-para-n2--9-14</xsl:text>
+               </xsl:if>
+            </xsl:if>
             <!--ref 12.2 - rank=-->
-            <xsl:if test="child::*[@style = 'tec'] and contains(preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text(),*[@style = 'tec'][1]/text())">
+            <xsl:if test="child::*[@style = 'tec'] and contains($pren2tec,$curtec)">
                <xsl:if test="$pres5 &lt; $pren2">
                   <xsl:text> err-para-n2--12-2</xsl:text>
                </xsl:if>
@@ -364,7 +425,7 @@
                </xsl:if>
             </xsl:if>
             <!--ref 12.7 - rank=5-->
-            <xsl:if test="child::*[@style = 'tec'] and not(contains(preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text(),translate(*[@style = 'tec'][1]/text(),':','')))">
+            <xsl:if test="child::*[@style = 'tec'] and not(contains($pren1tec,$curtec))">
                <xsl:if test="$pres5 &lt; $pren1">
                   <xsl:text> err-para-n2--12-7</xsl:text>
                </xsl:if>
@@ -376,10 +437,73 @@
          </xsl:apply-templates>
       </xsl:element>
    </xsl:template>
+   <!-- para @style=n3 -->
+   <xsl:template match="para[@style = 'n3']">
+      <xsl:variable name="pren1"
+                    select="count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pres5"
+                    select="count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pren2"
+                    select="count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pren3"
+                    select="count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)"/>
+      <xsl:variable name="pren1tec"
+                    select="preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="pren2tec"
+                    select="preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="pren3tec"
+                    select="preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text()"/>
+      <xsl:variable name="curtec" select="translate(*[@style = 'tec'][1]/text(), ':','')"/>
+      <xsl:element name="div">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--ref 9.15 - rank=-->
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+               <xsl:if test="contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-$') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'$-#') or contains(translate(.,$validcvnumblet,$validcvnumbletsub),'#-#')">
+                  <xsl:text> err-para-n3--9-15</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 10.2.2 - rank=-->
+            <xsl:if test="not(node()[1][@style = 'tec']) and count(char[@style = 'tec']) = 1">
+               <xsl:text> err-para-n3--10-2-2</xsl:text>
+            </xsl:if>
+            <!--ref 12.8.2 - rank=-->
+            <xsl:if test="$pres5 &gt; $pren1">
+               <xsl:text> err-para-n3--12-8-2</xsl:text>
+            </xsl:if>
+            <!--ref 12.8.3 - rank=-->
+            <xsl:if test="not(contains($pren1tec,$curtec))">
+               <xsl:text> err-para-n3--12-8-3</xsl:text>
+            </xsl:if>
+            <!--ref 10.1.3 - rank=5-->
+            <xsl:if test="count(char[@style = 'tec']) &gt; 1">
+               <xsl:text> err-para-n3--10-1-3</xsl:text>
+            </xsl:if>
+            <!--ref 10.1.5 - rank=5-->
+            <xsl:if test="count(char[@style = 'tec']) = 0">
+               <xsl:text> err-para-n3--10-1-5</xsl:text>
+            </xsl:if>
+            <!--ref 12.3 - rank=5-->
+            <xsl:if test="child::*[@style = 'tec'] and contains($pren3tec,$curtec)">
+               <xsl:if test="$pres5 &lt; $pren3">
+                  <xsl:text> err-para-n3--12-3</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 12.6 - rank=5-->
+            <xsl:if test="child::*[@style = 'tec'] and not(contains($pren2tec,$curtec))">
+               <xsl:if test="$pres5 &lt; $pren2">
+                  <xsl:text> err-para-n3--12-6</xsl:text>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:apply-templates select="node()">
+            <xsl:with-param name="embedded" select="0"/>
+         </xsl:apply-templates>
+      </xsl:element>
+   </xsl:template>
    <!-- para @style=qp -->
    <xsl:template match="para[@style = 'qp']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -396,8 +520,6 @@
    </xsl:template>
    <!-- para @style=ntn -->
    <xsl:template match="para[@style = 'ntn']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -430,8 +552,6 @@
    </xsl:template>
    <!-- para @style=b2 -->
    <xsl:template match="para[@style = 'b2']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -448,8 +568,6 @@
    </xsl:template>
    <!-- para @style=b -->
    <xsl:template match="para[@style = 'b']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -464,127 +582,35 @@
          </xsl:apply-templates>
       </xsl:element>
    </xsl:template>
-   <!-- para @style=n1 -->
-   <xsl:template match="para[@style = 'n1']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
-      <xsl:variable name="pren1"
-                    select="count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)"/>
-      <xsl:variable name="pres5"
-                    select="count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 10.2.1 - rank=-->
-            <xsl:if test="not(node()[1][@style = 'tec']) and count(char[@style = 'tec']) = 1">
-               <xsl:text> err-para-n1--10-2-1</xsl:text>
-            </xsl:if>
-            <!--ref 12.1 - rank=-->
-            <xsl:if test="child::*[@style = 'tec'] and contains(preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text(),translate(*[@style = 'tec'][1]/text(), ':',''))">
-               <xsl:if test="$pres5 &lt; $pren1">
-                  <xsl:text> err-para-n1--12-1</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 14.1 - rank=-->
-            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter'])">
-               <xsl:text> err-para-n1-post-14-1</xsl:text>
-            </xsl:if>
-            <!--ref 10.1 - rank=5-->
-            <xsl:if test="count(char[@style = 'tec']) &gt; 1">
-               <xsl:text> err-para-n1--10-1</xsl:text>
-            </xsl:if>
-            <!--ref 10.1.4 - rank=5-->
-            <xsl:if test="count(*[@style = 'tec']) = 0">
-               <xsl:text> err-para-n1--10-1-4</xsl:text>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="0"/>
-         </xsl:apply-templates>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=n3 -->
-   <xsl:template match="para[@style = 'n3']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
-      <xsl:variable name="pren1"
-                    select="count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)"/>
-      <xsl:variable name="pres5"
-                    select="count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:variable name="pren2"
-                    select="count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)"/>
-      <xsl:variable name="pren3"
-                    select="count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)"/>
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 10.2.2 - rank=-->
-            <xsl:if test="not(node()[1][@style = 'tec']) and count(char[@style = 'tec']) = 1">
-               <xsl:text> err-para-n3--10-2-2</xsl:text>
-            </xsl:if>
-            <!--ref 12.8.2 - rank=-->
-            <xsl:if test="$pres5 &gt; $pren1">
-               <xsl:text> err-para-n3--12-8-2</xsl:text>
-            </xsl:if>
-            <!--ref 12.8.3 - rank=-->
-            <xsl:if test="not(contains(preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text(),translate(*[@style = 'tec'][1]/text(),':','')))">
-               <xsl:text> err-para-n3--12-8-3</xsl:text>
-            </xsl:if>
-            <!--ref 10.1.3 - rank=5-->
-            <xsl:if test="count(char[@style = 'tec']) &gt; 1">
-               <xsl:text> err-para-n3--10-1-3</xsl:text>
-            </xsl:if>
-            <!--ref 10.1.5 - rank=5-->
-            <xsl:if test="count(char[@style = 'tec']) = 0">
-               <xsl:text> err-para-n3--10-1-5</xsl:text>
-            </xsl:if>
-            <!--ref 12.3 - rank=5-->
-            <xsl:if test="child::*[@style = 'tec'] and contains(preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text(),*[@style = 'tec'][1]/text())">
-               <xsl:if test="$pres5 &lt; $pren3">
-                  <xsl:text> err-para-n3--12-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 12.6 - rank=5-->
-            <xsl:if test="child::*[@style = 'tec'] and not(contains(preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text(),translate(*[@style = 'tec'][1]/text(),':','')))">
-               <xsl:if test="$pres5 &lt; $pren2">
-                  <xsl:text> err-para-n3--12-6</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="0"/>
-         </xsl:apply-templates>
-      </xsl:element>
-   </xsl:template>
    <!-- para @style=s3 -->
    <xsl:template match="para[@style = 's3']">
-      <xsl:variable name="pos" select="position()"/>
+      <xsl:variable name="vaftercolon" select="substring-after(.,':')"/>
+      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
       <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--ref 19.4 - rank=-->
             <xsl:if test="not(contains(substring-after(text(),':'),'–')) and not(contains(substring-after(text(),':'),'-'))">
-               <xsl:if test="translate(substring-after(text(),':'),$versepart,'') != preceding::verse[1]/@number">
+               <xsl:if test="translate($vaftercolon,$validvletpunc,'') != $preverse">
                   <xsl:text> err-para-s3--19-4</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 19.5 - rank=-->
-            <xsl:if test=" contains(translate(substring-after(.,':'),$versepart,$versepartsub),'$–$')">
-               <xsl:if test="translate(substring-after(text(),':'),'abcdefgh–','') != preceding::verse[1]/@number">
+            <xsl:if test="contains(translate($vaftercolon,$validvlet,$validvletsub),'$–$')">
+               <xsl:if test="translate($vaftercolon,$validvletpunc,'') != $preverse">
                   <xsl:text> err-para-s3--19-5</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 19.6 - rank=-->
-            <xsl:if test="(contains(translate(substring-after(.,':'),$numb,$numbsub),'#–#')  and translate($lastlet,$numb,$numbsub) = '#') or (contains(translate(translate(substring-after(.,':'),$numb,$numbsub),$versepart,$versepartsub),'#$–#')  and translate($lastlet,$numb,$numbsub) = '#')">
-               <xsl:if test="substring-after(substring-after(text(),':'),'–') != preceding::verse[1]/@number">
+            <xsl:if test="(contains(translate($vaftercolon,$numb,$numbsub),'#–#')  and (translate($lastlet,$numb,$numbsub) = '#')) or (contains(translate($vaftercolon,$validcvnumblet,$validcvnumbletsub),'#$–#')  and (translate($lastlet,$numb,$numbsub) = '#'))">
+               <xsl:if test="not(substring-after($vaftercolon,'–') = $preverse)">
                   <xsl:text> err-para-s3--19-6</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 19.7 - rank=-->
-            <xsl:if test="translate($lastlet,$versepart,$versepartsub) = '$'">
+            <xsl:if test="translate($lastlet,$validvlet,$validvletsub) = '$'">
                <xsl:if test="substring(text(),string-length(text()),1) != substring(preceding::*[@style = 's5'][1]/text(),string-length(preceding::*[@style = 's5'][1]/text()),1)">
                   <xsl:text> err-para-s3--19-7</xsl:text>
                </xsl:if>
@@ -594,7 +620,7 @@
                <xsl:text> err-para-s3--19-8</xsl:text>
             </xsl:if>
             <!--ref 19.3 - rank=5-->
-            <xsl:if test="substring-before(translate(text(),concat($alphauc,$alphalc,' '),'') ,':') != preceding::chapter[1]/@number">
+            <xsl:if test="substring-before(translate(text(),concat($letulc,' '),'') ,':') != preceding::chapter[1]/@number">
                <xsl:text> err-para-s3--19-3</xsl:text>
             </xsl:if>
             <!--ref 19.1 - rank=6-->
@@ -614,8 +640,6 @@
    </xsl:template>
    <!-- para @style=b3 -->
    <xsl:template match="para[@style = 'b3']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -642,8 +666,6 @@
    </xsl:template>
    <!-- para @style=p -->
    <xsl:template match="para[@style = 'p']">
-      <xsl:variable name="pos" select="position()"/>
-      <xsl:variable name="lastlet" select="substring(.,string-length(.),1)"/>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
@@ -669,13 +691,13 @@
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="pos" select="position()"/>
+      <xsl:variable name="curpos" select="position()"/>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--ref 22.3 - rank=-->
             <xsl:if test="parent::para[@style = 'ntn'] and preceding-sibling::*[@style = 'fig']">
-               <xsl:if test="$pos != 2">
+               <xsl:if test="$curpos != 2">
                   <xsl:text> err-note-f--22-3</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -728,13 +750,13 @@
       </xsl:element>
    </xsl:template>
    <xsl:template match="link[@style = 'jmp']">
-      <xsl:variable name="pos" select="position()"/>
+      <xsl:variable name="curpos" select="position()"/>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
             <!--ref 22.4 - rank=-->
             <xsl:if test="parent::para[@style = 'ntn'] and preceding-sibling::*[@style = 'fig'] and preceding-sibling::*[@style = 'f']">
-               <xsl:if test="$pos != 3">
+               <xsl:if test="$curpos != 3">
                   <xsl:text> err-link-jmp--22-4</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -749,7 +771,6 @@
    </xsl:template>
    <xsl:template match="char[@style = 'sbx']">
       <xsl:param name="embedded"/>
-      <xsl:variable name="pos" select="position()"/>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
       <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
       <xsl:element name="span">
@@ -758,7 +779,7 @@
             <!--common char errors-->
             <!--style specific errors-->
             <!--ref 9.12 - rank=-->
-            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#') and contains(translate(translate(.,$alphalc,''),$numb,$numbsub),'#-#')">
+            <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#') and contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
                <xsl:text> err-char-sbx--9-12</xsl:text>
             </xsl:if>
          </xsl:attribute>
@@ -772,7 +793,6 @@
    </xsl:template>
    <xsl:template match="char[@style = 'trs']">
       <xsl:param name="embedded"/>
-      <xsl:variable name="pos" select="position()"/>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
       <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
       <xsl:element name="span">
@@ -795,7 +815,6 @@
    </xsl:template>
    <xsl:template match="char[@style = 'tbb']">
       <xsl:param name="embedded"/>
-      <xsl:variable name="pos" select="position()"/>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
       <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
       <xsl:element name="span">
@@ -830,7 +849,6 @@
    </xsl:template>
    <xsl:template match="char[@style = 'tec']">
       <xsl:param name="embedded"/>
-      <xsl:variable name="pos" select="position()"/>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
       <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
       <xsl:element name="span">
@@ -838,16 +856,12 @@
             <xsl:value-of select="@style"/>
             <!--common char errors-->
             <!--style specific errors-->
-            <!--ref 10.33 - rank=-->
-            <xsl:if test="not(contains(text()[last()],':'))">
-               <xsl:text> err-char-tec-mid-10-33</xsl:text>
-            </xsl:if>
             <!--ref 11.1 - rank=-->
-            <xsl:if test="translate(substring(.,1,1),$tecfirstbad,'%%%') = '%'">
+            <xsl:if test="translate(substring(.,1,1),$invalidtecfirstpunc,'%%') = '%'">
                <xsl:text> err-char-tec-mid-11-1</xsl:text>
             </xsl:if>
             <!--ref 11.2 - rank=-->
-            <xsl:if test="translate($lastchar2,$teclast2bad,$teclast2badsub) = '%'">
+            <xsl:if test="translate($lastchar2,$invalidtecendpunc,$invalidtecendpuncsub) = '%'">
                <xsl:text> err-char-tec-mid-11-2</xsl:text>
             </xsl:if>
             <!--ref 20.3 - rank=-->
@@ -895,7 +909,7 @@
             </xsl:if>
             <!--ref 9.11 - rank=8-->
             <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-               <xsl:if test="contains(translate(translate(.,$alphalc,''),$numb,$numbsub),'#-#')">
+               <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
                   <xsl:text> err-cell-tc1--9-11</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -950,7 +964,7 @@
                <xsl:text> err-verse-v--9-2</xsl:text>
             </xsl:if>
             <!--ref 9.3 - rank=-->
-            <xsl:if test="contains(translate(translate(@number,$numb,$numbsub),$versepart,$versepartsub),'#$-#') or contains(translate(translate(@number,$numb,$numbsub),$versepart,$versepartsub),'#$')">
+            <xsl:if test="contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$-#') or contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$')">
                <xsl:text> err-verse-v--9-3</xsl:text>
             </xsl:if>
          </xsl:attribute>
