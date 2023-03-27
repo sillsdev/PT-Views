@@ -1,0 +1,11 @@
+begin   >   use(main)
+
+group(main)
+'<para' >   dup use(inpara)
+'<cell' >   dup use(inpara)
+
+group(inpara)
+'</para'    >   dup use(main)
+'</cell'    >   dup use(main)
+nl u20 u20 u20 u20  > ''
+nl u20 u20 u20 u20 u20 u20 u20 u20 > ''

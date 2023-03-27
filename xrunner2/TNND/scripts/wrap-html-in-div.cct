@@ -1,0 +1,7 @@
+begin    >   use(main)
+
+group(main)
+c 'utf-16'    >   'utf-8'
+uFEFF       >   ""
+'?>'nl > dup nl '<div>' nl 
+endfile     >   nl '</div>' dup

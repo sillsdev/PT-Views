@@ -1,0 +1,8 @@
+para-css_underscore-list	pre	background:peachpuff;border-top:2pt solid red;
+para-css_underscore-list	post	background:peachpuff;border-bottom:2pt solid red;
+para-css_underscore-list	mid	background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;
+para-css_underscore-list	default	background:peachpuff;
+char-css_underscore-list	pre	background:orange;border-left:4pt solid red;
+char-css_underscore-list	post	background:orange;border-right:4pt solid red;
+char-css_underscore-list	mid	border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;
+char-css_underscore-list	default	background:orange;

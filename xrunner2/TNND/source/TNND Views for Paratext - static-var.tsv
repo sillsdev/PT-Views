@@ -1,0 +1,18 @@
+name	value	Note	was
+numb	1234567890		numb
+numbsub	##########		numbsub
+validvlet	abcdefghij		validversepart
+validvletpunc	abcdefghij–		
+validvletsub	$$$$$$$$$$		validversepartsub
+invalidvlet	klmnopqrstuvwxyz		invalidversepart
+validcvnumblet	1234567890abcdefghij		validcvchar
+validcvnumbletsub	##########$$$$$$$$$$		validcvcharsub
+validcvnumbletpunc	1234567890abcdefghij–:		validcvall
+letlc	abcdefghijklmnopqrstuvwxyz		
+letuc	ABCDEFGHIJKLMNOPQRSTUVWXYZ		
+letsub	$$$$$$$$$$$$$$$$$$$$$$$$$$		
+letulc	ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz		
+invalidtecendpunc	.,’”		teclast2bad
+invalidtecendpuncsub	%%%%		teclast2badsub
+invalidtecfirstpunc	‘“		tecfirstbad
+dq	"		

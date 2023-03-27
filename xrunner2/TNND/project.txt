@@ -1,0 +1,312 @@
+[variables]
+title=Paratext TNND Views
+echofunc=echo
+outputxml=true
+tnxx=TNND
+
+data-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - check_data.tsv
+data_file-list=%projectpath%\source\TNND Views for Paratext - check_data.tsv
+data-xml=%projectpath%\output\check_data.xml
+static-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - static-var.tsv
+static-var_file-list=%projectpath%\source\TNND Views for Paratext - static-var.tsv
+sfm-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - sfm-var.tsv
+sfm-var_file-list=%projectpath%\source\TNND Views for Paratext - sfm-var.tsv
+static-var-xml=%projectpath%\output\static-var.xml
+sfm-var-xml=%projectpath%\output\sfm-var.xml
+kv-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - keyvalue.tsv
+kvlist=%projectpath%\keyvalue.tsv
+varstring-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - var-string.tsv
+varstring=%projectpath%\source\TNND Views for Paratext - var-string.tsv
+tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
+
+para-like_list=para row table
+char-like_list=char cell verse
+
+lev=003LEV
+
+#added metalang_list 2022-12-14 to simplyfy matching metalang in item
+metalang_list=pre post
+
+
+mypt8=D:\My Paratext 9 Projects
+ptviewssvn=D:\All-SIL-Publishing\Github-sillsdev\PT-Views\trunk
+
+# Concat USX to get para digraph pairs
+include-book_list=GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV
+usxpath=D:\usx-collection\TNND
+collectionfile=*.usx
+groupnode_list=id sl1 c
+bookorderfile=D:\My Paratext Projects\cms\book-chaps.txt
+para_list=para table book
+xslt=
+
+showref=1
+
+# j
+cms-dl=%USERPROFILE%\Downloads\%tnxx% Views - CMS-py-data.tsv
+cms-data-file=%projectpath%\source\%tnxx% Views - CMS-py-data.tsv
+
+# z
+documentationcss=documentation.css
+usxelem_list=book cell char note para row table
+
+# bkid
+
+
+
+[a]
+b=make tag-errors data TSV and fast test
+# process each tsv file into XML
+t=:updatedl
+# Create the tag errors file
+t=:buildtagerrors
+t=:bkid
+#t=:testfast LEV
+t=:testfast XXD
+#t=:testms GEN
+#t=:testfast LEV
+#t=:updateviews
+
+[buildtagerrors]
+t=:inputfile "%data-xml%"
+t=:xslt data2xslt-v4.xslt
+t=:outputfile "%tagerrors%"
+
+[updatedl]
+t=:dldata2xml "%static-var-dl%" "%static-var_file-list%"
+t=:dldata2xml "%sfm-var-dl%" "%sfm-var_file-list%"
+t=:dldata2xml "%data-dl%" "%data_file-list%"
+t=:dldataxslt "%varstring-dl%" "%varstring%"
+
+[dldata2xml]
+t=:name "%~2"
+t=:ifexist "%~1" move /y "%~1" "%~2"
+t=:cct tsv2xml-v2.cct "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%.xml"
+
+[dldataxslt]
+t=:ifexist "%~1" move /y "%~1" "%~2"
+t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt"
+
+[b]
+b=Test tag errors xsltms
+t=:bkid
+#t=:testfast LEV
+#t=:testfast GEN
+t=:testms XXD
+
+[b-old]
+b=test starlet build.
+t=:bkid
+t=:testfast XXD
+#t=:testms XXD
+
+
+
+
+
+[updateviews]
+t=:autoit CloseTitle.au3 "Paratext 9.3"
+t=:wait 2
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%ptviewssvn%\%tnxx%\%tnxx%-tag-errors.xslt"
+t=:copy "%projectpath%\output\%tnxx%-errors-documentation.html" "%ptviewssvn%\%tnxx%\cms\%tnxx%-errors-documentation.html" 
+t=:start "C:\Program Files\Paratext 9\Paratext.exe"
+
+[d]
+b=test starlet build.
+t=:bkid
+t=:testfast XXD
+
+[e]
+label=Paratext 
+b=Update and test Paratext
+t=:updateviews
+
+[f]
+b=Make tag errors and update PT
+t=:updatedl
+t=:buildtagerrors
+t=:updateviews
+
+
+
+
+[g]
+label=
+b=make test xslt of data TSV and test
+t=:ifexist "%data-dl%" move /y "%data-dl%" "%data_file-list%"
+t=:inputfile "%data_file-list%"
+t=:cct tsv2xml-v2.cct
+t=:outputfile "%projectpath%\output\data.xml"
+t=:xslt data2xslt-test-v4.xslt
+t=:outputfile "%projectpath%\scripts\%tnxx%-test-errors.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-test-errors.xslt" "%mypt8%\Views\%tnxx%-test-errors.xslt"
+#t=:bkid
+#t=:testfast GEN
+
+[h]
+b=test close Paratext
+t=:autoit CloseTitle.au3 "Paratext 9.3"
+t=:wait 30
+
+[j]
+label=
+b=Update XXD USX file
+t=:ptbook "TNND" XXD "D:\usx-collection\TNND"
+
+
+[l]
+label=Collection
+b=Trigram of styles
+t=:xslt usx2usx-collection.xslt blank.xml
+t=:outputfile "%projectpath%\output\collection.xml" 
+t=:xslt Paragraph-style-trigraph-v1.xslt
+t=:xslt extract-trigraph-data-v2.xslt
+#t=:uniqcount
+#t=:outputfile "%projectpath%\output\digraph-list-style-after.txt"  start
+#t=:inputfile "%projectpath%\output\preceding-style-unsorted.txt"
+#t=:uniqcount
+t=:outputfile "%projectpath%\output\trigraph-list-style2.txt"  start
+
+[m]
+b=test extract trigraph
+t=:inputfile "D:\All-SIL-Publishing\_xrunner_projects\Bible\ParatextViews\TNND\tmp\l-2-Paragraph-style-trigraph-v1.xml"
+t=:xslt extract-trigraph-data-v2.xslt
+t=:outputfile "%projectpath%\output\trigraph-list-style2.txt"  start
+
+[p]
+b=testbed
+t=:var book "XXD"
+t=:bkid
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:xslt1 testbed.xslt
+t=:outputfile "%projectpath%\output\testbed.html"  start
+
+[r]
+label=
+b=Test count words
+t=:bkid
+t=:testcount LEV
+
+
+[update-test]
+t=:var book %~1
+t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"
+t=:test %book%
+#t=:inputfile 
+#t=:cct remove-nl-from-para.cct "!%book%!" "!%book%!"
+#t=:xslt1 %tnxx%-tag-errors.xslt "!%book%!"
+#t=:outputfile "%projectpath%\output%book%.html" start
+
+[testfast]
+t=:var book %~1
+t=:var curbook !%book%!
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct "" ""  "" ""
+t=:xslt1 %tnxx%-tag-errors.xslt "" "%projectpath%\output\%book%-fast.html"
+#t=:cct wrap-html-in-div.cct "" ""  "" ""
+#t=:pause
+#t=:xslt tag-error-report.xslt "" ""  "" ""
+#t=:outputfile "%projectpath%\output\%book%-report.html" start
+t=:start "%projectpath%\output\%book%-fast.html" "" ""
+t=:elapsed
+
+[testms]
+t=:var book %~1
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct "" ""  "" ""
+t=:xsltms %tnxx%-tag-errors.xslt  "" ""  "" ""
+t=:outputfile "%projectpath%\output\%book%-ms.html" start
+#t=:xslt tag-error-report.xslt "" ""  "" ""
+#t=:outputfile "%projectpath%\output\%book%-report.html" start
+t=:elapsed
+
+
+
+[testcount]
+t=:var book %~1
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct "" ""  "" ""
+t=:xslt1 TNND-word-count.xslt "" "%projectpath%\output\%book%-cnt.html"
+t=:start "%projectpath%\output\%book%-cnt.html" "" ""
+
+[hide]
+#t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"
+
+[bkid]
+t=:var GEN 001GEN
+t=:var EXO 002EXO
+t=:var LEV 003LEV
+t=:var NUM 004NUM
+t=:var DEU 005DEU
+t=:var JOS 006JOS
+t=:var JDG 007JDG
+t=:var RUT 008RUT
+t=:var 1SA 0091SA
+t=:var 2SA 0102SA
+t=:var 1KI 0111KI
+t=:var 2KI 0122KI
+t=:var 1CH 0131CH
+t=:var 2CH 0142CH
+t=:var EZR 015EZR
+t=:var NEH 016NEH
+t=:var EST 017EST
+t=:var JOB 018JOB
+t=:var PSA 019PSA
+t=:var PRO 020PRO
+t=:var ECC 021ECC
+t=:var SNG 022SNG
+t=:var ISA 023ISA
+t=:var JER 024JER
+t=:var LAM 025LAM
+t=:var EZK 026EZK
+t=:var DAN 027DAN
+t=:var HOS 028HOS
+t=:var JOL 029JOL
+t=:var AMO 030AMO
+t=:var OBA 031OBA
+t=:var JON 032JON
+t=:var MIC 033MIC
+t=:var NAM 034NAM
+t=:var HAB 035HAB
+t=:var ZEP 036ZEP
+t=:var HAG 037HAG
+t=:var ZEC 038ZEC
+t=:var MAL 039MAL
+t=:var MAT 040MAT
+t=:var MRK 041MRK
+t=:var LUK 042LUK
+t=:var JHN 043JHN
+t=:var ACT 044ACT
+t=:var ROM 045ROM
+t=:var 1CO 0461CO
+t=:var 2CO 0472CO
+t=:var GAL 048GAL
+t=:var EPH 049EPH
+t=:var PHP 050PHP
+t=:var COL 051COL
+t=:var 1TH 0521TH
+t=:var 2TH 0532TH
+t=:var 1TI 0541TI
+t=:var 2TI 0552TI
+t=:var TIT 056TIT
+t=:var PHM 057PHM
+t=:var HEB 058HEB
+t=:var JAS 059JAS
+t=:var 1PE 0601PE
+t=:var 2PE 0612PE
+t=:var 1JN 0621JN
+t=:var 2JN 0632JN
+t=:var 3JN 0643JN
+t=:var JUD 065JUD
+t=:var REV 066REV
+t=:var XXA 093XXA
+t=:var XXB 094XXB
+t=:var XXC 095XXC
+t=:var XXD 096XXD
+t=:var XXE 097XXE
+t=:var GLO 109GLO

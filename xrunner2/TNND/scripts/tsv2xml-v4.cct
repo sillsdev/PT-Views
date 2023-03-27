@@ -1,0 +1,87 @@
+begin    >   '<data>' 
+	store(col) '1'
+	store(e1) 
+	use(htab)
+
+group(htab)
+tab     >    incr(col)         
+            ifeq(col) '2' store(e2) endif
+            ifeq(col) '3' store(e3) endif
+            ifeq(col) '4' store(e4) endif
+            ifeq(col) '5' store(e5) endif
+            ifeq(col) '6' store(e6) endif
+            ifeq(col) '7' store(e7) endif
+            ifeq(col) '8' store(e8) endif
+            ifeq(col) '9' store(e9) endif
+            ifeq(col) '10' store(e10) endif
+            ifeq(col) '11' store(e11) endif
+            ifeq(col) '12' store(e12) endif
+            ifeq(col) '13' store(e13) endif
+            ifeq(col) '14' store(e14) endif
+            ifeq(col) '15' store(e15) endif
+            ifeq(col) '16' store(e16) endif
+            ifeq(col) '17' store(e17) endif
+            ifeq(col) '18' store(e18) endif
+            ifeq(col) '19' store(e19) endif
+            ifeq(col) '20' store(e20) endif
+nl  >   endstore dup store(col) '1' endstore back(1) use(row)
+
+
+            
+group(ampersand)
+'&'    >   '&amp;'
+'&amp;'>    dup
+
+            
+group(row)
+nl  >   dup '  <item>' nl '    <' out(e1) '>' use(dtab,ampersand)
+c nl endfile >   '  <row>' nl '</data>' dup
+endfile >   '</data>' dup
+
+group(dtab)
+tab >   incr(col) ifeq(col) "2" '</' out(e1) '>' nl '    <' out(e2) '>' endif
+                    ifeq(col) "3" '</' out(e2) '>' nl '    <' out(e3) '>' endif
+                    ifeq(col) "4" '</' out(e3) '>' nl '    <' out(e4) '>' endif
+                    ifeq(col) "5" '</' out(e4) '>' nl '    <' out(e5) '>' endif
+                    ifeq(col) "6" '</' out(e5) '>' nl '    <' out(e6) '>' endif
+                    ifeq(col) "7" '</' out(e6) '>' nl '    <' out(e7) '>' endif
+                    ifeq(col) "8" '</' out(e7) '>' nl '    <' out(e8) '>' endif
+                    ifeq(col) "9" '</' out(e8) '>' nl '    <' out(e9) '>' endif
+                    ifeq(col) "10" '</' out(e9) '>' nl '    <' out(e10) '>' endif
+                    ifeq(col) "11" '</' out(e10) '>' nl '    <' out(e11) '>' endif
+                    ifeq(col) "12" '</' out(e11) '>' nl '    <' out(e12) '>' endif
+                    ifeq(col) "13" '</' out(e12) '>' nl '    <' out(e13) '>' endif
+                    ifeq(col) "14" '</' out(e13) '>' nl '    <' out(e14) '>' endif
+                    ifeq(col) "15" '</' out(e14) '>' nl '    <' out(e15) '>' endif
+                    ifeq(col) "16" '</' out(e15) '>' nl '    <' out(e16) '>' endif
+                    ifeq(col) "17" '</' out(e16) '>' nl '    <' out(e17) '>' endif
+                    ifeq(col) "18" '</' out(e17) '>' nl '    <' out(e18) '>' endif
+                    ifeq(col) "19" '</' out(e18) '>' nl '    <' out(e19) '>' endif
+                    ifeq(col) "20" '</' out(e19) '>' nl '    <' out(e20) '>' endif
+                    ifeq(col) "21" '</' out(e20) '>' nl '    <' out(e20) '>' endif
+nl  >   incr(col)         
+            ifeq(col) "2" '</' out(e1) '>' endif
+                    ifeq(col) "3" '</' out(e2) '>' endif
+                    ifeq(col) "4" '</' out(e3) '>' endif
+                    ifeq(col) "5" '</' out(e4) '>' endif
+                    ifeq(col) "6" '</' out(e5) '>' endif
+                    ifeq(col) "7" '</' out(e6) '>' endif
+                    ifeq(col) "8" '</' out(e7) '>' endif
+                    ifeq(col) "9" '</' out(e8) '>' endif
+                    ifeq(col) "10" '</' out(e9) '>' endif
+                    ifeq(col) "11" '</' out(e10) '>' endif
+                    ifeq(col) "12" '</' out(e11) '>' endif
+                    ifeq(col) "13" '</' out(e12) '>' endif
+                    ifeq(col) "14" '</' out(e13) '>' endif
+                    ifeq(col) "15" '</' out(e14) '>' endif
+                    ifeq(col) "16" '</' out(e15) '>' endif
+                    ifeq(col) "17" '</' out(e16) '>' endif
+                    ifeq(col) "18" '</' out(e17) '>' endif
+                    ifeq(col) "19" '</' out(e18) '>' endif
+                    ifeq(col) "20" '</' out(e19) '>' endif
+                    ifeq(col) "21" '</' out(e20) '>' endif
+            dup '  </item>' dup back(1)  use(row)
+endfile  >   '</' out(e1) '>' nl '  </item>' nl '</data>' dup
+            
+
+

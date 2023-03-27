@@ -1,0 +1,11 @@
+begin    >   '<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:f="myfunctions" exclude-result-prefixes="f">' nl store(nul)
+nl      >   endstore dup back(1) '  <xsl:variable name="var-string_list">' use(rowbegin)
+
+
+group(rowbegin)
+
+tab >   '=' 
+nl  >   ';'
+endfile >   '</xsl:variable>' nl '<xsl:variable name="var-string" select="tokenize($var-string_list,' "';'" ')"/>' nl '</xsl:stylesheet>' dup
+
+
