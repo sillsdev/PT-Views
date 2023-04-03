@@ -19,8 +19,8 @@ varstring-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - var-string.tsv
 varstring=%projectpath%\source\TNND Views for Paratext - var-string.tsv
 tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
 
-para-like_list=para row table
-char-like_list=char cell verse
+para-like_list=para cell row table
+char-like_list=char figure verse note link
 
 lev=003LEV
 
@@ -52,7 +52,7 @@ usxelem_list=book cell char note para row table
 
 # bkid
 
-
+debug=on
 
 [a]
 b=make tag-errors data TSV and fast test
@@ -64,7 +64,7 @@ t=:bkid
 #t=:testfast LEV
 t=:testfast XXD
 #t=:testms GEN
-#t=:testfast LEV
+
 #t=:updateviews
 
 [buildtagerrors]
@@ -93,6 +93,7 @@ t=:bkid
 #t=:testfast LEV
 #t=:testfast GEN
 t=:testms XXD
+t=:testfast REV
 
 [b-old]
 b=test starlet build.
@@ -210,7 +211,7 @@ t=:xslt1 %tnxx%-tag-errors.xslt "" "%projectpath%\output\%book%-fast.html"
 #t=:pause
 #t=:xslt tag-error-report.xslt "" ""  "" ""
 #t=:outputfile "%projectpath%\output\%book%-report.html" start
-t=:start "%projectpath%\output\%book%-fast.html" "" ""
+#t=:start "%projectpath%\output\%book%-fast.html" "" ""
 t=:elapsed
 
 [testms]

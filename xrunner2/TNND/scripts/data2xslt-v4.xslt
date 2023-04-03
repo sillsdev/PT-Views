@@ -49,10 +49,15 @@
         <xsl:comment select="concat(' ',name(),' @style=',@style,' ')"/>
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
-             <!-- <gen:variable name="pos" select="position()"/> -->
+            <!-- <gen:variable name="pos" select="position()"/> -->
             <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
             </xsl:apply-templates>
+            <xsl:if test="$debug = 'on'">
+                <gen:comment>
+                    <gen:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+                </gen:comment>
+            </xsl:if>
             <gen:element name="span">
                 <gen:attribute name="class">
                     <xsl:value-of select="'cell '"/>
@@ -88,6 +93,11 @@
             <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
             </xsl:apply-templates>
+            <xsl:if test="$debug = 'on'">
+                <gen:comment>
+                    <gen:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+                </gen:comment>
+            </xsl:if>
             <gen:element name="div">
                 <gen:element name="span">
                     <gen:attribute name="class">
@@ -114,7 +124,9 @@
                 <gen:attribute name="class">
                     <gen:value-of select="@style"/>
                 </gen:attribute>
+                <gen:value-of select="concat('\',@style,' ')"/>
                 <xsl:call-template name="char-gen"/>
+                <gen:value-of select="concat('\',@style,'*')"/>
             </gen:element>
         </gen:template>
     </xsl:template>
@@ -126,7 +138,11 @@
             <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
             </xsl:apply-templates>
-            <!-- Aded two variables to get last char -->
+            <xsl:if test="$debug = 'on'">
+                <gen:comment>
+                    <gen:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+                </gen:comment>
+            </xsl:if>
             <gen:element name="span">
                 <gen:attribute name="class">
                     <gen:value-of select="@style"/>
@@ -209,9 +225,9 @@
         </xsl:if>
     </xsl:template>
     <xsl:template name="char-gen">
-        <gen:text>
+        <!-- <gen:text>
             <xsl:text>&#160;</xsl:text>
-        </gen:text>
+        </gen:text> -->
         <gen:apply-templates select="node()">
             <gen:with-param name="embedded" select="1"/>
         </gen:apply-templates>
@@ -269,22 +285,26 @@
             <xsl:when test="string-length($t1) = 0"/>
             <xsl:when test="string-length($t2) gt 0">
                 <xsl:comment select="$comm"/>
-                <gen:if test="{$t1}">
-                    <gen:if test="{$t2}">
-                        <gen:text>
-                            <xsl:text> </xsl:text>
-                            <xsl:value-of select="class"/>
-                        </gen:text>
+                <gen:if test="preceding::chapter">
+                    <gen:if test="{$t1}">
+                        <gen:if test="{$t2}">
+                            <gen:text>
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="class"/>
+                            </gen:text>
+                        </gen:if>
                     </gen:if>
                 </gen:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment select="$comm"/>
-                <gen:if test="{$t1}">
-                    <gen:text>
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="class"/>
-                    </gen:text>
+                <gen:if test="preceding::chapter">
+                    <gen:if test="{$t1}">
+                        <gen:text>
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="class"/>
+                        </gen:text>
+                    </gen:if>
                 </gen:if>
             </xsl:otherwise>
         </xsl:choose>
@@ -355,6 +375,9 @@
         </gen:template>
         <gen:template match="@*">
             <gen:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="name()"/>
+                </xsl:attribute>
                 <gen:value-of select="concat(' ',name(),'=',$dq,.,$dq)"/>
             </gen:element>
         </gen:template>
@@ -403,6 +426,7 @@
 		    .c {font-size:140%;background:green;color:white;font-weight:bold;}
 			.rem {background:lightgreen;color:darkgreen;}
 			.table {border:2pt solid purple;border-left:10pt solid purple;width:auto;}
+                  .tec {font-weight:bold;}
 			<!-- .cell {border:2pt solid black} -->
                 <xsl:apply-templates select="$g1//item" mode="css"/>
             </style>
@@ -542,10 +566,12 @@
                     <!-- get string from keyvalue -->
                 </xsl:attribute>
             </xsl:element>
-            <gen:comment>
-                <xsl:value-of select="concat(' ',name,' = ')"/>
-                <gen:value-of select="{concat('$',name)}"/>
-            </gen:comment>
+            <xsl:if test="$debug = 'on'">
+                <gen:comment>
+                    <xsl:value-of select="concat(' ',name,' = ')"/>
+                    <gen:value-of select="{concat('$',name)}"/>
+                </gen:comment>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="item" mode="static-var">
@@ -554,9 +580,7 @@
             <xsl:attribute name="name">
                 <xsl:value-of select="name"/>
             </xsl:attribute>
-            <xsl:attribute name="select">
-                <xsl:value-of select="concat($sq,value,$sq)"/>
-            </xsl:attribute>
+            <xsl:value-of select="value"/>
         </xsl:element>
     </xsl:template>
 </xsl:stylesheet>
