@@ -1,19 +1,39 @@
 sfm	name	value	order	was
-s5	strlenb4chap		a	
-tc1	strlenb4chap		a	
-sbx	strlenb4chap		a	
-s3	strlenb4chap		a	
+n1	curtec		a	translate(*[@style = 'tec'][1]/text(), ':','')
+n2	curtec		a	translate(*[@style = 'tec'][1]/text(), ':','')
+n3	curtec		a	translate(*[@style = 'tec'][1]/text(), ':','')
+n2	curtecver		a	
+n3	curtecver		a	
 s5	refcolonv		a	
 tc1	refcolonv		a	
 sbx	refcolonv		a	
 s3	refcolonv		a	
+s5	strlenb4chap		a	
+tc1	strlenb4chap		a	
+sbx	strlenb4chap		a	
+s3	strlenb4chap		a	
 sbx	chappos		b	
 tc1	chappos		b	
+jmp	containsclickhere		b	
+table	containsdivision		b	
+tr	containsdivision		b	
+table	containsparagraph		b	
+table	containspart		b	
+tr	containspart		b	
+table	containssection		b	
+tr	containssection		b	
 gra	countf		b	count(*[@style = 'f'])
 gra	countfig		b	count(*[@style = 'fig'])
+table	countfolls5pretable		b	
+table	countfolltabledivision		b	
+table	countfolltableparagraph		b	
+table	countfolltablesection		b	
 gj	countjmp		b	count(*[@style = 'jmp'])
 gj	countnode		b	count(node())
 gra	countnode		b	count(node())
+table	countposttablewithdivision		b	
+table	countposttablewithparagraph		b	
+table	countposttablewithsection		b	
 n1	countpren1		b	count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
 n2	countpren1		b	count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
 n3	countpren1		b	count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
@@ -21,6 +41,7 @@ tei	countpren1		b
 trs	countpren1		b	count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
 tec	countpren1		b	
 n2	countpren2		b	count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)
+n2	countpren2tec			
 n3	countpren2		b	
 tec	countpren2		b	
 n3	countpren3		b	count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)
@@ -35,6 +56,7 @@ n1	countpresibnode		b
 n2	countpresibnode		b	
 n3	countpresibnode		b	
 tec	countpresibnode		b	
+tr	countpretable		b	
 tec	countpretec		b	
 tc1	countsbx		b	
 tc1	counttbb		b	
@@ -42,16 +64,16 @@ n1	counttec		b
 n2	counttec		b	
 n3	counttec		b	
 n1	countteu		b	
+n3	counttrs		b	
 f	curpos		b	position()
 fig	curpos		b	position()
 jmp	curpos		b	position()
-n1	curtec		b	translate(*[@style = 'tec'][1]/text(), ':','')
-n2	curtec		b	translate(*[@style = 'tec'][1]/text(), ':','')
-n3	curtec		b	translate(*[@style = 'tec'][1]/text(), ':','')
 n3	curtecpostellipsis		b	
 n2	curtecpostellipsis		b	
 n3	curtecpreellipsis		b	
 n2	curtecpreellipsis		b	
+n2	curtecverpreellipsis		b	
+n3	curtecverpreellipsis		b	
 n2	curtei		b	
 n3	curtei		b	
 jmp	gjparent		b	parent::para[@style = 'gj']
@@ -69,16 +91,25 @@ sbx	hascvref		b
 tc1	hascvref		b	
 tec	hasellipsis		b	
 trs	hasellipsis		b	
+table	hasfollowingtable		b	
+s5	hasreordered		b	
 s3	hasspacecref		b	
 sbx	hasspacecref		b	
 tc1	hasspacecref		b	
 fig	hasspaceinref		b	
 s3	hassubvrange		b	
+s5	hastbb		b	
 n1	hastecchild		b	
 n2	hastecchild		b	
 n3	hastecchild		b	
 n2	hastecellipsis		b	
 n3	hastecellipsis		b	
+n2	hastecversion		b	
+n3	hastecversion		b	
+tr	hastrdivision		b	
+tr	hastrparagraph		b	
+tr	hastrpart		b	
+tr	hastrsection		b	
 s3	hasvlet		b	
 s5	hasvlet		b	
 s3	lastchar		b	substring(.,string-length(.),1)
@@ -89,6 +120,9 @@ n3	lenchildtec		b
 n3	node1tec		b	node()[1][@style = 'tec']
 b	nodecount		b	
 b2	nodecount		b	
+table	notposttabledivision		b	
+table	notposttableparagraph		b	
+table	notposttablesection		b	
 tc1	notsbxchild		b	
 s5	numbfirst		b	
 sbx	numbfirst		b	
@@ -96,7 +130,11 @@ tc1	numbfirst		b
 tei	parent		b	
 trs	parent		b	
 v	parent		b	parent::*/@style
+tr	parentpostsib		b	
 tei	parentpresib		b	
+tr	parentpresib		b	
+tr	parentpresib2		b	
+tei	parentpresibpos		b	
 tc1	pos		b	position()
 n1	positiontec		b	
 tec	postellipsisstring		b	
@@ -112,6 +150,8 @@ sbx	prechapter		b	preceding::chapter[1]/@number
 tc1	prechapter		b	preceding::chapter[1]/@number
 tec	preellipsisstring		b	
 trs	preellipsisstring		b	
+n2	preellipsisstring		b	
+n3	preellipsisstring		b	
 n1	pren1tec		b	preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
 n2	pren1tec		b	preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
 n3	pren1tec		b	preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
@@ -122,8 +162,10 @@ n3	pren3tec		b	preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text(
 s3	pres5text		b	
 b3	presib		b	preceding-sibling::*[1]/@style
 p	presib		b	preceding-sibling::*[1]/@style
+table	presib		b	
 b3	presib2		b	preceding-sibling::*[2]/@style
 p	presib2		b	preceding-sibling::*[2]/@style
+table	presib2		b	
 tec	pretec		b	
 trs	pretec		b	
 fig	preverse		b	preceding::verse[1]/@number
@@ -144,6 +186,7 @@ tc1	refchapcolon		b
 fig	refchapter		b	substring-before(@ref,':')
 s3	refcolonvlet		b	
 s5	refcolonvlet		b	
+tc1	refcolonvnumb		b	
 s3	refcolonvr1		b	
 s5	refcolonvr1		b	
 sbx	refcolonvr1		b	substring-before(substring-after(text(),':'),'–')
@@ -156,4 +199,4 @@ fig	refverse		b	substring-after(@ref,':')
 s3	refwordschapcolon		b	
 sbx	refwordschapcolon		b	
 tc1	refwordschapcolon		b	
-n3	counttrs			
+n3	validtecfirst		b	

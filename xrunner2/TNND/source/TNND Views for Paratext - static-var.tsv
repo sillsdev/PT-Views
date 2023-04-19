@@ -12,7 +12,10 @@ letlc	abcdefghijklmnopqrstuvwxyz
 letuc	ABCDEFGHIJKLMNOPQRSTUVWXYZ		
 letsub	$$$$$$$$$$$$$$$$$$$$$$$$$$		
 letulc	ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz		
+letulcsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$		
 invalidtecendpunc	.,’”		teclast2bad
 invalidtecendpuncsub	%%%%		teclast2badsub
 invalidtecfirstpunc	‘“		tecfirstbad
-dq	"		
+validreorderedcvnumbletpunc	1234567890abcdefghij–:,		
+letucnumb	ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789		
+letucnumbsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$		

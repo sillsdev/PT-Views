@@ -93,7 +93,7 @@ t=:bkid
 #t=:testfast LEV
 #t=:testfast GEN
 t=:testms XXD
-t=:testfast REV
+t=:testfast NEH
 
 [b-old]
 b=test starlet build.
@@ -117,6 +117,7 @@ t=:start "C:\Program Files\Paratext 9\Paratext.exe"
 b=test starlet build.
 t=:bkid
 t=:testfast XXD
+t=:testfast ROM
 
 [e]
 label=Paratext 
@@ -154,13 +155,13 @@ t=:wait 30
 label=
 b=Update XXD USX file
 t=:ptbook "TNND" XXD "D:\usx-collection\TNND"
+t=:ptbook "TNND" ACT "D:\usx-collection\TNND"
 
 
 [l]
 label=Collection
 b=Trigram of styles
-t=:xslt usx2usx-collection.xslt blank.xml
-t=:outputfile "%projectpath%\output\collection.xml" 
+t=:collection
 t=:xslt Paragraph-style-trigraph-v1.xslt
 t=:xslt extract-trigraph-data-v2.xslt
 #t=:uniqcount
@@ -175,6 +176,20 @@ t=:inputfile "D:\All-SIL-Publishing\_xrunner_projects\Bible\ParatextViews\TNND\t
 t=:xslt extract-trigraph-data-v2.xslt
 t=:outputfile "%projectpath%\output\trigraph-list-style2.txt"  start
 
+[n]
+b=Process all USX for rules
+t=:bkid
+t=:loopstring testms "GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV"
+
+[failedcreatecollection]
+t=:collection
+t=:xslt collection-errors.xslt "%projectpath%\output\collection.xml"
+t=:outputfile "%projectpath%\output\TNND.html"
+
+[o]
+b=Create list of errors from HTML
+t=:xslt TNND-tag-errors.xslt "%usxpath%\001GEN.usx" "%projectpath%\output\GEN-xslt2.html"
+
 [p]
 b=testbed
 t=:var book "XXD"
@@ -185,11 +200,20 @@ t=:xslt1 testbed.xslt
 t=:outputfile "%projectpath%\output\testbed.html"  start
 
 [r]
+b=Process all USX for rules via XSLT2
+t=:bkid
+t=:loopstring testxslt2 "GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV"
+
+[v]
 label=
 b=Test count words
 t=:bkid
-t=:testcount LEV
+t=:testcount XXD
+t=:testcount2 XXD
 
+[collection]
+t=:xslt usx2usx-collection.xslt blank.xml
+t=:outputfile "%projectpath%\output\collection.xml" 
 
 [update-test]
 t=:var book %~1
@@ -225,7 +249,14 @@ t=:outputfile "%projectpath%\output\%book%-ms.html" start
 #t=:outputfile "%projectpath%\output\%book%-report.html" start
 t=:elapsed
 
-
+[testxslt2]
+t=:var book %~1
+t=:var curbook !%book%!
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct "" ""  "" ""
+t=:xslt %tnxx%-tag-errors.xslt "" "%projectpath%\output\%book%-xslt2.html"
+t=:elapsed
 
 [testcount]
 t=:var book %~1
@@ -233,7 +264,15 @@ t=:echo "Book = !%book%!"
 t=:inputfile "%usxpath%\!%book%!.usx"
 t=:cct remove-nl-from-para.cct "" ""  "" ""
 t=:xslt1 TNND-word-count.xslt "" "%projectpath%\output\%book%-cnt.html"
-t=:start "%projectpath%\output\%book%-cnt.html" "" ""
+#t=:start "%projectpath%\output\%book%-cnt.html" "" ""
+
+[testcount2]
+t=:var book %~1
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 TNND-word-count-v2.xslt "" "%projectpath%\output\%book%-cnt2.html"
+#t=:start "%projectpath%\output\%book%-cnt.html"
 
 [hide]
 #t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"

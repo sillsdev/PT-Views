@@ -1,0 +1,112 @@
+name	string
+chap1char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':'),1)
+chap2char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':')-1,2)
+chap3char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':')-2,3)
+chappos	string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1
+containsclickhere	contains(.,'Click here')
+containsdivision	contains(.,'Division')
+containsparagraph	contains(.,'Paragraph')
+containspart	contains(.,'Part')
+containssection	contains(.,'Section')
+countf	count(*[@style = 'f'])
+countfig	count(*[@style = 'fig'])
+countfolls5pretable	count(following::*[@style = 's5'][1]/preceding-sibling::table)
+countfolltabledivision	count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Division')][1]/preceding-sibling::table)
+countfolltableparagraph	count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')][1]/preceding-sibling::table)
+countfolltablesection	count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Section')][1]/preceding-sibling::table)
+countjmp	count(*[@style = 'jmp'])
+countnode	count(node())
+countparentpresib	count(parent::*/preceding-sibling::*)
+countposttablewithdivision	count(following::table[contains(descendant::*[@style = 'tc1'],'Division')])
+countposttablewithparagraph	count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')])
+countposttablewithsection	count(following::table[contains(descendant::*[@style = 'tc1'],'Section')])
+countpren1	count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)
+countpren2	count(preceding::*[@style = 'n2'][1]/preceding-sibling::*)
+countpren2tec	count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)
+countpren3	count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)
+countprenode	count(preceding-sibling::node())
+countpres5	count(preceding::*[@style = 's5'][1]/preceding-sibling::*)
+countpresibnode	count(preceding-sibling::node())
+countpretable	count(parent::*/preceding-sibling::table)
+countpretec	count(preceding-sibling::*[@style = 'tec'])
+countsbx	count(*[@style = 'sbx'])
+counttbb	count(*[@style = 'tbb'])
+counttec	count(*[@style = 'tec'])
+countteu	count(*[@style = 'teu'])
+counttrs	count(*[@style = 'trs'])
+curpos	position()
+curtec	substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)
+curtecpostellipsis	substring-after($curtec,'…')
+curtecpreellipsis	substring-before($curtec,'…')
+curtecver	normalize-space(substring-after($curtec,')'))
+curtecverpreellipsis	substring-before(substring-after($curtec,')'),'…')
+curtei	*[@style = 'tei']/text()
+gjparent	parent::para[@style = 'gj']
+graparent	parent::para[@style = 'gra']
+has1charchap	contains(translate(node()[not(self::*)],$numb,$numbsub),' #:')
+has2charchap 	contains(translate(node()[not(self::*)],$numb,$numbsub),' ##:')
+has3charchap	contains(translate(node()[not(self::*)],$numb,$numbsub),' ###:')
+hascoloncvref	contains(@ref,':')
+hascvref	contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')
+hasellipsis	contains(node()[not(self::*)],'…')
+hasfollowingtable	count(following::table) > 0
+hasreordered	contains(.,'reordered)')
+hasspacecref	contains(translate(node()[not(self::*)],$numb,$numbsub),' #')
+hasspaceinref	contains(@ref,' ')
+hassubvrange	contains(translate($refcolonv,$validvlet,$validvletsub),'$–$')
+hastbb	boolean(child::*[@style = 'tbb'])
+hastecchild	boolean(child::*[@style = 'tec'])
+hastecellipsis	contains(*[@style = 'tec'][1],'…')
+hastecversion	starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')
+hastrdivision	contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0
+hastrparagraph	contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0
+hastrpart	contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0
+hastrsection	contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0
+hasvlet	contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')
+lastchar	substring(.,string-length(.),1)
+lastchar2	substring(.,string-length(.) - 1,1)
+lastchartype	translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)
+lenchildtec	string-length(*[@style = 'tec']/text())
+node1tec	node()[1][@style = 'tec']
+nodecount	count(node())
+notposttabledivision	not(contains(following-sibling::table[1],'Division'))
+notposttableparagraph	not(contains(following-sibling::table[1],'Paragraph'))
+notposttablesection	not(contains(following-sibling::table[1],'Section'))
+notsbxchild	not(child::*[@style = 'sbx'])
+numbfirst	substring(translate(.,$numb,$numbsub),1,1) = '#'
+parent	parent::*/@style
+parentpostsib	parent::*/following-sibling::*[1]/@style
+parentpresib	parent::*/preceding-sibling::*[1]/@style
+parentpresib2	parent::*/preceding-sibling::*[2]/@style
+parentpresibpos	count(parent::*/preceding-sibling::*)
+postellipsisstring	substring-after(translate(node()[not(self::*)],':',''),'…')
+postsib	following-sibling::*[1]/@style
+posttable	following-sibling::*[1][name() = 'table'] 
+prechapter	preceding::chapter[1]/@number
+preellipsisstring	substring-before(node()[not(self::*)],'…')
+pren1tec	preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
+pren2tec	preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
+pren3tec	preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
+pres5text	preceding::*[@style = 's5'][1]/text()
+presib	preceding-sibling::*[1]/@style
+presib2	preceding-sibling::*[2]/@style
+pretec	preceding::*[@style = 'tec'][1]
+preverse	preceding::verse[1]/@number
+preverser1	substring-before($preverse,'-')
+prevhyphen	contains($preverse,'-')
+refattchap	substring-before(@ref,':')
+refattchapdot	substring-before(@ref,'.')
+refattdotverse	substring-after(@ref,'.')
+refattverse	substring-after(@ref,':')
+refchapcolon	substring-before(node()[not(self::*)],':')
+refcolonv	substring-after(node()[not(self::*)],':')
+refcolonvlet	substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')
+refcolonvnumb	translate(substring-after(text(),':'),$validvlet,'')
+refcolonvr1	substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')
+refcolonvr2	substring-after($refcolonv,'–')
+reftype	translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)
+refvendash	contains(node()[not(self::*)],'–')
+refwordschapcolon	substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')
+strlenb4chap	string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))
+validtecfirst	substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)
+z_causeserrors1	translate(substring-after(node()[not(self::*)],':'),$validvlet,'')
