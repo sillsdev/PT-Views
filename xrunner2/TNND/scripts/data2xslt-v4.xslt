@@ -244,9 +244,9 @@
     <xsl:template name="char-gen-note">
         <gen:text>\</gen:text>
         <gen:value-of select="@style"/>
-        <gen:text>
-            <xsl:text>&#160;</xsl:text>
-        </gen:text>
+        <gen:text>&#160;</gen:text>
+        <gen:value-of select="@caller"/>
+        <gen:text>&#160;</gen:text>
         <gen:apply-templates select="node()">
             <gen:with-param name="embedded" select="0"/>
         </gen:apply-templates>
@@ -568,7 +568,7 @@
             <xsl:if test="$debug = 'on'">
                 <gen:comment>
                     <xsl:value-of select="concat(' ',name,' = ')"/>
-                    <gen:value-of select="{concat('$',name)}"/>
+                    <gen:value-of select="concat(' ',{concat('$',name)},' ')"/>
                 </gen:comment>
             </xsl:if>
         </xsl:if>

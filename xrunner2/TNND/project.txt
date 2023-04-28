@@ -117,7 +117,7 @@ t=:start "C:\Program Files\Paratext 9\Paratext.exe"
 b=test starlet build.
 t=:bkid
 t=:testfast XXD
-t=:testfast ROM
+#t=:testfast ROM
 
 [e]
 label=Paratext 
@@ -208,8 +208,18 @@ t=:loopstring testxslt2 "GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH
 label=
 b=Test count words
 t=:bkid
-t=:testcount XXD
-t=:testcount2 XXD
+#t=:testcount2 LUK
+t=:testcount2 ROM
+
+[w]
+b= Load count into Paratext
+t=:autoit CloseTitle.au3 "Paratext 9.3"
+t=:wait 2
+t=:var curfile word-count
+t=:copy "%projectpath%\scripts\%tnxx%-%curfile%.xslt" "%mypt8%\Views\%tnxx%-%curfile%.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-%curfile%.xslt" "%ptviewssvn%\%tnxx%\%tnxx%-%curfile%.xslt"
+t=:start "C:\Program Files\Paratext 9\Paratext.exe"
+
 
 [collection]
 t=:xslt usx2usx-collection.xslt blank.xml
@@ -271,7 +281,7 @@ t=:var book %~1
 t=:echo "Book = !%book%!"
 t=:inputfile "%usxpath%\!%book%!.usx"
 t=:cct remove-nl-from-para.cct
-t=:xslt1 TNND-word-count-v2.xslt "" "%projectpath%\output\%book%-cnt2.html"
+t=:xslt1 TNND-word-count-v3.xslt "" "%projectpath%\output\%book%-cnt3.html"
 #t=:start "%projectpath%\output\%book%-cnt.html"
 
 [hide]

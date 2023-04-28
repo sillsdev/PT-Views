@@ -4,6 +4,8 @@ n2	curtec		a	translate(*[@style = 'tec'][1]/text(), ':','')
 n3	curtec		a	translate(*[@style = 'tec'][1]/text(), ':','')
 n2	curtecver		a	
 n3	curtecver		a	
+p	preverse		a	
+b3	preverse		a	
 s5	refcolonv		a	
 tc1	refcolonv		a	
 sbx	refcolonv		a	
@@ -12,6 +14,8 @@ s5	strlenb4chap		a
 tc1	strlenb4chap		a	
 sbx	strlenb4chap		a	
 s3	strlenb4chap		a	
+b3	values5beforev		a	
+p	values5beforev		a	
 sbx	chappos		b	
 tc1	chappos		b	
 jmp	containsclickhere		b	
@@ -41,9 +45,9 @@ tei	countpren1		b
 trs	countpren1		b	count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
 tec	countpren1		b	
 n2	countpren2		b	count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)
-n2	countpren2tec			
 n3	countpren2		b	
 tec	countpren2		b	
+n2	countpren2tec		b	
 n3	countpren3		b	count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)
 tc1	countprenode		b	
 n1	countpres5		b	count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
@@ -76,9 +80,14 @@ n2	curtecverpreellipsis		b
 n3	curtecverpreellipsis		b	
 n2	curtei		b	
 n3	curtei		b	
+p	curvr1		b	
+b3	curvr1		b	
+p	curvr2		b	
+b3	curvr2		b	
 jmp	gjparent		b	parent::para[@style = 'gj']
 f	graparent		b	parent::para[@style = 'gra']
 fig	graparent		b	parent::para[@style = 'gra']
+fr	hasbadcvref		b	
 fig	hascoloncvref		b	
 b2	hascvref		b	
 gj	hascvref		b	
@@ -89,6 +98,7 @@ s3	hascvref		b
 s5	hascvref		b	
 sbx	hascvref		b	
 tc1	hascvref		b	
+fr	hascvref		b	
 tec	hasellipsis		b	
 trs	hasellipsis		b	
 table	hasfollowingtable		b	
@@ -110,8 +120,11 @@ tr	hastrdivision		b
 tr	hastrparagraph		b	
 tr	hastrpart		b	
 tr	hastrsection		b	
+p	hasvhyphen		b	
+b3	hasvhyphen		b	
 s3	hasvlet		b	
 s5	hasvlet		b	
+s5	hasvsub		b	
 s3	lastchar		b	substring(.,string-length(.),1)
 tec	lastchar		b	substring(.,string-length(.),1)
 tec	lastchar2		b	substring(.,string-length(.) - 1,1)
@@ -139,6 +152,12 @@ tc1	pos		b	position()
 n1	positiontec		b	
 tec	postellipsisstring		b	
 trs	postellipsisstring		b	
+b3	posts5hasendashvr2		b	
+p	posts5hasendashvr2		b	
+b3	posts5hasleftround		b	
+p	posts5hasleftround		b	
+p	posts5v		b	
+b3	posts5v		b	
 b3	postsib		b	following-sibling::*[1]/@style
 p	postsib		b	following-sibling::*[1]/@style
 b3	posttable		b	following-sibling::*[1][name() = 'table'] 
@@ -159,7 +178,13 @@ tei	pren1tec		b
 n2	pren2tec		b	preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
 n3	pren2tec		b	preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
 n3	pren3tec		b	preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text()
+b3	pres5hasendashvr2		b	
+p	pres5hasendashvr2		b	
+p	pres5hasleftround		b	
+b3	pres5hasleftround		b	
 s3	pres5text		b	
+p	pres5v		b	
+b3	pres5v		b	
 b3	presib		b	preceding-sibling::*[1]/@style
 p	presib		b	preceding-sibling::*[1]/@style
 table	presib		b	
@@ -174,8 +199,14 @@ s5	preverse		b	preceding::verse[1]/@number
 sbx	preverse		b	preceding::verse[1]/@number
 tc1	preverse		b	preceding::verse[1]/@number
 s5	preverser1		b	
+b3	preverser1		b	
+p	preverser1		b	
+b3	preverser2		b	
+p	preverser2		b	
 s3	prevhyphen		b	
 s5	prevhyphen		b	
+p	prevhyphen		b	
+b3	prevhyphen		b	
 fig	refattchap		b	
 fig	refattchapdot		b	
 fig	refattdotverse		b	
@@ -200,3 +231,7 @@ s3	refwordschapcolon		b
 sbx	refwordschapcolon		b	
 tc1	refwordschapcolon		b	
 n3	validtecfirst		b	
+b3	posts5beforevhasvr2		b	
+p	posts5beforevhasvr2		b	
+b3	posts5beforevhaslrb		b	
+p	posts5beforevhaslrb		b	

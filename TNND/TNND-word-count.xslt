@@ -20,9 +20,17 @@
     <xsl:variable name="level3" select="0"/>
     <xsl:variable name="color3" select="''"/>
     <xsl:template match="/*">
-        <xsl:apply-templates select="*[preceding-sibling::chapter]|chapter"/>
+        <xsl:apply-templates select="chapter[@number]|*"/>
     </xsl:template>
-    <xsl:template match="chapter[@style]">
+    <xsl:template match="chapter[@style][count(preceding::chapter) > 0]">
+        <xsl:element name="div">
+            <xsl:attribute name="class">
+                <xsl:text>c</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="@number"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="chapter[@style][count(preceding::chapter) = 0]">
         <xsl:element name="style">
             <xsl:attribute name="type">
                 <xsl:text>text/css</xsl:text>
@@ -30,7 +38,8 @@
             <xsl:text>            .sentence {max-width:90%;}
             tr:nth-of-type(odd) {background:#e0e0e0}
             .words {padding: 0 0 3pt 3pt;}
-            .count {width:5em;font-weight:bold;padding: 0 1em 0 1em;text-align:right;}
+		.style {font-weight:bold;background:peachpuff;}
+            .count {font-weight:bold;text-align:right;padding-right:6px;}
             .lt9, .green {background:lawngreen}
             .yellow {background:yellow}
             .gold {background:gold}
@@ -38,14 +47,28 @@
             .darkorange {background:darkorange}
             .tomato {background:tomato}
             .red {background:red}
-            table {margin-left: 1em; width:95%}
+            table.s5 {margin-left: 0em; width:95%}
+		table.header {margin-left: 0em; width:95%}
             table caption {font-weight:bold;font-size:120%;background:greenyellow;}
 		th {background:peachpuff;}
             .subcap {font-size:85%;font-weight:normal;}
 		.versediv {color:navy;font-weight:bold;font-family:Arial;background:cyan;}
+		.versepara {font-weight:bold;font-family:Arial;background:greenyellow;}
+		.w3 {width:3em;padding-left:0em;}
+		.w6 {width:6em;}
+		.w2 {width:2em;}
+		div.c {text-align:center; font-weight:bold;font-size:30pt;background:lawngreen; width:95%;margin-left:0en;}
+		.sfm {float:left;width:2em;font-weight:bold;font-size:16pt}
+		table.para {width:95%;padding-left:0em;}
+		table.para td.style {background:white;color:white;}
+		table.para tr:first-child td.style {color:black;background:peachpuff;}
+
 	    </xsl:text>
         </xsl:element>
         <xsl:element name="table">
+            <xsl:attribute name="class">
+                <xsl:text>header</xsl:text>
+            </xsl:attribute>
             <caption>
                 <xsl:text>Word count per sentence for TNND.</xsl:text>
                 <xsl:if test="$level1 &gt; 0">
@@ -73,9 +96,17 @@
             <xsl:element name="tr">
                 <xsl:element name="th">
                     <xsl:attribute name="class">
-                        <xsl:text>count</xsl:text>
+                        <xsl:text>w3</xsl:text>
                     </xsl:attribute>
-                    <xsl:text>Word count</xsl:text>
+                    <xsl:text>&#xA0;</xsl:text>
+                </xsl:element>
+                <xsl:element name="th">
+                    <xsl:attribute name="class">
+                        <xsl:text>w6</xsl:text>
+                    </xsl:attribute>
+                    <xsl:text>Word</xsl:text>
+                    <xsl:element name="br"/>
+                    <xsl:text>count</xsl:text>
                 </xsl:element>
                 <xsl:element name="th">
                     <xsl:text>Sentence</xsl:text>
@@ -87,41 +118,59 @@
     <xsl:template name="parse-sent">
         <xsl:param name="string"/>
         <xsl:param name="eosp"/>
+        <xsl:param name="style"/>
+
         <xsl:choose>
             <xsl:when test="contains($string,'. ')">
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-before($string,'. ')"/>
                     <xsl:with-param name="eosp" select="'.'"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-after($string,'. ')"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains($string,'? ')">
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-before($string,'? ')"/>
                     <xsl:with-param name="eosp" select="'?'"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-after($string,'? ')"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains($string,'! ')">
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-before($string,'! ')"/>
                     <xsl:with-param name="eosp" select="'!'"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-after($string,'! ')"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains($string,': ')">
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-before($string,': ')"/>
                     <xsl:with-param name="eosp" select="':'"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
                 <xsl:call-template name="parse-sent">
                     <xsl:with-param name="string" select="substring-after($string,': ')"/>
+                    <xsl:with-param name="style" select="$style"/>
+                    <!-- <xsl:with-param name="pos" select="$pos + 1"/> -->
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -133,7 +182,18 @@
                 <xsl:element name="tr">
                     <xsl:element name="td">
                         <xsl:attribute name="class">
-                            <xsl:text>count </xsl:text>
+                            <xsl:text>w3</xsl:text>
+                        </xsl:attribute>
+                        <xsl:if test="string-length($style) > 0">
+                            <xsl:attribute name="class">
+                                <xsl:text>style w3</xsl:text>
+                            </xsl:attribute>
+                            <xsl:value-of select="concat('\',$style)"/>
+                        </xsl:if>
+                    </xsl:element>
+                    <xsl:element name="td">
+                        <xsl:attribute name="class">
+                            <xsl:text>count w3 </xsl:text>
                             <xsl:call-template name="count-color">
                                 <xsl:with-param name="words" select="$word-count"/>
                             </xsl:call-template>
@@ -153,11 +213,21 @@
     </xsl:template>
     <xsl:template match="*[@style = 's5']">
         <xsl:element name="table">
+            <xsl:attribute name="class">
+                <xsl:text>s5</xsl:text>
+            </xsl:attribute>
             <xsl:element name="tr">
                 <xsl:element name="td">
                     <xsl:attribute name="class">
-                        <xsl:text>count</xsl:text>
+                        <xsl:text>w3</xsl:text>
                     </xsl:attribute>
+                    <xsl:value-of select="concat('\',@style)"/>
+                </xsl:element>
+                <xsl:element name="td">
+                    <xsl:attribute name="class">
+                        <xsl:text>w3</xsl:text>
+                    </xsl:attribute>
+                    <xsl:text>&#xA0;</xsl:text>
                 </xsl:element>
                 <xsl:element name="td">
                     <xsl:attribute name="class">
@@ -168,11 +238,39 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+    <xsl:template match="*[@style = 'b3']|*[@style = 'p']">
+        <xsl:variable name="chap" select="preceding::chapter/@number"/>
+        <xsl:element name="table">
+            <xsl:attribute name="class">
+                <xsl:text>s5</xsl:text>
+            </xsl:attribute>
+            <xsl:element name="tr">
+                <xsl:element name="td">
+                    <xsl:attribute name="class">
+                        <xsl:text>w3</xsl:text>
+                    </xsl:attribute>
+                    <xsl:value-of select="concat('\',@style)"/>
+                </xsl:element>
+                <xsl:element name="td">
+                    <xsl:attribute name="class">
+                        <xsl:text>w3</xsl:text>
+                    </xsl:attribute>
+                    <xsl:text>&#xA0;</xsl:text>
+                </xsl:element>
+                <xsl:element name="td">
+                    <xsl:attribute name="class">
+                        <xsl:text>versepara</xsl:text>
+                    </xsl:attribute>
+                    <xsl:value-of select="concat($chap,':',*[@style = 'v']/@number)"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
     <xsl:template match="*"/>
     <xsl:template match="text()" mode="s1">
         <xsl:value-of select="."/>
     </xsl:template>
-    <xsl:template match="*[@style = 'n1']|*[@style = 'n2']|*[@style = 'n3']|*[@style = 'ntn']">
+    <xsl:template match="*[@style = 'n1' or @style = 'n2' or @style = 'n3'or @style = 'ntn' or @style = 'li1' or @style = 'hb1' or @style = 'qp'  or @style = 'qns']">
         <xsl:variable name="step1">
             <xsl:apply-templates select="node()" mode="s1"/>
         </xsl:variable>
@@ -181,18 +279,27 @@
                 <xsl:with-param name="string" select="$step1"/>
             </xsl:call-template>
         </xsl:variable>
+        <!-- <xsl:element name="div">
+            <xsl:attribute name="class">
+                <xsl:text>sfm</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style)"/>
+        </xsl:element> -->
         <xsl:element name="table">
-<tr>
-<th></th>
-<th><xsl:value-of select="concat('\',@style)"/></th>
-</tr>
+            <xsl:attribute name="class">
+                <xsl:text>para</xsl:text>
+            </xsl:attribute>
             <xsl:call-template name="parse-sent">
                 <xsl:with-param name="string" select="$step2"/>
+                <xsl:with-param name="style" select="@style"/>
+                <xsl:with-param name="pos" select="0"/>
             </xsl:call-template>
         </xsl:element>
     </xsl:template>
-    <xsl:template match="*[@style = 'tec']" mode="s1"/>
-<xsl:template match="*[@style = 'f']" mode="s1"/>
+    <xsl:template match="*" mode="s1">
+        <xsl:value-of select="text()"/>
+    </xsl:template>
+    <xsl:template match="*[@style = 'f']" mode="s1"/>
     <xsl:template name="wordCount">
         <xsl:param name="input"/>
         <xsl:param name="sep" select="'‒–—―'"/>

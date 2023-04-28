@@ -222,7 +222,7 @@
             <xsl:text>}&#10;</xsl:text>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="item" mode="var">
+    <!-- <xsl:template match="item" mode="var">
         <gen:variable name="next1-{translate(Ref,'.','-')}">
             <gen:call-template name="next">
                 <gen:with-param name="style" select="{nextstyle1}"/>
@@ -235,7 +235,7 @@
                 <gen:with-param name="curpos" select="$pos"/>
             </gen:call-template>
         </gen:variable>
-    </xsl:template>
+    </xsl:template> -->
     <xsl:template name="gen-static">
         <gen:variable name="sq">'</gen:variable>
         <xsl:apply-templates select="doc($static-var-xml-url)//item" mode="static-var"/>
@@ -284,6 +284,9 @@
                 <gen:value-of select="concat('\',@style,' ')"/>
                 <gen:apply-templates select="node()"/>
             </gen:element>
+        </gen:template>
+        <gen:template match="text()">
+            <xsl:value-of select="."/>
         </gen:template>
         <gen:template name="style">
             <style type="text/css">
@@ -398,7 +401,6 @@
         <gen:template match="{name()}[@style = '{@style}']">
             <gen:variable name="pos" select="position()"/>
             <gen:variable name="parent" select="parent::*/@style"/>
-            <!-- <gen:comment select="$parent"/> -->
             <gen:copy>
                 <gen:apply-templates select="@*"/>
                 <gen:attribute name="class">

@@ -26,6 +26,8 @@ countpren2tec	count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/pre
 countpren3	count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)
 countprenode	count(preceding-sibling::node())
 countpres5	count(preceding::*[@style = 's5'][1]/preceding-sibling::*)
+countprep	count(preceding::*[@style = 'p'][1]/preceding-sibling::*)
+countpreb3	count(preceding::*[@style = 'b3'][1]/preceding-sibling::*)
 countpresibnode	count(preceding-sibling::node())
 countpretable	count(parent::*/preceding-sibling::table)
 countpretec	count(preceding-sibling::*[@style = 'tec'])
@@ -62,6 +64,7 @@ hastrdivision	contains(*[1]/*[1]/text(),'Division') and count(following-sibling:
 hastrparagraph	contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0
 hastrpart	contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0
 hastrsection	contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0
+hasvhyphen	contains(verse/@number,'-')
 hasvlet	contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')
 lastchar	substring(.,string-length(.),1)
 lastchar2	substring(.,string-length(.) - 1,1)
@@ -93,6 +96,7 @@ presib2	preceding-sibling::*[2]/@style
 pretec	preceding::*[@style = 'tec'][1]
 preverse	preceding::verse[1]/@number
 preverser1	substring-before($preverse,'-')
+preverser2	substring-after($preverse,'-')
 prevhyphen	contains($preverse,'-')
 refattchap	substring-before(@ref,':')
 refattchapdot	substring-before(@ref,'.')
@@ -110,3 +114,20 @@ refwordschapcolon	substring-before(substring(node()[not(self::*)],$strlenb4chap 
 strlenb4chap	string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))
 validtecfirst	substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)
 z_causeserrors1	translate(substring-after(node()[not(self::*)],':'),$validvlet,'')
+hasvsub	contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')
+refcolonvnumblet	translate(substring-after(text(),':'),$validvletpunc,'')
+curvr1	substring-before(verse/@number,'-')
+curvr2	substring-after(verse/@number,'-')
+posts5v	substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')
+pres5v	substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')
+pres5hasendashvr2	contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')
+posts5hasendashvr2	contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')
+hasvlet	
+posts5vlet	substring-before(substring-after(translate(following::*[@style = 's5'][1],$validvlet,''),':')
+pres5vlet	substring-after(translate(preceding::*[@style = 's5'][1],$validvlet,''),':')
+posts5hasleftround	contains(following::*[@style = 's5'][1],'(')
+pres5hasleftround	contains(preceding::*[@style = 's5'][1],'(')
+hasbadcvref	contains(translate(node()[not(self::*)],$numb,$numbsub),'#.#')
+values5beforev	following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()
+posts5beforevhasvr2	contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')
+posts5beforevhaslrb	contains($values5beforev,'(')
