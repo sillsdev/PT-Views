@@ -1,10 +1,11 @@
 # Paratext TNND Views release
 
-This additional tool for Paratext is designed to help content creators and checkers to VIEW (but not edit) the TNND Paratext Project data in different ways. There are ??? views as explained below: 
+This additional tool for Paratext is designed to help content creators and checkers to VIEW (but not edit) the TNND Paratext Project data in different ways. There are 2 views as explained below: 
 
 ## Views
 
 - **TNND-tag-errors** -- This aids content creators to see that there is a markup error that PT does not catch. This view may still have some false labeling.
+- **TNND-word-count** - This gives a word count for each sentence.
 
 ## How to Install these Views for Paratext
 
@@ -12,7 +13,7 @@ This additional tool for Paratext is designed to help content creators and check
 - Download Paratext-TNND-Views-installer.exe from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest)
 - Close Paratext if open.
 - Run the installer and follow the usual steps to Install the Paratext Views. Your antivirus may tell you this program is rarely downloaded. That is true, but you can ignore the warning. (Previous versions were not signed. This version is signed.)
-- Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
+- Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu under View section.
 
 
 ### Option 2: Run a script to install

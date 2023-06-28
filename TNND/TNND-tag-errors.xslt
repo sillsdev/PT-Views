@@ -132,9 +132,9 @@
 .err-para--mid-26-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-26-1::after {content:'This paragraph contains a straight quote mark. It should be a curly quote mark. #26.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-qp-pre-14-2 {background:peachpuff;border-top:2pt solid red;}
-.err-para-qp-pre-14-2::after {content:'Two \\qp paragraphs, one after the other, are not allowed, unless it is one example with two paragraphs, or you are illustrating parallel line of Hebrew poetry. #14.2';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-qp-pre-14-2::after {content:'Two \\qp paragraphs, one after the other, are not allowed, unless it is one example with two paragraphs, or you are illustrating parallel lines of Hebrew poetry. #14.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ntn-pre-18-1 {background:peachpuff;border-top:2pt solid red;}
-.err-para-ntn-pre-18-1::after {content:'An \\ntn should be preceeded by a \\s3, \\s5, \\tr, \\ntn, \\qp, or \\qns. #18.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ntn-pre-18-1::after {content:'An \\ntn should be preceeded by a \\s3, \\s5, \\tr, \\ntn, \\qp, \\qns, \\q1tn, or \\q2tn. #18.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ntn-mid-24-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ntn-mid-24-1::after {content:'An \\ntn should not contain a \\tec. #24.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-gj-mid-22-9 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -154,7 +154,7 @@
 .err-para-n1-mid-12-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-n1-mid-12-1::after {content:'The contents of this \\n1 \\tec is a portion of the previous \\n1 \\tec. Perhaps this should be an \\n2? #12.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n1-post-14-1 {background:peachpuff;border-bottom:2pt solid red;}
-.err-para-n1-post-14-1::after {content:'Only these paragraphs are allowed after a \\n1: \\n1 \\n2 \\n3 \\ntn \\qp \\b \\b2 \\b3 \\p \\s5 \\li1 \\hb1 \\s3 \\gra \\c. #14.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-n1-post-14-1::after {content:'Only these paragraphs are allowed after a \\n1: \\n1 \\n2 \\n3 \\ntn \\qp \\q1tn \\q2tn \\b \\b2 \\b3 \\p \\s5 \\li1 \\hb1 \\s3 \\gra \\c. #14.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n1-mid-10-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-n1-mid-10-1::after {content:'There should be only one \\tec per \\n1 paragraph. #10.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n1-mid-10-1-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -190,7 +190,7 @@
 .err-para-n3-pre-12-8-2 {background:peachpuff;border-top:2pt solid red;}
 .err-para-n3-pre-12-8-2::after {content:'The \\n3 occurs before any \\n2 in this \\s5 note group. #12.8.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s3-mid-19-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-s3-mid-19-4::after {content:'The verse number in this \\s3 does not match the current verse number in \\v above. #19.4';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s3-mid-19-4::after {content:'The verse number in this \\s3 does not match the current verse number in \\v above or the hyphen should be a en dash. #19.4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s3-mid-19-4-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-s3-mid-19-4-1::after {content:'The verse number in this \\s3 does not match the current verse number in \\v above. #19.4.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s3-mid-19-5 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -268,11 +268,11 @@
 .err-char--mid-26-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char--mid-26-2::after {content:'This character SFM contains a straight quote mark. It should be a curly quote mark. #26.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-2-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-tec-mid-10-2-1::after {content:'The \\tec should be at the start of the paragraph. #10.2.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-tec-mid-10-2-1::after {content:'The \\tec should be at the start of the paragraph (or you are not using an \\n1, \\n2, or \\n3 style). #10.2.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-11-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-tec-mid-11-1::after {content:'The first character should not be punctuation unless you are specifically talking about that punctuation in this Note. #11.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-tec-mid-11-1::after {content:'The first character should not be punctuation unless you are specifically talking about that punctuation in this Note, or it is a short quote within a larger text. #11.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-11-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-tec-mid-11-2::after {content:'The last character before the colon should not be punctuation unless it is a question or exclamation mark or an end quote mark needed for the Note. #11.2';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-tec-mid-11-2::after {content:'The last character before the colon should not be punctuation unless it is a question, or exclamation mark, or an end quote mark needed for the Note, or a short quote within a larger text. #11.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-20-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tec-mid-20-3::after {content:'A \\tec cannot contain a footnote (\\f ...\\f*). It must be after the \\tec*. #20.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-32 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -282,9 +282,9 @@
 .err-char-tec-mid-10-31 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tec-mid-10-31::after {content:'The last character of this \\tec should be a colon, not a space. #10.31';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-trs-mid-10-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-trs-mid-10-4::after {content:'A \\tec should precede this \\trs in the paragraph. #10.4';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-trs-mid-10-4::after {content:'A \\tec should precede this \\trs in the paragraph, or perhaps this paragraph should be an \\n2. #10.4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-trs-mid-10-6 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-trs-mid-10-6::after {content:'The word/phrase in this \\trs is not found in the closest preceding \\tec, or is misspelled or has wrong capitalization. #10.6';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-trs-mid-10-6::after {content:'The word/phrase in this \\trs is not found in the closest preceding \\tec, or is misspelled, or has wrong capitalization, or has punctuation that does not belong in the \\trs. #10.6';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-trs-mid-10-6-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-trs-mid-10-6-1::after {content:'The word or phrase in this \\trs are not found in the preceding \\tec. #10.6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tei-mid-10-5 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -304,7 +304,7 @@
 .err-cell-tc1-mid-4-7 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-cell-tc1-mid-4-7::after {content:'These \\sbx should be separated by \\tbb __\\tbb*. #4.7';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-cell-tc1-mid-4-8 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-cell-tc1-mid-4-8::after {content:'The address and the heading should be separated by a \\+tbb __\\+tbb*. #4.8';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-cell-tc1-mid-4-8::after {content:'The address and the heading should be separated by this: \\sbx*\\tbb __\\tbb*\\sbx . #4.8';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-cell-tc1-mid-8-4-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-cell-tc1-mid-8-4-1::after {content:'The first verse of the range in this Paragraph Box does not match the current verse number in \\v above. #8.4.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-cell-tc1-mid-8-4-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -650,6 +650,9 @@
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
       <xsl:comment> hascvref = <xsl:value-of select="concat(' ',$hascvref,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -709,7 +712,7 @@
                <xsl:value-of select="@style"/>
                <!--ref 18.1 - rank=-->
                <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'li1'])">
+                  <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'q1tn' or @style = 'q2tn' or @style = 'li1'])">
                      <xsl:text> err-para-ntn-pre-18-1</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -983,7 +986,7 @@
                <!--ref 14.1 - rank=-->
                <xsl:if test="preceding::chapter">
                   <xsl:if test="position() != last()">
-                     <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter' or @style = 'gra'])">
+                     <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'q1tn' or @style = 'q2tn' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter' or @style = 'gra'])">
                         <xsl:text> err-para-n1-post-14-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
@@ -1610,6 +1613,9 @@
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
       <xsl:comment> prevhyphen = <xsl:value-of select="concat(' ',$prevhyphen,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1765,6 +1771,9 @@
       </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
       <xsl:comment> prevhyphen = <xsl:value-of select="concat(' ',$prevhyphen,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -2210,7 +2219,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style= -->
@@ -2242,7 +2253,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=tec -->
@@ -2355,7 +2368,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=trs -->
@@ -2386,6 +2401,9 @@
       <xsl:variable name="pretec" select="preceding::*[@style = 'tec'][1]"/>
       <xsl:comment> pretec = <xsl:value-of select="concat(' ',$pretec,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -2411,7 +2429,7 @@
             <!--ref 10.4 - rank=-->
             <xsl:if test="preceding::chapter">
                <xsl:if test="not(preceding-sibling::*[@style = 'tec']) ">
-                  <xsl:if test="not($parent = 'f' or $parent = 'n2' or $parent = 'li1')">
+                  <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1')">
                      <xsl:text> err-char-trs-mid-10-4</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -2437,7 +2455,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=tei -->
@@ -2464,6 +2484,9 @@
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:comment> pren1tec = <xsl:value-of select="concat(' ',$pren1tec,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -2489,7 +2512,7 @@
             <!--ref 10.5 - rank=-->
             <xsl:if test="preceding::chapter">
                <xsl:if test="$countpren1 &gt; $countpres5 or $parentpresibpos &gt; $countpres5 ">
-                  <xsl:if test="contains($pren1tec,text()) and not($parent = 'p') and not($parent = 'f') and not($parent = 'qp') and not($parent = 'qns') and not($parent = 'b3')">
+                  <xsl:if test="contains($pren1tec,text()) and not($ancestor = 'p') and not($ancestor = 'f') and not($ancestor = 'qp') and not($ancestor = 'q1tn') and not($ancestor = 'q2tn') and not($ancestor = 'qns') and not($ancestor = 'b3')">
                      <xsl:text> err-char-tei-mid-10-5</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -2499,7 +2522,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=fr -->
@@ -2546,7 +2571,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=tbb -->
@@ -2603,7 +2630,9 @@
          <xsl:apply-templates select="node()">
             <xsl:with-param name="embedded" select="1"/>
          </xsl:apply-templates>
-         <xsl:value-of select="concat('\',@style,'*')"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- cell @style=tc1 -->
