@@ -4,6 +4,8 @@ echofunc=echo
 outputxml=true
 tnxx=TNND
 
+rowname=item
+
 data-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - check_data.tsv
 data_file-list=%projectpath%\source\TNND Views for Paratext - check_data.tsv
 data-xml=%projectpath%\output\check_data.xml
@@ -58,6 +60,7 @@ debug=on
 b=make tag-errors data TSV and fast test
 # process each tsv file into XML
 t=:updatedl
+t=:elapsed
 # Create the tag errors file
 t=:buildtagerrors
 t=:bkid
@@ -82,10 +85,11 @@ t=:dldataxslt "%varstring-dl%" "%varstring%"
 t=:name "%~2"
 t=:ifexist "%~1" move /y "%~1" "%~2"
 t=:cct tsv2xml-v2.cct "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%.xml"
+#t=:tsv2xml "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%"
 
 [dldataxslt]
 t=:ifexist "%~1" move /y "%~1" "%~2"
-t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt"
+t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt" > nul
 
 [b]
 b=Test tag errors xsltms
@@ -99,6 +103,7 @@ t=:testfast NEH
 b=test starlet build.
 t=:bkid
 t=:testfast XXD
+
 #t=:testms XXD
 
 

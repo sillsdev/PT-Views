@@ -50,7 +50,7 @@
         <xsl:comment select="concat(' ',name(),' @style=',@style,' ')"/>
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -75,7 +75,7 @@
     </xsl:template>
     <xsl:template match="note">
         <gen:template match="note[@style = '{@style}']">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -94,7 +94,7 @@
         <xsl:comment select="concat(' ',name(),' @style=',@style,' ')"/>
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -117,7 +117,7 @@
     </xsl:template>
     <xsl:template match="table">
         <gen:template match="{name()}">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -136,7 +136,7 @@
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
             <gen:param name="embedded"/>
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -153,13 +153,15 @@
                 </gen:attribute>
                 <gen:value-of select="concat('\',@style,' ')"/>
                 <xsl:call-template name="char-gen"/>
-                <gen:value-of select="concat('\',@style,'*')"/>
+                <gen:if test="not(@closed = 'false')">
+                    <gen:value-of select="concat('\',@style,'*')"/>
+                </gen:if>
             </gen:element>
         </gen:template>
     </xsl:template>
     <xsl:template match="figure">
         <gen:template match="figure[@style = '{@style}']">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
@@ -183,23 +185,21 @@
     </xsl:template>
     <xsl:template match="link">
         <gen:template match="link[@style = '{@style}']">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
             </xsl:apply-templates>
             <xsl:sequence select="f:cvref()"/>
             <gen:element name="span">
-                <gen:attribute name="class">
-                    <gen:value-of select="@style"/>
-                    <xsl:apply-templates select="$g1/char[string-length(@style) = 0]/*"/>
-                    <xsl:apply-templates select="*"/>
-                </gen:attribute>
                 <gen:text>\jmp </gen:text>
+                <gen:apply-templates select="node()"/>
+                <gen:text>|</gen:text>
                 <gen:element name="span">
                     <gen:attribute name="class">
-                        <xsl:text>fig-attrib</xsl:text>
+                        <xsl:text>linkref</xsl:text>
                     </gen:attribute>
-                    <gen:apply-templates select="@*"/>
+                    <gen:value-of select="@link-href"/>
+                    <!-- <gen:apply-templates select="@*"/> -->
                 </gen:element>
                 <gen:text>\jmp*</gen:text>
             </gen:element>
@@ -211,7 +211,7 @@
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
             <!-- 2023-04-06 added three following lines so variables are assigned for sfm -->
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
             </xsl:apply-templates>
             <gen:element name="div">
@@ -227,7 +227,7 @@
             </gen:element>
         </gen:template>
     </xsl:template>
-    <xsl:template match="item" mode="next">
+    <xsl:template match="*[name() = $rowname]" mode="next">
         <xsl:if test="string-length(nextstyle1) gt 0">
             <gen:variable name="{concat('next1-',translate(Ref,'.','-'))}" select="{nextstyle1}"/>
             <gen:variable name="{concat('next2-',translate(Ref,'.','-'))}" select="{nextstyle2}"/>
@@ -256,7 +256,7 @@
             <gen:text>*</gen:text>
         </gen:if>
     </xsl:template>
-    <xsl:template match="item">
+    <xsl:template match="*[name() = $rowname]">
         <xsl:variable name="test1" select="tokenize(test,'=')[1]"/>
         <xsl:variable name="test2" select="tokenize(test2,'=')[1]"/>
         <xsl:variable name="t1">
@@ -318,7 +318,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="item" mode="css">
+    <xsl:template match="*[name() = $rowname]" mode="css">
         <xsl:variable name="get-type" select="tokenize(class,'\-')[4]"/>
         <xsl:variable name="css-type" select="if (string-length($get-type) &gt; 0) then $get-type else 'default'"/>
         <xsl:if test="string-length(Ref) gt 0">
@@ -350,7 +350,7 @@
             <xsl:text>}&#10;</xsl:text>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="item" mode="var">
+    <xsl:template match="*[name() = $rowname]" mode="var">
         <gen:variable name="next1-{translate(Ref,'.','-')}">
             <gen:call-template name="next">
                 <gen:with-param name="style" select="{nextstyle1}"/>
@@ -369,7 +369,7 @@
             <gen:variable name="sq">'</gen:variable>
             <gen:variable name="dq">"</gen:variable>
         </xsl:if>
-        <xsl:apply-templates select="doc($static-var-xml-url)//item" mode="static-var"/>
+        <xsl:apply-templates select="doc($static-var-xml-url)//*[name() = $rowname]" mode="static-var"/>
         <gen:template match="chapter[@number]">
             <!-- Provide a style for each chapter -->
             <gen:if test="count(preceding::chapter[@number]) = 0">
@@ -442,8 +442,9 @@
                   .tei, .trs {font-style:italic;}
                   .teu {text-decoration: underline;}
                   .tre {text-decoration: underline;font-style:italic;}
+			.linkref {color:grey;}
 			<!-- .cell {border:2pt solid black} -->
-                <xsl:apply-templates select="$g1//item" mode="css"/>
+                <xsl:apply-templates select="$g1//*[name() = $rowname]" mode="css"/>
             </style>
         </gen:template>
     </xsl:template>
@@ -524,7 +525,7 @@
     </xsl:template>
     <xsl:template match="verse">
         <gen:template match="{name()}[@style = '{@style}']">
-            <xsl:apply-templates select="doc($sfm-var-xml-url)//item" mode="sfm-var">
+            <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
             </xsl:apply-templates>
             <gen:element name="span">
@@ -544,7 +545,7 @@
             </gen:element>
         </gen:template>
     </xsl:template>
-    <xsl:template match="item" mode="sfm-var">
+    <xsl:template match="*[name() = $rowname]" mode="sfm-var">
         <!-- This template handles variables that contain code or are defined in var-string -->
         <xsl:param name="style"/>
         <xsl:param name="element"/>
@@ -573,7 +574,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="item" mode="static-var">
+    <xsl:template match="*[name() = $rowname]" mode="static-var">
         <!-- This template handles text string variables -->
         <xsl:element name="xsl:variable">
             <xsl:attribute name="name">
