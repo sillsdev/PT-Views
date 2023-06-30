@@ -646,12 +646,12 @@
    </xsl:template>
    <!-- para @style=qp -->
    <xsl:template match="para[@style = 'qp']">
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
       <xsl:comment> hascvref = <xsl:value-of select="concat(' ',$hascvref,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -941,6 +941,10 @@
                     select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
       <xsl:comment> curtec = <xsl:value-of select="concat(' ',$curtec,' ')"/>
       </xsl:comment>
+      <xsl:variable name="pren1tec"
+                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+      <xsl:comment> pren1tec = <xsl:value-of select="concat(' ',$pren1tec,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
@@ -964,9 +968,13 @@
       <xsl:variable name="positiontec" select="positiontec"/>
       <xsl:comment> positiontec = <xsl:value-of select="concat(' ',$positiontec,' ')"/>
       </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat(' ',$pren1tec,' ')"/>
+      <xsl:variable name="postcharn1tec"
+                    select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+      <xsl:comment> postcharn1tec = <xsl:value-of select="concat(' ',$postcharn1tec,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="precharn1tec"
+                    select="translate(substring(substring-before($pren1tec,$curtec),string-length(.), 1),$letulc,$letulcsub)"/>
+      <xsl:comment> precharn1tec = <xsl:value-of select="concat(' ',$precharn1tec,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -977,7 +985,7 @@
                <xsl:value-of select="@style"/>
                <!--ref 12.1 - rank=-->
                <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 0 and contains($pren1tec,$curtec)">
+                  <xsl:if test="$counttec &gt; 0 and contains($pren1tec,$curtec) and $precharn1tec != '$' and $postcharn1tec != '$'">
                      <xsl:if test="$countpres5 &lt; $countpren1">
                         <xsl:text> err-para-n1-mid-12-1</xsl:text>
                      </xsl:if>
@@ -1043,17 +1051,17 @@
       <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
       <xsl:comment> curtecver = <xsl:value-of select="concat(' ',$curtecver,' ')"/>
       </xsl:comment>
+      <xsl:variable name="pren2tec"
+                    select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+      <xsl:comment> pren2tec = <xsl:value-of select="concat(' ',$pren2tec,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat(' ',$countpren2,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren2tec"
                     select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2tec = <xsl:value-of select="concat(' ',$countpren2tec,' ')"/>
+      <xsl:comment> countpren2 = <xsl:value-of select="concat(' ',$countpren2,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
@@ -1088,6 +1096,14 @@
                     select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
       <xsl:comment> hastecversion = <xsl:value-of select="concat(' ',$hastecversion,' ')"/>
       </xsl:comment>
+      <xsl:variable name="postcharn2tec"
+                    select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+      <xsl:comment> postcharn2tec = <xsl:value-of select="concat(' ',$postcharn2tec,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="precharn2tec"
+                    select="translate(substring(substring-before($pren2tec,$curtec),string-length(.), 1),$letulc,$letulcsub)"/>
+      <xsl:comment> precharn2tec = <xsl:value-of select="concat(' ',$precharn2tec,' ')"/>
+      </xsl:comment>
       <xsl:variable name="preellipsisstring"
                     select="substring-before(node()[not(self::*)],'…')"/>
       <xsl:comment> preellipsisstring = <xsl:value-of select="concat(' ',$preellipsisstring,' ')"/>
@@ -1095,10 +1111,6 @@
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:comment> pren1tec = <xsl:value-of select="concat(' ',$pren1tec,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren2tec"
-                    select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren2tec = <xsl:value-of select="concat(' ',$pren2tec,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -1155,8 +1167,8 @@
                </xsl:if>
                <!--ref 12.2 - rank=8-->
                <xsl:if test="preceding::chapter">
-                  <xsl:if test="child::*[@style = 'tec'] and contains($pren2tec,$curtec)">
-                     <xsl:if test="$countpren1 &lt; $countpren2tec and $countpres5 &lt; $countpren2tec">
+                  <xsl:if test="$counttec &gt; 0 and contains($pren2tec,$curtec) and $precharn2tec != '$' and $postcharn2tec != '$'">
+                     <xsl:if test="$countpren1 &lt; $countpren2 and $countpres5 &lt; $countpren2">
                         <xsl:text> err-para-n2-mid-12-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
@@ -1206,7 +1218,7 @@
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][1]/preceding-sibling::*)"/>
+                    select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren2 = <xsl:value-of select="concat(' ',$countpren2,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpren3"
@@ -1552,6 +1564,9 @@
                     select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
       <xsl:comment> values5beforev = <xsl:value-of select="concat(' ',$values5beforev,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
       <xsl:comment> curvr1 = <xsl:value-of select="concat(' ',$curvr1,' ')"/>
       </xsl:comment>
@@ -1612,9 +1627,6 @@
       </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
       <xsl:comment> prevhyphen = <xsl:value-of select="concat(' ',$prevhyphen,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -1707,6 +1719,9 @@
                     select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
       <xsl:comment> values5beforev = <xsl:value-of select="concat(' ',$values5beforev,' ')"/>
       </xsl:comment>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
       <xsl:comment> curvr1 = <xsl:value-of select="concat(' ',$curvr1,' ')"/>
       </xsl:comment>
@@ -1771,9 +1786,6 @@
       </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
       <xsl:comment> prevhyphen = <xsl:value-of select="concat(' ',$prevhyphen,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -2266,7 +2278,7 @@
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][1]/preceding-sibling::*)"/>
+                    select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren2 = <xsl:value-of select="concat(' ',$countpren2,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpres5"
@@ -2376,6 +2388,9 @@
    <!-- char @style=trs -->
    <xsl:template match="char[@style = 'trs']">
       <xsl:param name="embedded"/>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
@@ -2400,9 +2415,6 @@
       </xsl:comment>
       <xsl:variable name="pretec" select="preceding::*[@style = 'tec'][1]"/>
       <xsl:comment> pretec = <xsl:value-of select="concat(' ',$pretec,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -2429,7 +2441,7 @@
             <!--ref 10.4 - rank=-->
             <xsl:if test="preceding::chapter">
                <xsl:if test="not(preceding-sibling::*[@style = 'tec']) ">
-                  <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1')">
+                  <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1' or $parent = 'hb1')">
                      <xsl:text> err-char-trs-mid-10-4</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -2463,6 +2475,9 @@
    <!-- char @style=tei -->
    <xsl:template match="char[@style = 'tei']">
       <xsl:param name="embedded"/>
+      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:comment> countpren1 = <xsl:value-of select="concat(' ',$countpren1,' ')"/>
@@ -2483,9 +2498,6 @@
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:comment> pren1tec = <xsl:value-of select="concat(' ',$pren1tec,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
