@@ -1,4 +1,5 @@
 name	string
+ancestor	ancestor::*/@style 
 chap1char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':'),1)
 chap2char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':')-1,2)
 chap3char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':')-2,3)
@@ -22,8 +23,7 @@ countposttablewithparagraph	count(following::table[contains(descendant::*[@style
 countposttablewithsection	count(following::table[contains(descendant::*[@style = 'tc1'],'Section')])
 countpreb3	count(preceding::*[@style = 'b3'][1]/preceding-sibling::*)
 countpren1	count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)
-countpren2	count(preceding::*[@style = 'n2'][1]/preceding-sibling::*)
-countpren2tec	count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)
+countpren2	count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)
 countpren3	count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)
 countprenode	count(preceding-sibling::node())
 countprep	count(preceding::*[@style = 'p'][1]/preceding-sibling::*)
@@ -77,6 +77,7 @@ lastchartype	translate(substring(.,string-length(.),1),$validcvnumblet,$validcvn
 lenchildtec	string-length(*[@style = 'tec']/text())
 node1tec	node()[1][@style = 'tec']
 nodecount	count(node())
+notmultirowtable	not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])
 notposttabledivision	not(contains(following-sibling::table[1],'Division'))
 notposttableparagraph	not(contains(following-sibling::table[1],'Paragraph'))
 notposttablesection	not(contains(following-sibling::table[1],'Section'))
@@ -87,6 +88,8 @@ parentpostsib	parent::*/following-sibling::*[1]/@style
 parentpresib	parent::*/preceding-sibling::*[1]/@style
 parentpresib2	parent::*/preceding-sibling::*[2]/@style
 parentpresibpos	count(parent::*/preceding-sibling::*)
+postcharn1tec	translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)
+postcharn2tec	translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)
 postellipsisstring	substring-after(translate(node()[not(self::*)],':',''),'…')
 posts5beforevhaslrb	contains($values5beforev,'(')
 posts5beforevhasvr2	contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')
@@ -97,6 +100,8 @@ posts5vlet	substring-before(substring-after(translate(following::*[@style = 's5'
 postsib	following-sibling::*[1]/@style
 posttable	following-sibling::*[1][name() = 'table'] 
 prechapter	preceding::chapter[1]/@number
+precharn1tec	translate(substring(substring-before($pren1tec,$curtec),string-length(.), 1),$letulc,$letulcsub)
+precharn2tec	translate(substring(substring-before($pren2tec,$curtec),string-length(.), 1),$letulc,$letulcsub)
 preellipsisstring	substring-before(node()[not(self::*)],'…')
 pren1tec	preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
 pren2tec	preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
@@ -131,5 +136,3 @@ strlenb4chap	string-length(substring-before(translate(node()[not(self::*)],$vali
 validtecfirst	substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)
 values5beforev	following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()
 z_causeserrors1	translate(substring-after(node()[not(self::*)],':'),$validvlet,'')
-notmultirowtable	not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])
-ancestor	ancestor::*/@style 
