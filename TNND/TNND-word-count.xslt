@@ -193,7 +193,7 @@
                     </xsl:element>
                     <xsl:element name="td">
                         <xsl:attribute name="class">
-                            <xsl:text>count w3 </xsl:text>
+                            <xsl:text>count w3</xsl:text>
                             <xsl:call-template name="count-color">
                                 <xsl:with-param name="words" select="$word-count"/>
                             </xsl:call-template>
@@ -270,7 +270,7 @@
     <xsl:template match="text()" mode="s1">
         <xsl:value-of select="."/>
     </xsl:template>
-    <xsl:template match="*[@style = 'n1' or @style = 'n2' or @style = 'n3'or @style = 'ntn' or @style = 'li1' or @style = 'hb1' or @style = 'qp'  or @style = 'qns']">
+    <xsl:template match="*[@style = 'n1']|*[@style = 'n2']|*[@style = 'n3']|*[@style = 'ntn']">
         <xsl:variable name="step1">
             <xsl:apply-templates select="node()" mode="s1"/>
         </xsl:variable>

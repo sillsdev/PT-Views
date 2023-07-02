@@ -98,11 +98,11 @@
 			.linkref {color:grey;}
 			
                 .err-table--post-6-1 {background:peachpuff;border-bottom:2pt solid red;}
-.err-table--post-6-1::after {content:'When you have a Part Box, a Division Box must occur after the Part summary. #6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-table--post-6-1::after {content:'When you have a Part Box, a Division Box must occur after the Part summary.  (But any \tr in the Part summary will cause a false positive.) #6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-table--post-6-2 {background:peachpuff;border-bottom:2pt solid red;}
-.err-table--post-6-2::after {content:'When you have a Division Box, a Section Box must occur after the Division summary. #6.2';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-table--post-6-2::after {content:'When you have a Division Box, a Section Box must occur after the Division summary. (But any \tr in the Div. summary will cause a false positive.) #6.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-table--post-6-3 {background:peachpuff;border-bottom:2pt solid red;}
-.err-table--post-6-3::after {content:'When you have a Section Box, a Paragraph Box must occur after the Section summary. #6.3';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-table--post-6-3::after {content:'When you have a Section Box, a Paragraph Box must occur after the Section summary. (But any \tr in the Section summary will cause a false positive.) #6.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-table--pre-7-2 {background:peachpuff;border-top:2pt solid red;}
 .err-table--pre-7-2::after {content:'A \\b must precede a \\p or \\b3 paragraph when a Part, Division, Section or Paragraph Box follows one of them, except at v.1. #7.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -287,6 +287,8 @@
 .err-char-trs-mid-10-6::after {content:'The word/phrase in this \\trs is not found in the closest preceding \\tec, or is misspelled, or has wrong capitalization, or has punctuation that does not belong in the \\trs. #10.6';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-trs-mid-10-6-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-trs-mid-10-6-1::after {content:'The word or phrase in this \\trs are not found in the preceding \\tec. #10.6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-trs--10-6-2 {background:orange;}
+.err-char-trs--10-6-2::after {content:'The word/phrase in this \\trs is not found in the closest preceding \\tec, or is misspelled, or has wrong capitalization, or has punctuation that does not belong in the \\trs. #10.6.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tei-mid-10-5 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tei-mid-10-5::after {content:'Any repeat of the words found in the preceding \\tec should be in a \\trs, not in this \\tei. #10.5';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-fr-mid-15-7 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -2308,9 +2310,6 @@
                     select="substring-before(node()[not(self::*)],'…')"/>
       <xsl:comment> preellipsisstring = <xsl:value-of select="concat(' ',$preellipsisstring,' ')"/>
       </xsl:comment>
-      <xsl:variable name="pretec" select="preceding::*[@style = 'tec'][1]"/>
-      <xsl:comment> pretec = <xsl:value-of select="concat(' ',$pretec,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -2388,6 +2387,9 @@
    <!-- char @style=trs -->
    <xsl:template match="char[@style = 'trs']">
       <xsl:param name="embedded"/>
+      <xsl:variable name="pretec" select="preceding::*[@style = 'tec'][1]"/>
+      <xsl:comment> pretec = <xsl:value-of select="concat(' ',$pretec,' ')"/>
+      </xsl:comment>
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
       <xsl:comment> ancestor = <xsl:value-of select="concat(' ',$ancestor,' ')"/>
       </xsl:comment>
@@ -2413,8 +2415,13 @@
                     select="substring-before(node()[not(self::*)],'…')"/>
       <xsl:comment> preellipsisstring = <xsl:value-of select="concat(' ',$preellipsisstring,' ')"/>
       </xsl:comment>
-      <xsl:variable name="pretec" select="preceding::*[@style = 'tec'][1]"/>
-      <xsl:comment> pretec = <xsl:value-of select="concat(' ',$pretec,' ')"/>
+      <xsl:variable name="teccharpretrs"
+                    select="translate(substring(substring-before($pretec,.),string-length(.), 1),$letulc,$letulcsub)"/>
+      <xsl:comment> teccharpretrs = <xsl:value-of select="concat(' ',$teccharpretrs,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="teccharposttrs"
+                    select="translate(substring(substring-after($pretec,.),1, 1),$letulc,$letulcsub)"/>
+      <xsl:comment> teccharposttrs = <xsl:value-of select="concat(' ',$teccharposttrs,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -2448,7 +2455,7 @@
             </xsl:if>
             <!--ref 10.6 - rank=-->
             <xsl:if test="preceding::chapter">
-               <xsl:if test="not($hasellipsis)">
+               <xsl:if test="not($hasellipsis) ">
                   <xsl:if test="not(contains($pretec,.))">
                      <xsl:text> err-char-trs-mid-10-6</xsl:text>
                   </xsl:if>
@@ -2459,6 +2466,14 @@
                <xsl:if test="$hasellipsis">
                   <xsl:if test="not(contains($pretec,$preellipsisstring) and contains($pretec,$postellipsisstring))">
                      <xsl:text> err-char-trs-mid-10-6-1</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 10.6.2 - rank=-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="not($hasellipsis)">
+                  <xsl:if test="contains($pretec,.) and ($teccharpretrs = '$' or $teccharposttrs = '$')">
+                     <xsl:text> err-char-trs--10-6-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
