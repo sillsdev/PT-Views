@@ -7,9 +7,11 @@ set view=%1
 call :date
 call :time
 call :created
-call relaxed %view%\%view%-info.pug --build-once
+start relaxed %view%\%view%-info.pug --build-once
+timeout 40
 :: "C:\Program Files (x86)\Prince\engine\bin\prince.exe" %1-info.html -o %1-info.pdf
 copy /y %view%\%view%-info.pdf %view%\cms
+
 @echo.
 @echo Making Zip of distribution files
 @echo.

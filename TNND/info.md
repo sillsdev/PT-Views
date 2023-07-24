@@ -31,7 +31,7 @@ This additional tool for Paratext is designed to help content creators and check
 ## Using the TNND Views within Paratext
 
 - If the installation was successful, the new views should be available as shown below:
-	via the Ctrl+E popup menu: ![views list control e](images/views-list-ctrl-e.png)        or via the project's View menu:  ![views-list-proj-view](images/views-list-proj-view-sml.png)   
+	via the Ctrl+E popup menu: ![views list control e](images/ctrl-e.png)        or via the project's View menu:  ![views-list-proj-view](images/views-list-proj-view-sml.png)   
 - Note that you cannot edit the text in *any* of these VIEWS - it is purely an aid for reading and checking the text (one meaning line at a time) without the clutter of markers.
 
 - If you are using Paratext 9, then it is highly recommended to open an additional TNND window as an Autohide window:
