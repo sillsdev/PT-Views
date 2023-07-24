@@ -1,0 +1,7 @@
+# Xrunner scripts to build the TNND Views
+
+This Project is setup to build the TNND-tag-errors.xslt for use in Paratext for people working on the Translatin Notes for Paratext.
+
+It can test with various XSLT1 transformation engines. The default is Starlet but MSXML provides the more restrictive transformation that is closer to the very basic one found in Paratext.
+
+
