@@ -569,8 +569,9 @@
             <xsl:if test="$debug = 'on'">
                 <gen:comment>
                     <xsl:value-of select="concat(' ',name,' = ')"/>
-                    <gen:value-of select="concat(' ',{concat('$',name)},' ')"/>
+                    <gen:value-of select="concat($sq,{concat('$',name)},$sq,' ')"/>
                 </gen:comment>
+                <xsl:text>&#10;</xsl:text>
             </xsl:if>
         </xsl:if>
     </xsl:template>

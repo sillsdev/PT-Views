@@ -43,8 +43,11 @@ curtecpreellipsis	substring-before($curtec,'…')
 curtecver	normalize-space(substring-after($curtec,')'))
 curtecverpreellipsis	substring-before(substring-after($curtec,')'),'…')
 curtei	*[@style = 'tei']/text()
+curfield	.
+curverse	verse/@number
 curvr1	substring-before(verse/@number,'-')
 curvr2	substring-after(verse/@number,'-')
+ellipsiscount	string-length(.)-string-length(translate(.,'…',''))
 gjparent	parent::para[@style = 'gj']
 graparent	parent::para[@style = 'gra']
 has1charchap	contains(translate(node()[not(self::*)],$numb,$numbsub),' #:')
@@ -90,7 +93,7 @@ parentpresib2	parent::*/preceding-sibling::*[2]/@style
 parentpresibpos	count(parent::*/preceding-sibling::*)
 postcharn1tec	translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)
 postcharn2tec	translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)
-postellipsisstring	substring-after(translate(node()[not(self::*)],':',''),'…')
+postellipsisstring	normalize-space(concat(' ',substring-after(translate(node()[not(self::*)],':',''),'…'),' '))
 posts5beforevhaslrb	contains($values5beforev,'(')
 posts5beforevhasvr2	contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')
 posts5hasendashvr2	contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')
@@ -99,10 +102,12 @@ posts5v	substring-after(translate(following::*[@style = 's5'][1],$validvletendas
 posts5vlet	substring-before(substring-after(translate(following::*[@style = 's5'][1],$validvlet,''),':')
 postsib	following-sibling::*[1]/@style
 posttable	following-sibling::*[1][name() = 'table'] 
+posttable2	following-sibling::*[2][name() = 'table'] 
 prechapter	preceding::chapter[1]/@number
-precharn1tec	translate(substring(substring-before($pren1tec,$curtec),string-length(.), 1),$letulc,$letulcsub)
-precharn2tec	translate(substring(substring-before($pren2tec,$curtec),string-length(.), 1),$letulc,$letulcsub)
-preellipsisstring	substring-before(node()[not(self::*)],'…')
+precharn1tec	translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)
+precharn2tec	translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)
+preellipsisstring	normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))
+premultiellipsisstring2	substring-before($splitellipsisstring2,'…')
 pren1tec	preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
 pren2tec	preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
 pren3tec	preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]
@@ -113,7 +118,7 @@ pres5v	substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash
 pres5vlet	substring-after(translate(preceding::*[@style = 's5'][1],$validvlet,''),':')
 presib	preceding-sibling::*[1]/@style
 presib2	preceding-sibling::*[2]/@style
-pretec	preceding::*[@style = 'tec'][1]
+pretec	concat(' ',preceding::*[@style = 'tec'][1])
 preverse	preceding::verse[1]/@number
 preverser1	substring-before($preverse,'-')
 preverser2	substring-after($preverse,'-')
@@ -132,7 +137,26 @@ refcolonvr2	substring-after($refcolonv,'–')
 reftype	translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)
 refvendash	contains(node()[not(self::*)],'–')
 refwordschapcolon	substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')
+split2ellipsisstring1	substring-before(.,'…')
+split2ellipsisstring2	substring-after(.,'…')
+split3ellipsisstring2	substring-before($split2ellipsisstring2,'…')
+split3ellipsisstring3	substring-after($split2ellipsisstring2,'…')
+split4ellipsisstring3	substring-before($split3ellipsisstring3,'…')
+split4ellipsisstring4	substring-after($split3ellipsisstring3,'…')
 strlenb4chap	string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))
+teccharposttrs	translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)
+teccharpretrs	translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)
+tecstringposttrs	substring-after($pretec,.)
+tecstringpretrs	substring-before($pretec,.)
 validtecfirst	substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)
 values5beforev	following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()
+wwellipsis1	normalize-space(translate(concat(' ',$split2ellipsisstring1,' '),$puncreplace,$puncreplacespace))
+wwellipsis2	normalize-space(translate(concat(' ',$split2ellipsisstring2,' '),$puncreplace,$puncreplacespace))
+wwellipsis3-2	normalize-space(translate(concat(' ',$split3ellipsisstring2,' '),$puncreplace,$puncreplacespace))
+wwellipsis3-3	normalize-space(translate(concat(' ',$split2ellipsisstring2,' '),$puncreplace,$puncreplacespace))
+wwellipsis4-2	normalize-space(translate(concat(' ',$split3ellipsisstring2,' '),$puncreplace,$puncreplacespace))
+wwellipsis4-3	normalize-space(translate(concat(' ',$split4ellipsisstring3,' '),$puncreplace,$puncreplacespace))
+wwellipsis4-4	normalize-space(translate(concat(' ',$split4ellipsisstring4,' '),$puncreplace,$puncreplacespace))
 z_causeserrors1	translate(substring-after(node()[not(self::*)],':'),$validvlet,'')
+spacecount	string-length(.)-string-length(translate(.,' ',''))
+curspfield	concat(' ',.)

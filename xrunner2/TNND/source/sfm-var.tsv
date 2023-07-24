@@ -1,0 +1,262 @@
+sfm	name	value	order	note	was
+b	nodecount		m		
+b2	hascvref		m		
+b2	nodecount		m		
+b3	preverse		a		
+b3	values5beforev		a		
+b3	ancestor		m		
+b3	curverse		m		
+b3	curvr1		m		
+b3	curvr2		m		
+b3	hasvhyphen		m		
+b3	posts5beforevhaslrb		m		
+b3	posts5beforevhasvr2		m		
+b3	posts5hasendashvr2		m		
+b3	posts5hasleftround		m		
+b3	posts5v		m		
+b3	postsib2		m		following-sibling::*[1]/@style
+b3	postsib		m		
+b3	posttable		m		following-sibling::*[1][name() = 'table'] 
+b3	posttable2		m		
+b3	pres5hasendashvr2		m		
+b3	pres5hasleftround		m		
+b3	pres5v		m		
+b3	presib		m		preceding-sibling::*[1]/@style
+b3	presib2		m		preceding-sibling::*[2]/@style
+b3	preverser1		m		
+b3	preverser2		m		
+b3	prevhyphen		m		
+f	curpos		m		position()
+f	graparent		m		parent::para[@style = 'gra']
+fig	curpos		m		position()
+fig	graparent		m		parent::para[@style = 'gra']
+fig	hascoloncvref		m		
+fig	hasspaceinref		m		
+fig	prechapter		m		preceding::chapter[1]/@number
+fig	preverse		m		preceding::verse[1]/@number
+fig	refattchap		m		
+fig	refattchapdot		m		
+fig	refattdotverse		m		
+fig	refattverse		m		
+fig	refchapter		m		substring-before(@ref,':')
+fig	refverse		m		substring-after(@ref,':')
+fr	hasbadcvref		m		
+fr	hascvref		m		
+gj	countjmp		m		count(*[@style = 'jmp'])
+gj	countnode		m		count(node())
+gj	hascvref		m		
+gra	countf		m		count(*[@style = 'f'])
+gra	countfig		m		count(*[@style = 'fig'])
+gra	countnode		m		count(node())
+jmp	containsclickhere		m		
+jmp	curpos		m		position()
+jmp	gjparent		m		parent::para[@style = 'gj']
+n1	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+n1	pren1tec		b		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+n1	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+n1	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+n1	countpresibnode		m		
+n1	counttec		m		
+n1	countteu		m		
+n1	hastecchild		m		
+n1	positiontec		m		
+n1	postcharn1tec		m		
+n1	precharn1tec		m		
+n2	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+n2	curtecver		a		
+n2	pren2tec		b		preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
+n2	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+n2	countpren2		m		count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)
+n2	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+n2	countpresibnode		m		
+n2	counttec		m		
+n2	curtecpostellipsis		m		
+n2	curtecpreellipsis		m		
+n2	curtecverpreellipsis		m		
+n2	curtei		m		
+n2	hastecchild		m		
+n2	hastecellipsis		m		
+n2	hastecversion		m		
+n2	postcharn2tec		m		
+n2	precharn2tec		m		
+n2	preellipsisstring		m		
+n2	pren1tec		m		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+n3	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+n3	curtecver		a		
+n3	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+n3	countpren2		m		
+n3	countpren3		m		count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)
+n3	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+n3	countpresibnode		m		
+n3	counttec		m		
+n3	counttrs		m		
+n3	curtecpostellipsis		m		
+n3	curtecpreellipsis		m		
+n3	curtecverpreellipsis		m		
+n3	curtei		m		
+n3	hastecchild		m		
+n3	hastecellipsis		m		
+n3	hastecversion		m		
+n3	lenchildtec		m		
+n3	node1tec		m		node()[1][@style = 'tec']
+n3	preellipsisstring		m		
+n3	pren1tec		m		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+n3	pren2tec		m		preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
+n3	pren3tec		m		preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text()
+n3	validtecfirst		m		
+ntn	hascvref		m		
+p	preverse		a		
+p	values5beforev		a		
+p	ancestor		m		
+p	curverse		m		
+p	curvr1		m		
+p	curvr2		m		
+p	hascvref		m		
+p	hasvhyphen		m		
+p	posts5beforevhaslrb		m		
+p	posts5beforevhasvr2		m		
+p	posts5hasendashvr2		m		
+p	posts5hasleftround		m		
+p	posts5v		m		
+p	postsib		m		following-sibling::*[1]/@style
+p	postsib2		m		
+p	posttable		m		following-sibling::*[1][name() = 'table'] 
+p	posttable2		m		
+p	pres5hasendashvr2		m		
+p	pres5hasleftround		m		
+p	pres5v		m		
+p	presib		m		preceding-sibling::*[1]/@style
+p	presib2		m		preceding-sibling::*[2]/@style
+p	preverser1		m		
+p	preverser2		m		
+p	prevhyphen		m		
+qns	ancestor		m		
+qp	ancestor		m		
+qp	hascvref		m		
+s3	refcolonv		a		
+s3	strlenb4chap		a		
+s3	hascvref		m		
+s3	hasspacecref		m		
+s3	hassubvrange		m		
+s3	hasvlet		m		
+s3	lastchar		m		substring(.,string-length(.),1)
+s3	lastchartype		m		
+s3	prechapter		m		preceding::chapter[1]/@number
+s3	pres5text		m		
+s3	preverse		m		preceding::verse[1]/@number
+s3	prevhyphen		m		
+s3	refcolonvlet		m		
+s3	refcolonvr1		m		
+s3	refcolonvr2		m		
+s3	reftype		m		
+s3	refvendash		m		
+s3	refwordschapcolon		m		
+s5	refcolonv		a		
+s5	strlenb4chap		a		
+s5	hascvref		m		
+s5	hasreordered		m		
+s5	hastbb		m		
+s5	hasvlet		m		
+s5	hasvsub		m		
+s5	numbfirst		m		
+s5	prechapter		m		preceding::chapter[1]/@number
+s5	preverse		m		preceding::verse[1]/@number
+s5	preverser1		m		
+s5	prevhyphen		m		
+s5	refchapcolon		m		substring-before(.,':')
+s5	refcolonvlet		m		
+s5	refcolonvr1		m		
+s5	refvendash		m		
+sbx	refcolonv		a		
+sbx	strlenb4chap		a		
+sbx	chappos		m		
+sbx	hascvref		m		
+sbx	hasspacecref		m		
+sbx	numbfirst		m		
+sbx	prechapter		m		preceding::chapter[1]/@number
+sbx	preverse		m		preceding::verse[1]/@number
+sbx	refchapcolon		m		
+sbx	refcolonvr1		m		substring-before(substring-after(text(),':'),'–')
+sbx	refwordschapcolon		m		
+table	containsdivision		m		
+table	containsparagraph		m		
+table	containspart		m		
+table	containssection		m		
+table	countfolls5pretable		m		
+table	countfolltabledivision		m		
+table	countfolltableparagraph		m		
+table	countfolltablesection		m		
+table	countposttablewithdivision		m		
+table	countposttablewithparagraph		m		
+table	countposttablewithsection		m		
+table	hasfollowingtable		m		
+table	notposttabledivision		m		
+table	notposttableparagraph		m		
+table	notposttablesection		m		
+table	presib		m		
+table	presib2		m		
+tc1	refcolonv		a		
+tc1	strlenb4chap		a		
+tc1	chappos		m		
+tc1	containsparagraph		m		
+tc1	countprenode		m		
+tc1	countsbx		m		
+tc1	counttbb		m		
+tc1	hascvref		m		
+tc1	hasspacecref		m		
+tc1	notmultirowtable		m		
+tc1	notsbxchild		m		
+tc1	numbfirst		m		
+tc1	pos		m		position()
+tc1	prechapter		m		preceding::chapter[1]/@number
+tc1	preverse		m		preceding::verse[1]/@number
+tc1	refchapcolon		m		
+tc1	refcolonvnumb		m		
+tc1	refcolonvr1		m		substring-before(substring-after(text(),':'),'–')
+tc1	refwordschapcolon		m		
+tec	countpren1		m		
+tec	countpren2		m		
+tec	countpres5		m		
+tec	countpresibnode		m		
+tec	countpretec		m		
+tec	hasellipsis		m		
+tec	lastchar		m		substring(.,string-length(.),1)
+tec	lastchar2		m		substring(.,string-length(.) - 1,1)
+tec	postellipsisstring		m		
+tec	preellipsisstring		m		
+tei	ancestor		m		
+tei	countpren1		m		
+tei	countpres5		m		
+tei	parent		m		
+tei	parentpresib		m		
+tei	parentpresibpos		m		
+tei	pren1tec		m		
+tr	containsdivision		m		
+tr	containspart		m		
+tr	containssection		m		
+tr	countpretable		m		
+tr	hastrdivision		m		
+tr	hastrparagraph		m		
+tr	hastrpart		m		
+tr	hastrsection		m		
+tr	parentpostsib		m		
+tr	parentpresib		m		
+tr	parentpresib2		m		
+trs	pretec		a		
+trs	ellipsiscount		a		
+trs	split2ellipsisstring1		b		
+trs	split2ellipsisstring2		b		
+trs	tecstringposttrs		b		
+trs	tecstringpretrs		b		
+trs	split3ellipsisstring2		c		
+trs	split3ellipsisstring3		c		
+trs	split4ellipsisstring3		d		
+trs	split4ellipsisstring4		d		
+trs	ancestor		m		
+trs	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+trs	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+trs	curspfield		m		
+trs	parent		m		
+trs	teccharposttrs		m		
+trs	teccharpretrs		m		
+v	parent		n		parent::*/@style

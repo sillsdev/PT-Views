@@ -22,3 +22,5 @@ letucnumbsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 validcvnumbletendash	1234567890abcdefghij–		
 validcvnumbletendashsub	##########$$$$$$$$$$		
 validvletendash	abcdefghij–,		
+puncreplace	,….“‘’”!?:—-		
+puncreplacespace			
