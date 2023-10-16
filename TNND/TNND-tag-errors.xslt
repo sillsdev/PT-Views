@@ -242,7 +242,7 @@
 .err-note-f-pre-22-3 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-22-3::after {content:'The sequence should be \\fig...\\fig*\\f...\\f*. Note no space after \\fig*. #22.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-22-5 {background:orange;border-left:4pt solid red;}
-.err-note-f-pre-22-5::after {content:'The caller for the \\f must be *. #22.5';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign. #22.5';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-pre-22-2-1 {background:orange;border-left:4pt solid red;}
 .err-figure-fig-pre-22-2-1::after {content:'The \\fig must be the first item in a \\gra paragraph. #22.2.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-mid-22-7-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -2007,7 +2007,7 @@
             </xsl:if>
             <!--ref 22.5 - rank=-->
             <xsl:if test="preceding::chapter">
-               <xsl:if test="@caller != '*'">
+               <xsl:if test="@caller != '+'">
                   <xsl:text> err-note-f-pre-22-5</xsl:text>
                </xsl:if>
             </xsl:if>
