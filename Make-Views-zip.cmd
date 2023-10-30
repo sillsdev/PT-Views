@@ -1,17 +1,18 @@
-@echo off
+@echo on
 :: Make Views.zip of files to be installed
 :: Written by: Ian McQuay
 :: Date: 2019-12-10
 set view=%1
+set prince=C:\programs\prince-15.1-win64\bin\prince.exe
 :main
 call :date
 call :time
 call :created
-start relaxed %view%\%view%-info.pug --build-once
-timeout 40
-:: "C:\Program Files (x86)\Prince\engine\bin\prince.exe" %1-info.html -o %1-info.pdf
-copy /y %view%\%view%-info.pdf %view%\cms
+call :pdf
+call :zip
+goto :eof
 
+:zip
 @echo.
 @echo Making Zip of distribution files
 @echo.
@@ -77,3 +78,9 @@ goto :eof
     set curhh_mm_ss=%%A:%%B:%%C
   )
 goto :eof
+
+:pdf
+copy %view%\info.md+%view%\created.md %view%\final.md
+call mdpdf %view%\final.md %view%\cms\%view%-info.pdf
+:: mdpdf is a nodejs script https://github.com/BlueHatbRit/mdpdf
+
