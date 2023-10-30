@@ -226,7 +226,7 @@
         </xsl:element>
     </xsl:template>
     <xsl:template match="*" mode="s1">
-        <xsl:value-of select="text()"/>
+        <xsl:apply-templates select="node()" mode="s1"/>
     </xsl:template>
     <xsl:template match="*[@style = 'f']" mode="s1"/>
     <xsl:template name="parse-sent">
