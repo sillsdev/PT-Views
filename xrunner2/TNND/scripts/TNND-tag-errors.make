@@ -1,9 +1,16 @@
+projectpath := D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND
+projectmpath := D\:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND
+xrunnerpath := C:\programs\xrunner2
+xrunnermpath := C\:\programs\xrunner2
+java := D:\programs\java\zulu17.42.19-ca-jdk17.0.7-win_x64\bin\java.exe
+saxon := C:\programs\xrunner2\tools\saxon\saxon-he-12.3.jar
+ccw := C:\programs\xrunner2\tools\cct\Ccw64.exe
 build: TNND-tag-errors.xslt clean
 	@echo All up to date
 
 TNND-tag-errors.xslt: ../output/check_data.xml ../output/static-var.xml ../output/sfm-var.xml var-string.xslt 
 	@echo Updating TNND-tag-errors.xslt
-	@java -jar "D:\programs\xrunner\tools\saxon\saxon9he.jar" -o:"D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\TNND-tag-errors.xslt" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\check_data.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\data2xslt-v4.xslt"
+	@"$(java)" -jar "D:\programs\xrunner\tools\saxon\saxon9he.jar" -o:"D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\TNND-tag-errors.xslt" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\check_data.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\data2xslt-v4.xslt"
 
 ../output/check_data.xml: ../source/check_data.tsv
 	@echo Updating check_data.xml
