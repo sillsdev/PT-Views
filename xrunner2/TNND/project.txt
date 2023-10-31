@@ -1,5 +1,6 @@
 [variables]
 title=Paratext TNND Views
+debugfunc=
 echofunc=echo
 outputxml=true
 tnxx=TNND
@@ -7,18 +8,18 @@ tnxx=TNND
 rowname=item
 
 data-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - check_data.tsv
-data_file-list=%projectpath%\source\TNND Views for Paratext - check_data.tsv
+data_file-list=%projectpath%\source\check_data.tsv
 data-xml=%projectpath%\output\check_data.xml
 static-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - static-var.tsv
-static-var_file-list=%projectpath%\source\TNND Views for Paratext - static-var.tsv
+static-var_file-list=%projectpath%\source\static-var.tsv
 sfm-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - sfm-var.tsv
-sfm-var_file-list=%projectpath%\source\TNND Views for Paratext - sfm-var.tsv
+sfm-var_file-list=%projectpath%\source\sfm-var.tsv
 static-var-xml=%projectpath%\output\static-var.xml
 sfm-var-xml=%projectpath%\output\sfm-var.xml
 kv-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - keyvalue.tsv
 kvlist=%projectpath%\keyvalue.tsv
 varstring-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - var-string.tsv
-varstring=%projectpath%\source\TNND Views for Paratext - var-string.tsv
+varstring=%projectpath%\source\var-string.tsv
 tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
 
 para-like_list=para cell row table
@@ -40,6 +41,7 @@ collectionfile=*.usx
 groupnode_list=id sl1 c
 bookorderfile=D:\My Paratext Projects\cms\book-chaps.txt
 para_list=para table book
+usxdata_list=table para note figure link char cell row verse
 xslt=
 
 showref=1
@@ -56,13 +58,16 @@ usxelem_list=book cell char note para row table
 
 debug=on
 
+################################################################################
 [a]
 b=make tag-errors data TSV and fast test
 # process each tsv file into XML
-t=:updatedl
-t=:elapsed
+#t=:updatedl
+#t=:elapsed
 # Create the tag errors file
-t=:buildtagerrors
+#t=:buildtagerrors
+t=:makemake "%scripts%\TNND-tag-errors.make"
+t=:runmake "%scripts%\TNND-tag-errors.make"
 t=:bkid
 #t=:testfast LEV
 t=:testfast XXD
@@ -75,11 +80,21 @@ t=:inputfile "%data-xml%"
 t=:xslt data2xslt-v4.xslt
 t=:outputfile "%tagerrors%"
 
+[buildtagerrors2]
+t=:make %scripts%/ TNND-tag-errors.make
+
 [updatedl]
 t=:dldata2xml "%static-var-dl%" "%static-var_file-list%"
 t=:dldata2xml "%sfm-var-dl%" "%sfm-var_file-list%"
 t=:dldata2xml "%data-dl%" "%data_file-list%"
 t=:dldataxslt "%varstring-dl%" "%varstring%"
+
+[updatedl2]
+t=:dldatamove "%static-var-dl%" "%static-var_file-list%"
+t=:dldatamove "%sfm-var-dl%" "%sfm-var_file-list%"
+t=:dldatamove "%data-dl%" "%data_file-list%"
+t=:dldatamove"%varstring-dl%" "%varstring%"
+
 
 [dldata2xml]
 t=:name "%~2"
@@ -87,9 +102,13 @@ t=:ifexist "%~1" move /y "%~1" "%~2"
 t=:cct tsv2xml-v2.cct "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%.xml"
 #t=:tsv2xml "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%"
 
+[dldatamove]
+t=:name "%~2"
+t=:ifexist "%~1" move /y "%~1" "%~2"
+
 [dldataxslt]
 t=:ifexist "%~1" move /y "%~1" "%~2"
-t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt" > nul
+t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt"
 
 [b]
 b=Test tag errors xsltms
@@ -113,7 +132,14 @@ t=:testfast XXD
 [updateviews]
 t=:autoit CloseTitle.au3 "Paratext 9.3"
 t=:wait 2
+t=:make "%projectpath%\scripts" "update-views.make"
+t=:start "C:\Program Files\Paratext 9\Paratext.exe"
+
+[updateviews-pre-make]
+t=:autoit CloseTitle.au3 "Paratext 9.3"
+t=:wait 2
 t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt.txt"
 t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%ptviewssvn%\%tnxx%\%tnxx%-tag-errors.xslt"
 t=:copy "%projectpath%\output\%tnxx%-errors-documentation.html" "%ptviewssvn%\%tnxx%\cms\%tnxx%-errors-documentation.html" 
 t=:start "C:\Program Files\Paratext 9\Paratext.exe"
@@ -131,8 +157,9 @@ t=:updateviews
 
 [f]
 b=Make tag errors and update PT
-t=:updatedl
-t=:buildtagerrors
+t=:make "%scripts%" TNND-tag-errors.make
+#t=:updatedl
+#t=:buildtagerrors
 t=:updateviews
 
 
@@ -161,6 +188,7 @@ label=
 b=Update XXD USX file
 t=:ptbook "TNND" XXD "D:\usx-collection\TNND"
 t=:ptbook "TNND" ACT "D:\usx-collection\TNND"
+t=:ptbook "TNND" REV "D:\usx-collection\TNND"
 
 
 [l]
@@ -211,10 +239,11 @@ t=:loopstring testxslt2 "GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH
 
 [v]
 label=
-b=Test count words
-t=:bkid
+b=Test update views make
+t=:make "%projectpath%\scripts" "update-views.make"
+#t=:bkid
 #t=:testcount2 LUK
-t=:testcount2 ROM
+#t=:testcount2 ROM
 
 [w]
 b= Load count into Paratext
@@ -225,6 +254,10 @@ t=:copy "%projectpath%\scripts\%tnxx%-%curfile%.xslt" "%mypt8%\Views\%tnxx%-%cur
 t=:copy "%projectpath%\scripts\%tnxx%-%curfile%.xslt" "%ptviewssvn%\%tnxx%\%tnxx%-%curfile%.xslt"
 t=:start "C:\Program Files\Paratext 9\Paratext.exe"
 
+[y]
+b=Create Rules documentation
+t=:xslt document-rules-v2.xslt "%projectpath%\output\struc-data.xml" 
+t=:outputfile "%projectpath%\output\TNND-errors-documentation.html" start
 
 [collection]
 t=:xslt usx2usx-collection.xslt blank.xml
@@ -258,7 +291,7 @@ t=:var book %~1
 t=:echo "Book = !%book%!"
 t=:inputfile "%usxpath%\!%book%!.usx"
 t=:cct remove-nl-from-para.cct "" ""  "" ""
-t=:xsltms %tnxx%-tag-errors.xslt  "" ""  "" ""
+t=:xsltms %tnxx%-tag-errors.xslt  "" ""  "debug=on" ""
 t=:outputfile "%projectpath%\output\%book%-ms.html" start
 #t=:xslt tag-error-report.xslt "" ""  "" ""
 #t=:outputfile "%projectpath%\output\%book%-report.html" start
