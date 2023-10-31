@@ -151,7 +151,7 @@ Order	Ref	disable	element	style	rank	test	test2	nextstyle1	nextstyle2	class-extr
 151	22.2.2	TRUE	para	gra		$countfig + $countf = 2	$nodecount != 2				err-para-gra--22-2-2	This \\gra has all the required elements of \\fig and a footnote, but also has some other markup, extra spaces or text.	same as 22.2		-		
 152	22.3		note	f		$graparent	not(preceding-sibling::*[1][@style = 'fig'] )			pre	err-note-f-pre-22-3	The sequence should be \\fig...\\fig*\\f...\\f*. Note no space after \\fig*.		XXD 22:6			
 153	22.4		link	jmp		not($gjparent) and $containsclickhere				pre	err-link-jmp-pre-22-4	This ‘Click here...’ \\jmp should occur as the only item in a \\gj paragraph. The \\gj  para should be immediately after a \\gra paragraph.		XXD 22:3-4			
-154	22.5		note	f		@caller != '*'				pre	err-note-f-pre-22-5	The caller for the \\f must be *.		XXD 22:7			
+154	22.5		note	f		@caller != '+'				pre	err-note-f-pre-22-5	The caller for the \\f must be a plus sign.		XXD 22:7			
 155	22.6		figure	fig	2	$hascoloncvref and not($hasspaceinref)	$refattchap != $prechapter			mid	err-figure-fig-mid-22-6	The referenced chapter number for the \\fig does not match the current chapter number.		XXD 22:9			
 156	22.6.2		figure	fig	2	$hascoloncvref and $hasspaceinref				mid	err-figure-fig-mid-22-6-2	The reference in this \\fig should not contain a book code, and the full stop between chapter and verse must be a colon.		XXD 22:6			
 157	22.6.3	TRUE	figure	fig	2	not($hascoloncvref) and not($hasspaceinref)	$refattchapdot != $prechapter			mid	err-figure-fig-mid-22-6-3	The referenced chapter number for the \\fig does not match the preceding \\c number.			-		
