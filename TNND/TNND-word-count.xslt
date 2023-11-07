@@ -21,7 +21,7 @@
     <xsl:variable name="color3" select="''"/>
     <!-- basic forms -->
     <xsl:variable name="periodspace" select="'. '"/>
-    <xsl:variable name="questspace" select="'$ '"/>
+    <xsl:variable name="questspace" select="'? '"/>
     <xsl:variable name="exclamspace" select="'! '"/>
     <xsl:variable name="colonspace" select="': '"/>
     <!-- end followed by right double quote -->
@@ -49,6 +49,11 @@
     <xsl:variable name="questrcbsp" select="'?} '"/>
     <xsl:variable name="exclamrcbsp" select="'!} '"/>
     <xsl:variable name="colonrcbsp" select="':} '"/>
+    <!-- end followed by ] -->
+    <xsl:variable name="periodrsbsp" select="'.] '"/>
+    <xsl:variable name="questrsbsp" select="'?] '"/>
+    <xsl:variable name="exclamrsbsp" select="'!] '"/>
+    <xsl:variable name="colonrsbsp" select="':] '"/>
     <xsl:template match="/*">
         <xsl:apply-templates select="chapter[@number]|*"/>
     </xsl:template>
@@ -228,7 +233,7 @@
     <xsl:template match="*" mode="s1">
         <xsl:apply-templates select="node()" mode="s1"/>
     </xsl:template>
-    <xsl:template match="*[@style = 'f']" mode="s1"/>
+    <xsl:template match="*[@style = 'f']" mode="s1"/><!-- Footnotes not included -->
     <xsl:template name="parse-sent">
         <xsl:param name="string"/>
         <xsl:param name="style"/>
@@ -515,6 +520,31 @@
                 <xsl:call-template name="insert-token">
                     <xsl:with-param name="string" select="$string"/>
                     <xsl:with-param name="divider" select="$colonrcbsp"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- handle ] after sentence end punct -->
+            <xsl:when test="contains($string,$periodrsbsp)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$periodrsbsp"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,$questrsbsp)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$questrsbsp"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,$exclamrsbsp)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$exclamrsbsp"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,$colonrsbsp)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$colonrsbsp"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
