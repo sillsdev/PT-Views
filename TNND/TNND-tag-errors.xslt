@@ -27,6 +27,10 @@
    <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
    <xsl:variable name="puncreplace">,….“‘’”!?:—-</xsl:variable>
    <xsl:variable name="puncreplacespace"/>
+   <xsl:variable name="ldq">“</xsl:variable>
+   <xsl:variable name="rdq">”</xsl:variable>
+   <xsl:variable name="lsq">‘</xsl:variable>
+   <xsl:variable name="rsq">’</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
@@ -98,6 +102,7 @@
                   .teu {text-decoration: underline;}
                   .tre {text-decoration: underline;font-style:italic;}
 			.linkref {color:grey;}
+			.f {background:lightgrey}
 			
                 .err-table--post-6-1 {background:peachpuff;border-bottom:2pt solid red;}
 .err-table--post-6-1::after {content:'When you have a Part Box, a Division Box must occur after the Part summary.  (But any \tr in the Part summary will cause a false positive.) #6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
@@ -243,6 +248,8 @@
 .err-note-f-pre-22-3::after {content:'The sequence should be \\fig...\\fig*\\f...\\f*. Note no space after \\fig*. #22.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-22-5 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign. #22.5';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-27-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-27-4::after {content:'Quotes within quotes of scholars need to be adjusted to single quotes and so forth through the levels of quotes. See fourth double quote. #27.4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-pre-22-2-1 {background:orange;border-left:4pt solid red;}
 .err-figure-fig-pre-22-2-1::after {content:'The \\fig must be the first item in a \\gra paragraph. #22.2.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-mid-22-7-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -336,6 +343,12 @@
 .err-verse-v-mid-9-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-verse-v-mid-9-3::after {content:'A \\v cannot have verse parts in it. #9.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 </style>
+   </xsl:template>
+   <xsl:template match="text()" mode="fntext">
+      <xsl:value-of select="."/>
+   </xsl:template>
+   <xsl:template match="*" mode="fntext">
+      <xsl:apply-templates select="node()" mode="fntext"/>
    </xsl:template>
    <xsl:template match="table">
       <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
@@ -1971,11 +1984,62 @@
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
+      <xsl:variable name="fnstring">
+         <xsl:apply-templates select="node()" mode="fntext"/>
+      </xsl:variable>
+      <xsl:comment> fnstring = <xsl:value-of select="$fnstring"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr2"
+                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
+      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr3"
+                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr4"
+                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
       <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
       <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
+      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
+      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
+      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="rawqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:comment> rawqstr1 = <xsl:value-of select="concat($sq,$rawqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff1"
+                    select="string-length(translate($indqstr1,$lsq,'')) - string-length(translate($indqstr1,$rsq,''))"/>
+      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff2"
+                    select="string-length(translate($indqstr2,$lsq,'')) - string-length(translate($indqstr2,$rsq,''))"/>
+      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff3"
+                    select="string-length(translate($indqstr3,$lsq,'')) - string-length(translate($indqstr3,$rsq,''))"/>
+      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff4"
+                    select="string-length(translate($indqstr4,$lsq,'')) - string-length(translate($indqstr4,$rsq,''))"/>
+      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -2009,6 +2073,12 @@
             <xsl:if test="preceding::chapter">
                <xsl:if test="@caller != '+'">
                   <xsl:text> err-note-f-pre-22-5</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 27.4 - rank=-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0)">
+                  <xsl:text> err-note-f-mid-27-4</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
