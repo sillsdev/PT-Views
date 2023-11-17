@@ -6,7 +6,7 @@
      # Part of:  		Xrunner - https://github.com/SILAsiaPub/xrunner
      # Author:   	Ian McQuay <ian_mcquay@sil.org>
      # Created:  	2019-12-12
-     # Modified:		2021-03-25; 2023-02-27
+     # Modified:		2021-03-25; 2023-02-27; 2023-11-10; 2023-11-18
      # Copyright:	(c) 2019-2022 SIL International
      # Licence:  	<MIT>
      ################################################################ -->
@@ -75,6 +75,7 @@
     </xsl:template>
     <xsl:template match="note">
         <gen:template match="note[@style = '{@style}']">
+            <xsl:sequence select="f:getfntext(@style)"/>
             <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
@@ -88,6 +89,7 @@
                 </gen:attribute>
                 <xsl:call-template name="char-gen-note"/>
             </gen:element>
+            <xsl:sequence select="f:fnqtests(@style,1,10)"/>
         </gen:template>
     </xsl:template>
     <xsl:template match="cell">
@@ -424,28 +426,36 @@
         <gen:template name="style">
             <style type="text/css">
 			.usx {line-height:1.8;}
-                .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
-                .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
-                .sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
-                .ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
-                .mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
+			.mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
+			.sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
+			.sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
+			.ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
+			.mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
                  <!-- .tr {border-left:10pt solid blue;padding-left:3pt} the table now has the border -->
                 <!-- .error-pre {border-left:5pt solid red;}
                 .error-post {border-right:5pt solid red;} these are now handled by keyvalue variables-->
-                ::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
-                .s5 {background:lightcyan;}
-                .v {background:navy;color:white;font-weight:bold;}
-		    .c {font-size:140%;background:green;color:white;font-weight:bold;}
+			::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
+			.s5 {background:lightcyan;}
+			.v {background:navy;color:white;font-weight:bold;}
+			.c {font-size:140%;background:green;color:white;font-weight:bold;}
 			.rem {background:lightgreen;color:darkgreen;}
 			.table {border:2pt solid purple;border-left:10pt solid purple;width:auto;}
-                  .tec, .sbx {font-weight:bold;}
-                  .tei, .trs {font-style:italic;}
-                  .teu {text-decoration: underline;}
-                  .tre {text-decoration: underline;font-style:italic;}
+			.tec, .sbx {font-weight:bold;}
+			.tei, .trs {font-style:italic;}
+			.teu {text-decoration: underline;}
+			.tre {text-decoration: underline;font-style:italic;}
 			.linkref {color:grey;}
-			<!-- .cell {border:2pt solid black} -->
-                <xsl:apply-templates select="$g1//*[name() = $rowname]" mode="css"/>
+			.f {background:lightgrey}
+			.quote-error {background:orange;border-bottom:2pt solid red;}
+			.quote-error:after {content:'This quote in quote in the above footnote, should be single quoted.';}
+<xsl:apply-templates select="$g1//*[name() = $rowname]" mode="css"/>
             </style>
+        </gen:template>
+        <gen:template match="text()" mode="fntext">
+            <gen:value-of select="."/>
+        </gen:template>
+        <gen:template match="*" mode="fntext">
+            <gen:apply-templates select="node()" mode="fntext"/>
         </gen:template>
     </xsl:template>
     <xsl:template name="output-xml">
@@ -589,6 +599,34 @@
             <gen:comment>
                 <gen:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
             </gen:comment>
+        </xsl:if>
+    </xsl:function>
+    <xsl:function name="f:fnqtests">
+        <xsl:param name="style"/>
+        <xsl:param name="start"/>
+        <xsl:param name="end"/>
+        <xsl:for-each select="$start to $end">
+            <xsl:if test="$style = 'f'">
+                <gen:if test="contains($indqstr{.},'“') and $sqdiff{.} = 0">
+                    <gen:text> </gen:text>
+                    <gen:element name="span">
+                        <gen:attribute name="class">
+                            <gen:text>quote-error</gen:text>
+                        </gen:attribute>
+                        <gen:value-of select="concat('“',substring-after($indqstr{.},'“'),'”')"/>
+                    </gen:element>
+                </gen:if>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:function>
+    <xsl:function name="f:getfntext">
+        <xsl:param name="style"/>
+        <xsl:if test="$style = 'f'">
+            <gen:variable name="fnstring">
+                <!-- <gen:value-of select="descendant-or-self::text()"/> -->
+                <gen:apply-templates select="node()" mode="fntext"/>
+            </gen:variable>
+            <gen:comment>&#10;fnstring = <gen:value-of select="$fnstring"/></gen:comment>
         </xsl:if>
     </xsl:function>
 </xsl:stylesheet>
