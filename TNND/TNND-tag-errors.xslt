@@ -1,110 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-   <xsl:variable name="sq">'</xsl:variable>
-   <xsl:variable name="dq">"</xsl:variable>
-   <xsl:variable name="numb">1234567890</xsl:variable>
-   <xsl:variable name="numbsub">##########</xsl:variable>
-   <xsl:variable name="validvlet">abcdefghij</xsl:variable>
-   <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validvletpunc">abcdefghij–</xsl:variable>
-   <xsl:variable name="invalidvlet">klmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="validcvnumblet">1234567890abcdefghij</xsl:variable>
-   <xsl:variable name="validcvnumbletsub">##########$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validcvnumbletpunc">1234567890abcdefghij–:</xsl:variable>
-   <xsl:variable name="letlc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letuc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
-   <xsl:variable name="letsub">$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="invalidtecendpunc">.,’”</xsl:variable>
-   <xsl:variable name="invalidtecendpuncsub">%%%%</xsl:variable>
-   <xsl:variable name="invalidtecfirstpunc">‘“</xsl:variable>
-   <xsl:variable name="validreorderedcvnumbletpunc">1234567890abcdefghij–:,</xsl:variable>
-   <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
-   <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validcvnumbletendash">1234567890abcdefghij–</xsl:variable>
-   <xsl:variable name="validcvnumbletendashsub">##########$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
-   <xsl:variable name="puncreplace">,….“‘’”!?:—-</xsl:variable>
-   <xsl:variable name="puncreplacespace"/>
-   <xsl:variable name="ldq">“</xsl:variable>
-   <xsl:variable name="rdq">”</xsl:variable>
-   <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="rsq">’</xsl:variable>
-   <xsl:template match="chapter[@number]">
-      <xsl:if test="count(preceding::chapter[@number]) = 0">
-         <xsl:call-template name="style"/>
-      </xsl:if>
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ',@number)"/>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="Ref">
-      <xsl:apply-templates select="*"/>
-   </xsl:template>
-   <xsl:template match="@*">
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="name()"/>
-         </xsl:attribute>
-         <xsl:value-of select="concat(' ',name(),'=',$dq,.,$dq)"/>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="usx">
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="'usx'"/>
-         </xsl:attribute>
-         <xsl:apply-templates select="*"/>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="book">
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()"/>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="*[@style = 'b' or @style = 'rem']">
-      <xsl:element name="div">
-         <xsl:element name="span">
+    <xsl:variable name="sq">'</xsl:variable>
+    <xsl:variable name="dq">"</xsl:variable>
+    <xsl:variable name="numb">1234567890</xsl:variable>
+    <xsl:variable name="numbsub">##########</xsl:variable>
+    <xsl:variable name="validvlet">abcdefghij</xsl:variable>
+    <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="validvletpunc">abcdefghij–</xsl:variable>
+    <xsl:variable name="invalidvlet">klmnopqrstuvwxyz</xsl:variable>
+    <xsl:variable name="validcvnumblet">1234567890abcdefghij</xsl:variable>
+    <xsl:variable name="validcvnumbletsub">##########$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="validcvnumbletpunc">1234567890abcdefghij–:</xsl:variable>
+    <xsl:variable name="letlc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+    <xsl:variable name="letuc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+    <xsl:variable name="letsub">$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
+    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="invalidtecendpunc">.,’”</xsl:variable>
+    <xsl:variable name="invalidtecendpuncsub">%%%%</xsl:variable>
+    <xsl:variable name="invalidtecfirstpunc">‘“</xsl:variable>
+    <xsl:variable name="validreorderedcvnumbletpunc">1234567890abcdefghij–:,</xsl:variable>
+    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
+    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="validcvnumbletendash">1234567890abcdefghij–</xsl:variable>
+    <xsl:variable name="validcvnumbletendashsub">##########$$$$$$$$$$</xsl:variable>
+    <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
+    <xsl:variable name="puncreplace">,….“‘’”!?:—-</xsl:variable>
+    <xsl:variable name="puncreplacespace"/>
+    <xsl:variable name="ldq">“</xsl:variable>
+    <xsl:variable name="rdq">”</xsl:variable>
+    <xsl:variable name="lsq">‘</xsl:variable>
+    <xsl:variable name="rsq">’</xsl:variable>
+    <xsl:template match="chapter[@number]">
+        <xsl:if test="count(preceding::chapter[@number]) = 0">
+            <xsl:call-template name="style"/>
+        </xsl:if>
+        <xsl:element name="div">
             <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
+                <xsl:value-of select="@style"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ',@number)"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="Ref">
+        <xsl:apply-templates select="*"/>
+    </xsl:template>
+    <xsl:template match="@*">
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="name()"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat(' ',name(),'=',$dq,.,$dq)"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="usx">
+        <xsl:element name="div">
+            <xsl:attribute name="class">
+                <xsl:value-of select="'usx'"/>
+            </xsl:attribute>
+            <xsl:apply-templates select="*"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="book">
+        <xsl:element name="div">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
             </xsl:attribute>
             <xsl:value-of select="concat('\',@style,' ')"/>
             <xsl:apply-templates select="node()"/>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template name="style">
-      <style type="text/css">
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="*[@style = 'b' or @style = 'rem']">
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()"/>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template name="style">
+        <style type="text/css">
 			.usx {line-height:1.8;}
-                .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
-                .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
-                .sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
-                .ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
-                .mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
+			.mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
+			.sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
+			.sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
+			.ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
+			.mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
                  
                 
-                ::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
-                .s5 {background:lightcyan;}
-                .v {background:navy;color:white;font-weight:bold;}
-		    .c {font-size:140%;background:green;color:white;font-weight:bold;}
+			::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
+			.s5 {background:lightcyan;}
+			.v {background:navy;color:white;font-weight:bold;}
+			.c {font-size:140%;background:green;color:white;font-weight:bold;}
 			.rem {background:lightgreen;color:darkgreen;}
 			.table {border:2pt solid purple;border-left:10pt solid purple;width:auto;}
-                  .tec, .sbx {font-weight:bold;}
-                  .tei, .trs {font-style:italic;}
-                  .teu {text-decoration: underline;}
-                  .tre {text-decoration: underline;font-style:italic;}
+			.tec, .sbx {font-weight:bold;}
+			.tei, .trs {font-style:italic;}
+			.teu {text-decoration: underline;}
+			.tre {text-decoration: underline;font-style:italic;}
 			.linkref {color:grey;}
 			.f {background:lightgrey}
-			
-                .err-table--post-6-1 {background:peachpuff;border-bottom:2pt solid red;}
+			.quote-error {background:orange;border-bottom:2pt solid red;}
+			.quote-error:after {content:'This quote in quote in the above footnote, should be single quoted.';}
+.err-table--post-6-1 {background:peachpuff;border-bottom:2pt solid red;}
 .err-table--post-6-1::after {content:'When you have a Part Box, a Division Box must occur after the Part summary.  (But any \tr in the Part summary will cause a false positive.) #6.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-table--post-6-2 {background:peachpuff;border-bottom:2pt solid red;}
 .err-table--post-6-2::after {content:'When you have a Division Box, a Section Box must occur after the Division summary. (But any \tr in the Div. summary will cause a false positive.) #6.2';border:2pt solid thistle;border-left:5pt solid tomato;}
@@ -343,80 +344,70 @@
 .err-verse-v-mid-9-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-verse-v-mid-9-3::after {content:'A \\v cannot have verse parts in it. #9.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 </style>
-   </xsl:template>
-   <xsl:template match="text()" mode="fntext">
-      <xsl:value-of select="."/>
-   </xsl:template>
-   <xsl:template match="*" mode="fntext">
-      <xsl:apply-templates select="node()" mode="fntext"/>
-   </xsl:template>
-   <xsl:template match="table">
-      <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
-      <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
+    </xsl:template>
+    <xsl:template match="text()" mode="fntext">
+        <xsl:value-of select="."/>
+    </xsl:template>
+    <xsl:template match="*" mode="fntext">
+        <xsl:apply-templates select="node()" mode="fntext"/>
+    </xsl:template>
+    <xsl:template match="table">
+        <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
+        <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
-      <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
+        <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
+        <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="containspart" select="contains(.,'Part')"/>
-      <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
+        <xsl:variable name="containspart" select="contains(.,'Part')"/>
+        <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="containssection" select="contains(.,'Section')"/>
-      <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
+        <xsl:variable name="containssection" select="contains(.,'Section')"/>
+        <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countfolls5pretable"
-                    select="count(following::*[@style = 's5'][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolls5pretable = <xsl:value-of select="concat($sq,$countfolls5pretable,$sq,' ')"/>
+        <xsl:variable name="countfolls5pretable" select="count(following::*[@style = 's5'][1]/preceding-sibling::table)"/>
+        <xsl:comment> countfolls5pretable = <xsl:value-of select="concat($sq,$countfolls5pretable,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countfolltabledivision"
-                    select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Division')][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolltabledivision = <xsl:value-of select="concat($sq,$countfolltabledivision,$sq,' ')"/>
+        <xsl:variable name="countfolltabledivision" select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Division')][1]/preceding-sibling::table)"/>
+        <xsl:comment> countfolltabledivision = <xsl:value-of select="concat($sq,$countfolltabledivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countfolltableparagraph"
-                    select="count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolltableparagraph = <xsl:value-of select="concat($sq,$countfolltableparagraph,$sq,' ')"/>
+        <xsl:variable name="countfolltableparagraph" select="count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')][1]/preceding-sibling::table)"/>
+        <xsl:comment> countfolltableparagraph = <xsl:value-of select="concat($sq,$countfolltableparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countfolltablesection"
-                    select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Section')][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolltablesection = <xsl:value-of select="concat($sq,$countfolltablesection,$sq,' ')"/>
+        <xsl:variable name="countfolltablesection" select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Section')][1]/preceding-sibling::table)"/>
+        <xsl:comment> countfolltablesection = <xsl:value-of select="concat($sq,$countfolltablesection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countposttablewithdivision"
-                    select="count(following::table[contains(descendant::*[@style = 'tc1'],'Division')])"/>
-      <xsl:comment> countposttablewithdivision = <xsl:value-of select="concat($sq,$countposttablewithdivision,$sq,' ')"/>
+        <xsl:variable name="countposttablewithdivision" select="count(following::table[contains(descendant::*[@style = 'tc1'],'Division')])"/>
+        <xsl:comment> countposttablewithdivision = <xsl:value-of select="concat($sq,$countposttablewithdivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countposttablewithparagraph"
-                    select="count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')])"/>
-      <xsl:comment> countposttablewithparagraph = <xsl:value-of select="concat($sq,$countposttablewithparagraph,$sq,' ')"/>
+        <xsl:variable name="countposttablewithparagraph" select="count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')])"/>
+        <xsl:comment> countposttablewithparagraph = <xsl:value-of select="concat($sq,$countposttablewithparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countposttablewithsection"
-                    select="count(following::table[contains(descendant::*[@style = 'tc1'],'Section')])"/>
-      <xsl:comment> countposttablewithsection = <xsl:value-of select="concat($sq,$countposttablewithsection,$sq,' ')"/>
+        <xsl:variable name="countposttablewithsection" select="count(following::table[contains(descendant::*[@style = 'tc1'],'Section')])"/>
+        <xsl:comment> countposttablewithsection = <xsl:value-of select="concat($sq,$countposttablewithsection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasfollowingtable" select="count(following::table) &gt; 0"/>
-      <xsl:comment> hasfollowingtable = <xsl:value-of select="concat($sq,$hasfollowingtable,$sq,' ')"/>
+        <xsl:variable name="hasfollowingtable" select="count(following::table) &gt; 0"/>
+        <xsl:comment> hasfollowingtable = <xsl:value-of select="concat($sq,$hasfollowingtable,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="notposttabledivision"
-                    select="not(contains(following-sibling::table[1],'Division'))"/>
-      <xsl:comment> notposttabledivision = <xsl:value-of select="concat($sq,$notposttabledivision,$sq,' ')"/>
+        <xsl:variable name="notposttabledivision" select="not(contains(following-sibling::table[1],'Division'))"/>
+        <xsl:comment> notposttabledivision = <xsl:value-of select="concat($sq,$notposttabledivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="notposttableparagraph"
-                    select="not(contains(following-sibling::table[1],'Paragraph'))"/>
-      <xsl:comment> notposttableparagraph = <xsl:value-of select="concat($sq,$notposttableparagraph,$sq,' ')"/>
+        <xsl:variable name="notposttableparagraph" select="not(contains(following-sibling::table[1],'Paragraph'))"/>
+        <xsl:comment> notposttableparagraph = <xsl:value-of select="concat($sq,$notposttableparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="notposttablesection"
-                    select="not(contains(following-sibling::table[1],'Section'))"/>
-      <xsl:comment> notposttablesection = <xsl:value-of select="concat($sq,$notposttablesection,$sq,' ')"/>
+        <xsl:variable name="notposttablesection" select="not(contains(following-sibling::table[1],'Section'))"/>
+        <xsl:comment> notposttablesection = <xsl:value-of select="concat($sq,$notposttablesection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
+        <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
+        <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
+        <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
+        <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
       </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:attribute name="class">table<!--ref 6.1 - rank=--><xsl:if test="preceding::chapter">
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:attribute name="class">table<!--ref 6.1 - rank=--><xsl:if test="preceding::chapter">
                <xsl:if test="$containspart and $hasfollowingtable">
                   <xsl:if test="$notposttabledivision">
                      <xsl:text> err-table--post-6-1</xsl:text>
@@ -448,2524 +439,2484 @@
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
-         <xsl:apply-templates select="node()"/>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=s5 -->
-   <xsl:template match="para[@style = 's5']">
-      <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=s5 -->
+    <xsl:template match="para[@style = 's5']">
+        <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
+        <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="strlenb4chap"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
+        <xsl:variable name="strlenb4chap" select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
+        <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasreordered" select="contains(.,'reordered)')"/>
-      <xsl:comment> hasreordered = <xsl:value-of select="concat($sq,$hasreordered,$sq,' ')"/>
+        <xsl:variable name="hasreordered" select="contains(.,'reordered)')"/>
+        <xsl:comment> hasreordered = <xsl:value-of select="concat($sq,$hasreordered,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hastbb" select="boolean(child::*[@style = 'tbb'])"/>
-      <xsl:comment> hastbb = <xsl:value-of select="concat($sq,$hastbb,$sq,' ')"/>
+        <xsl:variable name="hastbb" select="boolean(child::*[@style = 'tbb'])"/>
+        <xsl:comment> hastbb = <xsl:value-of select="concat($sq,$hastbb,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasvlet"
-                    select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
-      <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
+        <xsl:variable name="hasvlet" select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
+        <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasvsub"
-                    select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')"/>
-      <xsl:comment> hasvsub = <xsl:value-of select="concat($sq,$hasvsub,$sq,' ')"/>
+        <xsl:variable name="hasvsub" select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')"/>
+        <xsl:comment> hasvsub = <xsl:value-of select="concat($sq,$hasvsub,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="numbfirst"
-                    select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
+        <xsl:variable name="numbfirst" select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
+        <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+        <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+        <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
+        <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
+        <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
+        <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
+        <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
+        <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
+        <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refcolonvlet"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
-      <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
+        <xsl:variable name="refcolonvlet" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
+        <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refcolonvr1"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
+        <xsl:variable name="refcolonvr1" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
+        <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
-      <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
+        <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
+        <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
       </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 8.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hascvref and $numbfirst ">
+                            <xsl:if test="$refchapcolon != $prechapter">
+                                <xsl:text> err-para-s5-mid-8-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.21 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
+                            <xsl:if test="$refcolonv != $preverse">
+                                <xsl:text> err-para-s5-mid-8-21</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.21.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
+                            <xsl:if test="$refcolonvlet != $preverse">
+                                <xsl:text> err-para-s5-mid-8-21-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.23 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$prevhyphen and $refvendash">
+                            <xsl:if test="$refcolonvr1 != $preverser1">
+                                <xsl:text> err-para-s5-mid-8-23</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.26 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains($preverse,'-') and not(contains(.,'–'))">
+                            <xsl:if test="not((translate(substring-after(.,':'),$letlc,'') = substring-before($preverse,'-') or  translate(substring-after(.,':'),$letlc,'') &gt; substring-before($preverse,'-')) and ( translate(substring-after(.,':'),$letlc,'') = substring-after($preverse,'-') )or  translate(substring-after(.,':'),$letlc,'') &lt; substring-after($preverse,'-') )">
+                                <xsl:text> err-para-s5-mid-8-26</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.3 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="string-length(translate(.,$validcvnumbletpunc,'')) &gt; 0">
+                            <xsl:if test="not($hasreordered)">
+                                <xsl:text> err-para-s5-mid-8-3</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.3.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="string-length(translate(text()[1],$validreorderedcvnumbletpunc,'')) &gt; 0">
+                            <xsl:if test="$hasreordered and $hastbb">
+                                <xsl:text> err-para-s5-mid-8-3-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.3.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="string-length(translate(.,$validreorderedcvnumbletpunc,'')) &gt; 0">
+                            <xsl:if test="$hasreordered and not($hastbb)">
+                                <xsl:text> err-para-s5-mid-8-3-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.22 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($prevhyphen) and $refvendash and not($hasvlet)">
+                            <xsl:if test="$refcolonvr1 != $preverse">
+                                <xsl:text> err-para-s5-mid-8-22</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 8.25 - rank=10-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains(.,':'))">
+                            <xsl:text> err-para-s5-mid-8-25</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style= -->
+    <xsl:template match="para">
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=qp -->
+    <xsl:template match="para[@style = 'qp']">
+        <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+        <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 14.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="preceding-sibling::*[1][@style = 'qp']">
+                            <xsl:text> err-para-qp-pre-14-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=ntn -->
+    <xsl:template match="para[@style = 'ntn']">
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 18.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'q1tn' or @style = 'q2tn' or @style = 'li1' or @style = 'li2' or @style = 'gra' or @style = 'gj'])">
+                            <xsl:text> err-para-ntn-pre-18-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 24.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="char[@style = 'tec']">
+                            <xsl:text> err-para-ntn-mid-24-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=gj -->
+    <xsl:template match="para[@style = 'gj']">
+        <xsl:variable name="countjmp" select="count(*[@style = 'jmp'])"/>
+        <xsl:comment> countjmp = <xsl:value-of select="concat($sq,$countjmp,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countnode" select="count(node())"/>
+        <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 22.9 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countjmp = 0">
+                            <xsl:text> err-para-gj-mid-22-9</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 22.9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countnode != 1">
+                            <xsl:text> err-para-gj-mid-22-9-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 22.9.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'gra'])">
+                            <xsl:text> err-para-gj-pre-22-9-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=b2 -->
+    <xsl:template match="para[@style = 'b2']">
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="nodecount" select="count(node())"/>
+        <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 23.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="following-sibling::*[1][@style = 'b']">
+                            <xsl:text> err-para-b2-pre-23-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.4 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="count(node()) &gt; 0">
+                            <xsl:text> err-para-b2-mid-23-4</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=b -->
+    <xsl:template match="para[@style = 'b']">
+        <xsl:variable name="nodecount" select="count(node())"/>
+        <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 23.3 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="following-sibling::*[1][@style = 'b2']">
+                            <xsl:text> err-para-b-post-23-3</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.5 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="count(node()) &gt; 0">
+                            <xsl:text> err-para-b-mid-23-5</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=n1 -->
+    <xsl:template match="para[@style = 'n1']">
+        <xsl:variable name="curtec" select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+        <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren1tec" select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
+        <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
+        <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countteu" select="count(*[@style = 'teu'])"/>
+        <xsl:comment> countteu = <xsl:value-of select="concat($sq,$countteu,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
+        <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="positiontec" select="positiontec"/>
+        <xsl:comment> positiontec = <xsl:value-of select="concat($sq,$positiontec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postcharn1tec" select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+        <xsl:comment> postcharn1tec = <xsl:value-of select="concat($sq,$postcharn1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="precharn1tec" select="translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)"/>
+        <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 12.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec &gt; 0 and contains($pren1tec,$curtec) and $precharn1tec != '$' and $postcharn1tec != '$'">
+                            <xsl:if test="$countpres5 &lt; $countpren1">
+                                <xsl:text> err-para-n1-mid-12-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 14.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="position() != last()">
+                            <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'q1tn' or @style = 'q2tn' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter' or @style = 'gra'])">
+                                <xsl:text> err-para-n1-post-14-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec &gt; 1">
+                            <xsl:text> err-para-n1-mid-10-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.1.4 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec + $countteu  = 0 ">
+                            <xsl:text> err-para-n1-mid-10-1-4</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=n2 -->
+    <xsl:template match="para[@style = 'n2']">
+        <xsl:variable name="curtec" select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+        <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
+        <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren2tec" select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren2" select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
+        <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
+        <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
+        <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
+        <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecverpreellipsis" select="substring-before(substring-after($curtec,')'),'…')"/>
+        <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
+        <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
+        <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
+        <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecversion" select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
+        <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postcharn2tec" select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+        <xsl:comment> postcharn2tec = <xsl:value-of select="concat($sq,$postcharn2tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="precharn2tec" select="translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)"/>
+        <xsl:comment> precharn2tec = <xsl:value-of select="concat($sq,$precharn2tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preellipsisstring" select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
+        <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren1tec" select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 12.7.3 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
+                            <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and $hastecversion">
+                                <xsl:text> err-para-n2-mid-12-7-3</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.7.4 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
+                            <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and $hastecversion">
+                                <xsl:text> err-para-n2-mid-12-7-4</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.8.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countpres5 &gt; $countpren1">
+                            <xsl:if test="child::*[@style = 'tec']">
+                                <xsl:text> err-para-n2-pre-12-8-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.1.2 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec &gt; 1">
+                            <xsl:text> err-para-n2-mid-10-1-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.7 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren1tec,$curtec))">
+                            <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and not($hastecversion)">
+                                <xsl:text> err-para-n2-mid-12-7</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.7.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
+                            <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and not($hastecversion)">
+                                <xsl:text> err-para-n2-mid-12-7-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.2 - rank=8-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec &gt; 0 and contains($pren2tec,$curtec) and $precharn2tec != '$' and $postcharn2tec != '$'">
+                            <xsl:if test="$countpren1 &lt; $countpren2 and $countpres5 &lt; $countpren2">
+                                <xsl:text> err-para-n2-mid-12-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=n3 -->
+    <xsl:template match="para[@style = 'n3']">
+        <xsl:variable name="curtec" select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+        <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
+        <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren2" select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren3" select="count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren3 = <xsl:value-of select="concat($sq,$countpren3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
+        <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
+        <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="counttrs" select="count(*[@style = 'trs'])"/>
+        <xsl:comment> counttrs = <xsl:value-of select="concat($sq,$counttrs,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
+        <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
+        <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtecverpreellipsis" select="substring-before(substring-after($curtec,')'),'…')"/>
+        <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
+        <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
+        <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
+        <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hastecversion" select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
+        <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="lenchildtec" select="string-length(*[@style = 'tec']/text())"/>
+        <xsl:comment> lenchildtec = <xsl:value-of select="concat($sq,$lenchildtec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="node1tec" select="node()[1][@style = 'tec']"/>
+        <xsl:comment> node1tec = <xsl:value-of select="concat($sq,$node1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preellipsisstring" select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
+        <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren1tec" select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren2tec" select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren3tec" select="preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren3tec = <xsl:value-of select="concat($sq,$pren3tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="validtecfirst" select="substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)"/>
+        <xsl:comment> validtecfirst = <xsl:value-of select="concat($sq,$validtecfirst,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 12.6.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not((contains($pren2tec,$curtecverpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
+                            <xsl:if test="$hastecellipsis and $hastecchild  and $hastecversion">
+                                <xsl:text> err-para-n3-mid-12-6-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.6.3 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
+                            <xsl:if test="not($hastecellipsis) and $hastecchild and $hastecversion">
+                                <xsl:text> err-para-n3-mid-12-6-3</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.1.3 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec &gt; 1">
+                            <xsl:text> err-para-n3-mid-10-1-3</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.1.5 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$counttec = 0">
+                            <xsl:if test="$counttrs = 0">
+                                <xsl:text> err-para-n3-mid-10-1-5</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 10.2.2 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$node1tec and $counttec = 1">
+                            <xsl:if test="$validtecfirst != '$'">
+                                <xsl:text> err-para-n3-mid-10-2-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.6 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains($pren2tec,$curtec) or contains($pren1tec,$curtec))">
+                            <xsl:if test="$hastecchild and not($hastecversion) and not($hastecellipsis)">
+                                <xsl:text> err-para-n3-mid-12-6</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.6.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not((contains($pren2tec,$curtecpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
+                            <xsl:if test="$countpres5 &lt; $countpren2 and $countpres5 &lt; $countpren1 and $hastecellipsis and $hastecchild and not($hastecversion)">
+                                <xsl:text> err-para-n3-mid-12-6-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 12.8.2 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countpres5 &gt; $countpren2">
+                            <xsl:text> err-para-n3-pre-12-8-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=s3 -->
+    <xsl:template match="para[@style = 's3']">
+        <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
+        <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="strlenb4chap" select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
+        <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasspacecref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
+        <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hassubvrange" select="contains(translate($refcolonv,$validvlet,$validvletsub),'$–$')"/>
+        <xsl:comment> hassubvrange = <xsl:value-of select="concat($sq,$hassubvrange,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasvlet" select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
+        <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
+        <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="lastchartype" select="translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)"/>
+        <xsl:comment> lastchartype = <xsl:value-of select="concat($sq,$lastchartype,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+        <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5text" select="preceding::*[@style = 's5'][1]/text()"/>
+        <xsl:comment> pres5text = <xsl:value-of select="concat($sq,$pres5text,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
+        <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refcolonvlet" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
+        <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refcolonvr1" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
+        <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refcolonvr2" select="substring-after($refcolonv,'–')"/>
+        <xsl:comment> refcolonvr2 = <xsl:value-of select="concat($sq,$refcolonvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="reftype" select="translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)"/>
+        <xsl:comment> reftype = <xsl:value-of select="concat($sq,$reftype,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
+        <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refwordschapcolon" select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
+        <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 19.4 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
+                            <xsl:if test="$refcolonv != $preverse">
+                                <xsl:text> err-para-s3-mid-19-4</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.4.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
+                            <xsl:if test="$refcolonvlet != $preverse">
+                                <xsl:text> err-para-s3-mid-19-4-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.5 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hassubvrange and $hascvref ">
+                            <xsl:if test="$refcolonvlet != $preverse">
+                                <xsl:text> err-para-s3-mid-19-5</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.6 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="($refvendash  and ($lastchartype = '#')) or (contains($reftype,'#$–#')  and ($lastchartype = '#'))">
+                            <xsl:if test="$refcolonvr2 != $preverse">
+                                <xsl:text> err-para-s3-mid-19-6</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.8 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ntn'])">
+                            <xsl:text> err-para-s3-mid-19-8</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.3 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hascvref and $hasspacecref">
+                            <xsl:if test="$refwordschapcolon != $prechapter">
+                                <xsl:text> err-para-s3-mid-19-3</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.7 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hascvref and $lastchartype  = '$'">
+                            <xsl:if test="$lastchar != substring($pres5text,string-length($pres5text),1)">
+                                <xsl:text> err-para-s3-mid-19-7</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.1 - rank=6-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(contains(text(),'General Comment on'))">
+                            <xsl:text> err-para-s3-mid-19-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 19.2 - rank=6-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not($hascvref )">
+                            <xsl:text> err-para-s3-mid-19-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=b3 -->
+    <xsl:template match="para[@style = 'b3']">
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="values5beforev" select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
+        <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+        <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curverse" select="verse/@number"/>
+        <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
+        <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
+        <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
+        <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
+        <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5beforevhasvr2" select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5hasendashvr2" select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5hasleftround" select="contains(following::*[@style = 's5'][1],'(')"/>
+        <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5v" select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
+        <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postsib2" select="postsib2"/>
+        <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
+        <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
+        <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
+        <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5hasendashvr2" select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5hasleftround" select="contains(preceding::*[@style = 's5'][1],'(')"/>
+        <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5v" select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
+        <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
+        <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
+        <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
+        <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
+        <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
+        <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 7.1.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$curverse = 1">
+                            <xsl:if test="$postsib = 'b'">
+                                <xsl:text> err-para-b3-post-7-1-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 7.1.3 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$curverse != 1">
+                            <xsl:if test="$presib = 'b'">
+                                <xsl:text> err-para-b3-pre-7-1-3</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 7.10.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="($curverse != 1) and $posttable">
+                            <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
+                                <xsl:text> err-para-b3-post-7-10-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 15.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
+                            <xsl:if test="$posts5v != $curvr1">
+                                <xsl:text> err-para-b3-post-15-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 15.5 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
+                            <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
+                                <xsl:text> err-para-b3-post-15-5</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 1.1 - rank=8-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(verse)">
+                            <xsl:text> err-para-b3-mid-1-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=p -->
+    <xsl:template match="para[@style = 'p']">
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="values5beforev" select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
+        <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+        <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curverse" select="verse/@number"/>
+        <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
+        <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
+        <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
+        <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
+        <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5beforevhasvr2" select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5hasendashvr2" select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5hasleftround" select="contains(following::*[@style = 's5'][1],'(')"/>
+        <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posts5v" select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
+        <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
+        <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postsib2" select="postsib2"/>
+        <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
+        <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
+        <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5hasendashvr2" select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
+        <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5hasleftround" select="contains(preceding::*[@style = 's5'][1],'(')"/>
+        <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pres5v" select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
+        <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
+        <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
+        <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
+        <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
+        <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
+        <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 7.1.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$curverse = 1">
+                            <xsl:if test="$postsib = 'b'">
+                                <xsl:text> err-para-p-post-7-1-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 7.1.4 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$curverse != 1">
+                            <xsl:if test="$presib = 'b'">
+                                <xsl:text> err-para-p-pre-7-1-4</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 7.10.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="($curverse != 1) and $posttable">
+                            <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
+                                <xsl:text> err-para-p-post-7-10-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 15.2 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
+                            <xsl:if test="$posts5v != $curvr1">
+                                <xsl:text> err-para-p-post-15-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 15.6 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
+                            <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
+                                <xsl:text> err-para-p-post-15-6</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 1.2 - rank=8-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(verse)">
+                            <xsl:text> err-para-p-mid-1-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <!-- para @style=gra -->
+    <xsl:template match="para[@style = 'gra']">
+        <xsl:variable name="countf" select="count(*[@style = 'f'])"/>
+        <xsl:comment> countf = <xsl:value-of select="concat($sq,$countf,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countfig" select="count(*[@style = 'fig'])"/>
+        <xsl:comment> countfig = <xsl:value-of select="concat($sq,$countfig,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countnode" select="count(node())"/>
+        <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="div">
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@style"/>
+                    <!--ref 22.8 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countfig + $countf = 1">
+                            <xsl:if test="$countf = 0">
+                                <xsl:text> err-para-gra-mid-22-8</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 22.10. - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countfig + $countf = 1">
+                            <xsl:if test="$countfig = 0">
+                                <xsl:text> err-para-gra-mid-22-10-</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 22.2 - rank=8-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="$countfig + $countf = 2">
+                            <xsl:if test="$countnode != 2">
+                                <xsl:text> err-para-gra-mid-22-2</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--common para errors-->
+                    <!--ref 9.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                            <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                                <xsl:text> err-para--mid-9-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 23.1 - rank=-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
+                            <xsl:if test="string-length(text()) = 0 and count(*) = 0">
+                                <xsl:text> err-para--mid-23-1</xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:if>
+                    <!--ref 26.1 - rank=5-->
+                    <xsl:if test="preceding::chapter">
+                        <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                            <xsl:text> err-para--mid-26-1</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:value-of select="concat('\',@style,' ')"/>
+                <xsl:apply-templates select="node()">
+                    <xsl:with-param name="embedded" select="0"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="note[@style = 'f']">
+        <xsl:variable name="fnstring">
+            <xsl:apply-templates select="node()" mode="fntext"/>
+        </xsl:variable>
+        <xsl:comment>
+fnstring = <xsl:value-of select="$fnstring"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+        <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr2" select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
+        <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr3" select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr4" select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr5" select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr6" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr7" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr8" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr9" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="dqstr10" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+        <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curpos" select="position()"/>
+        <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
+        <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+        <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
+        <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
+        <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
+        <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
+        <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
+        <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
+        <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
+        <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
+        <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+        <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+        <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+        <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
+        <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
+        <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
+        <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
+        <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
+        <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
+        <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
+        <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+        <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff1" select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
+        <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff2" select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
+        <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff3" select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
+        <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff4" select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
+        <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff5" select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
+        <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff6" select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
+        <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff7" select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
+        <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff8" select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
+        <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff9" select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
+        <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="sqdiff10" select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+        <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
             <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 8.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hascvref and $numbfirst ">
-                     <xsl:if test="$refchapcolon != $prechapter">
-                        <xsl:text> err-para-s5-mid-8-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.21 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
-                     <xsl:if test="$refcolonv != $preverse">
-                        <xsl:text> err-para-s5-mid-8-21</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.21.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
-                     <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> err-para-s5-mid-8-21-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.23 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$prevhyphen and $refvendash">
-                     <xsl:if test="$refcolonvr1 != $preverser1">
-                        <xsl:text> err-para-s5-mid-8-23</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.26 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains($preverse,'-') and not(contains(.,'–'))">
-                     <xsl:if test="not((translate(substring-after(.,':'),$letlc,'') = substring-before($preverse,'-') or  translate(substring-after(.,':'),$letlc,'') &gt; substring-before($preverse,'-')) and ( translate(substring-after(.,':'),$letlc,'') = substring-after($preverse,'-') )or  translate(substring-after(.,':'),$letlc,'') &lt; substring-after($preverse,'-') )">
-                        <xsl:text> err-para-s5-mid-8-26</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.3 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="string-length(translate(.,$validcvnumbletpunc,'')) &gt; 0">
-                     <xsl:if test="not($hasreordered)">
-                        <xsl:text> err-para-s5-mid-8-3</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.3.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="string-length(translate(text()[1],$validreorderedcvnumbletpunc,'')) &gt; 0">
-                     <xsl:if test="$hasreordered and $hastbb">
-                        <xsl:text> err-para-s5-mid-8-3-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.3.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="string-length(translate(.,$validreorderedcvnumbletpunc,'')) &gt; 0">
-                     <xsl:if test="$hasreordered and not($hastbb)">
-                        <xsl:text> err-para-s5-mid-8-3-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.22 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($prevhyphen) and $refvendash and not($hasvlet)">
-                     <xsl:if test="$refcolonvr1 != $preverse">
-                        <xsl:text> err-para-s5-mid-8-22</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 8.25 - rank=10-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains(.,':'))">
-                     <xsl:text> err-para-s5-mid-8-25</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
+                <xsl:value-of select="@style"/>
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$graparent">
+                        <xsl:if test="not(preceding-sibling::*[1][@style = 'fig'] )">
+                            <xsl:text> err-note-f-pre-22-3</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.5 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="@caller != '+'">
+                        <xsl:text> err-note-f-pre-22-5</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 27.4 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
+                        <xsl:text> err-note-f-mid-27-4</xsl:text>
+                    </xsl:if>
+                </xsl:if>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style= -->
-   <xsl:template match="para">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=qp -->
-   <xsl:template match="para[@style = 'qp']">
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 14.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="preceding-sibling::*[1][@style = 'qp']">
-                     <xsl:text> err-para-qp-pre-14-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=ntn -->
-   <xsl:template match="para[@style = 'ntn']">
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 18.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'q1tn' or @style = 'q2tn' or @style = 'li1' or @style = 'li2' or @style = 'gra' or @style = 'gj'])">
-                     <xsl:text> err-para-ntn-pre-18-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 24.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="char[@style = 'tec']">
-                     <xsl:text> err-para-ntn-mid-24-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=gj -->
-   <xsl:template match="para[@style = 'gj']">
-      <xsl:variable name="countjmp" select="count(*[@style = 'jmp'])"/>
-      <xsl:comment> countjmp = <xsl:value-of select="concat($sq,$countjmp,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countnode" select="count(node())"/>
-      <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 22.9 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countjmp = 0">
-                     <xsl:text> err-para-gj-mid-22-9</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 22.9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countnode != 1">
-                     <xsl:text> err-para-gj-mid-22-9-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 22.9.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'gra'])">
-                     <xsl:text> err-para-gj-pre-22-9-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=b2 -->
-   <xsl:template match="para[@style = 'b2']">
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="nodecount" select="count(node())"/>
-      <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 23.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="following-sibling::*[1][@style = 'b']">
-                     <xsl:text> err-para-b2-pre-23-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.4 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="count(node()) &gt; 0">
-                     <xsl:text> err-para-b2-mid-23-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=b -->
-   <xsl:template match="para[@style = 'b']">
-      <xsl:variable name="nodecount" select="count(node())"/>
-      <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 23.3 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="following-sibling::*[1][@style = 'b2']">
-                     <xsl:text> err-para-b-post-23-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.5 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="count(node()) &gt; 0">
-                     <xsl:text> err-para-b-mid-23-5</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=n1 -->
-   <xsl:template match="para[@style = 'n1']">
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countteu" select="count(*[@style = 'teu'])"/>
-      <xsl:comment> countteu = <xsl:value-of select="concat($sq,$countteu,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="positiontec" select="positiontec"/>
-      <xsl:comment> positiontec = <xsl:value-of select="concat($sq,$positiontec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postcharn1tec"
-                    select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn1tec = <xsl:value-of select="concat($sq,$postcharn1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="precharn1tec"
-                    select="translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 12.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 0 and contains($pren1tec,$curtec) and $precharn1tec != '$' and $postcharn1tec != '$'">
-                     <xsl:if test="$countpres5 &lt; $countpren1">
-                        <xsl:text> err-para-n1-mid-12-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 14.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="position() != last()">
-                     <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'q1tn' or @style = 'q2tn' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter' or @style = 'gra'])">
-                        <xsl:text> err-para-n1-post-14-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 1">
-                     <xsl:text> err-para-n1-mid-10-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.1.4 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec + $countteu  = 0 ">
-                     <xsl:text> err-para-n1-mid-10-1-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=n2 -->
-   <xsl:template match="para[@style = 'n2']">
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren2tec"
-                    select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
-      <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
-      <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecverpreellipsis"
-                    select="substring-before(substring-after($curtec,')'),'…')"/>
-      <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
-      <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
-      <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecversion"
-                    select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
-      <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postcharn2tec"
-                    select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn2tec = <xsl:value-of select="concat($sq,$postcharn2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="precharn2tec"
-                    select="translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn2tec = <xsl:value-of select="concat($sq,$precharn2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preellipsisstring"
-                    select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 12.7.3 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
-                     <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and $hastecversion">
-                        <xsl:text> err-para-n2-mid-12-7-3</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.7.4 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
-                     <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and $hastecversion">
-                        <xsl:text> err-para-n2-mid-12-7-4</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.8.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countpres5 &gt; $countpren1">
-                     <xsl:if test="child::*[@style = 'tec']">
-                        <xsl:text> err-para-n2-pre-12-8-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.1.2 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 1">
-                     <xsl:text> err-para-n2-mid-10-1-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.7 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren1tec,$curtec))">
-                     <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and not($hastecversion)">
-                        <xsl:text> err-para-n2-mid-12-7</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.7.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
-                     <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and not($hastecversion)">
-                        <xsl:text> err-para-n2-mid-12-7-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.2 - rank=8-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 0 and contains($pren2tec,$curtec) and $precharn2tec != '$' and $postcharn2tec != '$'">
-                     <xsl:if test="$countpren1 &lt; $countpren2 and $countpres5 &lt; $countpren2">
-                        <xsl:text> err-para-n2-mid-12-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=n3 -->
-   <xsl:template match="para[@style = 'n3']">
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren3"
-                    select="count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren3 = <xsl:value-of select="concat($sq,$countpren3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="counttrs" select="count(*[@style = 'trs'])"/>
-      <xsl:comment> counttrs = <xsl:value-of select="concat($sq,$counttrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
-      <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
-      <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtecverpreellipsis"
-                    select="substring-before(substring-after($curtec,')'),'…')"/>
-      <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
-      <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
-      <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hastecversion"
-                    select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
-      <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lenchildtec" select="string-length(*[@style = 'tec']/text())"/>
-      <xsl:comment> lenchildtec = <xsl:value-of select="concat($sq,$lenchildtec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="node1tec" select="node()[1][@style = 'tec']"/>
-      <xsl:comment> node1tec = <xsl:value-of select="concat($sq,$node1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preellipsisstring"
-                    select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren2tec"
-                    select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren3tec"
-                    select="preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren3tec = <xsl:value-of select="concat($sq,$pren3tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="validtecfirst"
-                    select="substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)"/>
-      <xsl:comment> validtecfirst = <xsl:value-of select="concat($sq,$validtecfirst,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 12.6.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not((contains($pren2tec,$curtecverpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
-                     <xsl:if test="$hastecellipsis and $hastecchild  and $hastecversion">
-                        <xsl:text> err-para-n3-mid-12-6-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.6.3 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
-                     <xsl:if test="not($hastecellipsis) and $hastecchild and $hastecversion">
-                        <xsl:text> err-para-n3-mid-12-6-3</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.1.3 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec &gt; 1">
-                     <xsl:text> err-para-n3-mid-10-1-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.1.5 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$counttec = 0">
-                     <xsl:if test="$counttrs = 0">
-                        <xsl:text> err-para-n3-mid-10-1-5</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 10.2.2 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$node1tec and $counttec = 1">
-                     <xsl:if test="$validtecfirst != '$'">
-                        <xsl:text> err-para-n3-mid-10-2-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.6 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains($pren2tec,$curtec) or contains($pren1tec,$curtec))">
-                     <xsl:if test="$hastecchild and not($hastecversion) and not($hastecellipsis)">
-                        <xsl:text> err-para-n3-mid-12-6</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.6.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not((contains($pren2tec,$curtecpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
-                     <xsl:if test="$countpres5 &lt; $countpren2 and $countpres5 &lt; $countpren1 and $hastecellipsis and $hastecchild and not($hastecversion)">
-                        <xsl:text> err-para-n3-mid-12-6-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.8.2 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countpres5 &gt; $countpren2">
-                     <xsl:text> err-para-n3-pre-12-8-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=s3 -->
-   <xsl:template match="para[@style = 's3']">
-      <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="strlenb4chap"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasspacecref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hassubvrange"
-                    select="contains(translate($refcolonv,$validvlet,$validvletsub),'$–$')"/>
-      <xsl:comment> hassubvrange = <xsl:value-of select="concat($sq,$hassubvrange,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasvlet"
-                    select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
-      <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
-      <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastchartype"
-                    select="translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)"/>
-      <xsl:comment> lastchartype = <xsl:value-of select="concat($sq,$lastchartype,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5text" select="preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> pres5text = <xsl:value-of select="concat($sq,$pres5text,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvlet"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
-      <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvr1"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvr2" select="substring-after($refcolonv,'–')"/>
-      <xsl:comment> refcolonvr2 = <xsl:value-of select="concat($sq,$refcolonvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="reftype"
-                    select="translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)"/>
-      <xsl:comment> reftype = <xsl:value-of select="concat($sq,$reftype,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
-      <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refwordschapcolon"
-                    select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 19.4 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
-                     <xsl:if test="$refcolonv != $preverse">
-                        <xsl:text> err-para-s3-mid-19-4</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.4.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
-                     <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> err-para-s3-mid-19-4-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.5 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hassubvrange and $hascvref ">
-                     <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> err-para-s3-mid-19-5</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.6 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="($refvendash  and ($lastchartype = '#')) or (contains($reftype,'#$–#')  and ($lastchartype = '#'))">
-                     <xsl:if test="$refcolonvr2 != $preverse">
-                        <xsl:text> err-para-s3-mid-19-6</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.8 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ntn'])">
-                     <xsl:text> err-para-s3-mid-19-8</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.3 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hascvref and $hasspacecref">
-                     <xsl:if test="$refwordschapcolon != $prechapter">
-                        <xsl:text> err-para-s3-mid-19-3</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.7 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hascvref and $lastchartype  = '$'">
-                     <xsl:if test="$lastchar != substring($pres5text,string-length($pres5text),1)">
-                        <xsl:text> err-para-s3-mid-19-7</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.1 - rank=6-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(contains(text(),'General Comment on'))">
-                     <xsl:text> err-para-s3-mid-19-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 19.2 - rank=6-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not($hascvref )">
-                     <xsl:text> err-para-s3-mid-19-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=b3 -->
-   <xsl:template match="para[@style = 'b3']">
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="values5beforev"
-                    select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curverse" select="verse/@number"/>
-      <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
-      <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
-      <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
-      <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
-      <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5beforevhasvr2"
-                    select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5hasendashvr2"
-                    select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5hasleftround"
-                    select="contains(following::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5v"
-                    select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postsib2" select="postsib2"/>
-      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
-      <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
-      <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
-      <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5hasendashvr2"
-                    select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5hasleftround"
-                    select="contains(preceding::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5v"
-                    select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
-      <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 7.1.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$curverse = 1">
-                     <xsl:if test="$postsib = 'b'">
-                        <xsl:text> err-para-b3-post-7-1-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 7.1.3 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$curverse != 1">
-                     <xsl:if test="$presib = 'b'">
-                        <xsl:text> err-para-b3-pre-7-1-3</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 7.10.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="($curverse != 1) and $posttable">
-                     <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
-                        <xsl:text> err-para-b3-post-7-10-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 15.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
-                     <xsl:if test="$posts5v != $curvr1">
-                        <xsl:text> err-para-b3-post-15-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 15.5 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
-                     <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
-                        <xsl:text> err-para-b3-post-15-5</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 1.1 - rank=8-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(verse)">
-                     <xsl:text> err-para-b3-mid-1-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=p -->
-   <xsl:template match="para[@style = 'p']">
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="values5beforev"
-                    select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curverse" select="verse/@number"/>
-      <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
-      <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
-      <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
-      <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
-      <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5beforevhasvr2"
-                    select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5hasendashvr2"
-                    select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5hasleftround"
-                    select="contains(following::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posts5v"
-                    select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
-      <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postsib2" select="postsib2"/>
-      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
-      <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
-      <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5hasendashvr2"
-                    select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5hasleftround"
-                    select="contains(preceding::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pres5v"
-                    select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
-      <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 7.1.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$curverse = 1">
-                     <xsl:if test="$postsib = 'b'">
-                        <xsl:text> err-para-p-post-7-1-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 7.1.4 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$curverse != 1">
-                     <xsl:if test="$presib = 'b'">
-                        <xsl:text> err-para-p-pre-7-1-4</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 7.10.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="($curverse != 1) and $posttable">
-                     <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
-                        <xsl:text> err-para-p-post-7-10-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 15.2 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
-                     <xsl:if test="$posts5v != $curvr1">
-                        <xsl:text> err-para-p-post-15-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 15.6 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
-                     <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
-                        <xsl:text> err-para-p-post-15-6</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 1.2 - rank=8-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(verse)">
-                     <xsl:text> err-para-p-mid-1-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <!-- para @style=gra -->
-   <xsl:template match="para[@style = 'gra']">
-      <xsl:variable name="countf" select="count(*[@style = 'f'])"/>
-      <xsl:comment> countf = <xsl:value-of select="concat($sq,$countf,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countfig" select="count(*[@style = 'fig'])"/>
-      <xsl:comment> countfig = <xsl:value-of select="concat($sq,$countfig,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countnode" select="count(node())"/>
-      <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="@style"/>
-               <!--ref 22.8 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countfig + $countf = 1">
-                     <xsl:if test="$countf = 0">
-                        <xsl:text> err-para-gra-mid-22-8</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 22.10. - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countfig + $countf = 1">
-                     <xsl:if test="$countfig = 0">
-                        <xsl:text> err-para-gra-mid-22-10-</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 22.2 - rank=8-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="$countfig + $countf = 2">
-                     <xsl:if test="$countnode != 2">
-                        <xsl:text> err-para-gra-mid-22-2</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--common para errors-->
-               <!--ref 9.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                     <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> err-para--mid-9-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 23.1 - rank=-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
-                     <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> err-para--mid-23-1</xsl:text>
-                     </xsl:if>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 26.1 - rank=5-->
-               <xsl:if test="preceding::chapter">
-                  <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                     <xsl:text> err-para--mid-26-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-            <xsl:apply-templates select="node()">
-               <xsl:with-param name="embedded" select="0"/>
-            </xsl:apply-templates>
-         </xsl:element>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
- fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
-      <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr2"
-                    select="substring-after(substring-before($dqstr1,$rdq),$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr3"
-                    select="substring-after(substring-before($dqstr2,$rdq),$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr4"
-                    select="substring-after(substring-before($dqstr3,$rdq),$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr5"
-                    select="substring-after(substring-before($dqstr4,$rdq),$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr6"
-                    select="substring-after(substring-before($dqstr5,$rdq),$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr7"
-                    select="substring-after(substring-before($dqstr6,$rdq),$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr8"
-                    select="substring-after(substring-before($dqstr7,$rdq),$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr9"
-                    select="substring-after(substring-before($dqstr8,$rdq),$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr10"
-                    select="substring-after(substring-before($dqstr9,$rdq),$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 22.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$graparent">
-                  <xsl:if test="not(preceding-sibling::*[1][@style = 'fig'] )">
-                     <xsl:text> err-note-f-pre-22-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 22.5 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="@caller != '+'">
-                  <xsl:text> err-note-f-pre-22-5</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 27.4 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
-                  <xsl:text> err-note-f-mid-27-4</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:text>\</xsl:text>
-         <xsl:value-of select="@style"/>
-         <xsl:text> </xsl:text>
-         <xsl:value-of select="@caller"/>
-         <xsl:text> </xsl:text>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="0"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
             <xsl:text>\</xsl:text>
             <xsl:value-of select="@style"/>
-            <xsl:text>*</xsl:text>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="figure[@style = 'fig']">
-      <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
-      <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascoloncvref" select="contains(@ref,':')"/>
-      <xsl:comment> hascoloncvref = <xsl:value-of select="concat($sq,$hascoloncvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasspaceinref" select="contains(@ref,' ')"/>
-      <xsl:comment> hasspaceinref = <xsl:value-of select="concat($sq,$hasspaceinref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refattchap" select="substring-before(@ref,':')"/>
-      <xsl:comment> refattchap = <xsl:value-of select="concat($sq,$refattchap,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refattchapdot" select="substring-before(@ref,'.')"/>
-      <xsl:comment> refattchapdot = <xsl:value-of select="concat($sq,$refattchapdot,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refattdotverse" select="substring-after(@ref,'.')"/>
-      <xsl:comment> refattdotverse = <xsl:value-of select="concat($sq,$refattdotverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refattverse" select="substring-after(@ref,':')"/>
-      <xsl:comment> refattverse = <xsl:value-of select="concat($sq,$refattverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refchapter" select="refchapter"/>
-      <xsl:comment> refchapter = <xsl:value-of select="concat($sq,$refchapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refverse" select="refverse"/>
-      <xsl:comment> refverse = <xsl:value-of select="concat($sq,$refverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="@caller"/>
+            <xsl:text> </xsl:text>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="0"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:text>\</xsl:text>
+                <xsl:value-of select="@style"/>
+                <xsl:text>*</xsl:text>
             </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
+        </xsl:element>
+        <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+        <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
+            <xsl:text> </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">
+                    <xsl:text>quote-error</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="concat('“',substring-after($indqstr10,'“'),'”')"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="figure[@style = 'fig']">
+        <xsl:variable name="curpos" select="position()"/>
+        <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
+        <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascoloncvref" select="contains(@ref,':')"/>
+        <xsl:comment> hascoloncvref = <xsl:value-of select="concat($sq,$hascoloncvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasspaceinref" select="contains(@ref,' ')"/>
+        <xsl:comment> hasspaceinref = <xsl:value-of select="concat($sq,$hasspaceinref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+        <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refattchap" select="substring-before(@ref,':')"/>
+        <xsl:comment> refattchap = <xsl:value-of select="concat($sq,$refattchap,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refattchapdot" select="substring-before(@ref,'.')"/>
+        <xsl:comment> refattchapdot = <xsl:value-of select="concat($sq,$refattchapdot,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refattdotverse" select="substring-after(@ref,'.')"/>
+        <xsl:comment> refattdotverse = <xsl:value-of select="concat($sq,$refattdotverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refattverse" select="substring-after(@ref,':')"/>
+        <xsl:comment> refattverse = <xsl:value-of select="concat($sq,$refattverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refchapter" select="refchapter"/>
+        <xsl:comment> refchapter = <xsl:value-of select="concat($sq,$refchapter,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refverse" select="refverse"/>
+        <xsl:comment> refverse = <xsl:value-of select="concat($sq,$refverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.2.1 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$curpos != 1">
+                        <xsl:text> err-figure-fig-pre-22-2-1</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.7 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascoloncvref and not($hasspaceinref)">
+                        <xsl:if test="$refattverse != $preverse">
+                            <xsl:text> err-figure-fig-mid-22-7-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.7.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="not($hascoloncvref)">
+                        <xsl:text> err-figure-fig-mid-22-8</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.6 - rank=2-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascoloncvref and not($hasspaceinref)">
+                        <xsl:if test="$refattchap != $prechapter">
+                            <xsl:text> err-figure-fig-mid-22-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.6.2 - rank=2-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascoloncvref and $hasspaceinref">
+                        <xsl:text> err-figure-fig-mid-22-6-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 22.1 - rank=8-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="not($graparent)">
+                        <xsl:text> err-figure-fig-pre-22-1</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:text>\fig </xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">fig-attrib</xsl:attribute>
+                <xsl:apply-templates select="@*"/>
+            </xsl:element>
+            <xsl:text>\fig*</xsl:text>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="link[@style = 'jmp']">
+        <xsl:variable name="containsclickhere" select="contains(.,'Click here')"/>
+        <xsl:comment> containsclickhere = <xsl:value-of select="concat($sq,$containsclickhere,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curpos" select="position()"/>
+        <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="gjparent" select="parent::para[@style = 'gj']"/>
+        <xsl:comment> gjparent = <xsl:value-of select="concat($sq,$gjparent,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:text>\jmp </xsl:text>
+            <xsl:apply-templates select="node()"/>
+            <xsl:text>|</xsl:text>
+            <xsl:element name="span">
+                <xsl:attribute name="class">linkref</xsl:attribute>
+                <xsl:value-of select="@link-href"/>
+            </xsl:element>
+            <xsl:text>\jmp*</xsl:text>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=sbx -->
+    <xsl:template match="char[@style = 'sbx']">
+        <xsl:param name="embedded"/>
+        <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
+        <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="strlenb4chap" select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
+        <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="chappos" select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
+        <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasspacecref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
+        <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="numbfirst" select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
+        <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+        <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
+        <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refcolonvr1" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
+        <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="refwordschapcolon" select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
+        <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 8.4.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascvref and not(contains($preverse,'-')) and contains(.,'–')">
+                        <xsl:if test="$refcolonvr1 != $preverse">
+                            <xsl:text> err-char-sbx-mid-8-4-3</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 8.4.4 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascvref and not(contains($preverse,'-'))  and not(contains(.,'–'))">
+                        <xsl:if test="$refcolonv != $preverse">
+                            <xsl:text> err-char-sbx-mid-8-4-4</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 8.4.5 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hasspacecref  and $hascvref ">
+                        <xsl:if test="$refwordschapcolon != $prechapter">
+                            <xsl:text> err-char-sbx-mid-8-4-5</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 8.4.7 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$numbfirst and $hascvref">
+                        <xsl:if test="$refchapcolon != $prechapter">
+                            <xsl:text> err-char-sbx-mid-8-4-7</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.2.1 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$curpos != 1">
-                  <xsl:text> err-figure-fig-pre-22-2-1</xsl:text>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style= -->
+    <xsl:template match="char">
+        <xsl:param name="embedded"/>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--style specific errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.7 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascoloncvref and not($hasspaceinref)">
-                  <xsl:if test="$refattverse != $preverse">
-                     <xsl:text> err-figure-fig-mid-22-7-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=tec -->
+    <xsl:template match="char[@style = 'tec']">
+        <xsl:param name="embedded"/>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren2" select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
+        <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpretec" select="count(preceding-sibling::*[@style = 'tec'])"/>
+        <xsl:comment> countpretec = <xsl:value-of select="concat($sq,$countpretec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hasellipsis" select="contains(node()[not(self::*)],'…')"/>
+        <xsl:comment> hasellipsis = <xsl:value-of select="concat($sq,$hasellipsis,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
+        <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
+        <xsl:comment> lastchar2 = <xsl:value-of select="concat($sq,$lastchar2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="postellipsisstring" select="normalize-space(concat(' ',substring-after(translate(node()[not(self::*)],':',''),'…'),' '))"/>
+        <xsl:comment> postellipsisstring = <xsl:value-of select="concat($sq,$postellipsisstring,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="preellipsisstring" select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
+        <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 10.2.1 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$countpresibnode &gt; 0">
+                        <xsl:text> err-char-tec-mid-10-2-1</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 11.1 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="translate(substring(.,1,1),$invalidtecfirstpunc,'%%') = '%'">
+                        <xsl:text> err-char-tec-mid-11-1</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 11.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="translate($lastchar2,$invalidtecendpunc,$invalidtecendpuncsub) = '%'">
+                        <xsl:text> err-char-tec-mid-11-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 20.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="*[@style = 'f']">
+                        <xsl:text> err-char-tec-mid-20-3</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.32 - rank=3-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="not($lastchar = ':')">
+                        <xsl:text> err-char-tec-mid-10-32</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.2.3 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$countpretec &gt; 0">
+                        <xsl:text> err-char-tec-pre-10-2-3</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.31 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$lastchar = ' '">
+                        <xsl:text> err-char-tec-mid-10-31</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.7.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="not($hascoloncvref)">
-                  <xsl:text> err-figure-fig-mid-22-8</xsl:text>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=trs -->
+    <xsl:template match="char[@style = 'trs']">
+        <xsl:param name="embedded"/>
+        <xsl:variable name="pretec" select="concat(' ',preceding::*[@style = 'tec'][1])"/>
+        <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ellipsiscount" select="string-length(.)-string-length(translate(.,'…',''))"/>
+        <xsl:comment> ellipsiscount = <xsl:value-of select="concat($sq,$ellipsiscount,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split2ellipsisstring1" select="substring-before(.,'…')"/>
+        <xsl:comment> split2ellipsisstring1 = <xsl:value-of select="concat($sq,$split2ellipsisstring1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split2ellipsisstring2" select="substring-after(.,'…')"/>
+        <xsl:comment> split2ellipsisstring2 = <xsl:value-of select="concat($sq,$split2ellipsisstring2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="tecstringposttrs" select="substring-after($pretec,.)"/>
+        <xsl:comment> tecstringposttrs = <xsl:value-of select="concat($sq,$tecstringposttrs,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="tecstringpretrs" select="substring-before($pretec,.)"/>
+        <xsl:comment> tecstringpretrs = <xsl:value-of select="concat($sq,$tecstringpretrs,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split3ellipsisstring2" select="substring-before($split2ellipsisstring2,'…')"/>
+        <xsl:comment> split3ellipsisstring2 = <xsl:value-of select="concat($sq,$split3ellipsisstring2,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split3ellipsisstring3" select="substring-after($split2ellipsisstring2,'…')"/>
+        <xsl:comment> split3ellipsisstring3 = <xsl:value-of select="concat($sq,$split3ellipsisstring3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split4ellipsisstring3" select="substring-before($split3ellipsisstring3,'…')"/>
+        <xsl:comment> split4ellipsisstring3 = <xsl:value-of select="concat($sq,$split4ellipsisstring3,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="split4ellipsisstring4" select="substring-after($split3ellipsisstring3,'…')"/>
+        <xsl:comment> split4ellipsisstring4 = <xsl:value-of select="concat($sq,$split4ellipsisstring4,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+        <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="curspfield" select="concat(' ',.)"/>
+        <xsl:comment> curspfield = <xsl:value-of select="concat($sq,$curspfield,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="parent" select="parent::*/@style"/>
+        <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="teccharposttrs" select="translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)"/>
+        <xsl:comment> teccharposttrs = <xsl:value-of select="concat($sq,$teccharposttrs,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="teccharpretrs" select="translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)"/>
+        <xsl:comment> teccharpretrs = <xsl:value-of select="concat($sq,$teccharpretrs,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 10.4 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="not(preceding-sibling::*[@style = 'tec']) ">
+                        <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1' or $parent = 'hb1')">
+                            <xsl:text> err-char-trs-mid-10-4</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$ellipsiscount = 0 and not(contains($pretec,.))">
+                        <xsl:if test="not(contains($pretec,$curspfield) and $teccharposttrs = '$') or  not($teccharpretrs = '$' or $teccharposttrs = '$') ">
+                            <xsl:text> err-char-trs-mid-10-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.6.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$ellipsiscount = 1">
+                        <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split2ellipsisstring2))">
+                            <xsl:text> err-char-trs-mid-10-6-2</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.6.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$ellipsiscount = 2">
+                        <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split3ellipsisstring3))">
+                            <xsl:text> err-char-trs-mid-10-6-3</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 10.6.4 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$ellipsiscount = 3">
+                        <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split4ellipsisstring3) and contains($pretec,$split4ellipsisstring4))">
+                            <xsl:text> err-char-trs-mid-10-6-4</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.6 - rank=2-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascoloncvref and not($hasspaceinref)">
-                  <xsl:if test="$refattchap != $prechapter">
-                     <xsl:text> err-figure-fig-mid-22-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=tei -->
+    <xsl:template match="char[@style = 'tei']">
+        <xsl:param name="embedded"/>
+        <xsl:variable name="ancestor" select="ancestor::*/@style "/>
+        <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpren1" select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="countpres5" select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
+        <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="parent" select="parent::*/@style"/>
+        <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
+        <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="parentpresibpos" select="count(parent::*/preceding-sibling::*)"/>
+        <xsl:comment> parentpresibpos = <xsl:value-of select="concat($sq,$parentpresibpos,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="pren1tec" select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+        <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 10.5 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$countpren1 &gt; $countpres5 or $parentpresibpos &gt; $countpres5 ">
+                        <xsl:if test="contains($pren1tec,text()) and not($ancestor = 'p') and not($ancestor = 'f') and not($ancestor = 'qp') and not($ancestor = 'q1tn') and not($ancestor = 'q2tn') and not($ancestor = 'qns') and not($ancestor = 'b3')">
+                            <xsl:text> err-char-tei-mid-10-5</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.6.2 - rank=2-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascoloncvref and $hasspaceinref">
-                  <xsl:text> err-figure-fig-mid-22-6-2</xsl:text>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=fr -->
+    <xsl:template match="char[@style = 'fr']">
+        <xsl:param name="embedded"/>
+        <xsl:variable name="hasbadcvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#.#')"/>
+        <xsl:comment> hasbadcvref = <xsl:value-of select="concat($sq,$hasbadcvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+      </xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 15.7 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$hascvref or $hasbadcvref">
+                        <xsl:text> err-char-fr-mid-15-7</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-            <!--ref 22.1 - rank=8-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="not($graparent)">
-                  <xsl:text> err-figure-fig-pre-22-1</xsl:text>
-               </xsl:if>
+        </xsl:element>
+    </xsl:template>
+    <!-- char @style=tbb -->
+    <xsl:template match="char[@style = 'tbb']">
+        <xsl:param name="embedded"/>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--common char errors-->
+                <!--ref 9.6 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                        <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                            <xsl:text> err-char--mid-9-6</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 26.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                        <xsl:text> err-char--mid-26-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--style specific errors-->
+                <!--ref 17.1.1 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="text() = '_'">
+                        <xsl:text> err-char-tbb--17-1-1</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 17.1.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="text() = '___' or text() = '____'">
+                        <xsl:text> err-char-tbb-mid-17-1-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 17.2 - rank=5-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="substring(preceding-sibling::node()[1],string-length(preceding-sibling::node()[1]),1) = ' '">
+                        <xsl:text> err-char-tbb-pre-17-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 17.3 - rank=10-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="substring(following-sibling::node()[1],1,1) = ' '">
+                        <xsl:text> err-char-tbb-post-17-3</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="1"/>
+            </xsl:apply-templates>
+            <xsl:if test="not(@closed = 'false')">
+                <xsl:value-of select="concat('\',@style,'*')"/>
             </xsl:if>
-         </xsl:attribute>
-         <xsl:text>\fig </xsl:text>
-         <xsl:element name="span">
-            <xsl:attribute name="class">fig-attrib</xsl:attribute>
-            <xsl:apply-templates select="@*"/>
-         </xsl:element>
-         <xsl:text>\fig*</xsl:text>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="link[@style = 'jmp']">
-      <xsl:variable name="containsclickhere" select="contains(.,'Click here')"/>
-      <xsl:comment> containsclickhere = <xsl:value-of select="concat($sq,$containsclickhere,$sq,' ')"/>
+        </xsl:element>
+    </xsl:template>
+    <!-- cell @style=tc1 -->
+    <xsl:template match="cell[@style = 'tc1']">
+        <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
+        <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
+        <xsl:variable name="strlenb4chap" select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
+        <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="gjparent" select="parent::para[@style = 'gj']"/>
-      <xsl:comment> gjparent = <xsl:value-of select="concat($sq,$gjparent,$sq,' ')"/>
+        <xsl:variable name="chappos" select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
+        <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
       </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
+        <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="span">
-         <xsl:text>\jmp </xsl:text>
-         <xsl:apply-templates select="node()"/>
-         <xsl:text>|</xsl:text>
-         <xsl:element name="span">
-            <xsl:attribute name="class">linkref</xsl:attribute>
-            <xsl:value-of select="@link-href"/>
-         </xsl:element>
-         <xsl:text>\jmp*</xsl:text>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=sbx -->
-   <xsl:template match="char[@style = 'sbx']">
-      <xsl:param name="embedded"/>
-      <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
+        <xsl:variable name="countprenode" select="count(preceding-sibling::node())"/>
+        <xsl:comment> countprenode = <xsl:value-of select="concat($sq,$countprenode,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="strlenb4chap"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
+        <xsl:variable name="countsbx" select="count(*[@style = 'sbx'])"/>
+        <xsl:comment> countsbx = <xsl:value-of select="concat($sq,$countsbx,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="chappos"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
-      <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
+        <xsl:variable name="counttbb" select="count(*[@style = 'tbb'])"/>
+        <xsl:comment> counttbb = <xsl:value-of select="concat($sq,$counttbb,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+        <xsl:variable name="hascvref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
+        <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasspacecref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
+        <xsl:variable name="hasspacecref" select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
+        <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="numbfirst"
-                    select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
+        <xsl:variable name="notmultirowtable" select="not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])"/>
+        <xsl:comment> notmultirowtable = <xsl:value-of select="concat($sq,$notmultirowtable,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+        <xsl:variable name="notsbxchild" select="not(child::*[@style = 'sbx'])"/>
+        <xsl:comment> notsbxchild = <xsl:value-of select="concat($sq,$notsbxchild,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+        <xsl:variable name="numbfirst" select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
+        <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
+        <xsl:variable name="pos" select="pos"/>
+        <xsl:comment> pos = <xsl:value-of select="concat($sq,$pos,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refcolonvr1"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
+        <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+        <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refwordschapcolon"
-                    select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
+        <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+        <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
       </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
+        <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 8.4.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascvref and not(contains($preverse,'-')) and contains(.,'–')">
-                  <xsl:if test="$refcolonvr1 != $preverse">
-                     <xsl:text> err-char-sbx-mid-8-4-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 8.4.4 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascvref and not(contains($preverse,'-'))  and not(contains(.,'–'))">
-                  <xsl:if test="$refcolonv != $preverse">
-                     <xsl:text> err-char-sbx-mid-8-4-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 8.4.5 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hasspacecref  and $hascvref ">
-                  <xsl:if test="$refwordschapcolon != $prechapter">
-                     <xsl:text> err-char-sbx-mid-8-4-5</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 8.4.7 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$numbfirst and $hascvref">
-                  <xsl:if test="$refchapcolon != $prechapter">
-                     <xsl:text> err-char-sbx-mid-8-4-7</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style= -->
-   <xsl:template match="char">
-      <xsl:param name="embedded"/>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        <xsl:variable name="refcolonvnumb" select="translate(substring-after(text(),':'),$validvlet,'')"/>
+        <xsl:comment> refcolonvnumb = <xsl:value-of select="concat($sq,$refcolonvnumb,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--style specific errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=tec -->
-   <xsl:template match="char[@style = 'tec']">
-      <xsl:param name="embedded"/>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
+        <xsl:variable name="refcolonvr1" select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
+        <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countpren2"
-                    select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
+        <xsl:variable name="refwordschapcolon" select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
+        <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpretec" select="count(preceding-sibling::*[@style = 'tec'])"/>
-      <xsl:comment> countpretec = <xsl:value-of select="concat($sq,$countpretec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasellipsis" select="contains(node()[not(self::*)],'…')"/>
-      <xsl:comment> hasellipsis = <xsl:value-of select="concat($sq,$hasellipsis,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
-      <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
-      <xsl:comment> lastchar2 = <xsl:value-of select="concat($sq,$lastchar2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postellipsisstring"
-                    select="normalize-space(concat(' ',substring-after(translate(node()[not(self::*)],':',''),'…'),' '))"/>
-      <xsl:comment> postellipsisstring = <xsl:value-of select="concat($sq,$postellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preellipsisstring"
-                    select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 10.2.1 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$countpresibnode &gt; 0">
-                  <xsl:text> err-char-tec-mid-10-2-1</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 11.1 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="translate(substring(.,1,1),$invalidtecfirstpunc,'%%') = '%'">
-                  <xsl:text> err-char-tec-mid-11-1</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 11.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="translate($lastchar2,$invalidtecendpunc,$invalidtecendpuncsub) = '%'">
-                  <xsl:text> err-char-tec-mid-11-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 20.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="*[@style = 'f']">
-                  <xsl:text> err-char-tec-mid-20-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.32 - rank=3-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="not($lastchar = ':')">
-                  <xsl:text> err-char-tec-mid-10-32</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.2.3 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$countpretec &gt; 0">
-                  <xsl:text> err-char-tec-pre-10-2-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.31 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$lastchar = ' '">
-                  <xsl:text> err-char-tec-mid-10-31</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=trs -->
-   <xsl:template match="char[@style = 'trs']">
-      <xsl:param name="embedded"/>
-      <xsl:variable name="pretec" select="concat(' ',preceding::*[@style = 'tec'][1])"/>
-      <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ellipsiscount"
-                    select="string-length(.)-string-length(translate(.,'…',''))"/>
-      <xsl:comment> ellipsiscount = <xsl:value-of select="concat($sq,$ellipsiscount,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split2ellipsisstring1" select="substring-before(.,'…')"/>
-      <xsl:comment> split2ellipsisstring1 = <xsl:value-of select="concat($sq,$split2ellipsisstring1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split2ellipsisstring2" select="substring-after(.,'…')"/>
-      <xsl:comment> split2ellipsisstring2 = <xsl:value-of select="concat($sq,$split2ellipsisstring2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="tecstringposttrs" select="substring-after($pretec,.)"/>
-      <xsl:comment> tecstringposttrs = <xsl:value-of select="concat($sq,$tecstringposttrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="tecstringpretrs" select="substring-before($pretec,.)"/>
-      <xsl:comment> tecstringpretrs = <xsl:value-of select="concat($sq,$tecstringpretrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split3ellipsisstring2"
-                    select="substring-before($split2ellipsisstring2,'…')"/>
-      <xsl:comment> split3ellipsisstring2 = <xsl:value-of select="concat($sq,$split3ellipsisstring2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split3ellipsisstring3"
-                    select="substring-after($split2ellipsisstring2,'…')"/>
-      <xsl:comment> split3ellipsisstring3 = <xsl:value-of select="concat($sq,$split3ellipsisstring3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split4ellipsisstring3"
-                    select="substring-before($split3ellipsisstring3,'…')"/>
-      <xsl:comment> split4ellipsisstring3 = <xsl:value-of select="concat($sq,$split4ellipsisstring3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="split4ellipsisstring4"
-                    select="substring-after($split3ellipsisstring3,'…')"/>
-      <xsl:comment> split4ellipsisstring4 = <xsl:value-of select="concat($sq,$split4ellipsisstring4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="curspfield" select="concat(' ',.)"/>
-      <xsl:comment> curspfield = <xsl:value-of select="concat($sq,$curspfield,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="teccharposttrs"
-                    select="translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> teccharposttrs = <xsl:value-of select="concat($sq,$teccharposttrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="teccharpretrs"
-                    select="translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> teccharpretrs = <xsl:value-of select="concat($sq,$teccharpretrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 10.4 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="not(preceding-sibling::*[@style = 'tec']) ">
-                  <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1' or $parent = 'hb1')">
-                     <xsl:text> err-char-trs-mid-10-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$ellipsiscount = 0 and not(contains($pretec,.))">
-                  <xsl:if test="not(contains($pretec,$curspfield) and $teccharposttrs = '$') or  not($teccharpretrs = '$' or $teccharposttrs = '$') ">
-                     <xsl:text> err-char-trs-mid-10-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.6.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$ellipsiscount = 1">
-                  <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split2ellipsisstring2))">
-                     <xsl:text> err-char-trs-mid-10-6-2</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.6.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$ellipsiscount = 2">
-                  <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split3ellipsisstring3))">
-                     <xsl:text> err-char-trs-mid-10-6-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 10.6.4 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$ellipsiscount = 3">
-                  <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split4ellipsisstring3) and contains($pretec,$split4ellipsisstring4))">
-                     <xsl:text> err-char-trs-mid-10-6-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=tei -->
-   <xsl:template match="char[@style = 'tei']">
-      <xsl:param name="embedded"/>
-      <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpren1"
-                    select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5"
-                    select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
-      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="parentpresibpos" select="count(parent::*/preceding-sibling::*)"/>
-      <xsl:comment> parentpresibpos = <xsl:value-of select="concat($sq,$parentpresibpos,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 10.5 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$countpren1 &gt; $countpres5 or $parentpresibpos &gt; $countpres5 ">
-                  <xsl:if test="contains($pren1tec,text()) and not($ancestor = 'p') and not($ancestor = 'f') and not($ancestor = 'qp') and not($ancestor = 'q1tn') and not($ancestor = 'q2tn') and not($ancestor = 'qns') and not($ancestor = 'b3')">
-                     <xsl:text> err-char-tei-mid-10-5</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=fr -->
-   <xsl:template match="char[@style = 'fr']">
-      <xsl:param name="embedded"/>
-      <xsl:variable name="hasbadcvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#.#')"/>
-      <xsl:comment> hasbadcvref = <xsl:value-of select="concat($sq,$hasbadcvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 15.7 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$hascvref or $hasbadcvref">
-                  <xsl:text> err-char-fr-mid-15-7</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=tbb -->
-   <xsl:template match="char[@style = 'tbb']">
-      <xsl:param name="embedded"/>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--common char errors-->
-            <!--ref 9.6 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> err-char--mid-9-6</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 26.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
-                  <xsl:text> err-char--mid-26-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--style specific errors-->
-            <!--ref 17.1.1 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="text() = '_'">
-                  <xsl:text> err-char-tbb--17-1-1</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 17.1.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="text() = '___' or text() = '____'">
-                  <xsl:text> err-char-tbb-mid-17-1-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 17.2 - rank=5-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="substring(preceding-sibling::node()[1],string-length(preceding-sibling::node()[1]),1) = ' '">
-                  <xsl:text> err-char-tbb-pre-17-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 17.3 - rank=10-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="substring(following-sibling::node()[1],1,1) = ' '">
-                  <xsl:text> err-char-tbb-post-17-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="1"/>
-         </xsl:apply-templates>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:value-of select="concat('\',@style,'*')"/>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- cell @style=tc1 -->
-   <xsl:template match="cell[@style = 'tc1']">
-      <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="strlenb4chap"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="chappos"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
-      <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
-      <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countprenode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countprenode = <xsl:value-of select="concat($sq,$countprenode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countsbx" select="count(*[@style = 'sbx'])"/>
-      <xsl:comment> countsbx = <xsl:value-of select="concat($sq,$countsbx,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="counttbb" select="count(*[@style = 'tbb'])"/>
-      <xsl:comment> counttbb = <xsl:value-of select="concat($sq,$counttbb,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hascvref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="hasspacecref"
-                    select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="notmultirowtable"
-                    select="not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])"/>
-      <xsl:comment> notmultirowtable = <xsl:value-of select="concat($sq,$notmultirowtable,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="notsbxchild" select="not(child::*[@style = 'sbx'])"/>
-      <xsl:comment> notsbxchild = <xsl:value-of select="concat($sq,$notsbxchild,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="numbfirst"
-                    select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pos" select="pos"/>
-      <xsl:comment> pos = <xsl:value-of select="concat($sq,$pos,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvnumb"
-                    select="translate(substring-after(text(),':'),$validvlet,'')"/>
-      <xsl:comment> refcolonvnumb = <xsl:value-of select="concat($sq,$refcolonvnumb,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvr1"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refwordschapcolon"
-                    select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">cell <xsl:value-of select="@style"/>
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">cell <xsl:value-of select="@style"/>
             <!--ref 4.4 - rank=-->
             <xsl:if test="preceding::chapter">
                <xsl:if test="count(following-sibling::cell) = 0 and @style = 'tc1'">
@@ -3044,18 +2995,18 @@
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
-         <xsl:text>\</xsl:text>
-         <xsl:value-of select="concat(@style,' ')"/>
-         <xsl:apply-templates select="node()"/>
-      </xsl:element>
-   </xsl:template>
-   <!-- cell @style= -->
-   <xsl:template match="cell">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">cell <xsl:value-of select="@style"/>
+            <xsl:text>\</xsl:text>
+            <xsl:value-of select="concat(@style,' ')"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:element>
+    </xsl:template>
+    <!-- cell @style= -->
+    <xsl:template match="cell">
+        <xsl:comment>
+            <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+        </xsl:comment>
+        <xsl:element name="span">
+            <xsl:attribute name="class">cell <xsl:value-of select="@style"/>
             <!--ref 9.5 - rank=-->
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
@@ -3071,109 +3022,105 @@
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
-         <xsl:text>\</xsl:text>
-         <xsl:value-of select="concat(@style,' ')"/>
-         <xsl:apply-templates select="node()"/>
-      </xsl:element>
-   </xsl:template>
-   <!-- row @style=tr -->
-   <xsl:template match="row[@style = 'tr']">
-      <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
-      <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
+            <xsl:text>\</xsl:text>
+            <xsl:value-of select="concat(@style,' ')"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:element>
+    </xsl:template>
+    <!-- row @style=tr -->
+    <xsl:template match="row[@style = 'tr']">
+        <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
+        <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="containspart" select="contains(.,'Part')"/>
-      <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
+        <xsl:variable name="containspart" select="contains(.,'Part')"/>
+        <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="containssection" select="contains(.,'Section')"/>
-      <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
+        <xsl:variable name="containssection" select="contains(.,'Section')"/>
+        <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="countpretable" select="count(parent::*/preceding-sibling::table)"/>
-      <xsl:comment> countpretable = <xsl:value-of select="concat($sq,$countpretable,$sq,' ')"/>
+        <xsl:variable name="countpretable" select="count(parent::*/preceding-sibling::table)"/>
+        <xsl:comment> countpretable = <xsl:value-of select="concat($sq,$countpretable,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hastrdivision"
-                    select="contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrdivision = <xsl:value-of select="concat($sq,$hastrdivision,$sq,' ')"/>
+        <xsl:variable name="hastrdivision" select="contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0"/>
+        <xsl:comment> hastrdivision = <xsl:value-of select="concat($sq,$hastrdivision,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hastrparagraph"
-                    select="contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrparagraph = <xsl:value-of select="concat($sq,$hastrparagraph,$sq,' ')"/>
+        <xsl:variable name="hastrparagraph" select="contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0"/>
+        <xsl:comment> hastrparagraph = <xsl:value-of select="concat($sq,$hastrparagraph,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hastrpart"
-                    select="contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrpart = <xsl:value-of select="concat($sq,$hastrpart,$sq,' ')"/>
+        <xsl:variable name="hastrpart" select="contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0"/>
+        <xsl:comment> hastrpart = <xsl:value-of select="concat($sq,$hastrpart,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hastrsection"
-                    select="contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrsection = <xsl:value-of select="concat($sq,$hastrsection,$sq,' ')"/>
+        <xsl:variable name="hastrsection" select="contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0"/>
+        <xsl:comment> hastrsection = <xsl:value-of select="concat($sq,$hastrsection,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="parentpostsib" select="parent::*/following-sibling::*[1]/@style"/>
-      <xsl:comment> parentpostsib = <xsl:value-of select="concat($sq,$parentpostsib,$sq,' ')"/>
+        <xsl:variable name="parentpostsib" select="parent::*/following-sibling::*[1]/@style"/>
+        <xsl:comment> parentpostsib = <xsl:value-of select="concat($sq,$parentpostsib,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
-      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
+        <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
+        <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="parentpresib2" select="parent::*/preceding-sibling::*[2]/@style"/>
-      <xsl:comment> parentpresib2 = <xsl:value-of select="concat($sq,$parentpresib2,$sq,' ')"/>
+        <xsl:variable name="parentpresib2" select="parent::*/preceding-sibling::*[2]/@style"/>
+        <xsl:comment> parentpresib2 = <xsl:value-of select="concat($sq,$parentpresib2,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 4.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="cell[2]/@style = 'tc1'">
-                  <xsl:text> err-row-tr--4-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 4.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="cell[1]/@style = 'tc2'">
-                  <xsl:text> err-row-tr--4-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 6.8 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="$containspart or $containsdivision or $containssection">
-                  <xsl:if test="not($parentpostsib = 'ntn')">
-                     <xsl:text> err-row-tr-post-6-8</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ')"/>
-         <xsl:apply-templates select="node()">
-            <xsl:with-param name="embedded" select="0"/>
-         </xsl:apply-templates>
-      </xsl:element>
-   </xsl:template>
-   <xsl:template match="verse[@style = 'v']">
-      <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
+        <xsl:element name="div">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--ref 4.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="cell[2]/@style = 'tc1'">
+                        <xsl:text> err-row-tr--4-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 4.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="cell[1]/@style = 'tc2'">
+                        <xsl:text> err-row-tr--4-3</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 6.8 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="$containspart or $containsdivision or $containssection">
+                        <xsl:if test="not($parentpostsib = 'ntn')">
+                            <xsl:text> err-row-tr-post-6-8</xsl:text>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="embedded" select="0"/>
+            </xsl:apply-templates>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="verse[@style = 'v']">
+        <xsl:variable name="parent" select="parent::*/@style"/>
+        <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
       </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="@style"/>
-            <!--ref 9.2 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(@number,'–')">
-                  <xsl:text> err-verse-v-mid-9-2</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 9.3 - rank=-->
-            <xsl:if test="preceding::chapter">
-               <xsl:if test="contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$-#') or contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$')">
-                  <xsl:text> err-verse-v-mid-9-3</xsl:text>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:value-of select="concat('\',@style,' ',@number,' ')"/>
-      </xsl:element>
-      <xsl:element name="verse">
-         <xsl:attribute name="number">
-            <xsl:value-of select="@number"/>
-         </xsl:attribute>
-         <xsl:attribute name="style">
-            <xsl:value-of select="@style"/>
-         </xsl:attribute>
-      </xsl:element>
-   </xsl:template>
+        <xsl:element name="span">
+            <xsl:attribute name="class">
+                <xsl:value-of select="@style"/>
+                <!--ref 9.2 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(@number,'–')">
+                        <xsl:text> err-verse-v-mid-9-2</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+                <!--ref 9.3 - rank=-->
+                <xsl:if test="preceding::chapter">
+                    <xsl:if test="contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$-#') or contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$')">
+                        <xsl:text> err-verse-v-mid-9-3</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ',@number,' ')"/>
+        </xsl:element>
+        <xsl:element name="verse">
+            <xsl:attribute name="number">
+                <xsl:value-of select="@number"/>
+            </xsl:attribute>
+            <xsl:attribute name="style">
+                <xsl:value-of select="@style"/>
+            </xsl:attribute>
+        </xsl:element>
+    </xsl:template>
 </xsl:stylesheet>
