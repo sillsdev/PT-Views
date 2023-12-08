@@ -51,6 +51,7 @@
         <xsl:comment select="concat(' ',name(),' @style=',@style,' ')"/>
         <xsl:variable name="pred" select="if (string-length(@style) &gt; 0) then concat('[@style = ',$sq,@style,$sq,']') else '' "/>
         <gen:template match="{name()}{$pred}">
+            <xsl:sequence select="f:note-start(@style)"/>
             <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
@@ -70,6 +71,7 @@
                     <gen:apply-templates select="node()"/>
                 </gen:element>
             </gen:element>
+            <xsl:sequence select="f:note-end(@style)"/>
         </gen:template>
     </xsl:template>
     <xsl:template match="note">
@@ -274,7 +276,7 @@
                         <gen:if test="{$t2}">
                             <gen:text>
                                 <xsl:text> </xsl:text>
-                                <xsl:value-of select="class"/>
+                                <xsl:value-of select="@class"/>
                             </gen:text>
                         </gen:if>
                     </gen:if>
@@ -419,9 +421,10 @@
 			.tre {text-decoration: underline;font-style:italic;}
 			.linkref {color:grey;}
 			.f {background:lightgrey}
-			.quote-error {background:orange;border-bottom:2pt solid red;}
-			.quote-error:after {content:'This quote in quote in the above footnote, should be single quoted.';}
-<xsl:apply-templates select="$g1//*[name() = $rowname]" mode="css"/>
+            <xsl:for-each select="$quotecheck">
+            <xsl:value-of select="f:quotecss(.)"/>
+            </xsl:for-each>
+            <xsl:apply-templates select="$g1//*[name() = $rowname]" mode="css"/>
             </style>
         </gen:template>
         <gen:template match="text()" mode="fntext">
@@ -430,6 +433,7 @@
         <gen:template match="*" mode="fntext">
             <gen:apply-templates select="node()" mode="fntext"/>
         </gen:template>
+        <gen:template match="*[@style = 'tec']" mode="fntext"/>
     </xsl:template>
     <xsl:template name="output-xml">
         <xsl:result-document href="{f:file2uri($xml-pre)}" format="xml">
@@ -590,7 +594,7 @@
     <xsl:function name="f:note-start">
         <xsl:param name="style"/>
         <xsl:choose>
-            <xsl:when test="$style = 'f'">
+            <xsl:when test="$style = $quotecheck">
                 <gen:variable name="fnstring">
                     <gen:apply-templates select="node()" mode="fntext"/>
                 </gen:variable>
@@ -604,13 +608,14 @@
         <xsl:variable name="start" select="1"/>
         <xsl:variable name="end" select="10"/>
         <xsl:choose>
-            <xsl:when test="$style = 'f'">
+            <xsl:when test="$style = $quotecheck">
                 <xsl:for-each select="$start to $end">
                     <gen:if test="contains($indqstr{.},'“') and $sqdiff{.} = 0">
                         <gen:text> </gen:text>
                         <gen:element name="span">
                             <gen:attribute name="class">
-                                <gen:text>quote-error</gen:text>
+                                <gen:value-of select="concat('quote-error-',@style)"/>
+                                <!-- <gen:text>quote-error</gen:text> -->
                             </gen:attribute>
                             <gen:value-of select="concat('“',substring-after($indqstr{.},'“'),'”')"/>
                         </gen:element>
@@ -619,5 +624,12 @@
             </xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
+    </xsl:function>
+    <xsl:function name="f:quotecss">
+        <xsl:param name="style"/>
+        <xsl:value-of select="concat('.quote-error-',$style,' {background:orange;border-top:2pt solid red;}&#10;')"/>
+        <xsl:value-of select="concat('.quote-error-',$style,':after {content:',$sq,'This double quote in the above \\',$style,' ',f:keyvalue($style2element,$style),', is preceeded by an opening double quote, it should either be single quoted or there is some preceding error.',$sq,';}&#10;')"/>
+        <!-- .quote-error-ntn {background:orange;border-top:2pt solid red;}
+			.quote-error-f:after {content:'This quote in quote in the above \\f footnote, probably should be single quoted.';} -->
     </xsl:function>
 </xsl:stylesheet>
