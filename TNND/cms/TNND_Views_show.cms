@@ -1,7 +1,7 @@
 \check TNND Show Views
 \submenu Custom Views
 \script TNND_Views_show.py
-\description (Ignore the "Input Project" box above.) This tool will show hidden TNND Views in the Views menus, after Paratext is restarted. There are seven TNND views. \n\n TNND Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
+\description (Ignore the "Input Project" box above.) This tool will show hidden TNND Views in the Views menus, after Paratext is restarted. There are two TNND views. \n\n TNND Views aids Translation Notes Development content creators and checkers in viewing the data in various ways.
 \helpFile TNND-info.pdf
 \noText
 \rank 10

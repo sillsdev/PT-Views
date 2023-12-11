@@ -27,7 +27,6 @@ This additional tool for Paratext is designed to help content creators and check
 - Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 
 
-
 ## Using the TNND Views within Paratext
 
 - If the installation was successful, the new views should be available as shown below:
@@ -36,30 +35,30 @@ This additional tool for Paratext is designed to help content creators and check
 
 - If you are using Paratext 9, then it is highly recommended to open an additional TNND window as an Autohide window:
 ![PT-auto-hide-setup](images/PT-auto-hide-setup.png)
-- This will enable you to keep your normal workspace uncluttered, but the Table view will be easy to access from the right-hand column:
-![PT-show-view](images/PT-show-view.png)
+- This will enable you to keep your normal workspace uncluttered, but the **TNND-tag-errrors** view or the **TNND-count-words view** will be easy to access from the right-hand column:
+![PT-show-view](images/PT-show-view.png) ![PT-show-view2](images/PT-show-view2.png)
 
 
 ## There are four **Tools > Custom Tools > Custom Views**
-- Hide TNND Views 
-- Show TNND Views 
-- Uninstall TNND Views 
-- Update TNND Views
+- TNND Hide Views 
+- TNND Show Views 
+- TNND Uninstall Views 
+- TNND Update Views
 
 ### Hiding TNND Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
 - In  **Custom tools** click on **Custom Views**
-- Click on **Hide TNND Views**
-- Click the **OK** on the **Hide TNND Views** dialog
+- Click on **TNND Hide Views**
+- Click the **OK** on the **TNND Hide Views** dialog
 - Restart Paratext
 
 ### Show TNND Views tha were previously hidden
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
 - In  **Custom tools** click on **Custom Views**
-- Click on **Show TNND Views**
-- Click the **OK** on the **Show TNND Views** dialog
+- Click on **TNND Show Views**
+- Click the **OK** on the **TNND Show Views** dialog
 - Restart Paratext
 
 ## Uninstall TNND Views
@@ -74,12 +73,12 @@ This additional tool for Paratext is designed to help content creators and check
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
 - In  **Custom tools** click on **Custom Views**
-- Click on **Update TNND Views**
-- Click the **OK** on the **Show TNND Views** dialog
+- Click on **TNND Update Views**
+- Click the **OK** on the **TNND Show Views** dialog
 - Restart Paratext
 
 
 ---
 Credits: Concept by Mark Penny, Design and Programming by Ian McQuay, TNND direction by Steve Christensen
 
-More details and further [updates](https://github.com/SILAsiaPub/PT-Views/releases) will be available at the [TNND Views GitHub](https://github.com/SILAsiaPub/PT-Views/tree/master/TNND) site. 
+More details and further [updates](https://github.com/sillsdev/PT-Views/releases) will be available at the [TNND Views GitHub](https://github.com/sillsdev/PT-Views/tree/master/TNND) site. 

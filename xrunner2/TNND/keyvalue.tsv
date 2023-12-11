@@ -190,3 +190,8 @@ usxchap_list	PS2	151
 usxchap_list	ODA	1
 usxchap_list	PSS	1
 usxchap_list	GLO	0
+style2element_list	f	footnote
+style2element_list	n1	paragraph
+style2element_list	n2	paragraph
+style2element_list	n3	paragraph
+style2element_list	ntn	paragraph
