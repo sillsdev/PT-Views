@@ -105,6 +105,7 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="para[@style='ml1' or @style = 'p']" mode="meaning">
+        <!-- Output the marker selected relative to preceding \sl1 -->
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="*">
@@ -151,6 +152,9 @@
             <xsl:value-of select="*/*/*[@style = 'sbx'][1]"/>
         </xsl:element>
     </xsl:template>
+    <xsl:template match="annot">
+        <xsl:apply-templates select="node()"/>
+    </xsl:template>
     <xsl:template name="styles">
         <style type="text/css">
 		.sub {color:saddlebrown}
@@ -165,3 +169,4 @@
         </style>
     </xsl:template>
 </xsl:stylesheet>
+
