@@ -175,7 +175,7 @@ goto :eof
   echo.
   if exist "%ptpath%Views\%~1.old" del "%ptpath%Views\%~1.old"
   if exist "%ptpath%Views\%~1" ren "%ptpath%Views\%~1" "%~1.old"
-  call curl %baseurl%/%~1 > "%ptpath%Views\%~1"
+  call curl %baseurl%/%~1 --ssl-no-revoke > "%ptpath%Views\%~1"
   if exist "%ptpath%Views\%~1" echo %green%%~1 %reset% updated in %ptpath%Views folder.
 goto :eof
 
