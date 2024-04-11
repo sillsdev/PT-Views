@@ -321,6 +321,14 @@
 .err-char-tbb-pre-17-2::after {content:'There should not be a space before a \\tbb. #17.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tbb-post-17-3 {background:orange;border-right:4pt solid red;}
 .err-char-tbb-post-17-3::after {content:'There should not be a space after a \\tbb*. #17.3';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-rgi-pre-28-1 {background:orange;border-left:4pt solid red;}
+.err-char-rgi-pre-28-1::after {content:'The \\rgi should be immediately after the word it modifies. #28.1';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-rgi-post-28-3 {background:orange;border-right:4pt solid red;}
+.err-char-rgi-post-28-3::after {content:'A letter should not immediately follow an \\rgi*. #28.3';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-rgm-pre-28-2 {background:orange;border-left:4pt solid red;}
+.err-char-rgm-pre-28-2::after {content:'The \\rgm should be immediately after the word it modifies. #28.2';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-rgm-post-28-4 {background:orange;border-right:4pt solid red;}
+.err-char-rgm-post-28-4::after {content:'A letter should not immediately follow an \\rgm*. #28.4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-cell-tc1-mid-4-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-cell-tc1-mid-4-4::after {content:'A \\tc1 must contain either an \\sbx or the word ‘Paragraph’. #4.4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-cell-tc1-mid-4-7 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -429,7 +437,7 @@
          <xsl:attribute name="class">table<!--ref 6.1 - rank=--><xsl:if test="preceding::chapter">
                <xsl:if test="$containspart and $hasfollowingtable">
                   <xsl:if test="$notposttabledivision">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-table--post-6-1</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -437,7 +445,7 @@
             <xsl:if test="preceding::chapter">
                <xsl:if test="$containsdivision and $hasfollowingtable">
                   <xsl:if test="$notposttablesection">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-table--post-6-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -445,7 +453,7 @@
             <xsl:if test="preceding::chapter">
                <xsl:if test="$containssection and $hasfollowingtable">
                   <xsl:if test="$notposttableparagraph">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-table--post-6-3</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -453,7 +461,7 @@
             <xsl:if test="preceding::chapter">
                <xsl:if test="($containsdivision or $containspart or $containssection or $containsparagraph) and not($presib2 = 'c')">
                   <xsl:if test="not($presib = 'b' or ($presib = 'b' and $presib2 = 'b3') or ($presib = 'b' and $presib2 = 'p'))">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-table--pre-7-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -529,7 +537,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hascvref and $numbfirst ">
                      <xsl:if test="$refchapcolon != $prechapter">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -537,7 +545,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
                      <xsl:if test="$refcolonv != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-21</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -545,7 +553,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
                      <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-21-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -553,7 +561,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$prevhyphen and $refvendash">
                      <xsl:if test="$refcolonvr1 != $preverser1">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-23</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -561,7 +569,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains($preverse,'-') and not(contains(.,'–'))">
                      <xsl:if test="not((translate(substring-after(.,':'),$letlc,'') = substring-before($preverse,'-') or  translate(substring-after(.,':'),$letlc,'') &gt; substring-before($preverse,'-')) and ( translate(substring-after(.,':'),$letlc,'') = substring-after($preverse,'-') )or  translate(substring-after(.,':'),$letlc,'') &lt; substring-after($preverse,'-') )">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-26</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -569,7 +577,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="string-length(translate(.,$validcvnumbletpunc,'')) &gt; 0">
                      <xsl:if test="not($hasreordered)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-3</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -577,7 +585,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="string-length(translate(text()[1],$validreorderedcvnumbletpunc,'')) &gt; 0">
                      <xsl:if test="$hasreordered and $hastbb">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-3-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -585,7 +593,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="string-length(translate(.,$validreorderedcvnumbletpunc,'')) &gt; 0">
                      <xsl:if test="$hasreordered and not($hastbb)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-3-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -593,7 +601,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not($prevhyphen) and $refvendash and not($hasvlet)">
                      <xsl:if test="$refcolonvr1 != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s5-mid-8-22</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -608,7 +616,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -616,7 +624,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -645,7 +653,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -653,7 +661,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -696,7 +704,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -704,7 +712,7 @@
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -730,6 +738,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
       <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
@@ -763,16 +775,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
       <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
       <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
       <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
@@ -798,11 +809,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
       <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
       <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
       <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
@@ -828,12 +839,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
       <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
       <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff10"
+                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
@@ -867,10 +879,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
       <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -895,7 +903,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -903,7 +911,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1051,7 +1059,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1059,7 +1067,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1108,7 +1116,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1116,7 +1124,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1161,7 +1169,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1169,7 +1177,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1199,6 +1207,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
       <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
@@ -1232,10 +1244,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
@@ -1260,19 +1268,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
       <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="positiontec" select="positiontec"/>
-      <xsl:comment> positiontec = <xsl:value-of select="concat($sq,$positiontec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postcharn1tec"
-                    select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn1tec = <xsl:value-of select="concat($sq,$postcharn1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="precharn1tec"
-                    select="translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
       <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
       <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
@@ -1298,11 +1298,22 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
       <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
+      <xsl:variable name="positiontec" select="positiontec"/>
+      <xsl:comment> positiontec = <xsl:value-of select="concat($sq,$positiontec,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postcharn1tec"
+                    select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+      <xsl:comment> postcharn1tec = <xsl:value-of select="concat($sq,$postcharn1tec,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="precharn1tec"
+                    select="translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)"/>
+      <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
       <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
       <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
@@ -1328,12 +1339,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
       <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
       <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff10"
+                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
@@ -1367,10 +1379,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
       <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1382,7 +1390,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$counttec &gt; 0 and contains($pren1tec,$curtec) and $precharn1tec != '$' and $postcharn1tec != '$'">
                      <xsl:if test="$countpres5 &lt; $countpren1">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n1-mid-12-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1390,7 +1398,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="position() != last()">
                      <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'n1' or @style = 'n2' or @style = 'n3' or @style = 'ntn' or @style = 'qp' or @style = 'q1tn' or @style = 'q2tn' or @style = 'b' or @style = 'b2' or @style = 'b3' or @style = 'p' or @style = 's5' or @style = 'li1' or @style = 'hb1' or @style = 's3' or name() = 'chapter' or @style = 'gra'])">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n1-post-14-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1411,7 +1419,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1419,7 +1427,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1543,6 +1551,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
       <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="dqstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
       <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
@@ -1574,10 +1586,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="pren2tec"
                     select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
@@ -1624,24 +1632,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
       <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="postcharn2tec"
-                    select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn2tec = <xsl:value-of select="concat($sq,$postcharn2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="precharn2tec"
-                    select="translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn2tec = <xsl:value-of select="concat($sq,$precharn2tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="preellipsisstring"
-                    select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="pren1tec"
-                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
       <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
       <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
@@ -1667,11 +1662,27 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
       <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
+      <xsl:variable name="postcharn2tec"
+                    select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
+      <xsl:comment> postcharn2tec = <xsl:value-of select="concat($sq,$postcharn2tec,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="precharn2tec"
+                    select="translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)"/>
+      <xsl:comment> precharn2tec = <xsl:value-of select="concat($sq,$precharn2tec,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="preellipsisstring"
+                    select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
+      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="pren1tec"
+                    select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
+      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
       <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
       <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
@@ -1697,12 +1708,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
       <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
       <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff10"
+                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
@@ -1736,10 +1748,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
       <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1751,7 +1759,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
                      <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and $hastecversion">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-mid-12-7-3</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1759,7 +1767,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
                      <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and $hastecversion">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-mid-12-7-4</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1767,7 +1775,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$countpres5 &gt; $countpren1">
                      <xsl:if test="child::*[@style = 'tec']">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-pre-12-8-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1781,7 +1789,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren1tec,$curtec))">
                      <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and not($hastecversion)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-mid-12-7</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1789,7 +1797,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)) ">
                      <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and not($hastecversion)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-mid-12-7-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1797,7 +1805,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$counttec &gt; 0 and contains($pren2tec,$curtec) and $precharn2tec != '$' and $postcharn2tec != '$'">
                      <xsl:if test="$countpren1 &lt; $countpren2 and $countpres5 &lt; $countpren2">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n2-mid-12-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1806,7 +1814,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1814,7 +1822,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -1938,6 +1946,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
       <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="dqstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
       <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
@@ -1969,10 +1981,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
@@ -2022,6 +2030,36 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
       <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
+      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
+      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
+      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
+      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
+      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
+      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
+      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
+      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="lenchildtec" select="string-length(*[@style = 'tec']/text())"/>
       <xsl:comment> lenchildtec = <xsl:value-of select="concat($sq,$lenchildtec,$sq,' ')"/>
       </xsl:comment>
@@ -2048,38 +2086,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)"/>
       <xsl:comment> validtecfirst = <xsl:value-of select="concat($sq,$validtecfirst,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
       <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
       <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
@@ -2105,12 +2116,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
       <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
       <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff10"
+                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
@@ -2144,10 +2156,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
       <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -2159,7 +2167,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not((contains($pren2tec,$curtecverpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
                      <xsl:if test="$hastecellipsis and $hastecchild  and $hastecversion">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-12-6-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2167,7 +2175,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
                      <xsl:if test="not($hastecellipsis) and $hastecchild and $hastecversion">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-12-6-3</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2181,7 +2189,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$counttec = 0">
                      <xsl:if test="$counttrs = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-10-1-5</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2189,7 +2197,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$node1tec and $counttec = 1">
                      <xsl:if test="$validtecfirst != '$'">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-10-2-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2197,7 +2205,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(contains($pren2tec,$curtec) or contains($pren1tec,$curtec))">
                      <xsl:if test="$hastecchild and not($hastecversion) and not($hastecellipsis)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-12-6</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2205,7 +2213,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not((contains($pren2tec,$curtecpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)))">
                      <xsl:if test="$countpres5 &lt; $countpren2 and $countpres5 &lt; $countpren1 and $hastecellipsis and $hastecchild and not($hastecversion)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-n3-mid-12-6-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2220,7 +2228,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2228,7 +2236,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2411,7 +2419,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
                      <xsl:if test="$refcolonv != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-4</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2419,7 +2427,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
                      <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-4-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2427,7 +2435,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hassubvrange and $hascvref ">
                      <xsl:if test="$refcolonvlet != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-5</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2435,7 +2443,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="($refvendash  and ($lastchartype = '#')) or (contains($reftype,'#$–#')  and ($lastchartype = '#'))">
                      <xsl:if test="$refcolonvr2 != $preverse">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-6</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2449,7 +2457,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hascvref and $hasspacecref">
                      <xsl:if test="$refwordschapcolon != $prechapter">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-3</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2457,7 +2465,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hascvref and $lastchartype  = '$'">
                      <xsl:if test="$lastchar != substring($pres5text,string-length($pres5text),1)">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-s3-mid-19-7</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2478,7 +2486,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2486,7 +2494,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2545,11 +2553,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
       <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="postsib2" select="postsib2"/>
-      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
       <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postsib2" select="postsib2"/>
+      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
       <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
@@ -2595,7 +2603,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$curverse = 1">
                      <xsl:if test="$postsib = 'b'">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-b3-post-7-1-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2603,7 +2611,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$curverse != 1">
                      <xsl:if test="$presib = 'b'">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-b3-pre-7-1-3</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2611,7 +2619,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="($curverse != 1) and $posttable">
                      <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-b3-post-7-10-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2619,7 +2627,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
                      <xsl:if test="$posts5v != $curvr1">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-b3-post-15-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2627,7 +2635,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
                      <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-b3-post-15-5</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2642,7 +2650,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2650,7 +2658,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2763,7 +2771,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$curverse = 1">
                      <xsl:if test="$postsib = 'b'">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-p-post-7-1-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2771,7 +2779,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$curverse != 1">
                      <xsl:if test="$presib = 'b'">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-p-pre-7-1-4</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2779,7 +2787,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="($curverse != 1) and $posttable">
                      <xsl:if test="not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-p-post-7-10-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2787,7 +2795,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)">
                      <xsl:if test="$posts5v != $curvr1">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-p-post-15-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2795,7 +2803,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) ">
                      <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-p-post-15-6</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2810,7 +2818,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2818,7 +2826,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2856,7 +2864,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$countfig + $countf = 1">
                      <xsl:if test="$countf = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-gra-mid-22-8</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2864,7 +2872,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$countfig + $countf = 1">
                      <xsl:if test="$countfig = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-gra-mid-22-10-</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2872,7 +2880,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="$countfig + $countf = 2">
                      <xsl:if test="$countnode != 2">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para-gra-mid-22-2</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2881,7 +2889,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                      <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-9-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2889,7 +2897,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="preceding::chapter">
                   <xsl:if test="not(@style = 'b') and not(@style = 'b2') ">
                      <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                        <xsl:text> </xsl:text>
+                        <xsl:text> err-para--mid-23-1</xsl:text>
                      </xsl:if>
                   </xsl:if>
                </xsl:if>
@@ -2914,6 +2922,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
       <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="dqstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
@@ -2947,10 +2959,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
       <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
       </xsl:comment>
@@ -2959,6 +2967,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
       <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
+      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
       <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
@@ -2984,11 +2995,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
       <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
       <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
       <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
@@ -3014,12 +3025,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
       <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
       <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="sqdiff10"
+                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
@@ -3053,10 +3065,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
       <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -3067,7 +3075,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3081,7 +3089,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$graparent">
                   <xsl:if test="not(preceding-sibling::*[1][@style = 'fig'] )">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-note-f-pre-22-3</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3244,7 +3252,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3264,7 +3272,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hascoloncvref and not($hasspaceinref)">
                   <xsl:if test="$refattverse != $preverse">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-figure-fig-mid-22-7-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3278,7 +3286,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hascoloncvref and not($hasspaceinref)">
                   <xsl:if test="$refattchap != $prechapter">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-figure-fig-mid-22-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3380,7 +3388,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3395,7 +3403,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hascvref and not(contains($preverse,'-')) and contains(.,'–')">
                   <xsl:if test="$refcolonvr1 != $preverse">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-sbx-mid-8-4-3</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3403,7 +3411,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hascvref and not(contains($preverse,'-'))  and not(contains(.,'–'))">
                   <xsl:if test="$refcolonv != $preverse">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-sbx-mid-8-4-4</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3411,7 +3419,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hasspacecref  and $hascvref ">
                   <xsl:if test="$refwordschapcolon != $prechapter">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-sbx-mid-8-4-5</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3419,7 +3427,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$numbfirst and $hascvref">
                   <xsl:if test="$refchapcolon != $prechapter">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-sbx-mid-8-4-7</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3444,7 +3452,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3510,7 +3518,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3573,12 +3581,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- char @style=trs -->
    <xsl:template match="char[@style = 'trs']">
-      <xsl:variable name="pretec" select="concat(' ',preceding::*[@style = 'tec'][1])"/>
-      <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ellipsiscount"
                     select="string-length(.)-string-length(translate(.,'…',''))"/>
       <xsl:comment> ellipsiscount = <xsl:value-of select="concat($sq,$ellipsiscount,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="pretec" select="concat(' ',preceding::*[@style = 'tec'][1])"/>
+      <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="split2ellipsisstring1" select="substring-before(.,'…')"/>
       <xsl:comment> split2ellipsisstring1 = <xsl:value-of select="concat($sq,$split2ellipsisstring1,$sq,' ')"/>
@@ -3644,7 +3652,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3659,7 +3667,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="not(preceding-sibling::*[@style = 'tec']) ">
                   <xsl:if test="not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1' or $parent = 'hb1')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-trs-mid-10-4</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3667,7 +3675,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$ellipsiscount = 0 and not(contains($pretec,.))">
                   <xsl:if test="not(contains($pretec,$curspfield) and $teccharposttrs = '$') or  not($teccharpretrs = '$' or $teccharposttrs = '$') ">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-trs-mid-10-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3675,7 +3683,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$ellipsiscount = 1">
                   <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split2ellipsisstring2))">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-trs-mid-10-6-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3683,7 +3691,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$ellipsiscount = 2">
                   <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split3ellipsisstring3))">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-trs-mid-10-6-3</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3691,7 +3699,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$ellipsiscount = 3">
                   <xsl:if test="not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split4ellipsisstring3) and contains($pretec,$split4ellipsisstring4))">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-trs-mid-10-6-4</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3740,7 +3748,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3755,7 +3763,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$countpren1 &gt; $countpres5 or $parentpresibpos &gt; $countpres5 ">
                   <xsl:if test="contains($pren1tec,text()) and not($ancestor = 'p') and not($ancestor = 'f') and not($ancestor = 'qp') and not($ancestor = 'q1tn') and not($ancestor = 'q2tn') and not($ancestor = 'qns') and not($ancestor = 'b3')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char-tei-mid-10-5</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3788,7 +3796,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3826,7 +3834,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-char--mid-9-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3859,6 +3867,140 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="substring(following-sibling::node()[1],1,1) = ' '">
                   <xsl:text> err-char-tbb-post-17-3</xsl:text>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:apply-templates select="node()"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
+      </xsl:element>
+   </xsl:template>
+   <!-- char @style=rgi -->
+   <xsl:template match="char[@style = 'rgi']">
+      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
+      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
+      <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
+      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
+      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
+      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:comment>
+         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+      </xsl:comment>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--common char errors-->
+            <!--ref 9.6 - rank=-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                     <xsl:text> err-char--mid-9-6</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 26.2 - rank=5-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                  <xsl:text> err-char--mid-26-2</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--style specific errors-->
+            <!--ref 28.1 - rank=1-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="$presibnode1 = $presibtext1">
+                  <xsl:if test="translate($pretextlastchar,' ,.?!):”’','#########') = '#'">
+                     <xsl:text> err-char-rgi-pre-28-1</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 28.3 - rank=2-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="$postsibnode1 = $postsibtext1">
+                  <xsl:if test="translate($postchar1,$letulc,$letulcsub) = '$'">
+                     <xsl:text> err-char-rgi-post-28-3</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:apply-templates select="node()"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:value-of select="concat('\',@style,'*')"/>
+         </xsl:if>
+      </xsl:element>
+   </xsl:template>
+   <!-- char @style=rgm -->
+   <xsl:template match="char[@style = 'rgm']">
+      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
+      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
+      <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
+      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
+      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
+      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:comment>
+         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+      </xsl:comment>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+            <!--common char errors-->
+            <!--ref 9.6 - rank=-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="contains(translate(.,$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                     <xsl:text> err-char--mid-9-6</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 26.2 - rank=5-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
+                  <xsl:text> err-char--mid-26-2</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--style specific errors-->
+            <!--ref 28.2 - rank=1-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="$presibnode1 = $presibtext1">
+                  <xsl:if test="translate($pretextlastchar,' ,.?!):”’','#########') = '#'">
+                     <xsl:text> err-char-rgm-pre-28-2</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 28.4 - rank=2-->
+            <xsl:if test="preceding::chapter">
+               <xsl:if test="$postsibnode1 = $postsibtext1">
+                  <xsl:if test="translate($postchar1,$letulc,$letulcsub) = '$'">
+                     <xsl:text> err-char-rgm-post-28-4</xsl:text>
+                  </xsl:if>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -3946,7 +4088,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="count(following-sibling::cell) = 0 and @style = 'tc1'">
                   <xsl:if test="not(*[@style = 'sbx'] or contains(text(),'Paragraph'))">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-4-4</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3954,7 +4096,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$countsbx &gt; 1">
                   <xsl:if test="$counttbb + 1 != $countsbx">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-4-7</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3962,7 +4104,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$countsbx = 1">
                   <xsl:if test="count(*/*[@style = '+tbb']) = 0 and $counttbb = 0">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-4-8</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3970,7 +4112,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hasspacecref and $hascvref and not(contains($preverse,'-')) and contains(.,'–') and $notsbxchild">
                   <xsl:if test="$refcolonvr1 != $preverse">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-8-4-1</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3978,7 +4120,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hascvref and not(contains($preverse,'-'))  and not(contains(.,'–')) and $containsparagraph">
                   <xsl:if test="$refcolonvnumb != $preverse">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-8-4-2</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3986,7 +4128,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$hasspacecref and $hascvref ">
                   <xsl:if test="$refwordschapcolon != $prechapter">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-8-4-6</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3994,7 +4136,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$numbfirst and $hascvref and $notmultirowtable and $containsparagraph">
                   <xsl:if test="$refchapcolon != $prechapter">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell-tc1-mid-8-4-8</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4009,7 +4151,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell--mid-9-5</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4035,7 +4177,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-cell--mid-9-5</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4108,7 +4250,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="preceding::chapter">
                <xsl:if test="$containspart or $containsdivision or $containssection">
                   <xsl:if test="not($parentpostsib = 'ntn')">
-                     <xsl:text> </xsl:text>
+                     <xsl:text> err-row-tr-post-6-8</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
