@@ -108,8 +108,7 @@
                 <xsl:for-each select="$array">
                     <!-- loop through the known data to find a match -->
                     <xsl:variable name="subarray" select="tokenize(.,$field-separator)"/>
-                    <xsl:if test="$subarray[number($find-column)] = $string">
-                        <!-- <xsl:value-of select="$subarray[number($return-column)]"/> -->
+                    <xsl:if test="string($subarray[number($find-column)]) = string($string)">
 <!-- modified to handle = in value string -->
                         <xsl:value-of select="substring-after(.,'=')"/>
                     </xsl:if>
@@ -289,4 +288,44 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:function name="f:emdashfix">
+        <xsl:param name="string"/>
+        <xsl:variable name="part" select="tokenize($string,'&#x2013;')"/>
+        <xsl:choose>
+            <xsl:when test="contains($string,'&#x2013;')">
+                <xsl:value-of select="concat($part[1],'--',$part[2])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$string"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    <xsl:function name="f:xsv2xml">
+        <!-- Handes one or more tsv or csv files and combines into one XML node-->
+        <xsl:param name="input"/><!-- $input must be an array -->
+        <xsl:param name="basepath"/><!-- $basepath must have trailing \ -->
+        <xsl:for-each select="$input">
+            <xsl:variable name="dataname" select="tokenize(.,'\.')"/>
+            <xsl:variable name="fileuri" select="concat($basepath,.)"/>
+            <xsl:variable name="setname" select="$dataname[1]"/>
+            <xsl:variable name="ext" select="$dataname[2]"/>
+            <xsl:variable name="line" select="f:file2lines($fileuri)"/>
+            <xsl:variable name="elename" select="if ($ext = 'csv') then f:csvTokenize($line[1]) else tokenize($line[1],'&#9;')"/>
+            <xsl:element name="{$setname}">
+                <xsl:for-each select="$line[position() gt 1]">
+                    <xsl:if test="string-length(.) gt 0">
+                        <xsl:element name="record">
+                            <xsl:variable name="field" select="if ($ext = 'csv') then f:csvTokenize(.) else tokenize(.,'&#9;')"/>
+                            <xsl:for-each select="$field">
+                                <xsl:variable name="pos" select="position()"/>
+                                <xsl:element name="{$elename[number($pos)]}">
+                                    <xsl:value-of select="."/>
+                                </xsl:element>
+                            </xsl:for-each>
+                        </xsl:element>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:element>
+        </xsl:for-each>
+    </xsl:function>
 </xsl:stylesheet>

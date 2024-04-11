@@ -6,7 +6,7 @@
      # Part of:  		Xrunner - https://github.com/SILAsiaPub/xrunner
      # Author:   	Ian McQuay <ian_mcquay@sil.org>
      # Created:  	2019-12-12
-     # Modified:		2021-03-25; 2023-02-27; 2023-11-10; 2023-11-18
+     # Modified:		2021-03-25; 2023-02-27; 2023-11-10; 2023-11-18; 2023-11-20
      # Copyright:	(c) 2019-2022 SIL International
      # Licence:  	<MIT>
      ################################################################ -->
@@ -65,7 +65,7 @@
                             <xsl:apply-templates select="//para[string-length(@style) = 0]/*"/>
                         </xsl:if>
                     </gen:attribute>
-                    <gen:value-of select="concat('\',@style,' ')"/>
+                    <xsl:sequence select="f:sfm(@style)"/>
                     <gen:apply-templates select="node()">
                         <gen:with-param name="embedded" select="0"/>
                     </gen:apply-templates>
@@ -75,7 +75,7 @@
     </xsl:template>
     <xsl:template match="note">
         <gen:template match="note[@style = '{@style}']">
-            <xsl:sequence select="f:getfntext(@style)"/>
+            <xsl:sequence select="f:note-start(@style)"/>
             <xsl:apply-templates select="doc($sfm-var-xml-url)//*[name() = $rowname]" mode="sfm-var">
                 <xsl:with-param name="style" select="@style"/>
                 <xsl:with-param name="element" select="name()"/>
@@ -87,9 +87,13 @@
                     <xsl:apply-templates select="$g1/char[string-length(@style) = 0]/*"/>
                     <xsl:apply-templates select="*"/>
                 </gen:attribute>
-                <xsl:call-template name="char-gen-note"/>
+                <xsl:sequence select="f:sfm-f(@style,@caller)"/>
+                <gen:apply-templates select="node()">
+                    <gen:with-param name="embedded" select="0"/>
+                </gen:apply-templates>
+                <xsl:sequence select="f:sfm-end(@style,@closed)"/>
             </gen:element>
-            <xsl:sequence select="f:fnqtests(@style,1,10)"/>
+            <xsl:sequence select="f:note-end(@style)"/>
         </gen:template>
     </xsl:template>
     <xsl:template match="cell">
@@ -111,8 +115,7 @@
                         <xsl:apply-templates select="//cell[string-length(@style) = 0]/*"/>
                     </xsl:if>
                 </gen:attribute>
-                <gen:text>\</gen:text>
-                <gen:value-of select="concat(@style,' ')"/>
+                <xsl:sequence select="f:sfm(@style)"/>
                 <gen:apply-templates select="node()"/>
             </gen:element>
         </gen:template>
@@ -153,11 +156,9 @@
                     <xsl:comment select="'style specific errors'"/>
                     <xsl:apply-templates select="*"/>
                 </gen:attribute>
-                <gen:value-of select="concat('\',@style,' ')"/>
+                <xsl:sequence select="f:sfm(@style)"/>
                 <xsl:call-template name="char-gen"/>
-                <gen:if test="not(@closed = 'false')">
-                    <gen:value-of select="concat('\',@style,'*')"/>
-                </gen:if>
+                <xsl:sequence select="f:sfm-end(@style,@closed)"/>
             </gen:element>
         </gen:template>
     </xsl:template>
@@ -244,19 +245,7 @@
         </gen:apply-templates>
     </xsl:template>
     <xsl:template name="char-gen-note">
-        <gen:text>\</gen:text>
-        <gen:value-of select="@style"/>
-        <gen:text>&#160;</gen:text>
-        <gen:value-of select="@caller"/>
-        <gen:text>&#160;</gen:text>
-        <gen:apply-templates select="node()">
-            <gen:with-param name="embedded" select="0"/>
-        </gen:apply-templates>
-        <gen:if test="not(@closed = 'false')">
-            <gen:text>\</gen:text>
-            <gen:value-of select="@style"/>
-            <gen:text>*</gen:text>
-        </gen:if>
+
     </xsl:template>
     <xsl:template match="*[name() = $rowname]">
         <xsl:variable name="test1" select="tokenize(test,'=')[1]"/>
@@ -594,6 +583,24 @@
             <xsl:value-of select="value"/>
         </xsl:element>
     </xsl:template>
+    <xsl:function name="f:sfm">
+        <xsl:param name="style"/>
+        <gen:value-of select="concat('\',$style,'&#160;')"/>
+    </xsl:function>
+    <xsl:function name="f:sfm-end">
+        <xsl:param name="style"/>
+        <xsl:param name="closed"/>
+        <gen:if test="not($closed = 'false')">
+            <gen:value-of select="concat('\',$style,'*')"/>
+        </gen:if>
+    </xsl:function>
+    <xsl:function name="f:sfm-f">
+        <xsl:param name="style"/>
+        <xsl:param name="caller"/>
+        <xsl:sequence select="f:sfm($style)"/>
+        <gen:value-of select="$caller"/>
+        <gen:text>&#160;</gen:text>
+    </xsl:function>
     <xsl:function name="f:cvref">
         <xsl:if test="$debug = 'on'">
             <gen:comment>
@@ -601,32 +608,37 @@
             </gen:comment>
         </xsl:if>
     </xsl:function>
-    <xsl:function name="f:fnqtests">
+    <xsl:function name="f:note-start">
         <xsl:param name="style"/>
-        <xsl:param name="start"/>
-        <xsl:param name="end"/>
-        <xsl:for-each select="$start to $end">
-            <xsl:if test="$style = 'f'">
-                <gen:if test="contains($indqstr{.},'“') and $sqdiff{.} = 0">
-                    <gen:text> </gen:text>
-                    <gen:element name="span">
-                        <gen:attribute name="class">
-                            <gen:text>quote-error</gen:text>
-                        </gen:attribute>
-                        <gen:value-of select="concat('“',substring-after($indqstr{.},'“'),'”')"/>
-                    </gen:element>
-                </gen:if>
-            </xsl:if>
-        </xsl:for-each>
+        <xsl:choose>
+            <xsl:when test="$style = 'f'">
+                <gen:variable name="fnstring">
+                    <gen:apply-templates select="node()" mode="fntext"/>
+                </gen:variable>
+                <gen:comment>&#10;fnstring = <gen:value-of select="$fnstring"/></gen:comment>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
-    <xsl:function name="f:getfntext">
+    <xsl:function name="f:note-end">
         <xsl:param name="style"/>
-        <xsl:if test="$style = 'f'">
-            <gen:variable name="fnstring">
-                <!-- <gen:value-of select="descendant-or-self::text()"/> -->
-                <gen:apply-templates select="node()" mode="fntext"/>
-            </gen:variable>
-            <gen:comment>&#10;fnstring = <gen:value-of select="$fnstring"/></gen:comment>
-        </xsl:if>
+        <xsl:variable name="start" select="1"/>
+        <xsl:variable name="end" select="10"/>
+        <xsl:choose>
+            <xsl:when test="$style = 'f'">
+                <xsl:for-each select="$start to $end">
+                    <gen:if test="contains($indqstr{.},'“') and $sqdiff{.} = 0">
+                        <gen:text> </gen:text>
+                        <gen:element name="span">
+                            <gen:attribute name="class">
+                                <gen:text>quote-error</gen:text>
+                            </gen:attribute>
+                            <gen:value-of select="concat('“',substring-after($indqstr{.},'“'),'”')"/>
+                        </gen:element>
+                    </gen:if>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
 </xsl:stylesheet>

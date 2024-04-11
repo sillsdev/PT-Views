@@ -276,7 +276,7 @@
                         <gen:if test="{$t2}">
                             <gen:text>
                                 <xsl:text> </xsl:text>
-                                <xsl:value-of select="@class"/>
+                                <xsl:value-of select="class"/>
                             </gen:text>
                         </gen:if>
                     </gen:if>

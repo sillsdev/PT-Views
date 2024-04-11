@@ -15,20 +15,20 @@ scripts/TNND-tag-errors.xslt: output/check_data.xml output/static-var.xml output
 
 output/check_data.xml: source/check_data.tsv
 	@echo $(cyan)Updating check_data.xml$(reset)
-	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\check_data.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\check_data.tsv"
+	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "scripts\tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\check_data.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\check_data.tsv"
 
 output/static-var.xml: source/static-var.tsv
 	@echo $(cyan)Updating static-var.xml$(reset)
-	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\static-var.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\static-var.tsv"
+	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "scripts\tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\static-var.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\static-var.tsv"
 
 output/sfm-var.xml: source/sfm-var.tsv
 	@echo $(cyan)Updating sfm-var.xml$(reset)
-	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\tmp\sfm-var1.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\sfm-var.tsv"
+	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "scripts\tsv2xml-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\tmp\sfm-var1.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\sfm-var.tsv"
 	@"$(java)" -jar "D:\programs\xrunner\tools\saxon\saxon9he.jar" -o:"D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\output\sfm-var.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\tmp\sfm-var1.xml" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\sort-sfm-var.xslt"
 
 scripts/var-string.xslt: source/var-string.tsv
 	@echo $(cyan)Updating var-string.xslt$(reset)
-	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "list2xsltvar-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\var-string.xslt" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\var-string.tsv"
+	@"D:\programs\xrunner2\tools\cct\Ccw64.exe" -u -b -q -n -t "scripts\list2xsltvar-v2.cct" -o "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\scripts\var-string.xslt" "D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\source\var-string.tsv"
 
 source/check_data.tsv: $(USERPROFILE)/Downloads/TNND\ Views\ for\ Paratext\ -\ check_data.tsv
 	@if exist "$(USERPROFILE)\Downloads\TNND Views for Paratext - check_data.tsv" copy /y "$(USERPROFILE)\Downloads\TNND Views for Paratext - check_data.tsv" "..\source\check_data.tsv" > nul & @echo $(cyan)Moved check_data.tsv$(reset)

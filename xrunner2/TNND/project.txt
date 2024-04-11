@@ -1,6 +1,6 @@
 [variables]
 title=Paratext TNND Views
-debugfunc=update
+debugfunc=makex
 echofunc=updatedl
 outputxml=true
 tnxx=TNND
@@ -21,6 +21,7 @@ kv-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - keyvalue.tsv
 kvlist=%projectpath%\keyvalue.tsv
 varstring-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - var-string.tsv
 varstring=%projectpath%\source\var-string.tsv
+#var-string_file-list=%projectpath%\source\var-string.tsv
 tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
 
 para-like_list=para cell row table
@@ -33,7 +34,7 @@ metalang_list=pre post
 quotecheck_list=f n1 n2 n3 ntn
 
 mypt8=D:\My Paratext 9 Projects
-ptviewssvn=D:\All-SIL-Publishing\Github-sillsdev\PT-Views\trunk
+ptviewssvn=%gitTNNDproject%
 
 # Concat USX to get para digraph pairs
 include-book_list=GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV
@@ -58,44 +59,54 @@ usxelem_list=book cell char note para row table
 # bkid
 debug=on
 
-svnTNNDproject=D:\All-SIL-Publishing\Github-sillsdev\PT-Views\trunk
+gitTNNDproject=D:\All-SIL-Publishing\Github-sillsdev\PT-Views
 fn_file-list=D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\notes\all-footnotes.txt
 
 [a]
-b=a. make tag-errors, test, update PT
-t=:updatetagerrors
+b=a. make tag-errors, test
+t=:tagerrorsupdate
 t=:bkid
 #t=:testfast LEV
 t=:testfast XXD
 #t=:testfast REV
+
+[b]
+b=b. Update git project and PT
 t=:updateviews
 
-[updatetagerrors]
-t=:makef "%projectpath%\projxslt.make"
-t=:makef "%projectpath%\TNND-tag-errors.make"
+[updatetagerrors depreciated]
+#t=:makef "%projectpath%\projxslt.make"
+#t=:makef "%projectpath%\TNND-tag-errors.make"
+t=:makex "%projectpath%\TNND-tag-errors-var.make" tagerrorsmake
 
 [updateviews]
 s=
 #t=:cmd "'%autoit%' '%projectpath%\scripts\CloseTitle.au3' 'Paratext 9.3'"
 #t=:autoit "CloseTitle.au3" "%mypt8%\Views\"
-#t=:autoit CloseTitle.au3 "Paratext 9.3"
+t=:autoit CloseTitle.au3 "Paratext 9.4"
 # svn Xrunner2 project
-t=:update "%projectpath%\project.txt" "%svnTNNDproject%\xrunner2\TNND\project.txt"
-t=:update "%projectpath%\*.tsv" "%svnTNNDproject%\xrunner2\TNND\"
-t=:update "%projectpath%\TNND-tag-errors.make" "%svnTNNDproject%\xrunner2\TNND\"
-t=:update "%projectpath%\scripts\data2xslt-cur.xslt" "%svnTNNDproject%\xrunner2\TNND\scripts\"
-t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" "%svnTNNDproject%\TNND\xrunner2\scripts\"
-t=:update "%projectpath%\scripts\TNND-word-count.xslt" "%svnTNNDproject%\TNND\xrunner2\scripts\"
-# svn TNND
+t=:update "%projectpath%\project.txt" "%gitTNNDproject%\xrunner2\TNND\"
+t=:update "%projectpath%\*.tsv"
+t=:update "%projectpath%\TNND-tag-errors.make"
+t=:update "%projectpath%\scripts\data2xslt-cur.xslt" "%gitTNNDproject%\xrunner2\TNND\scripts\"
+t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" 
+t=:update "%projectpath%\scripts\TNND-word-count.xslt" 
+# Update info PDF
+t=:md2pdf "%gitTNNDproject%\TNND\info.md"
+t=:move "%gitTNNDproject%\TNND\info.pdf" "%gitTNNDproject%\TNND\cms\TNND-info.PDF"
+# Update to My PT 9 projects
+t=:update "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views
+t=:update "%projectpath%\scripts\TNND-word-count.xslt" 
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt.txt"
+# svn TNND Copy to PT
 t=:wait 2
-t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" "%svnTNNDproject%\TNND\"
-t=:update "%projectpath%\scripts\TNND-word-count.xslt" "%svnTNNDproject%\TNND\"
-# Copy to PT
+t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" "%gitTNNDproject%\TNND\"
+t=:update "%projectpath%\scripts\TNND-word-count.xslt"
 #t=:makef "%projectpath%\update-views.make"
-#t=:start "C:\Program Files\Paratext 9\Paratext.exe"
+t=:start "C:\Program Files\Paratext 9\Paratext.exe"
 
-[b]
-b=b. Test tag errors xsltms
+[c]
+b=c. Test tag errors xsltms
 t=:bkid
 #t=:testfast LEV
 #t=:testfast GEN
@@ -134,14 +145,30 @@ t=:outputfile "%projectpath%\output\TNND-errors-documentation.html" start
 
 [z]
 b=testbed
+t=:tagerrorsmake
+
+[z-old]
+t=:cct var-string2xsltvar-v0.cct "%projectpath%\source\var-string.tsv" "%projectpath%\output\var-strings.xslt"
+t=:makex "%projectpath%\test-make.make" temake
+#t=:xslt data2xslt-cur.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-cur.xslt"
+#t=:xslt data2xslt-v6.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v6.xslt"
+#t=:xslt data2xslt-v5.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v5.xslt"
+#t=:xslt data2xslt-v4.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v4.xslt"
+t=:xslt data2xslt-v3.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v3.xslt"
 #t=:updatetagerrors
 #t=:xslt sort-sfm-var.xslt "%projectpath%\output\sfm-var.xml" "%projectpath%\output\sfm-var-test.xml"
 #t=:xslt data2xslt-v6.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\TNND-tag-errors-t1.xslt"
 #t=:xsltms test-exslt.xslt "%projectpath%\source\test-match.xml" "%projectpath%\output\exslt-test.txt"
 #t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" "%projectpath%\tmp\"
 #t=:update "%projectpath%\project.txt" "%projectpath%\tmp\"
-#t=:sub :test "%projectpath%\project.txt" "%svnTNNDproject%\xrunner2\TNND\"
-t=:updateviews
+#t=:sub :test "%projectpath%\project.txt" "%gitTNNDproject%\xrunner2\TNND\"
+#t=:update "%projectpath%\project.txt" "%projectpath%\tmp\"
+#t=:update "%projectpath%\*.tsv"
+t=:md2pdf "%gitTNNDproject%\TNND\info.md" "%gitTNNDproject%\TNND\cms\TNND-info.PDF"
+#t=:move "%gitTNNDproject%\TNND\info.pdf" "%gitTNNDproject%\TNND\cms\TNND-info.PDF"
+
+[test1]
+t=:xslt data2xslt-v3.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v3.xslt"
 
 [update-test]
 t=:var book %~1
@@ -182,15 +209,15 @@ t=:outputfile "%projectpath%\output\%book%-ms.html" start
 # 2023-11-07
 t=:date
 t=:time
-t=:appendfile "%svnTNNDproject%\TNND\info.md" "%svnTNNDproject%\TNND\final.md" first
-t=:appendtofile "%isodate%T%curhh_mm%+10" "%svnTNNDproject%\TNND\final.md"
-t=:command "mdpdf '%svnTNNDproject%\TNND\final.md' '%svnTNNDproject%\TNND\cms\TNND-info.pdf'"
-t=:ifexist "%svnTNNDproject%\Installers\%view%-Views.zip" del "%svnTNNDproject%\Installers\%view%-Views.zip"
-t=:command "7z a -tzip '%svnTNNDproject%\Installers\%view%-Views.zip' @%svnTNNDproject%\%view%\file-list.txt" "%svnTNNDproject%" "%svnTNNDproject%\Installers\%view%-Views.zip"
+t=:appendfile "%gitTNNDproject%\TNND\info.md" "%gitTNNDproject%\TNND\final.md" first
+t=:appendtofile "%isodate%T%curhh_mm%+10" "%gitTNNDproject%\TNND\final.md"
+t=:command "mdpdf '%gitTNNDproject%\TNND\final.md' '%gitTNNDproject%\TNND\cms\TNND-info.pdf'"
+t=:ifexist "%gitTNNDproject%\Installers\%view%-Views.zip" del "%gitTNNDproject%\Installers\%view%-Views.zip"
+t=:command "7z a -tzip '%gitTNNDproject%\Installers\%view%-Views.zip' @%gitTNNDproject%\%view%\file-list.txt" "%gitTNNDproject%" "%gitTNNDproject%\Installers\%view%-Views.zip"
 
 [innocomp]
 # 2023-11-07
-t=:command "'%innocompiler%' /Qp '%svnTNNDproject%\TNND-setup.iss'"
+t=:command "'%innocompiler%' /Qp '%gitTNNDproject%\TNND-setup.iss'"
 
 [hide]
 #t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"
@@ -345,3 +372,39 @@ b=test close Paratext
 t=:autoit CloseTitle.au3 "Paratext 9.3"
 t=:wait 30
 
+[donothing]
+t=:echo "do nothing"
+
+[tagerrorsupdate]
+t=:updatecheckdata
+t=:varstringxml
+t=:sfmvarxml
+t=:staticvarxml
+t=:checkdataxml
+t=:tagerrorsxslt
+
+[staticvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\static-var.tsv" "%projectpath%\output\static-var.xml"
+
+[varstringxml]
+t=:cct list2xsltvar-v2.cct "%projectpath%\source\var-string.tsv" "%projectpath%\scripts\var-string.xslt"
+
+[sfmvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\sfm-var.tsv" 
+t=:xslt sort-sfm-var.xslt 
+t=:outputfile "%projectpath%\output\sfm-var.xml"
+
+[checkdataxml]
+#t=:echo "%cyan%Updating check_data.xml%reset%"
+t=:cct tsv2xml-v2.cct "%projectpath%\source\check_data.tsv" "%projectpath%\output\check_data.xml"
+
+[tagerrorsxslt]
+#t=:echo "%cyan%Updating TNND-tag-errors-test.xslt%reset%"
+t=:xslt data2xslt-cur.xslt "%projectpath%\output\check_data.xml" "%projectpath%\scripts\TNND-tag-errors.xslt"
+
+[updatecheckdata]
+t=:cmd "call '%projectpath%\scripts\data-url.cmd'"
+t=:curl %checkdatatsvurl% "%projectpath%\source\check_data.tsv"
+t=:curl %sfmvartsvurl% "%projectpath%\source\sfm-var.tsv"
+t=:curl %varstringtsvurl% "%projectpath%\source\var-string.tsv"
+t=:curl %staticvartsvurl% "%projectpath%\source\static-var.tsv"

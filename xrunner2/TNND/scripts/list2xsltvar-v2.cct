@@ -5,7 +5,7 @@ nl      >   endstore dup back(1) '  <xsl:variable name="var-string_list">' use(r
 group(rowbegin)
 
 tab >   '=' 
-nl  >   ';'
-endfile >   '</xsl:variable>' nl '<xsl:variable name="var-string" select="tokenize($var-string_list,' "';'" ')"/>' nl '</xsl:stylesheet>' dup
+nl  >   '%%%'
+endfile >   '</xsl:variable>' nl '<xsl:variable name="var-string" select="tokenize($var-string_list,' "'%%%'" ')"/>' nl '</xsl:stylesheet>' dup
 
 
