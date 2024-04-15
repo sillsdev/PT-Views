@@ -167,14 +167,11 @@ goto :eof
   echo %green%Updating of Views complete. %reset%
 goto :eof
 
-
-
 :getfile
   echo.
-  if exist "%ptpath%Views\%~1.old" del "%ptpath%Views\%~1.old"
-  if exist "%ptpath%Views\%~1" ren "%ptpath%Views\%~1" "%~1.old"
-  call curl %baseurl%/%~1 --ssl-no-revoke > "%ptpath%Views\%~1"
-  if exist "%ptpath%Views\%~1" echo %green%%~1 %reset% updated in %ptpath%Views folder.
+  set winfile=%~1
+  call curl -o "%outpath%\%winfile:/=\%" --ssl-no-revoke %url-base%/%~1
+  if exist "%outp%\%~1" echo %green%%~1 updated. %reset%
 goto :eof
 
 :errorsdoc
