@@ -14,7 +14,7 @@ commandstring = "echo set matchstart=TNND>> " + actionbatchfile
 os.system(commandstring)
 commandstring = "echo set baseurl=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TNND>> " + actionbatchfile
 os.system(commandstring)
-commandstring = "echo set filelist=TNND-tag-errors.xslt TNND-word-count-per-line.xslt>> " + actionbatchfile
+commandstring = "echo set filelist=TNND-tag-errors.xslt TNND-word-count.xslt>> " + actionbatchfile
 os.system(commandstring)
 # Run the batch file to do the action
 os.startfile(batchfile)

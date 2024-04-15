@@ -1,0 +1,8 @@
+\check Bamboo Views Updater
+\submenu Custom Views
+\script Bamboo_Views_updater.py
+\description (Ignore the "Input Project" box above.) This tool will update Bamboo Views TNDD and or TNND from the Internet. TNDD and TNND Views aids creators and checkers of Translation Notes Display Development and Translation Notes Development in viewing content in various ways.
+\helpFile Bamboo_Views_updater.pdf
+\noText
+\rank 10
+\utf8

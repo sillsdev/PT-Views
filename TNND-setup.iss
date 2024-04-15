@@ -29,7 +29,7 @@ DisableProgramGroupPage=Yes
 LicenseFile=LICENSE
 InfoAfterFile=TNND\info.md
 OutputDir=Installers
-OutputBaseFilename=Paratext-TNND-Views-installer
+OutputBaseFilename=Paratext-TNND-Views-unsigned
 Compression=lzma
 SolidCompression=yes
 
