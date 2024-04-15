@@ -1,7 +1,7 @@
 :: User Views manager
 :: Written by: ian_mcquay@sil.org
 :: Date updated: 2020-07-13
-@echo off
+rem @echo off
 set viewsappdata=C:\Users\Public\PT-Views
 set viewsaction=user-views-action.cmd
 set action=%1
@@ -37,8 +37,11 @@ set ptpath=
 set drive=
 set curdir=%cd%
 call :regquery 8
+  set viewspath=%ptpath%Views
+  set cmspath=%ptpath%cms
+  @echo Paratext path found at: %ptpath%
 if errorlevel=0 (
-    call :runaction
+    call :%action%
 ) else (
     @echo Checking for Paratext 9 settings
     call :regquery 9
@@ -54,19 +57,12 @@ echo.
 pause
 goto :eof
 
-:runaction
-  set ptpath=%drive%:%ptpathnodrive%
-  set viewspath=%ptpath%Views
-  set cmspath=%ptpath%cms
-  @echo Paratext path found at: %ptpath%
-  call :%action%
-goto :eof
-
 :regquery
 FOR /F "usebackq skip=2 tokens=1,2 delims=:" %%A IN (`REG QUERY HKLM\SOFTWARE\WOW6432Node\Paratext\%~1 /v Settings_Directory`) DO (
   call :drive %%A
   set ptpathnodrive=%%B
 )
+  set ptpath=%drive%:%ptpathnodrive%
 goto :eof
 
 :drive
@@ -171,6 +167,8 @@ goto :eof
   echo %green%Updating of Views complete. %reset%
 goto :eof
 
+
+
 :getfile
   echo.
   if exist "%ptpath%Views\%~1.old" del "%ptpath%Views\%~1.old"
@@ -190,13 +188,13 @@ goto :eof
 
 :loopstring
 :: Description: Loops through a list supplied in a space separated string.
-:: Usage: call :loopstring grouporfunc "string" [param[3-9]]
+:: Usage: call :loopstring func "string" [param[3-9]]
 :: Depends on: appendnumbparam, last, taskgroup. Can also use any other function.
 :: Note: action may have multiple parts
   rem @call :funcbegin %0 "'%~1' '%~2' '%~3'"
   if defined fatal goto :eof
   rem echo on
-  set grouporfunc=%~1
+  set func=%~1
   set string=%~2
   set par3=%~3
   set par4=%~4
@@ -205,9 +203,9 @@ goto :eof
   set par7=%~7
   set par8=%~8
   set par9=%~9
-  if not defined grouporfunc echo Missing action parameter
-  if not defined grouporfunc echo %funcendtext% %0 
-  if not defined grouporfunc goto :eof
+  if not defined func echo Missing action parameter
+  if not defined func echo %funcendtext% %0 
+  if not defined func goto :eof
   if not defined string echo Missing string parameter
   if not defined string echo %funcendtext% %0 
   if not defined string goto :eof
@@ -217,8 +215,8 @@ goto :eof
   for /L %%v in (3,1,9) Do call :last par %%v
   if defined info3 set numbparam
   if defined info2 echo %last%
-  if "%grouporfunc:~0,1%" == ":" FOR %%s IN (%string%) DO call %grouporfunc% "%%s" %numbparam%
-  if "%grouporfunc:~0,1%" neq ":" FOR %%s IN (%string%) DO call :taskgroup %grouporfunc% "%%s" %numbparam%
+  if "%func:~0,1%" == ":" FOR %%s IN (%string%) DO call %func% "%%s" %numbparam%
+  if "%func:~0,1%" neq ":" FOR %%s IN (%string%) DO call :taskgroup %func% "%%s" %numbparam%
   rem @call :funcend %0
   rem @echo off
 goto :eof
@@ -264,3 +262,80 @@ echo.
 pause
 goto :eof
 
+:looplist
+:: Description: Used to loop through list supplied in a file
+:: Usage: call :looplist sub_name list-file_specs [param[3-9]]
+:: Functions called: multivarlist. Can also use any other function.
+  @if defined debug %0 "'%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'"
+  if defined fatal goto :eof
+  set func=%~1
+  set listfile=%~2
+  set param3=%~3
+  set param4=%~4
+  set param5=%~5
+  set param6=%~6
+  set param7=%~7
+  set param8=%~8
+  set param9=%~9
+  if not defined func echo %error% Missing 'function' parameter%reset% & goto :eof
+  if not defined listfile echo %error% Missing 'list file' parameter%reset% & goto :eof
+  if not exist "%listfile%" echo %error% Missing source: %listfile% %reset% & echo %funcendtext% %0 & goto :eof 
+  call :multivarlist 3 9
+  FOR /F " delims=" %%s IN (%listfile%) DO  call %func% "%%s" %multivar:'="% 
+goto :eof
+
+:multivarlist
+:: Descriptions: if varaible string contains a space put double quotes around it.
+:: Usage: call quotevar var_name start_numb end_numb
+  @if defined debug echo %0 "'%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'"
+  set startnumb=%~1
+  set endnumb=%~2
+  for /L %%v in (%startnumb%,1,%endnumb%) Do if defined param%%v if "!param%%v!" neq "!param%%v: =!" set param%%v='!param%%v!'
+  if %startnumb%. == 1. set multivar=%param1% %param2% %param3% %param4% %param5% %param6% %param7% %param8% %param9%
+  if %startnumb%. == 2. set multivar=%param2% %param3% %param4% %param5% %param6% %param7% %param8% %param9%
+  if %startnumb%. == 3. set multivar=%param3% %param4% %param5% %param6% %param7% %param8% %param9%
+  if %startnumb%. == 4. set multivar=%param4% %param5% %param6% %param7% %param8% %param9%
+  if defined info3 echo %green%Info: multivar = %multivar%%reset%
+goto :eof
+
+:updateinstalled
+:: Description: Run list updates on al installed Views
+:: Usage: Call :listupdate
+  if exist "%ptpath%\Views\TNDD-tag-errors.xslt" call :listupdate tndd
+  if exist "%ptpath%\Views\TNND-tag-errors.xslt" call :listupdate tnnd
+  if exist "%ptpath%\Views\USX-view.xslt" call :listupdate usx
+goto :eof
+
+:listupdate
+:: Description: Update view type from internet
+:: Usage: call :listupdate type
+  set TNxD=%~1 
+  set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
+  rem the following is only for testing.
+  set outpath=C:\Users\Public\PT-Views2
+  set curlist=%outpath%\%TNxD%-Public-list.txt
+
+  if not exist "%outpath%\%TNxD%\cms" md "%outpath%\%TNxD%\cms"
+
+  curl -o "%curlist%"  --ssl-no-revoke %url-base%/%TNxD%-Public-list.txt
+
+  ::call :ptpathquery
+  set ptpath=%drive%:%ptpathnodrive%
+  
+  rem for testing
+  set ptpath=C:\Users\Public\PT-test
+
+  call :looplist :getfile "%curlist%" %url-base% "%outpath%"
+  call :copyfiles
+goto :eof
+
+:copyfiles
+  if not exist "%ptpath%\cms" md "%ptpath%\cms"
+  copy /Y "%outpath%\%TNxD%\cms\*.cms" "%ptpath%\cms"
+  copy /Y "%outpath%\%TNxD%\cms\*.py" "%ptpath%\cms"
+  copy /Y "%outpath%\%TNxD%\cms\*.pdf" "%ptpath%\cms"
+
+  if not exist "%ptpath%\Views" md  "%ptpath%\Views"
+  copy /Y "%outpath%\%TNxD%\*.xml" "%ptpath%\Views"
+  copy /Y "%outpath%\%TNxD%\*.xslt" "%ptpath%\Views"
+goto :eof
