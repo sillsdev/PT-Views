@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html>
+   <head>
+      <title>Rule Docs</title>
+      <meta charset="utf-8"/>
+      <meta name="description" content=""/>
+      <link rel="stylesheet" href="documentation.css" type="text/css"/>
+      <style type="text/css">
+h3 {margin-left:2em}
+h4 {margin-left:3em}
+.index, .index2, .index3, .h4 {margin-left:4em}
+.test, .test2, .note {margin-left:6em}
+.testrow {padding-bottom:6pt;}
+div.index {padding-bottom:12pt;}
+.var {padding-left:4em}
+</style>
+   </head>
+   <body>
+      <h1>TNDD error checks documentation.</h1>
+      <h4 id="index">Error Reference Index</h4>
+      <div class="index">
+         <a href="#err1.1">1.1</a> <a href="#err1.2">1.2</a> <a href="#err4.2">4.2</a> <a href="#err4.3">4.3</a> <a href="#err4.4">4.4</a> <a href="#err4.7">4.7</a> <a href="#err4.8">4.8</a> <a href="#err4.9">4.9</a> <a href="#err6.1">6.1</a> <a href="#err6.2">6.2</a> <a href="#err6.3">6.3</a> <a href="#err6.8">6.8</a> <a href="#err7.1.1">7.1.1</a> <a href="#err7.1.2">7.1.2</a> <a href="#err7.1.3">7.1.3</a> <a href="#err7.1.4">7.1.4</a> <a href="#err7.2">7.2</a> <a href="#err7.10.1">7.10.1</a> <a href="#err7.10.2">7.10.2</a> <a href="#err8.1">8.1</a> <a href="#err8.21">8.21</a> <a href="#err8.21.2">8.21.2</a> <a href="#err8.22">8.22</a> <a href="#err8.23">8.23</a> <a href="#err8.25">8.25</a> <a href="#err8.26">8.26</a> <a href="#err8.3">8.3</a> <a href="#err8.3.1">8.3.1</a> <a href="#err8.3.2">8.3.2</a> <a href="#err8.4.1">8.4.1</a> <a href="#err8.4.2">8.4.2</a> <a href="#err8.4.3">8.4.3</a> <a href="#err8.4.4">8.4.4</a> <a href="#err8.4.5">8.4.5</a> <a href="#err8.4.6">8.4.6</a> <a href="#err8.4.7">8.4.7</a> <a href="#err8.4.8">8.4.8</a> <a href="#err9.1">9.1</a> <a href="#err9.2">9.2</a> <a href="#err9.3">9.3</a> <a href="#err9.5">9.5</a> <a href="#err9.6">9.6</a> <a href="#err10.1">10.1</a> <a href="#err10.1.2">10.1.2</a> <a href="#err10.1.3">10.1.3</a> <a href="#err10.1.4">10.1.4</a> <a href="#err10.1.5">10.1.5</a> <a href="#err10.2.1">10.2.1</a> <a href="#err10.2.2">10.2.2</a> <a href="#err10.2.3">10.2.3</a> <a href="#err10.31">10.31</a> <a href="#err10.32">10.32</a> <a href="#err10.4">10.4</a> <a href="#err10.5">10.5</a> <a href="#err10.6">10.6</a> <a href="#err10.6.2">10.6.2</a> <a href="#err10.6.3">10.6.3</a> <a href="#err10.6.4">10.6.4</a> <a href="#err11.1">11.1</a> <a href="#err11.2">11.2</a> <a href="#err12.1">12.1</a> <a href="#err12.2">12.2</a> <a href="#err12.6">12.6</a> <a href="#err12.6.1">12.6.1</a> <a href="#err12.6.2">12.6.2</a> <a href="#err12.6.3">12.6.3</a> <a href="#err12.7">12.7</a> <a href="#err12.7.1">12.7.1</a> <a href="#err12.7.3">12.7.3</a> <a href="#err12.7.4">12.7.4</a> <a href="#err12.8.1">12.8.1</a> <a href="#err12.8.2">12.8.2</a> <a href="#err14.1">14.1</a> <a href="#err14.2">14.2</a> <a href="#err15.1">15.1</a> <a href="#err15.2">15.2</a> <a href="#err15.5">15.5</a> <a href="#err15.6">15.6</a> <a href="#err15.7">15.7</a> <a href="#err17.1.1">17.1.1</a> <a href="#err17.1.2">17.1.2</a> <a href="#err17.2">17.2</a> <a href="#err17.3">17.3</a> <a href="#err18.1">18.1</a> <a href="#err19.1">19.1</a> <a href="#err19.2">19.2</a> <a href="#err19.3">19.3</a> <a href="#err19.4">19.4</a> <a href="#err19.4.1">19.4.1</a> <a href="#err19.5">19.5</a> <a href="#err19.6">19.6</a> <a href="#err19.7">19.7</a> <a href="#err19.8">19.8</a> <a href="#err20.3">20.3</a> <a href="#err22.1">22.1</a> <a href="#err22.2">22.2</a> <a href="#err22.2.1">22.2.1</a> <a href="#err22.3">22.3</a> <a href="#err22.4">22.4</a> <a href="#err22.5">22.5</a> <a href="#err22.6">22.6</a> <a href="#err22.6.2">22.6.2</a> <a href="#err22.7">22.7</a> <a href="#err22.7.2">22.7.2</a> <a href="#err22.8">22.8</a> <a href="#err22.9">22.9</a> <a href="#err22.9.1">22.9.1</a> <a href="#err22.9.2">22.9.2</a> <a href="#err22.10.">22.10.</a> <a href="#err23.1">23.1</a> <a href="#err23.2">23.2</a> <a href="#err23.3">23.3</a> <a href="#err23.4">23.4</a> <a href="#err23.5">23.5</a> <a href="#err24.1">24.1</a> <a href="#err26.1">26.1</a> <a href="#err26.2">26.2</a> <a href="#err26.3">26.3</a> </div>
+      <h4 id="index2">SFM Index</h4>
+      <div class="index2">
+         <a href="#sfm-tr">tr</a> <a href="#sfm-s5">s5</a> <a href="#sfm-qp">qp</a> <a href="#sfm-ntn">ntn</a> <a href="#sfm-gj">gj</a> <a href="#sfm-b2">b2</a> <a href="#sfm-b">b</a> <a href="#sfm-n1">n1</a> <a href="#sfm-n2">n2</a> <a href="#sfm-n3">n3</a> <a href="#sfm-s3">s3</a> <a href="#sfm-b3">b3</a> <a href="#sfm-p">p</a> <a href="#sfm-gra">gra</a> <a href="#sfm-f">f</a> <a href="#sfm-fig">fig</a> <a href="#sfm-jmp">jmp</a> <a href="#sfm-sbx">sbx</a> <a href="#sfm-tec">tec</a> <a href="#sfm-trs">trs</a> <a href="#sfm-tei">tei</a> <a href="#sfm-fr">fr</a> <a href="#sfm-tbb">tbb</a> <a href="#sfm-tc1">tc1</a> <a href="#sfm-tr">tr</a> <a href="#sfm-v">v</a> </div>
+      <div class="index3">
+         <h3 id="static-index">Static string variables</h3>
+         <a href="#static-numb">numb</a> <a href="#static-numbsub">numbsub</a> <a href="#static-validvlet">validvlet</a> <a href="#static-validvletsub">validvletsub</a> <a href="#static-validvletpunc">validvletpunc</a> <a href="#static-invalidvlet">invalidvlet</a> <a href="#static-validcvnumblet">validcvnumblet</a> <a href="#static-validcvnumbletsub">validcvnumbletsub</a> <a href="#static-validcvnumbletpunc">validcvnumbletpunc</a> <a href="#static-letlc">letlc</a> <a href="#static-letuc">letuc</a> <a href="#static-letsub">letsub</a> <a href="#static-letulc">letulc</a> <a href="#static-letulcsub">letulcsub</a> <a href="#static-invalidtecendpunc">invalidtecendpunc</a> <a href="#static-invalidtecendpuncsub">invalidtecendpuncsub</a> <a href="#static-invalidtecfirstpunc">invalidtecfirstpunc</a> <a href="#static-validreorderedcvnumbletpunc">validreorderedcvnumbletpunc</a> <a href="#static-letucnumb">letucnumb</a> <a href="#static-letucnumbsub">letucnumbsub</a> <a href="#static-validcvnumbletendash">validcvnumbletendash</a> <a href="#static-validcvnumbletendashsub">validcvnumbletendashsub</a> <a href="#static-validvletendash">validvletendash</a> <a href="#static-puncreplace">puncreplace</a> <a href="#static-puncreplacespace">puncreplacespace</a> </div>
+      <h2>Rules</h2>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-">USX element table</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err6.1" href="#index">6.1</a> Message: When you have a Part Box, a Division Box must occur after the Part summary.  (But any \tr in the Part summary will cause a false positive.) Priority: </div>
+            <div class="test">Test 1: $containspart and $hasfollowingtable</div>
+            <div class="test2">Test 2: $notposttabledivision</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err6.2" href="#index">6.2</a> Message: When you have a Division Box, a Section Box must occur after the Division summary. (But any \tr in the Div. summary will cause a false positive.) Priority: </div>
+            <div class="test">Test 1: $containsdivision and $hasfollowingtable</div>
+            <div class="test2">Test 2: $notposttablesection</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err6.3" href="#index">6.3</a> Message: When you have a Section Box, a Paragraph Box must occur after the Section summary. (But any \tr in the Section summary will cause a false positive.) Priority: </div>
+            <div class="test">Test 1: $containssection and $hasfollowingtable</div>
+            <div class="test2">Test 2: $notposttableparagraph</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.2" href="#index">7.2</a> Message: There should be a \b before a \tr (and after the \p (or b3) \v paragraph), except at v.1. Priority: </div>
+            <div class="note"> IM updated 2023-07-19</div>
+            <div class="test">Test 1: ($containsdivision or $containspart or $containssection or $containsparagraph) and not($presib2 = 'c')</div>
+            <div class="test2">Test 2: not($presib = 'b' or ($presib = 'b' and $presib2 = 'b3') or ($presib = 'b' and $presib2 = 'p'))</div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-s5">\s5 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.1" href="#index">8.1</a> Message: The chapter number in this \s5 should match the current chapter number. Priority: </div>
+            <div class="test">Test 1: $hascvref and $numbfirst </div>
+            <div class="test2">Test 2: $refchapcolon != $prechapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.21" href="#index">8.21</a> Message: The verse number in this \s5 should match the current verse number. Priority: </div>
+            <div class="test">Test 1: not($prevhyphen) and not($refvendash) and not($hasvlet)</div>
+            <div class="test2">Test 2: $refcolonv != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.21.2" href="#index">8.21.2</a> Message: The verse number in this \s5 should match the current verse number. Priority: </div>
+            <div class="test">Test 1: not($prevhyphen) and not($refvendash) and $hasvlet</div>
+            <div class="test2">Test 2: $refcolonvlet != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.23" href="#index">8.23</a> Message: The first verse number in the range in this \s5 should match the first number of current verse range. Priority: </div>
+            <div class="test">Test 1: $prevhyphen and $refvendash</div>
+            <div class="test2">Test 2: $refcolonvr1 != $preverser1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.26" href="#index">8.26</a> Message: The verse number in this \s5 must be within the current verse range. Priority: </div>
+            <div class="test">Test 1: contains($preverse,'-') and not(contains(.,'–'))</div>
+            <div class="test2">Test 2: not((translate(substring-after(.,':'),$letlc,'') = substring-before($preverse,'-') or  translate(substring-after(.,':'),$letlc,'') &gt; substring-before($preverse,'-')) and ( translate(substring-after(.,':'),$letlc,'') = substring-after($preverse,'-') )or  translate(substring-after(.,':'),$letlc,'') &lt; substring-after($preverse,'-') )</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.3" href="#index">8.3</a> Message: This \s5 reference has invalid character(s). Numbers, colon, en dash, and letters a–j are allowed. Priority: </div>
+            <div class="note">SC 22 Dec: Can we make this go to 10 (a-j) rather than 8 (a-h)? </div>
+            <div class="test">Test 1: string-length(translate(.,$validcvnumbletpunc,'')) &gt; 0</div>
+            <div class="test2">Test 2: not($hasreordered)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.3.1" href="#index">8.3.1</a> Message: This \s5 reference has invalid character(s). Numbers, colon, en dash, comma, and letters a–j are allowed. Priority: </div>
+            <div class="test">Test 1: string-length(translate(text()[1],$validreorderedcvnumbletpunc,'')) &gt; 0</div>
+            <div class="test2">Test 2: $hasreordered and $hastbb</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.3.2" href="#index">8.3.2</a> Message: This \s5 reference is reordered and does not contain a \tbb between the verse reference and the (reordered) part. Priority: </div>
+            <div class="test">Test 1: string-length(translate(.,$validreorderedcvnumbletpunc,'')) &gt; 0</div>
+            <div class="test2">Test 2: $hasreordered and not($hastbb)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.22" href="#index">8.22</a> Message: The first verse number in the range in this \s5 should match current verse number. Priority: 5</div>
+            <div class="test">Test 1: not($prevhyphen) and $refvendash and not($hasvlet)</div>
+            <div class="test2">Test 2: $refcolonvr1 != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.25" href="#index">8.25</a> Message: This \s5 must contain a colon between the chapter and verse. Priority: 10</div>
+            <div class="test">Test 1: not(contains(.,':'))</div>
+         </div>
+         <h4>\s5 variables</h4>
+         <div class="var">refcolonv substring-after(node()[not(self::*)],':')</div>
+         <div class="var">strlenb4chap string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">hasreordered contains(.,'reordered)')</div>
+         <div class="var">hastbb boolean(child::*[@style = 'tbb'])</div>
+         <div class="var">hasvlet contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')</div>
+         <div class="var">hasvsub contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')</div>
+         <div class="var">numbfirst substring(translate(.,$numb,$numbsub),1,1) = '#'</div>
+         <div class="var">prechapter preceding::chapter[1]/@number</div>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">preverser1 substring-before($preverse,'-')</div>
+         <div class="var">prevhyphen contains($preverse,'-')</div>
+         <div class="var">refchapcolon substring-before(node()[not(self::*)],':')</div>
+         <div class="var">refcolonvlet substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')</div>
+         <div class="var">refcolonvr1 substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')</div>
+         <div class="var">refvendash contains(node()[not(self::*)],'–')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-">USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err9.1" href="#index">9.1</a> Message: The hyphen in a verse range in this paragraph should be an en dash. Priority: </div>
+            <div class="test">Test 1: contains(translate(.,$numb,$numbsub),'#:#')</div>
+            <div class="test2">Test 2: contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23.1" href="#index">23.1</a> Message: This paragraph type should not be empty. Allowed are \b and on rare occasion \b2. Priority: </div>
+            <div class="test">Test 1: not(@style = 'b') and not(@style = 'b2') </div>
+            <div class="test2">Test 2: string-length(text()) = 0 and count(*) = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err26.1" href="#index">26.1</a> Message: This paragraph contains a straight quote mark. It should be a curly quote mark. Priority: 5</div>
+            <div class="test">Test 1: contains(text(),$sq) or contains(text(),$dq) </div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-qp">\qp in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err14.2" href="#index">14.2</a> Message: Two \qp paragraphs, one after the other, are not allowed, unless it is one example with two paragraphs, or you are illustrating parallel lines of Hebrew poetry. Priority: </div>
+            <div class="test">Test 1: preceding-sibling::*[1][@style = 'qp']</div>
+         </div>
+         <h4>\qp variables</h4>
+         <div class="var">ancestor ancestor::*/@style </div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-ntn">\ntn in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err18.1" href="#index">18.1</a> Message: An \ntn should be preceeded by a \s3, \s5, \tr, \ntn, \qp, \qns, \q1tn, \q2tn, \li1, \li2, \gra, or \gj. Priority: </div>
+            <div class="test">Test 1: pre=s3 s5 ntn tr ntn qp qns q1tn q2tn li1 li2 gra gj</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err24.1" href="#index">24.1</a> Message: An \ntn should not contain a \tec. Priority: </div>
+            <div class="test">Test 1: char[@style = 'tec']</div>
+         </div>
+         <h4>\ntn variables</h4>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-gj">\gj in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.9" href="#index">22.9</a> Message: This \gj paragraph is missing a ‘Click here...’ jump link ( \jmp). Priority: </div>
+            <div class="test">Test 1: $countjmp = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.9.1" href="#index">22.9.1</a> Message: This \gj paragraph should contain only one ‘Click here...’ \jmp item, and no other text or markup. Priority: </div>
+            <div class="test">Test 1: $countnode != 1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.9.2" href="#index">22.9.2</a> Message: The paragraph preceding this \gj paragraph is not a \gra. Priority: </div>
+            <div class="test">Test 1: pre=gra</div>
+         </div>
+         <h4>\gj variables</h4>
+         <div class="var">countjmp count(*[@style = 'jmp'])</div>
+         <div class="var">countnode count(node())</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-b2">\b2 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23.2" href="#index">23.2</a> Message: A \b2 should not precede a \b. Priority: </div>
+            <div class="test">Test 1: following-sibling::*[1][@style = 'b']</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23.4" href="#index">23.4</a> Message: A \b2 paragraph should be empty. Priority: </div>
+            <div class="test">Test 1: count(node()) &gt; 0</div>
+         </div>
+         <h4>\b2 variables</h4>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">nodecount count(node())</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-b">\b in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23.3" href="#index">23.3</a> Message: A \b2 should not follow a \b. Priority: </div>
+            <div class="test">Test 1: following-sibling::*[1][@style = 'b2']</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err23.5" href="#index">23.5</a> Message: A \b paragraph should be empty. Priority: </div>
+            <div class="test">Test 1: count(node()) &gt; 0</div>
+         </div>
+         <h4>\b variables</h4>
+         <div class="var">nodecount count(node())</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-n1">\n1 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.1" href="#index">12.1</a> Message: The contents of this \n1 \tec is a portion of the previous \n1 \tec. Perhaps this should be an \n2? Priority: </div>
+            <div class="test">Test 1: $counttec &gt; 0 and contains($pren1tec,$curtec) and $precharn1tec != '$' and $postcharn1tec != '$'</div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err14.1" href="#index">14.1</a> Message: Only these paragraphs are allowed after a \n1: \n1 \n2 \n3 \ntn \qp \q1tn \q2tn \b \b2 \b3 \p \s5 \li1 \hb1 \s3 \gra \c. Priority: </div>
+            <div class="test">Test 1: position() != last()</div>
+            <div class="test2">Test 2: post=n1 n2 n3 ntn qp q1tn q2tn b b2 b3 p s5 li1 hb1 s3 c gra</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.1" href="#index">10.1</a> Message: There should be only one \tec per \n1 paragraph. Priority: 5</div>
+            <div class="test">Test 1: $counttec &gt; 1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.1.4" href="#index">10.1.4</a> Message: This \n1 paragraph is missing a \tec, or perhaps should be a \n2 or a \ntn. Priority: 5</div>
+            <div class="test">Test 1: $counttec + $countteu  = 0 </div>
+         </div>
+         <h4>\n1 variables</h4>
+         <div class="var">curtec substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)</div>
+         <div class="var">pren1tec preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">countpresibnode count(preceding-sibling::node())</div>
+         <div class="var">counttec count(*[@style = 'tec'])</div>
+         <div class="var">countteu count(*[@style = 'teu'])</div>
+         <div class="var">hastecchild boolean(child::*[@style = 'tec'])</div>
+         <div class="var">positiontec positiontec</div>
+         <div class="var">postcharn1tec translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)</div>
+         <div class="var">precharn1tec translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-n2">\n2 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.7.3" href="#index">12.7.3</a> Message: The contents of this \n2 \tec are not found in the preceding \n1 \tec. Priority: </div>
+            <div class="test">Test 1: not(contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)) </div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and $hastecversion</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.7.4" href="#index">12.7.4</a> Message: The contents of this \n2 \tec are not found in the preceding \n1 \tec. Priority: </div>
+            <div class="test">Test 1: not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))</div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and $hastecversion</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.8.1" href="#index">12.8.1</a> Message: There is no \n1 preceding this \n2. It should be an \n1. Priority: </div>
+            <div class="test">Test 1: $countpres5 &gt; $countpren1</div>
+            <div class="test2">Test 2: child::*[@style = 'tec']</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.1.2" href="#index">10.1.2</a> Message: There not should be two or more \tec in a \n2 paragraph. Priority: 5</div>
+            <div class="test">Test 1: $counttec &gt; 1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.7" href="#index">12.7</a> Message: The contents of this \n2 \tec are not found in the preceding \n1 \tec. Perhaps this should be an \\n1? Priority: 5</div>
+            <div class="test">Test 1: not(contains($pren1tec,$curtec))</div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and not($hastecversion)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.7.1" href="#index">12.7.1</a> Message: The contents of this \n2 \tec are not found in the preceding \n1 \tec. Priority: 5</div>
+            <div class="test">Test 1: not(contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)) </div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and not($hastecversion)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.2" href="#index">12.2</a> Message: The contents of this \n2 \tec is a portion of the previous \n2 \tec. Perhaps this should be an \n3? Priority: 8</div>
+            <div class="test">Test 1: $counttec &gt; 0 and contains($pren2tec,$curtec) and $precharn2tec != '$' and $postcharn2tec != '$'</div>
+            <div class="test2">Test 2: $countpren1 &lt; $countpren2 and $countpres5 &lt; $countpren2</div>
+         </div>
+         <h4>\n2 variables</h4>
+         <div class="var">curtec substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)</div>
+         <div class="var">curtecver normalize-space(substring-after($curtec,')'))</div>
+         <div class="var">pren2tec preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpren2 count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">countpresibnode count(preceding-sibling::node())</div>
+         <div class="var">counttec count(*[@style = 'tec'])</div>
+         <div class="var">curtecpostellipsis substring-after($curtec,'…')</div>
+         <div class="var">curtecpreellipsis substring-before($curtec,'…')</div>
+         <div class="var">curtecverpreellipsis substring-before(substring-after($curtec,')'),'…')</div>
+         <div class="var">curtei *[@style = 'tei']/text()</div>
+         <div class="var">hastecchild boolean(child::*[@style = 'tec'])</div>
+         <div class="var">hastecellipsis contains(*[@style = 'tec'][1],'…')</div>
+         <div class="var">hastecversion starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')</div>
+         <div class="var">postcharn2tec translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)</div>
+         <div class="var">precharn2tec translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)</div>
+         <div class="var">preellipsisstring normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))</div>
+         <div class="var">pren1tec preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-n3">\n3 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.6.2" href="#index">12.6.2</a> Message: The contents of this \n3 \tec are not found in the preceding \n2 or \n1 \tec. Priority: </div>
+            <div class="test">Test 1: not((contains($pren2tec,$curtecverpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecverpreellipsis) and contains($pren1tec,$curtecpostellipsis)))</div>
+            <div class="test2">Test 2: $hastecellipsis and $hastecchild  and $hastecversion</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.6.3" href="#index">12.6.3</a> Message: The contents of this \n3 \tec are not found in the preceding  \n2 or \n1 \tec. Priority: </div>
+            <div class="test">Test 1: not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))</div>
+            <div class="test2">Test 2: not($hastecellipsis) and $hastecchild and $hastecversion</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.1.3" href="#index">10.1.3</a> Message: There should be only one \tec per \n3 paragraph. Priority: 5</div>
+            <div class="test">Test 1: $counttec &gt; 1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.1.5" href="#index">10.1.5</a> Message: This \n3 paragraph is missing a \tec. Priority: 5</div>
+            <div class="test">Test 1: $counttec = 0</div>
+            <div class="test2">Test 2: $counttrs = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.2.2" href="#index">10.2.2</a> Message: There should be text in a \tec at the beginning of this \n3 paragraph. Priority: 5</div>
+            <div class="test">Test 1: $node1tec and $counttec = 1</div>
+            <div class="test2">Test 2: $validtecfirst != '$'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.6" href="#index">12.6</a> Message: The contents of this \n3 \tec are not found in the preceding \n2 or \n1 \tec. Priority: 5</div>
+            <div class="test">Test 1: not(contains($pren2tec,$curtec) or contains($pren1tec,$curtec))</div>
+            <div class="test2">Test 2: $hastecchild and not($hastecversion) and not($hastecellipsis)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.6.1" href="#index">12.6.1</a> Message: The contents of this \n3 \tec are not found in the preceding \n2 or \n1 \tec. Priority: 5</div>
+            <div class="test">Test 1: not((contains($pren2tec,$curtecpreellipsis) and contains($pren2tec,$curtecpostellipsis)) or (contains($pren1tec,$curtecpreellipsis) and contains($pren1tec,$curtecpostellipsis)))</div>
+            <div class="test2">Test 2: $countpres5 &lt; $countpren2 and $countpres5 &lt; $countpren1 and $hastecellipsis and $hastecchild and not($hastecversion)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err12.8.2" href="#index">12.8.2</a> Message: The \n3 occurs before any \n2 in this \s5 note group. Priority: 5</div>
+            <div class="test">Test 1: $countpres5 &gt; $countpren2</div>
+         </div>
+         <h4>\n3 variables</h4>
+         <div class="var">curtec substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)</div>
+         <div class="var">curtecver normalize-space(substring-after($curtec,')'))</div>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpren2 count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpren3 count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">countpresibnode count(preceding-sibling::node())</div>
+         <div class="var">counttec count(*[@style = 'tec'])</div>
+         <div class="var">counttrs count(*[@style = 'trs'])</div>
+         <div class="var">curtecpostellipsis substring-after($curtec,'…')</div>
+         <div class="var">curtecpreellipsis substring-before($curtec,'…')</div>
+         <div class="var">curtecverpreellipsis substring-before(substring-after($curtec,')'),'…')</div>
+         <div class="var">curtei *[@style = 'tei']/text()</div>
+         <div class="var">hastecchild boolean(child::*[@style = 'tec'])</div>
+         <div class="var">hastecellipsis contains(*[@style = 'tec'][1],'…')</div>
+         <div class="var">hastecversion starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')</div>
+         <div class="var">lenchildtec string-length(*[@style = 'tec']/text())</div>
+         <div class="var">node1tec node()[1][@style = 'tec']</div>
+         <div class="var">preellipsisstring normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))</div>
+         <div class="var">pren1tec preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+         <div class="var">pren2tec preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+         <div class="var">pren3tec preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+         <div class="var">validtecfirst substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-s3">\s3 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.4" href="#index">19.4</a> Message: The verse number in this \s3 does not match the current verse number in \v above or the hyphen should be a en dash. Priority: </div>
+            <div class="test">Test 1: not($prevhyphen) and not($refvendash) and not($hasvlet)</div>
+            <div class="test2">Test 2: $refcolonv != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.4.1" href="#index">19.4.1</a> Message: The verse number in this \s3 does not match the current verse number in \v above. Priority: </div>
+            <div class="test">Test 1: not($prevhyphen) and not($refvendash) and $hasvlet</div>
+            <div class="test2">Test 2: $refcolonvlet != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.5" href="#index">19.5</a> Message: The verse number in this \s3 does not match the current verse number in \v above. Priority: </div>
+            <div class="test">Test 1: $hassubvrange and $hascvref </div>
+            <div class="test2">Test 2: $refcolonvlet != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.6" href="#index">19.6</a> Message: The last verse number in the range in this \s3 does not match the current verse number in the \v above. Priority: </div>
+            <div class="test">Test 1: ($refvendash  and ($lastchartype = '#')) or (contains($reftype,'#$–#')  and ($lastchartype = '#'))</div>
+            <div class="test2">Test 2: $refcolonvr2 != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.8" href="#index">19.8</a> Message: An \s3 can only be followed by an \ntn. Priority: </div>
+            <div class="test">Test 1: post=ntn</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.3" href="#index">19.3</a> Message: The chapter number in this \s3 does not match the current chapter number. Priority: 5</div>
+            <div class="test">Test 1: $hascvref and $hasspacecref</div>
+            <div class="test2">Test 2: $refwordschapcolon != $prechapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.7" href="#index">19.7</a> Message: The ending verse part does not match the previous \s5 verse part. Priority: 5</div>
+            <div class="note">SC 21 Dec: Changed message. Otherwise OK.</div>
+            <div class="test">Test 1: $hascvref and $lastchartype  = '$'</div>
+            <div class="test2">Test 2: $lastchar != substring($pres5text,string-length($pres5text),1)</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.1" href="#index">19.1</a> Message: An \s3 paragraph always starts with `General Comment on` Priority: 6</div>
+            <div class="test">Test 1: not(contains(text(),'General Comment on'))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err19.2" href="#index">19.2</a> Message: This \s3 paragraph is missing a valid chapter verse reference, or the colon is missing. Priority: 6</div>
+            <div class="test">Test 1: not($hascvref )</div>
+         </div>
+         <h4>\s3 variables</h4>
+         <div class="var">refcolonv substring-after(node()[not(self::*)],':')</div>
+         <div class="var">strlenb4chap string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">hasspacecref contains(translate(node()[not(self::*)],$numb,$numbsub),' #')</div>
+         <div class="var">hassubvrange contains(translate($refcolonv,$validvlet,$validvletsub),'$–$')</div>
+         <div class="var">hasvlet contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')</div>
+         <div class="var">lastchar substring(.,string-length(.),1)</div>
+         <div class="var">lastchartype translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)</div>
+         <div class="var">prechapter preceding::chapter[1]/@number</div>
+         <div class="var">pres5text preceding::*[@style = 's5'][1]/text()</div>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">prevhyphen contains($preverse,'-')</div>
+         <div class="var">refcolonvlet substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')</div>
+         <div class="var">refcolonvr1 substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')</div>
+         <div class="var">refcolonvr2 substring-after($refcolonv,'–')</div>
+         <div class="var">reftype translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)</div>
+         <div class="var">refvendash contains(node()[not(self::*)],'–')</div>
+         <div class="var">refwordschapcolon substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-b3">\b3 in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.1.1" href="#index">7.1.1</a> Message: A \b para is not needed after the \b3 \v 1 (start of chapter). Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: $curverse = 1</div>
+            <div class="test2">Test 2: $postsib = 'b'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.1.3" href="#index">7.1.3</a> Message: A \b should be after the \b3 \v stuff, not before it. Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: $curverse != 1</div>
+            <div class="test2">Test 2: $presib = 'b'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.10.2" href="#index">7.10.2</a> Message: A \tr needs a \b above it (below the \b3 \v stuff), except @ v.1. Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: ($curverse != 1) and $posttable</div>
+            <div class="test2">Test 2: not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15.1" href="#index">15.1</a> Message: The first \s5 below should include the first verse in the \v verse range here. Priority: </div>
+            <div class="test">Test 1: $hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)</div>
+            <div class="test2">Test 2: $posts5v != $curvr1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15.5" href="#index">15.5</a> Message: The last \s5 below (in this verse range) should include the last verse in this \v verse range. Priority: </div>
+            <div class="test">Test 1: $hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) </div>
+            <div class="test2">Test 2: not(contains($values5beforev,concat(':',$curvr2)))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err1.1" href="#index">1.1</a> Message: A \b3 paragraph must contain a \v. Priority: 8</div>
+            <div class="test">Test 1: not(verse)</div>
+         </div>
+         <h4>\b3 variables</h4>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">values5beforev following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()</div>
+         <div class="var">ancestor ancestor::*/@style </div>
+         <div class="var">curverse verse/@number</div>
+         <div class="var">curvr1 substring-before(verse/@number,'-')</div>
+         <div class="var">curvr2 substring-after(verse/@number,'-')</div>
+         <div class="var">hasvhyphen contains(verse/@number,'-')</div>
+         <div class="var">posts5beforevhaslrb contains($values5beforev,'(')</div>
+         <div class="var">posts5beforevhasvr2 contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">posts5hasendashvr2 contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">posts5hasleftround contains(following::*[@style = 's5'][1],'(')</div>
+         <div class="var">posts5v substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')</div>
+         <div class="var">postsib2 postsib2</div>
+         <div class="var">postsib following-sibling::*[1]/@style</div>
+         <div class="var">posttable following-sibling::*[1][name() = 'table'] </div>
+         <div class="var">posttable2 following-sibling::*[2][name() = 'table'] </div>
+         <div class="var">pres5hasendashvr2 contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">pres5hasleftround contains(preceding::*[@style = 's5'][1],'(')</div>
+         <div class="var">pres5v substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')</div>
+         <div class="var">presib preceding-sibling::*[1]/@style</div>
+         <div class="var">presib2 preceding-sibling::*[2]/@style</div>
+         <div class="var">preverser1 substring-before($preverse,'-')</div>
+         <div class="var">preverser2 substring-after($preverse,'-')</div>
+         <div class="var">prevhyphen contains($preverse,'-')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-p">\p in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.1.2" href="#index">7.1.2</a> Message: A \b para is not needed after a \p \v 1 (start of chapter). Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: $curverse = 1</div>
+            <div class="test2">Test 2: $postsib = 'b'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.1.4" href="#index">7.1.4</a> Message: A \b should be after the \p, \v stuff not before it. Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: $curverse != 1</div>
+            <div class="test2">Test 2: $presib = 'b'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err7.10.1" href="#index">7.10.1</a> Message: A \tr needs a \b above it (below the \p \v stuff), except @ v.1. Priority: </div>
+            <div class="note">IM updated 2023-07-19</div>
+            <div class="test">Test 1: ($curverse != 1) and $posttable</div>
+            <div class="test2">Test 2: not($postsib = 'b' or ( $postsib = 'rem' and $postsib2 = 'b'))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15.2" href="#index">15.2</a> Message: The first \s5 below should include the first verse in the \v verse range here. Priority: </div>
+            <div class="test">Test 1: $hasvhyphen and not($posts5hasendashvr2) and not($posts5hasleftround)</div>
+            <div class="test2">Test 2: $posts5v != $curvr1</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15.6" href="#index">15.6</a> Message: The last \s5 below (in this verse range) should include the last verse in this \v verse range. Priority: </div>
+            <div class="test">Test 1: $hasvhyphen and not($posts5beforevhasvr2) and not($posts5beforevhaslrb) </div>
+            <div class="test2">Test 2: not(contains($values5beforev,concat(':',$curvr2)))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err1.2" href="#index">1.2</a> Message: A \p paragraph must contain a \v. Priority: 8</div>
+            <div class="test">Test 1: not(verse)</div>
+         </div>
+         <h4>\p variables</h4>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">values5beforev following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()</div>
+         <div class="var">ancestor ancestor::*/@style </div>
+         <div class="var">curverse verse/@number</div>
+         <div class="var">curvr1 substring-before(verse/@number,'-')</div>
+         <div class="var">curvr2 substring-after(verse/@number,'-')</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">hasvhyphen contains(verse/@number,'-')</div>
+         <div class="var">posts5beforevhaslrb contains($values5beforev,'(')</div>
+         <div class="var">posts5beforevhasvr2 contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">posts5hasendashvr2 contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">posts5hasleftround contains(following::*[@style = 's5'][1],'(')</div>
+         <div class="var">posts5v substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')</div>
+         <div class="var">postsib following-sibling::*[1]/@style</div>
+         <div class="var">postsib2 postsib2</div>
+         <div class="var">posttable following-sibling::*[1][name() = 'table'] </div>
+         <div class="var">posttable2 following-sibling::*[2][name() = 'table'] </div>
+         <div class="var">pres5hasendashvr2 contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')</div>
+         <div class="var">pres5hasleftround contains(preceding::*[@style = 's5'][1],'(')</div>
+         <div class="var">pres5v substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')</div>
+         <div class="var">presib preceding-sibling::*[1]/@style</div>
+         <div class="var">presib2 preceding-sibling::*[2]/@style</div>
+         <div class="var">preverser1 substring-before($preverse,'-')</div>
+         <div class="var">preverser2 substring-after($preverse,'-')</div>
+         <div class="var">prevhyphen contains($preverse,'-')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-gra">\gra in USX element para</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.8" href="#index">22.8</a> Message: This \gra paragraph is missing the copyright footnote. Priority: </div>
+            <div class="test">Test 1: $countfig + $countf = 1</div>
+            <div class="test2">Test 2: $countf = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.10." href="#index">22.10.</a> Message: This \gra paragraph is missing a \fig. Priority: </div>
+            <div class="test">Test 1: $countfig + $countf = 1</div>
+            <div class="test2">Test 2: $countfig = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.2" href="#index">22.2</a> Message: This \gra has all the required elements of \fig and a footnote, but also has some other markup, extra spaces or text. Priority: 8</div>
+            <div class="note">SC 6 Dec: This test does not seem to be working. Please make the message: 'This \\ntn must only have a \\fig and a footnote'.</div>
+            <div class="test">Test 1: $countfig + $countf = 2</div>
+            <div class="test2">Test 2: $countnode != 2</div>
+         </div>
+         <h4>\gra variables</h4>
+         <div class="var">countf count(*[@style = 'f'])</div>
+         <div class="var">countfig count(*[@style = 'fig'])</div>
+         <div class="var">countnode count(node())</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-f">\f in USX element note</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.3" href="#index">22.3</a> Message: The sequence should be \fig...\fig*\f...\f*. Note no space after \fig*. Priority: </div>
+            <div class="test">Test 1: $graparent</div>
+            <div class="test2">Test 2: not(preceding-sibling::*[1][@style = 'fig'] )</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err22.5" href="#index">22.5</a> Message: The caller for the \f must be *. Priority: </div>
+            <div class="test">Test 1: @caller != '*'</div>
+         </div>
+         <h4>\f variables</h4>
+         <div class="var">curpos position()</div>
+         <div class="var">graparent parent::para[@style = 'gra']</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.2.1" href="#index">22.2.1</a> Message: The \fig must be the first item in a \gra paragraph. Priority: </div>
+         <div class="note">SC 6 Dec: This test does not seem to be working. Please make the message: 'This \\ntn must only have a \\fig and a footnote'.</div>
+         <div class="test">Test 1: $curpos != 1</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.7" href="#index">22.7</a> Message: The referenced verse number for the \fig does not match the current verse number. Priority: </div>
+         <div class="test">Test 1: $hascoloncvref and not($hasspaceinref)</div>
+         <div class="test2">Test 2: $refattverse != $preverse</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.7.2" href="#index">22.7.2</a> Message: The reference should be chapter number then colon then verse number. No book code. Priority: </div>
+         <div class="test">Test 1: not($hascoloncvref)</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.6" href="#index">22.6</a> Message: The referenced chapter number for the \fig does not match the current chapter number. Priority: 2</div>
+         <div class="test">Test 1: $hascoloncvref and not($hasspaceinref)</div>
+         <div class="test2">Test 2: $refattchap != $prechapter</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.6.2" href="#index">22.6.2</a> Message: The reference in this \fig should not contain a book code, and the full stop between chapter and verse must be a colon. Priority: 2</div>
+         <div class="test">Test 1: $hascoloncvref and $hasspaceinref</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.1" href="#index">22.1</a> Message: A \fig must only occur in a \gra paragraph. Priority: 8</div>
+         <div class="test">Test 1: not($graparent)</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err22.4" href="#index">22.4</a> Message: This ‘Click here...’ \jmp should occur as the only item in a \gj paragraph. The \gj  para should be immediately after a \gra paragraph. Priority: </div>
+         <div class="test">Test 1: not($gjparent) and $containsclickhere</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-sbx">\sbx in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.3" href="#index">8.4.3</a> Message: The first verse of the range in this \sbx does not match the current verse number in \v above. Priority: </div>
+            <div class="test">Test 1: $hascvref and not(contains($preverse,'-')) and contains(.,'–')</div>
+            <div class="test2">Test 2: $refcolonvr1 != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.4" href="#index">8.4.4</a> Message: The verse in this \sbx does not match the current verse number in \v above. (Or you maybe using an em dash rather than an en dash.) Priority: </div>
+            <div class="test">Test 1: $hascvref and not(contains($preverse,'-'))  and not(contains(.,'–'))</div>
+            <div class="test2">Test 2: $refcolonv != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.5" href="#index">8.4.5</a> Message: The chapter in this \sbx does not match the current chapter number. Priority: </div>
+            <div class="test">Test 1: $hasspacecref  and $hascvref </div>
+            <div class="test2">Test 2: $refwordschapcolon != $prechapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.7" href="#index">8.4.7</a> Message: The chapter in this \sbx does not match the current chapter number. Priority: </div>
+            <div class="test">Test 1: $numbfirst and $hascvref</div>
+            <div class="test2">Test 2: $refchapcolon != $prechapter</div>
+         </div>
+         <h4>\sbx variables</h4>
+         <div class="var">refcolonv substring-after(node()[not(self::*)],':')</div>
+         <div class="var">strlenb4chap string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))</div>
+         <div class="var">chappos string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">hasspacecref contains(translate(node()[not(self::*)],$numb,$numbsub),' #')</div>
+         <div class="var">numbfirst substring(translate(.,$numb,$numbsub),1,1) = '#'</div>
+         <div class="var">prechapter preceding::chapter[1]/@number</div>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">refchapcolon substring-before(node()[not(self::*)],':')</div>
+         <div class="var">refcolonvr1 substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')</div>
+         <div class="var">refwordschapcolon substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-">USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err9.6" href="#index">9.6</a> Message: The hyphen in a verse range in this paragraph should be an en dash. Priority: </div>
+            <div class="test">Test 1: contains(translate(.,$numb,$numbsub),'#:#')</div>
+            <div class="test2">Test 2: contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err26.2" href="#index">26.2</a> Message: This character SFM contains a straight quote mark. It should be a curly quote mark. Priority: 5</div>
+            <div class="test">Test 1: contains(text(),$sq) or contains(text(),$dq) </div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tec">\tec in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.2.1" href="#index">10.2.1</a> Message: The \tec should be at the start of the paragraph (or you are not using an \n1, \n2, or \n3 style). Priority: </div>
+            <div class="test">Test 1: $countpresibnode &gt; 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err11.1" href="#index">11.1</a> Message: The first character should not be punctuation unless you are specifically talking about that punctuation in this Note, or it is a short quote within a larger text. Priority: </div>
+            <div class="test">Test 1: translate(substring(.,1,1),$invalidtecfirstpunc,'%%') = '%'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err11.2" href="#index">11.2</a> Message: The last character before the colon should not be punctuation unless it is a question, or exclamation mark, or an end quote mark needed for the Note, or a short quote within a larger text. Priority: </div>
+            <div class="test">Test 1: translate($lastchar2,$invalidtecendpunc,$invalidtecendpuncsub) = '%'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err20.3" href="#index">20.3</a> Message: A \tec cannot contain a footnote (\f ...\f*). It must be after the \tec*. Priority: </div>
+            <div class="test">Test 1: *[@style = 'f']</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.32" href="#index">10.32</a> Message: The last character of this \tec should be a colon. Priority: 3</div>
+            <div class="test">Test 1: not($lastchar = ':')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.2.3" href="#index">10.2.3</a> Message: This \tec should not be here. There should be only one \tec at the start of this paragraph. Priority: 5</div>
+            <div class="test">Test 1: $countpretec &gt; 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.31" href="#index">10.31</a> Message: The last character of this \tec should be a colon, not a space. Priority: 5</div>
+            <div class="test">Test 1: $lastchar = ' '</div>
+         </div>
+         <h4>\tec variables</h4>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpren2 count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">countpresibnode count(preceding-sibling::node())</div>
+         <div class="var">countpretec count(preceding-sibling::*[@style = 'tec'])</div>
+         <div class="var">hasellipsis contains(node()[not(self::*)],'…')</div>
+         <div class="var">lastchar substring(.,string-length(.),1)</div>
+         <div class="var">lastchar2 substring(.,string-length(.) - 1,1)</div>
+         <div class="var">postellipsisstring normalize-space(concat(' ',substring-after(translate(node()[not(self::*)],':',''),'…'),' '))</div>
+         <div class="var">preellipsisstring normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-trs">\trs in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.4" href="#index">10.4</a> Message: A \tec should precede this \trs in the paragraph, or perhaps this paragraph should be an \n2. Priority: </div>
+            <div class="note">SC 23 Mar: Caught by #10.6</div>
+            <div class="test">Test 1: not(preceding-sibling::*[@style = 'tec']) </div>
+            <div class="test2">Test 2: not($ancestor= 'f' or $parent = 'n2' or $parent = 'li1' or $parent = 'hb1')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.6" href="#index">10.6</a> Message: The word/phrase in this \trs is not found in the closest preceding \tec, or is misspelled, or has wrong capitalization, or has punctuation that does not belong in the \trs. Priority: </div>
+            <div class="test">Test 1: $ellipsiscount = 0 and not(contains($pretec,.))</div>
+            <div class="test2">Test 2: not(contains($pretec,$curspfield) and $teccharposttrs = '$') or  not($teccharpretrs = '$' or $teccharposttrs = '$') </div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.6.2" href="#index">10.6.2</a> Message: The word or phrase in this \trs are not found in the preceding \tec. Priority: </div>
+            <div class="test">Test 1: $ellipsiscount = 1</div>
+            <div class="test2">Test 2: not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split2ellipsisstring2))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.6.3" href="#index">10.6.3</a> Message: The word or phrase in this \trs are not found in the preceding \tec. Priority: </div>
+            <div class="test">Test 1: $ellipsiscount = 2</div>
+            <div class="test2">Test 2: not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split3ellipsisstring3))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.6.4" href="#index">10.6.4</a> Message: The word or phrase in this \trs are not found in the preceding \tec. Priority: </div>
+            <div class="test">Test 1: $ellipsiscount = 3</div>
+            <div class="test2">Test 2: not(contains($pretec,$split2ellipsisstring1) and contains($pretec,$split3ellipsisstring2) and contains($pretec,$split4ellipsisstring3) and contains($pretec,$split4ellipsisstring4))</div>
+         </div>
+         <h4>\trs variables</h4>
+         <div class="var">pretec concat(' ',preceding::*[@style = 'tec'][1])</div>
+         <div class="var">ellipsiscount string-length(.)-string-length(translate(.,'…',''))</div>
+         <div class="var">split2ellipsisstring1 substring-before(.,'…')</div>
+         <div class="var">split2ellipsisstring2 substring-after(.,'…')</div>
+         <div class="var">tecstringposttrs substring-after($pretec,.)</div>
+         <div class="var">tecstringpretrs substring-before($pretec,.)</div>
+         <div class="var">split3ellipsisstring2 substring-before($split2ellipsisstring2,'…')</div>
+         <div class="var">split3ellipsisstring3 substring-after($split2ellipsisstring2,'…')</div>
+         <div class="var">split4ellipsisstring3 substring-before($split3ellipsisstring3,'…')</div>
+         <div class="var">split4ellipsisstring4 substring-after($split3ellipsisstring3,'…')</div>
+         <div class="var">ancestor ancestor::*/@style </div>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">curspfield concat(' ',.)</div>
+         <div class="var">parent parent::*/@style</div>
+         <div class="var">teccharposttrs translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)</div>
+         <div class="var">teccharpretrs translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tei">\tei in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err10.5" href="#index">10.5</a> Message: Any repeat of the words found in the preceding \tec should be in a \trs, not in this \tei. Priority: </div>
+            <div class="test">Test 1: $countpren1 &gt; $countpres5 or $parentpresibpos &gt; $countpres5 </div>
+            <div class="test2">Test 2: contains($pren1tec,text()) and not($ancestor = 'p') and not($ancestor = 'f') and not($ancestor = 'qp') and not($ancestor = 'q1tn') and not($ancestor = 'q2tn') and not($ancestor = 'qns') and not($ancestor = 'b3')</div>
+         </div>
+         <h4>\tei variables</h4>
+         <div class="var">ancestor ancestor::*/@style </div>
+         <div class="var">countpren1 count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)</div>
+         <div class="var">countpres5 count(preceding::*[@style = 's5'][1]/preceding-sibling::*)</div>
+         <div class="var">parent parent::*/@style</div>
+         <div class="var">parentpresib parent::*/preceding-sibling::*[1]/@style</div>
+         <div class="var">parentpresibpos count(parent::*/preceding-sibling::*)</div>
+         <div class="var">pren1tec preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-fr">\fr in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err15.7" href="#index">15.7</a> Message: Remove this \fr and the address. TNs do not use them. Priority: </div>
+            <div class="test">Test 1: $hascvref or $hasbadcvref</div>
+         </div>
+         <h4>\fr variables</h4>
+         <div class="var">hasbadcvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#.#')</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tbb">\tbb in USX element char</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err17.1.1" href="#index">17.1.1</a> Message: This \tbb __\tbb* has less than the required 2 underscore characters. Priority: </div>
+            <div class="test">Test 1: text() = '_'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err17.1.2" href="#index">17.1.2</a> Message: This \tbb __\tbb* has more than 2 underscore characters. Priority: </div>
+            <div class="test">Test 1: text() = '___' or text() = '____'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err17.2" href="#index">17.2</a> Message: There should not be a space before a \tbb. Priority: 5</div>
+            <div class="test">Test 1: substring(preceding-sibling::node()[1],string-length(preceding-sibling::node()[1]),1) = ' '</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err17.3" href="#index">17.3</a> Message: There should not be a space after a \tbb*. Priority: 10</div>
+            <div class="test">Test 1: substring(following-sibling::node()[1],1,1) = ' '</div>
+         </div>
+         <h4>\tbb variables</h4>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tc1">\tc1 in USX element cell</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.4" href="#index">4.4</a> Message: A \tc1 must contain either an \sbx or the word ‘Paragraph’. Priority: </div>
+            <div class="test">Test 1: count(following-sibling::cell) = 0 and @style = 'tc1'</div>
+            <div class="test2">Test 2: not(*[@style = 'sbx'] or contains(text(),'Paragraph'))</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.7" href="#index">4.7</a> Message: These \sbx should be separated by \tbb __\tbb*. Priority: </div>
+            <div class="test">Test 1: $countsbx &gt; 1</div>
+            <div class="test2">Test 2: $counttbb + 1 != $countsbx</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.8" href="#index">4.8</a> Message: The address and the heading should be separated by this: \sbx*\tbb __\tbb*\sbx . Priority: </div>
+            <div class="test">Test 1: $countsbx = 1</div>
+            <div class="test2">Test 2: count(*/*[@style = '+tbb']) = 0 and $counttbb = 0</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.1" href="#index">8.4.1</a> Message: The first verse of the range in this Paragraph Box does not match the current verse number in \v above. Priority: </div>
+            <div class="test">Test 1: $hasspacecref and $hascvref and not(contains($preverse,'-')) and contains(.,'–') and $notsbxchild</div>
+            <div class="test2">Test 2: $refcolonvr1 != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.2" href="#index">8.4.2</a> Message: The verse in this Paragraph Box does not match the current verse number in \v above. Priority: </div>
+            <div class="test">Test 1: $hascvref and not(contains($preverse,'-'))  and not(contains(.,'–')) and $containsparagraph</div>
+            <div class="test2">Test 2: $refcolonvnumb != $preverse</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.6" href="#index">8.4.6</a> Message: The chapter in this \tc1 does not match the current chapter number. Priority: </div>
+            <div class="note">excludes if contains sbx</div>
+            <div class="test">Test 1: $hasspacecref and $hascvref </div>
+            <div class="test2">Test 2: $refwordschapcolon != $prechapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err8.4.8" href="#index">8.4.8</a> Message: The chapter in this \tc1 does not match the current chapter number. Priority: </div>
+            <div class="note">Not sure this ever occurs</div>
+            <div class="test">Test 1: $numbfirst and $hascvref and $notmultirowtable and $containsparagraph</div>
+            <div class="test2">Test 2: $refchapcolon != $prechapter</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.9" href="#index">4.9</a> Message: A \tc1 can only occur as the first SFM in a \tr. Priority: 5</div>
+            <div class="note">2023-03-27 addded to show instead of 4.4 in XXD 1:2 first \tr</div>
+            <div class="test">Test 1: $countprenode &gt; 1</div>
+         </div>
+         <h4>\tc1 variables</h4>
+         <div class="var">refcolonv substring-after(node()[not(self::*)],':')</div>
+         <div class="var">strlenb4chap string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))</div>
+         <div class="var">chappos string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1</div>
+         <div class="var">containsparagraph contains(.,'Paragraph')</div>
+         <div class="var">countprenode count(preceding-sibling::node())</div>
+         <div class="var">countsbx count(*[@style = 'sbx'])</div>
+         <div class="var">counttbb count(*[@style = 'tbb'])</div>
+         <div class="var">hascvref contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')</div>
+         <div class="var">hasspacecref contains(translate(node()[not(self::*)],$numb,$numbsub),' #')</div>
+         <div class="var">notmultirowtable not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])</div>
+         <div class="var">notsbxchild not(child::*[@style = 'sbx'])</div>
+         <div class="var">numbfirst substring(translate(.,$numb,$numbsub),1,1) = '#'</div>
+         <div class="var">pos pos</div>
+         <div class="var">prechapter preceding::chapter[1]/@number</div>
+         <div class="var">preverse preceding::verse[1]/@number</div>
+         <div class="var">refchapcolon substring-before(node()[not(self::*)],':')</div>
+         <div class="var">refcolonvnumb translate(substring-after(text(),':'),$validvlet,'')</div>
+         <div class="var">refcolonvr1 substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')</div>
+         <div class="var">refwordschapcolon substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')</div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-">USX element cell</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err9.5" href="#index">9.5</a> Message: The hyphen in a verse range in this \tr \tc1 should be an en dash. Priority: </div>
+            <div class="test">Test 1: contains(translate(text(),$numb,$numbsub),'#:#')</div>
+            <div class="test2">Test 2: contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err26.3" href="#index">26.3</a> Message: This table cell contains a straight quote mark. It should be a curly quote mark. Priority: </div>
+            <div class="test">Test 1: contains(text(),$sq) or contains(text(),$dq) </div>
+         </div>
+      </div>
+      <div>
+         <h3>
+            <a href="#index2" id="sfm-tr">\tr in USX element row</a>
+         </h3>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.2" href="#index">4.2</a> Message: The second column must be a \tc2 in \tr. Priority: </div>
+            <div class="test">Test 1: cell[2]/@style = 'tc1'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err4.3" href="#index">4.3</a> Message: The first column must be a \tc1 in \tr. Priority: </div>
+            <div class="test">Test 1: cell[1]/@style = 'tc2'</div>
+         </div>
+         <div class="testrow">
+            <div class="h4">Check: <a id="err6.8" href="#index">6.8</a> Message: An \ntn is used for the summary under a Part, Division or Section Box. Priority: </div>
+            <div class="test">Test 1: $containspart or $containsdivision or $containssection</div>
+            <div class="test2">Test 2: not($parentpostsib = 'ntn')</div>
+         </div>
+         <h4>\tr variables</h4>
+         <div class="var">containsdivision contains(.,'Division')</div>
+         <div class="var">containspart contains(.,'Part')</div>
+         <div class="var">containssection contains(.,'Section')</div>
+         <div class="var">countpretable count(parent::*/preceding-sibling::table)</div>
+         <div class="var">hastrdivision contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0</div>
+         <div class="var">hastrparagraph contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0</div>
+         <div class="var">hastrpart contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0</div>
+         <div class="var">hastrsection contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0</div>
+         <div class="var">parentpostsib parent::*/following-sibling::*[1]/@style</div>
+         <div class="var">parentpresib parent::*/preceding-sibling::*[1]/@style</div>
+         <div class="var">parentpresib2 parent::*/preceding-sibling::*[2]/@style</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err9.2" href="#index">9.2</a> Message: The en dash in the verse range in this \v must be a hyphen. Priority: </div>
+         <div class="test">Test 1: contains(@number,'–')</div>
+      </div>
+      <div class="testrow">
+         <div class="h4">Check: <a id="err9.3" href="#index">9.3</a> Message: A \v cannot have verse parts in it. Priority: </div>
+         <div class="test">Test 1: contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$-#') or contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$')</div>
+      </div>
+      <h2>
+         <a href="#static-index">Static</a> string variables</h2>
+      <div id="static-numb" class="var">numb 1234567890</div>
+      <div id="static-numbsub" class="var">numbsub ##########</div>
+      <div id="static-validvlet" class="var">validvlet abcdefghij</div>
+      <div id="static-validvletsub" class="var">validvletsub $$$$$$$$$$</div>
+      <div id="static-validvletpunc" class="var">validvletpunc abcdefghij–</div>
+      <div id="static-invalidvlet" class="var">invalidvlet klmnopqrstuvwxyz</div>
+      <div id="static-validcvnumblet" class="var">validcvnumblet 1234567890abcdefghij</div>
+      <div id="static-validcvnumbletsub" class="var">validcvnumbletsub ##########$$$$$$$$$$</div>
+      <div id="static-validcvnumbletpunc" class="var">validcvnumbletpunc 1234567890abcdefghij–:</div>
+      <div id="static-letlc" class="var">letlc abcdefghijklmnopqrstuvwxyz</div>
+      <div id="static-letuc" class="var">letuc ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+      <div id="static-letsub" class="var">letsub $$$$$$$$$$$$$$$$$$$$$$$$$$</div>
+      <div id="static-letulc" class="var">letulc ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</div>
+      <div id="static-letulcsub" class="var">letulcsub $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</div>
+      <div id="static-invalidtecendpunc" class="var">invalidtecendpunc .,’”</div>
+      <div id="static-invalidtecendpuncsub" class="var">invalidtecendpuncsub %%%%</div>
+      <div id="static-invalidtecfirstpunc" class="var">invalidtecfirstpunc ‘“</div>
+      <div id="static-validreorderedcvnumbletpunc" class="var">validreorderedcvnumbletpunc 1234567890abcdefghij–:,</div>
+      <div id="static-letucnumb" class="var">letucnumb ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</div>
+      <div id="static-letucnumbsub" class="var">letucnumbsub $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</div>
+      <div id="static-validcvnumbletendash" class="var">validcvnumbletendash 1234567890abcdefghij–</div>
+      <div id="static-validcvnumbletendashsub" class="var">validcvnumbletendashsub ##########$$$$$$$$$$</div>
+      <div id="static-validvletendash" class="var">validvletendash abcdefghij–,</div>
+      <div id="static-puncreplace" class="var">puncreplace ,….“‘’”!?:—-</div>
+      <div id="static-puncreplacespace" class="var">puncreplacespace </div>
+   </body>
+</html>
