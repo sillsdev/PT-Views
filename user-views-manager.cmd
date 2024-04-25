@@ -4,6 +4,7 @@
 rem @echo off
 set viewsappdata=C:\Users\Public\PT-Views
 set viewsaction=user-views-action.cmd
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
 set action=%1
 set matchstart=%2
   set redbg=[101m
@@ -33,18 +34,17 @@ if not defined action (
 @echo.
 @echo Checking for Paratext settings
 @echo.
-set ptpath=
+set mpppath=
 set drive=
 set curdir=%cd%
-call :regquery 8
-  set viewspath=%ptpath%Views
-  set cmspath=%ptpath%cms
+call :mpppathquery 8
+
   @echo Paratext path found at: %ptpath%
 if errorlevel=0 (
     call :%action%
 ) else (
     @echo Checking for Paratext 9 settings
-    call :regquery 9
+    call :ptpathquery 9
   if errorlevel=0 (
     call :runaction
   ) else (
@@ -57,12 +57,14 @@ echo.
 pause
 goto :eof
 
-:regquery
+:mpppathquery
 FOR /F "usebackq skip=2 tokens=1,2 delims=:" %%A IN (`REG QUERY HKLM\SOFTWARE\WOW6432Node\Paratext\%~1 /v Settings_Directory`) DO (
   call :drive %%A
-  set ptpathnodrive=%%B
+  set mpppathnodrive=%%B
 )
-  set ptpath=%drive%:%ptpathnodrive%
+  set mpppath=%drive%:%ptpathnodrive%
+  set viewspath=%mpppath%Views
+  set cmspath=%mpppath%cms
 goto :eof
 
 :drive
@@ -171,15 +173,15 @@ goto :eof
   echo.
   set winfile=%~1
   call curl -o "%outpath%\%winfile:/=\%" --ssl-no-revoke %url-base%/%~1
-  if exist "%outp%\%~1" echo %green%%~1 updated. %reset%
+  if exist "%outpath%\%~1" echo %green%%~1 updated. %reset%
 goto :eof
 
 :errorsdoc
   echo.
  
-  cd /d "%ptpath%cms"
+  cd /d "%mpppath%cms"
   echo Starting %matchstart%-errors-documentation.html
-  start msedge "file://%ptpath%cms/%matchstart%-errors-documentation.html"
+  start msedge "file://%mpppath%cms/%matchstart%-errors-documentation.html"
 goto :eof
 
 
@@ -295,19 +297,11 @@ goto :eof
   if defined info3 echo %green%Info: multivar = %multivar%%reset%
 goto :eof
 
-:updateinstalled
-:: Description: Run list updates on al installed Views
-:: Usage: Call :listupdate
-  if exist "%ptpath%\Views\TNDD-tag-errors.xslt" call :listupdate tndd
-  if exist "%ptpath%\Views\TNND-tag-errors.xslt" call :listupdate tnnd
-  if exist "%ptpath%\Views\USX-view.xslt" call :listupdate usx
-goto :eof
-
 :listupdate
 :: Description: Update view type from internet
 :: Usage: call :listupdate type
   set TNxD=%~1 
-  set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
+
   rem the following is only for testing.
   set outpath=C:\Users\Public\PT-Views2
   set curlist=%outpath%\%TNxD%-Public-list.txt
@@ -316,9 +310,6 @@ goto :eof
 
   curl -o "%curlist%"  --ssl-no-revoke %url-base%/%TNxD%-Public-list.txt
 
-  ::call :ptpathquery
-  set ptpath=%drive%:%ptpathnodrive%
-  
   rem for testing
   set ptpath=C:\Users\Public\PT-test
 
@@ -332,7 +323,57 @@ goto :eof
   copy /Y "%outpath%\%TNxD%\cms\*.py" "%ptpath%\cms"
   copy /Y "%outpath%\%TNxD%\cms\*.pdf" "%ptpath%\cms"
 
-  if not exist "%ptpath%\Views" md  "%ptpath%\Views"
+  if not exist "%ptpath%\Views" md "%ptpath%\Views"
+  copy /Y "%outpath%\%TNxD%\*.x*" "%ptpath%\Views"
+goto :eof
+
+:neededdir
+  if not exist "%mpppath%\Views" md  "%mpppath%\Views"
+  if not exist "%mpppath%\cms" md "%mpppath%\cms"
+  if not exist "%viewsappdata%\%TNxD%\cms" md "%viewsappdata%\%TNxD%\cms"
+  if not exist "%viewsappdata%\%TNxD%\Views" md "%viewsappdata%\%TNxD%\Views"
+goto :eof
+
+:toggle
+:: Hide or show a set of views
+  if exit "%mpppath%\cms\%NTNxD%_Views_hide.cms" (
+    del "%mpppath%\cms\%NTNxD%_Views_hide.cms"
+    copy /y "%viewsappdata%\%TNxD%\cms\%TNxD%_Views_show.cms" "%mpppath%\cms\"
+  ) else (
+    del "%mpppath%\cms\%NTNxD%_Views_show.cms"
+    copy /y "%viewsappdata%\%TNxD%\cms\%TNxD%_Views_hide.cms" "%mpppath%\cms\"
+goto :eof
+
+:updateall
+:: Description: Update all view from internet
+:: Usage: call :updateall
+
+ rem the following is only for testing.
+  set installpath=C:\Users\Public\PT-Views2
+  
+  set curlist=%installpath%\Bamboo-Public-list.txt
+  if not exist "%installpath%\TNDD\cms\" md "%installpath%\TNDD\cms\"
+  if not exist "%installpath%\TNND\cms\" md "%installpath%\TNND\cms\"
+  if not exist "%installpath%\USX\cms\" md "%installpath%\USX\cms\"
+  if not exist "%mppviews%" md  "%mppviews%"
+  if not exist "%mppcms%" md  "%mppcms%"
+
+  call curl -o "%curlist%"  --ssl-no-revoke %url-base%/Bamboo-Public-list.txt
+
+  call :looplist :getfile "%curlist%" %url-base% "%outpath%"
+  call :copyfiles TNDD
+  call :copyfiles TNND
+  call :copyfiles USX
+goto :eof
+
+:copyfiles
+  set TNxD=%~1
+  if exist "%ptpath%\cms\%TNxD%_Views_hide.cms" (
+  copy /Y "%outpath%\%TNxD%\cms\*.cms" "%ptpath%\cms"
+  copy /Y "%outpath%\%TNxD%\cms\*.py" "%ptpath%\cms"
+  copy /Y "%outpath%\%TNxD%\cms\*.pdf" "%ptpath%\cms"
   copy /Y "%outpath%\%TNxD%\*.xml" "%ptpath%\Views"
   copy /Y "%outpath%\%TNxD%\*.xslt" "%ptpath%\Views"
+  )
 goto :eof
+

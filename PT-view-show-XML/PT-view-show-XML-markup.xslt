@@ -26,7 +26,7 @@
                 <xsl:text>&gt;</xsl:text>
             </xsl:element>
             <xsl:apply-templates select="node()"/>
-            <span style="color:blue">
+            <span style="color:blue;background:orange">
                 <xsl:text>&lt;/</xsl:text>
                 <xsl:value-of select="name()"/>
                 <xsl:text>&gt;</xsl:text>
