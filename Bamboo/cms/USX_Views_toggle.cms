@@ -1,0 +1,8 @@
+\check USX Views-Toggle
+\submenu Custom Views
+\script USX_Views_toggle.py
+\description (Ignore the "Input Project" box above.) This tool will hide or show USX Views in the Views menus, after Paratext is restarted. There are two TNDD views. \n\n USX Views aids in Bamboo Views development. Some other may also find it useful.
+\helpFile USX-info.pdf
+\noText
+\rank 1
+\utf8
