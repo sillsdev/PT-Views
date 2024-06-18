@@ -6,17 +6,10 @@ import os
 
 # Define batch files
 actionbatchfile = "C:\Users\Public\PT-Views\user-views-action.cmd"
-batchfile = "C:\Users\Public\PT-Views\Bamboo_Views_updater.cmd"
+batchfile = "C:\Users\Public\PT-Views\Bamboo-views-manager.cmd"
+
 # setup variables for the ACTION batch file.
-commandstring = "echo set action=update> " + actionbatchfile
-os.system(commandstring)
-#commandstring = "echo set matchstart=TNND>> " + actionbatchfile
-#os.system(commandstring)
-commandstring = "echo set baseurl=https://raw.githubusercontent.com/sillsdev/PT-Views/master>> " + actionbatchfile
-os.system(commandstring)
-commandstring = "echo set filelist=" + batchfile + ">> " + actionbatchfile
-os.system(commandstring)
-commandstring = "curl.exe --ssl-no-revoke -o " + actionbatchfile + " " + baseurl + "Bamboo_Views_updater.cmd"
+commandstring = "echo set action=updateall> " + actionbatchfile
 os.system(commandstring)
 # Run the batch file to do the action
-os.startfile(actionbatchfile)
+os.startfile(batchfile)
