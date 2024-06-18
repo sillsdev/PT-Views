@@ -1,0 +1,8 @@
+\check Uninstall Bamboo Views
+\submenu Custom Views
+\script Bamboo_Views_uninstall.py
+\description (Ignore the "Input Project" box above.) This will UNINSTALL Bamboo Views in the Views menu and this Custom Tools > Custom Views, after Paratext restart. This will uninstall all Bamboo views: TNDD, TNND and USX. 
+\helpFile Bamboo-info.pdf
+\noText
+\rank 10
+\utf8
