@@ -1,10 +1,10 @@
-:: User Views manager
+:: Bamboo Views manager
 :: Written by: ian_mcquay@sil.org
-:: Date updated: 2020-07-13
+:: Date updated: 2024-06-19
 rem @echo off
 set viewsappdata=C:\Users\Public\PT-Bamboo-Views
 set viewsaction=user-views-action.cmd
-set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/Bamboo
 set action=%1
 set TNxD=%2
   set redbg=[101m
@@ -28,11 +28,7 @@ if not defined action (
 
 :main
 @echo.
-@if "%TNxD%" == "TNDD" echo Paratext Views manager for: %TNxD% 
-@echo.
-@if "%TNxD%" == "TNDD" echo Atempting to %action% %TNxD% Views
-@echo.
-@echo Checking for Paratext settings
+@echo Paratext Bamboo Views manager
 @echo.
 set mpppath=
 set drive=
