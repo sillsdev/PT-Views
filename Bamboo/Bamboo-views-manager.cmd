@@ -36,7 +36,8 @@ set drive=
 set curdir=%cd%
 call :mpppathquery 8
 
-@echo %green%Paratext path found at: %mpppath%%reset%
+@echo %green%Paratext path found at:%reset% %mpppath%
+@echo.
 if errorlevel=0 (
     call :%action%
 ) else (
@@ -228,10 +229,8 @@ goto :eof
 :: Functions called: multivarlist. Can also use any other function.
   @if defined debug echo %0 '%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'
   if defined fatal goto :eof
-  echo on
   set func=%~1
   set listfile=%~2
-  echo off
   if not defined func echo %error% Missing 'function' parameter%reset% & goto :eof
   if not defined listfile echo %error% Missing 'list file' parameter%reset% & goto :eof
   if not exist "%listfile%" echo %error% Missing source: %listfile% %reset% & echo %funcendtext% %0 & goto :eof 
@@ -304,9 +303,10 @@ goto :eof
   @call :looplist :getfile "Bamboo-Public-list.txt"
   
   rem update the files in Views and cms folder if there already
-  echo %green%Info: Coping support files to '%%mpppath%cms%' folder
+  echo.
+  echo %green%Info: Copying support files to '%mpppath%cms' folder%reset%
   xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
-  echo %green%Info: Coping vies files to '%%mpppath%Views%' folder
+  echo %green%Info: Copying views files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
 
