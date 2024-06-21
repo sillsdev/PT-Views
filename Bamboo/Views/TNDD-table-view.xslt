@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!--
+<!--
     #############################################################
     # Name:     	TNDD-table-view.xslt
     # Purpose:  	Provide a table view of TNDD data with \sl1 and up to three columns of \ml1 data.
@@ -12,10 +12,16 @@
     # Licence:  	<MIT>
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<!-- Credits: Mark Penny for the idea; Ian McQuay for the XSLT and CSS details to make it all work! -->
+    <!-- Credits: Mark Penny for the idea; Ian McQuay for the XSLT and CSS details to make it all work! -->
     <xsl:output method="html"/>
+    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="view" select="' TNDD table view.'"/>
+    <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:template match="/*">
         <div class="usfm">
+            <xsl:element name="h4">
+                <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
+            </xsl:element>
             <xsl:apply-templates/>
         </div>
     </xsl:template>

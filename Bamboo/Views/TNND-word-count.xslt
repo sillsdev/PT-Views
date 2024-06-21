@@ -12,6 +12,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:str="http://exslt.org/strings" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl str">
     <xsl:output method="xml" version="1.0" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:strip-space elements="*"/>
+    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="view" select="' TNND word count view.'"/>
+    <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <!-- Define the color levels and colors-->
     <xsl:variable name="level1" select="17"/>
     <xsl:variable name="color1" select="'orange'"/>
@@ -55,6 +58,10 @@
     <xsl:variable name="exclamrsbsp" select="'!] '"/>
     <xsl:variable name="colonrsbsp" select="':] '"/>
     <xsl:template match="/*">
+    
+        <xsl:element name="h4">
+            <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
+        </xsl:element>
         <xsl:apply-templates select="chapter[@number]|*"/>
     </xsl:template>
     <xsl:template match="chapter[@style][count(preceding::chapter) > 0]">
@@ -218,7 +225,9 @@
                 <xsl:with-param name="para-string" select="$step1"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:comment><xsl:value-of select="$step2"/></xsl:comment>
+        <xsl:comment>
+            <xsl:value-of select="$step2"/>
+        </xsl:comment>
         <xsl:element name="table">
             <xsl:attribute name="class">
                 <xsl:text>para</xsl:text>
@@ -226,14 +235,15 @@
             <xsl:call-template name="parse-sent">
                 <xsl:with-param name="string" select="$step2"/>
                 <xsl:with-param name="style" select="@style"/>
-                 <!-- <xsl:with-param name="pos" select="0"/> -->
+                <!-- <xsl:with-param name="pos" select="0"/> -->
             </xsl:call-template>
         </xsl:element>
     </xsl:template>
     <xsl:template match="*" mode="s1">
         <xsl:apply-templates select="node()" mode="s1"/>
     </xsl:template>
-    <xsl:template match="*[@style = 'f']" mode="s1"/><!-- Footnotes not included -->
+    <xsl:template match="*[@style = 'f']" mode="s1"/>
+    <!-- Footnotes not included -->
     <xsl:template name="parse-sent">
         <xsl:param name="string"/>
         <xsl:param name="style"/>
@@ -285,7 +295,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template name="wordCount">
         <xsl:param name="input"/>
         <xsl:param name="sep" select="'‒–—―'"/>
@@ -369,7 +378,6 @@
     <xsl:template name="mark-sentence">
         <xsl:param name="para-string"/>
         <xsl:variable name="string" select="translate($para-string,'&#x200A;','')"/>
-
         <xsl:choose>
             <!-- handle basic forms -->
             <xsl:when test="contains($string,$periodspace)">

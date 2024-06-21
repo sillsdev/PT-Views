@@ -13,6 +13,9 @@
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html" version="5" indent="no"/>
+    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="view" select="' TNDD 2nd meaning line view.'"/>
+    <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:strip-space elements="*"/>
     <xsl:variable name="get-ml1" select="2"/>
     <xsl:variable name="show-chap" select="'false'"/>
@@ -35,6 +38,9 @@
     </xsl:variable>
     <xsl:template match="/*">
         <div class="usfm">
+            <xsl:element name="h4">
+                <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
+            </xsl:element>
             <xsl:apply-templates/>
         </div>
     </xsl:template>

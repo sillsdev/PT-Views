@@ -1,23 +1,23 @@
-:: User Views manager
+:: Bamboo Views manager
 :: Written by: ian_mcquay@sil.org
 :: Date updated: 2020-07-13
 rem @echo off
-set viewsappdata=C:\Users\Public\PT-Bamboo-Views
+set installpath=C:\Users\Public\PT-Bamboo-Views
 set viewsaction=user-views-action.cmd
-set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/Bamboo
 set action=%1
 set TNxD=%2
-  set redbg=[101m
-  set magentabg=[105m
-  set green=[32m
-  set reset=[0m
+@set redbg=[101m
+@set magentabg=[105m
+@set green=[32m
+@set reset=[0m
 @echo %CD%
 if not defined action (
   rem no action passed in at the commandline
   rem so check if the user-views-action.cmd file exists
-  if exist "%viewsappdata%\%viewsaction%" (
+  if exist "%installpath%\%viewsaction%" (
     rem since it exists get the variables written to it
-    call "%viewsappdata%\%viewsaction%"
+    call "%installpath%\%viewsaction%"
     rem now check if there is an action to do
     if not defined action echo %redbg% No action found from command line or from %viewsaction% %reset%
   ) else (
@@ -28,23 +28,19 @@ if not defined action (
 
 :main
 @echo.
-@if "%TNxD%" == "TNDD" echo Paratext Views manager for: %TNxD% 
-@echo.
-@if "%TNxD%" == "TNDD" echo Atempting to %action% %TNxD% Views
-@echo.
-@echo Checking for Paratext settings
+@echo Paratext Bamboo Views manager
 @echo.
 set mpppath=
 set drive=
 set curdir=%cd%
 call :mpppathquery 8
 
-  @echo Paratext path found at: %ptpath%
+@echo Paratext path found at: %mpppath%
 if errorlevel=0 (
     call :%action%
 ) else (
     @echo Checking for Paratext 9 settings
-    call :ptpathquery 9
+    call :mpppathquery 9
   if errorlevel=0 (
     call :runaction
   ) else (
@@ -81,10 +77,10 @@ call :remove del "%cmspath%\Bamboo*.*"       "Bamboo cms files deleted!"
 call :remove del "%cmspath%\TNDD*.*"         "TNDD cms files deleted!"
 call :remove del "%cmspath%\TNND*.*"         "TNND cms files deleted!"
 call :remove del "%cmspath%\USX*.*"          "USX cms files deleted!"
-call :remove del "%viewsappdata%\Views\*.*"  "Views base files removed!"
-call :remove del "%viewsappdata%\cms\*.*"    "CMS base files removed!"
-call :remove del "%viewsappdata%\*.cmd"      "Bamboo Views manager file deleted!"
-call :remove "rmdir /s /q" "%viewsappdata%\" "Public\PT-Paratext-Views folder removed!"
+call :remove del "%installpath%\Views\*.*"  "Views base files removed!"
+call :remove del "%installpath%\cms\*.*"    "CMS base files removed!"
+call :remove del "%installpath%\*.cmd"      "Bamboo Views manager file deleted!"
+call :remove "rmdir /s /q" "%installpath%\" "Public\PT-Paratext-Views folder removed!"
 echo %green%All Bamboo Views files removed.%reset%
 goto :eof
 
@@ -128,8 +124,8 @@ goto :eof
 :getfile
   echo.
   set winfile=%~1
-  call curl -o "%outpath%\%winfile:/=\%" --ssl-no-revoke %url-base%/%~1
-  if exist "%outpath%\%~1" echo %green%%~1 updated. %reset%
+  call curl -o "%installpath%\%winfile:/=\%" --ssl-no-revoke %url-base%/%winfile%
+  if exist "%installpath%\%~1" echo %green%%~1 updated. %reset%
 goto :eof
 
 :errorsdoc
@@ -179,6 +175,7 @@ goto :eof
 :appendnumbparam
 :: Description: Append numbered parameters on the end of a given variable name. Used from a loop like :loopfiles.
 :: Usage: call :appendnumbparam prepart-of-par-name seed-numb out_var_name
+  echo off
   set outvar=%~1
   set parpre=%~2
   set numb=%~3
@@ -188,6 +185,7 @@ goto :eof
   if not defined outvar echo Error: no var name defined at par3.& echo %funcendtext% %0  & goto :eof
   if defined %parpre%%numb% set appendparam=%appendparam% "!%parpre%%newnumb%!"
   set %outvar%=%appendparam%
+  echo on
 goto :eof
 
 :last
@@ -221,7 +219,7 @@ goto :eof
 :: Description: Used to loop through list supplied in a file
 :: Usage: call :looplist sub_name list-file_specs [param[3-9]]
 :: Functions called: multivarlist. Can also use any other function.
-  @if defined debug %0 "'%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'"
+  @if defined debug echo %0 '%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'
   if defined fatal goto :eof
   set func=%~1
   set listfile=%~2
@@ -259,17 +257,14 @@ goto :eof
   set TNxD=%~1 
 
   rem the following is only for testing.
-  set outpath=C:\Users\Public\PT-Views2
-  set curlist=%outpath%\%TNxD%-Public-list.txt
+  set installpath=C:\Users\Public\PT-Views2
+  set curlist=%installpath%\%TNxD%-Public-list.txt
 
-  if not exist "%outpath%\%TNxD%\cms" md "%outpath%\%TNxD%\cms"
+  if not exist "%installpath%\%TNxD%\cms" md "%installpath%\%TNxD%\cms"
 
   curl -o "%curlist%"  --ssl-no-revoke %url-base%/%TNxD%-Public-list.txt
 
-  rem for testing
-  set ptpath=C:\Users\Public\PT-test
-
-  call :looplist :getfile "%curlist%" %url-base% "%outpath%"
+  call :looplist :getfile "%curlist%" %url-base% "%installpath%"
   call :copyfiles
 goto :eof
 
@@ -277,21 +272,21 @@ goto :eof
 :neededdir
   if not exist "%installpath%\cms\" md "%installpath%\cms\"
   if not exist "%installpath%\Views\cms\" md "%installpath%\Views\cms\"
-  if not exist "%mppviews%" md  "%mppviews%"
-  if not exist "%mppcms%" md  "%mppcms%"
+  if not exist "%viewspath%" md  "%viewspath%"
+  if not exist "%cmspath%" md  "%cmspath%"
 goto :eof
 
 :toggle
 :: Hide or show a set of views
-  if exit "%mpppath%\Views\%TNxD%*.xml" (
-    if not exist "%viewsappdata%\%TNxD%\cms\%TNxD%_Views_show.cms" copy /y "%viewsappdata%\%TNxD%\cms\%TNxD%_Views_show.cms" "%mpppath%\cms\"
+  if exit "%viewspath%\%TNxD%*.xml" (
+    if not exist "%installpath%\%TNxD%\cms\%TNxD%_Views_show.cms" copy /y "%installpath%\%TNxD%\cms\%TNxD%_Views_show.cms" "%mpppath%\cms\"
     if exist "%cmspath%\%TNxD%_Views_hide.cms" del "%cmspath%\%TNxD%_Views_hide.cms"
-    if not exist "%cmspath%\%TNxD%_Views_show.xml" copy /Y "%viewsappdata%\cms\%TNxD%_Views_show.xml" "%cmspath%\"
+    if not exist "%cmspath%\%TNxD%_Views_show.xml" copy /Y "%installpath%\cms\%TNxD%_Views_show.xml" "%cmspath%\"
   ) else (
     if exist "%cmspath%\%TNxD%_Views_show.cms" del "%cmspath%\%TNxD%_Views_show.cms"
-    if not exist "%viewspath%\%TNxD%*.xml" copy /Y "%viewsappdata%\Views\%TNxD%*.xml" "%viewspath%\"
+    if not exist "%viewspath%\%TNxD%*.xml" copy /Y "%installpath%\Views\%TNxD%*.xml" "%viewspath%\"
     if exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% Views files showing after PT restart%reset%
-    if not exist "%cmspath%\%TNxD%_Views_hide.xml" copy /Y "%viewsappdata%\cms\%TNxD%_Views_hide.xml" "%cmspath%\"
+    if not exist "%cmspath%\%TNxD%_Views_hide.xml" copy /Y "%installpath%\cms\%TNxD%_Views_hide.xml" "%cmspath%\"
 goto :eof
 
 :updateall
@@ -300,13 +295,13 @@ goto :eof
 
  rem the following is only for testing.
 
-  set curlist=%viewsappdata%\Bamboo-Public-list.txt
+  set curlist=%installpath%\Bamboo-Public-list.txt
   call :neededdir
 
   call curl -o "%curlist%"  --ssl-no-revoke %url-base%/Bamboo-Public-list.txt
   
   rem get the files
-  call :loopstring :getfile "%curlist%" %url-base% "%viewsappdata%"
+  call :looplist :getfile "%curlist%"
   
   rem update the files in Views and cms folder if there already
   call :copyfiles TNDD
@@ -316,12 +311,12 @@ goto :eof
 
 :copyfiles
   set TNxD=%~1
-  if exist "%ptpath%\cms\%TNxD%_Views_hide.cms" (
-  copy /Y "%viewsappdata%\cms\%TNxD%*.cms" "%ptpath%\cms"
-  copy /Y "%viewsappdata%\cms\%TNxD%*.py" "%ptpath%\cms"
-  copy /Y "%viewsappdata%\cms\%TNxD%*.pdf" "%ptpath%\cms"
-  copy /Y "%viewsappdata%\Views\%TNxD%*.xml" "%ptpath%\Views"
-  copy /Y "%viewsappdata%\Views\%TNxD%*.xslt" "%ptpath%\Views"
+  if exist "%cmspath%\%TNxD%_Views_hide.cms" (
+  copy /Y "%installpath%\cms\%TNxD%*.cms" "%mpppath%\cms"
+  copy /Y "%installpath%\cms\%TNxD%*.py" "%mpppath%\cms"
+  copy /Y "%installpath%\cms\%TNxD%*.pdf" "%mpppath%\cms"
+  copy /Y "%installpath%\Views\%TNxD%*.xml" "%mpppath%\Views"
+  copy /Y "%installpath%\Views\%TNxD%*.xslt" "%mpppath%\Views"
   )
 goto :eof
 
