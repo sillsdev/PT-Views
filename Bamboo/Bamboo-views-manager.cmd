@@ -1,10 +1,10 @@
-:: Bamboo Views manager
+:: User Views manager
 :: Written by: ian_mcquay@sil.org
-:: Date updated: 2024-06-19
+:: Date updated: 2020-07-13
 rem @echo off
 set viewsappdata=C:\Users\Public\PT-Bamboo-Views
 set viewsaction=user-views-action.cmd
-set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/Bamboo
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master
 set action=%1
 set TNxD=%2
   set redbg=[101m
@@ -28,7 +28,11 @@ if not defined action (
 
 :main
 @echo.
-@echo Paratext Bamboo Views manager
+@if "%TNxD%" == "TNDD" echo Paratext Views manager for: %TNxD% 
+@echo.
+@if "%TNxD%" == "TNDD" echo Atempting to %action% %TNxD% Views
+@echo.
+@echo Checking for Paratext settings
 @echo.
 set mpppath=
 set drive=
@@ -58,7 +62,7 @@ FOR /F "usebackq skip=2 tokens=1,2 delims=:" %%A IN (`REG QUERY HKLM\SOFTWARE\WO
   call :drive %%A
   set mpppathnodrive=%%B
 )
-  set mpppath=%drive%:%ptpathnodrive%
+  set mpppath=%drive%:%mpppathnodrive%
   set viewspath=%mpppath%Views
   set cmspath=%mpppath%cms
 goto :eof
@@ -302,7 +306,7 @@ goto :eof
   call curl -o "%curlist%"  --ssl-no-revoke %url-base%/Bamboo-Public-list.txt
   
   rem get the files
-  call :looplist :getfile "%curlist%" %url-base% "%viewsappdata%"
+  call :loopstring :getfile "%curlist%" %url-base% "%viewsappdata%"
   
   rem update the files in Views and cms folder if there already
   call :copyfiles TNDD
