@@ -127,7 +127,7 @@ goto :eof
   @echo.
   @set winfile=%~1
   @set outfile=%installpath%\%winfile:/=\%
-  @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
+  @call curl -o "%outfile%" --data-binary --ssl-no-revoke %url-base%/%winfile%
   @FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
   @if %size%. == 14. (
     @echo %redbg%Error: %winfile% not found at %url-base%.%reset%
