@@ -305,7 +305,8 @@ goto :eof
   rem update the files in Views and cms folder if there already
   echo.
   echo %green%Info: Copying support files to '%mpppath%cms' folder%reset%
-  xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
+  xcopy /D/Q/Y "%installpath%\cms\*.py" "%mpppath%cms"
+  call :looplist :fixlf "Bamboo-Public-list.txt"
   echo %green%Info: Copying views files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
@@ -321,13 +322,10 @@ goto :eof
   )
 goto :eof
 
-:sizetest
-  set file=%~1
-  FOR /F "usebackq" %%A IN ('%file%') DO set size=%%~zA
-  if %size%. == 14. (
-    @echo %redbg%Error: file not found at URL.
-  ) else (
-    @if exist "%installpath%\%~1" echo %green%%~1 updated. %reset%
-  )
+:fixlf
+set curfile=%~1
+set ext=%~x1
+if .%ext% == ..cms (
+  more /P < %curfile% > %mpppath%%curfile%
+)
 goto :eof
-
