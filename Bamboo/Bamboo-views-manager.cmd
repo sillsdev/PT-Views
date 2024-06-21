@@ -1,7 +1,7 @@
 :: Bamboo Views manager
 :: Written by: ian_mcquay@sil.org
-:: Date updated: 2020-07-13
-rem @echo off
+:: Date updated: 2024-06-19
+@echo off
 set installpath=C:\Users\Public\PT-Bamboo-Views
 set viewsaction=user-views-action.cmd
 set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/Bamboo
@@ -9,6 +9,7 @@ set action=%1
 set TNxD=%2
 @set redbg=[101m
 @set magentabg=[105m
+@set magenta=[35m
 @set green=[32m
 @set reset=[0m
 @echo %CD%
@@ -28,14 +29,14 @@ if not defined action (
 
 :main
 @echo.
-@echo Paratext Bamboo Views manager
+@echo %magenta%Paratext Bamboo Views manager%reset%
 @echo.
 set mpppath=
 set drive=
 set curdir=%cd%
 call :mpppathquery 8
 
-@echo Paratext path found at: %mpppath%
+@echo %green%Paratext path found at: %mpppath%%reset%
 if errorlevel=0 (
     call :%action%
 ) else (
@@ -122,11 +123,17 @@ goto :eof
 goto :eof
 
 :getfile
-  echo.
-  set winfile=%~1
-  call curl -o "%installpath%\%winfile:/=\%" --ssl-no-revoke %url-base%/%winfile%
-  if exist "%installpath%\%~1" echo %green%%~1 updated. %reset%
-goto :eof
+  @echo.
+  @set winfile=%~1
+  @set outfile=%installpath%\%winfile:/=\%
+  @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
+  @FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
+  @if %size%. == 14. (
+    @echo %redbg%Error: %winfile% not found at %url-base%.%reset%
+  ) else (
+    @if exist "%outfile%" echo %green%%winfile% updated. %reset%
+  )
+@goto :eof
 
 :errorsdoc
   echo.
@@ -221,20 +228,15 @@ goto :eof
 :: Functions called: multivarlist. Can also use any other function.
   @if defined debug echo %0 '%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'
   if defined fatal goto :eof
+  echo on
   set func=%~1
   set listfile=%~2
-  set param3=%~3
-  set param4=%~4
-  set param5=%~5
-  set param6=%~6
-  set param7=%~7
-  set param8=%~8
-  set param9=%~9
+  echo off
   if not defined func echo %error% Missing 'function' parameter%reset% & goto :eof
   if not defined listfile echo %error% Missing 'list file' parameter%reset% & goto :eof
   if not exist "%listfile%" echo %error% Missing source: %listfile% %reset% & echo %funcendtext% %0 & goto :eof 
-  call :multivarlist 3 9
-  FOR /F " delims=" %%s IN (%listfile%) DO  call %func% "%%s" %multivar:'="% 
+  rem @call :multivarlist 3 9
+  @FOR /F " delims=" %%s IN (%listfile%) DO  call %func% "%%s"
 goto :eof
 
 :multivarlist
@@ -264,8 +266,10 @@ goto :eof
 
   curl -o "%curlist%"  --ssl-no-revoke %url-base%/%TNxD%-Public-list.txt
 
-  call :looplist :getfile "%curlist%" %url-base% "%installpath%"
-  call :copyfiles
+  call :looplist :getfile "%curlist%"
+  call :copyfiles TNDD
+  call :copyfiles TNND
+  call :copyfiles USX
 goto :eof
 
 
@@ -292,31 +296,38 @@ goto :eof
 :updateall
 :: Description: Update all view from internet
 :: Usage: call :updateall
-
- rem the following is only for testing.
-
-  set curlist=%installpath%\Bamboo-Public-list.txt
+  @echo %magenta%:updateall%reset%
   call :neededdir
+  call :getfile "Bamboo-Public-list.txt"
 
-  call curl -o "%curlist%"  --ssl-no-revoke %url-base%/Bamboo-Public-list.txt
-  
-  rem get the files
-  call :looplist :getfile "%curlist%"
+  rem get the files in the downloaded list
+  @call :looplist :getfile "Bamboo-Public-list.txt"
   
   rem update the files in Views and cms folder if there already
-  call :copyfiles TNDD
-  call :copyfiles TNND
-  call :copyfiles USX
+  echo %green%Info: Coping support files to '%%mpppath%cms%' folder
+  xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
+  echo %green%Info: Coping vies files to '%%mpppath%Views%' folder
+  xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
 
 :copyfiles
   set TNxD=%~1
   if exist "%cmspath%\%TNxD%_Views_hide.cms" (
-  copy /Y "%installpath%\cms\%TNxD%*.cms" "%mpppath%\cms"
-  copy /Y "%installpath%\cms\%TNxD%*.py" "%mpppath%\cms"
-  copy /Y "%installpath%\cms\%TNxD%*.pdf" "%mpppath%\cms"
-  copy /Y "%installpath%\Views\%TNxD%*.xml" "%mpppath%\Views"
-  copy /Y "%installpath%\Views\%TNxD%*.xslt" "%mpppath%\Views"
+  copy /Y "%installpath%\cms\%TNxD%*.cms" "%mpppath%cms"
+  copy /Y "%installpath%\cms\%TNxD%*.py" "%mpppath%cms"
+  copy /Y "%installpath%\cms\%TNxD%*.pdf" "%mpppath%cms"
+  copy /Y "%installpath%\Views\%TNxD%*.xml" "%mpppath%Views"
+  copy /Y "%installpath%\Views\%TNxD%*.xslt" "%mpppath%Views"
+  )
+goto :eof
+
+:sizetest
+  set file=%~1
+  FOR /F "usebackq" %%A IN ('%file%') DO set size=%%~zA
+  if %size%. == 14. (
+    @echo %redbg%Error: file not found at URL.
+  ) else (
+    @if exist "%installpath%\%~1" echo %green%%~1 updated. %reset%
   )
 goto :eof
 

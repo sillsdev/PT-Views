@@ -29,7 +29,8 @@ Views/TNND-tag-errors.xml
 Views/TNND-tag-errors.xslt
 Views/TNND-word-count.xml
 Views/TNND-word-count.xslt
-Views/USX-view.xml
-Views/USX-view.xslt
-
+Views/USX-column-view.xml
+Views/USX-column-view.xslt
+Views/USX-paragraph-view.xml
+Views/USX-paragraph-view.xslt
 
