@@ -127,18 +127,18 @@ goto :eof
   @echo.
   @set winfile=%~1
   @set outfile=%installpath%\%winfile:/=\%
-  @call curl -o "%outfile%" --data-binary --ssl-no-revoke %url-base%/%winfile%
+  rem @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
+  @call curl --ssl-no-revoke %url-base%/%winfile% |more /P > "%outfile%" 
   @FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
   @if %size%. == 14. (
     @echo %redbg%Error: %winfile% not found at %url-base%.%reset%
   ) else (
-    @if exist "%outfile%" echo %green%%winfile% updated. %reset%
+    @if exist "%outfile%" echo %green%Updated: %winfile%  %reset%
   )
 @goto :eof
 
 :errorsdoc
   echo.
- 
   cd /d "%mpppath%cms"
   echo Starting %TNxD%-errors-documentation.html
   start msedge "file://%mpppath%cms/%TNxD%-errors-documentation.html"
@@ -147,80 +147,31 @@ goto :eof
 
 :loopstring
 :: Description: Loops through a list supplied in a space separated string.
-:: Usage: call :loopstring func "string" [param[3-9]]
-:: Depends on: appendnumbparam, last, taskgroup. Can also use any other function.
+:: Usage: call :loopstring grouporfunc "string" [param[3-9]]
+:: Functions called: quotevar, last, taskgroup. Can also use any other function.
 :: Note: action may have multiple parts
-  rem @call :funcbegin %0 "'%~1' '%~2' '%~3'"
+  @call :funcbegin %0 "'%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7'"
   if defined fatal goto :eof
-  rem echo on
-  set func=%~1
+  set grouporfunc=%~1
   set string=%~2
-  set par3=%~3
-  set par4=%~4
-  set par5=%~5
-  set par6=%~6
-  set par7=%~7
-  set par8=%~8
-  set par9=%~9
-  if not defined func echo Missing action parameter
-  if not defined func echo %funcendtext% %0 
-  if not defined func goto :eof
+  set param3=%~3
+  set param4=%~4
+  set param5=%~5
+  set param6=%~6
+  set param7=%~7
+  set param8=%~8
+  set param9=%~9
+  if not defined grouporfunc echo Missing action parameter
+  if not defined grouporfunc echo %funcendtext% %0 
+  if not defined grouporfunc goto :eof
   if not defined string echo Missing string parameter
-  if not defined string echo %funcendtext% %0 
+  if not defined string if defined info4 echo %funcendtext% %0 
   if not defined string goto :eof
-  set numbparam=
-  set appendparam=
-  for /L %%v in (3,1,9) Do call :appendnumbparam numbparam par %%v 
-  for /L %%v in (3,1,9) Do call :last par %%v
-  if defined info3 set numbparam
-  if defined info2 echo %last%
-  if "%func:~0,1%" == ":" FOR %%s IN (%string%) DO call %func% "%%s" %numbparam%
-  if "%func:~0,1%" neq ":" FOR %%s IN (%string%) DO call :taskgroup %func% "%%s" %numbparam%
-  rem @call :funcend %0
-  rem @echo off
-goto :eof
-
-:appendnumbparam
-:: Description: Append numbered parameters on the end of a given variable name. Used from a loop like :loopfiles.
-:: Usage: call :appendnumbparam prepart-of-par-name seed-numb out_var_name
-  echo off
-  set outvar=%~1
-  set parpre=%~2
-  set numb=%~3
-  set calcnumb=%~4
-  if not defined calcnumb set calcnumb=+0
-  set /A newnumb=%numb%%calcnumb%
-  if not defined outvar echo Error: no var name defined at par3.& echo %funcendtext% %0  & goto :eof
-  if defined %parpre%%numb% set appendparam=%appendparam% "!%parpre%%newnumb%!"
-  set %outvar%=%appendparam%
-  echo on
-goto :eof
-
-:last
-:: Description: Find the last parameter in a set of numbered params. Usually called by a loop.
-:: Usage: call :last par_name number
-  if defined lastfound goto :eof
-  set last=!%~1%~2!
-  if defined last set lastfound=on
-  rem set utreturn=%last%, %~1, %~2
-goto :eof
-
-:hello
-echo.
-echo Test output for issue: %TNxD%
-echo.
-echo hello
-echo.
-pause
-goto :eof
-
-:goodbye
-echo.
-echo Test output for issue: %TNxD%
-echo.
-echo goodbye
-echo.
-pause
+  call :multivarlist 3 9
+  if defined info3 set multivar
+  if "%grouporfunc:~0,1%" == ":" FOR %%s IN (%string%) DO call %grouporfunc% "%%s" %multivar:'="%
+  if "%grouporfunc:~0,1%" neq ":" FOR %%s IN (%string%) DO call :%grouporfunc% "%%s" %multivar:'="%
+  @call :funcend %0
 goto :eof
 
 :looplist
@@ -234,7 +185,6 @@ goto :eof
   if not defined func echo %error% Missing 'function' parameter%reset% & goto :eof
   if not defined listfile echo %error% Missing 'list file' parameter%reset% & goto :eof
   if not exist "%listfile%" echo %error% Missing source: %listfile% %reset% & echo %funcendtext% %0 & goto :eof 
-  rem @call :multivarlist 3 9
   @FOR /F " delims=" %%s IN (%listfile%) DO  call %func% "%%s"
 goto :eof
 
@@ -305,8 +255,8 @@ goto :eof
   rem update the files in Views and cms folder if there already
   echo.
   echo %green%Info: Copying support files to '%mpppath%cms' folder%reset%
-  xcopy /D/Q/Y "%installpath%\cms\*.py" "%mpppath%cms"
-  call :looplist :fixlf "Bamboo-Public-list.txt"
+  xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
+  del /y "%mpppath%cms\*show*.cms"
   echo %green%Info: Copying views files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
@@ -322,10 +272,4 @@ goto :eof
   )
 goto :eof
 
-:fixlf
-set curfile=%~1
-set ext=%~x1
-if .%ext% == ..cms (
-  more /P < %curfile% > %mpppath%%curfile%
-)
-goto :eof
+
