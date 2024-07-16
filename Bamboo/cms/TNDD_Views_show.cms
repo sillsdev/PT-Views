@@ -2,7 +2,7 @@
 \submenu Custom Views
 \script TNDD_Views_toggle.py
 \description (Ignore the "Input Project" box above.) This tool will show hidden TNDD Views in the Views menus, after Paratext is restarted. There are seven TNDD views. \n\n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
-\helpFile TNDD-info.pdf
+\helpFile Bamboo-Views-Documentation.pdf
 \noText
 \rank 1
 \utf8

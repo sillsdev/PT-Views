@@ -3,7 +3,7 @@ cms\Bamboo_Views_uninstall.cms
 cms\Bamboo_Views_uninstall.py
 cms\Bamboo_Views_update.cms
 cms\Bamboo_Views_update.py
-cms\Bamboo_Views.pdf
+cms\Bamboo-Views-Documentation.pdf
 cms\TNDD_Views_hide.cms
 cms\TNDD_Views_show.cms
 cms\TNDD_Views_Toggle.py
@@ -35,7 +35,11 @@ Views\TNND-tag-errors.xml
 Views\TNND-tag-errors.xslt
 Views\TNND-word-count.xml
 Views\TNND-word-count.xslt
+Views\TNND-hilighter.xslt
+Views\TNND-hilighter.xml
 Views\USX-column-view.xml
 Views\USX-column-view.xslt
 Views\USX-paragraph-view.xml
 Views\USX-paragraph-view.xslt
+Views\SFM-hilighter.xml
+Views\SFM-hilighter.xslt

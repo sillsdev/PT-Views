@@ -19,13 +19,15 @@ body {line-height:1.2;}
 .char {background:khaki;}
 .f {background:#ccff99;}
 .ft {background:#ccff99;}
+.fr {background:#ccff99;}
+.fq {background:#ccff99;}
 .sfm {color:grey;font-size:60%;}
 td {border:thin black solid;}
 table {border-collapse: collapse;}
 .v {color:red;font-weight:bold;}
+.v:after {content:' '`}
 .c {font-size:150%;font-weight:bold;}
 .rem {background:#ccff00;}
-
 </style>
         <xsl:apply-templates select="node()"/>
     </xsl:template>
