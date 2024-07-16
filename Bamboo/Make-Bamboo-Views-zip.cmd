@@ -87,7 +87,8 @@ copy docs\Bamboo-Views.md+docs\Bamboo-Views-install.md+docs\Bamboo-Views-custom.
 call mdpdf tmp\Bamboo-final.md cms\Bamboo-Views-Documentation.pdf
 :: mdpdf is a nodejs script https://github.com/BlueHatbRit/mdpdf
 rem call make-Bamboo-index.ps
-copy /Y tmp\Bamboo-final.md index.md
-fart index.md "../" ""
-if not exist index.md echo index.md not found & pause
+set readme=readme.md
+copy /Y tmp\Bamboo-final.md %readme%
+fart --remove %readme% "../"
+if not exist %readme% echo %readme% not found & pause
 goto :eof
