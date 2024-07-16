@@ -12,22 +12,12 @@ This additional tool for Paratext is designed to help content creators and check
 - **TNDD-word-count-1st-mng-line** - This counts words per sentence. It marks sentence counts of more than 17 in orange and more than 30 words in tomato-red. Now includes chapter:verse and verse segment to ease comparison.
 - **TNDD-word-count-2nd-mng-line** - This counts words per sentence. It marks sentence counts of more than 17 in orange and more than 30 words in tomato-red. If there is no 2nd meaning line then the 1st meaning line is included. Now includes chapter:verse and verse segment to ease comparison.
 
-## Using the TNDD Views within Paratext
+## There are two TNDD Views controls **Tools > Custom Tools > Custom Views** 
 
-- If the installation was successful, the new views should be available as shown below:
-	via the Ctrl+E popup menu: ![TNDD control e](../images/TNDD-ctrl-e.png)        or via the project's View menu:  ![TNDD proj view list](../images/TNDD-proj-view-list.png)   
-- Note that you cannot edit the text in *any* of these VIEWS - it is purely an aid for reading and checking the text (one meaning line at a time) without the clutter of markers.
+Only one of the following should be visible at any time.
 
-- If you are using Paratext 9, then it is highly recommended to open an additional TNDD window as an Autohide window:
-![TNDD-auto-hide-setup](../images/TNDD-auto-hide-setup.png)
-- This will enable you to keep your normal workspace uncluttered, but the Table view will be easy to access from the right-hand column:
-![TNDD table view](../images/TNDD-table-view.png)
-
-
-## There are two TNDD Views controls **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
 - Hide TNDD Views 
 - Show TNDD Views 
-
 
 ### Hiding TNDD Views
 - In Paratext click on the hamburger icon in any project.
