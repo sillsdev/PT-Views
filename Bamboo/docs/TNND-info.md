@@ -19,7 +19,7 @@ This additional tool for Paratext is designed to help content creators and check
 ![TNND auto hide setup](../images/TNND-auto-hide-setup.png)
 - This will enable you to keep your normal workspace uncluttered, but the **TNND-tag-errrors** view or the **TNND-count-words view** will be easy to access from the right-hand column:
 
-## There are two TNND Views controls **Tools > Custom Tools > Custom Views** 
+## There are two TNND Views controls **Tools > Custom Tools > Bamboo Views** 
 
 Only one of the following should be visible at any time.
 
@@ -30,7 +30,7 @@ Only one of the following should be visible at any time.
 ### Hiding TNND Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **TNND Hide Views**
 - Click the **OK** on the **TNND Hide Views** dialog
 - Restart Paratext
@@ -38,7 +38,7 @@ Only one of the following should be visible at any time.
 ### Show TNND Views tha were previously hidden
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **TNND Show Views**
 - Click the **OK** on the **TNND Show Views** dialog
 - Restart Paratext

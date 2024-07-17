@@ -1,5 +1,5 @@
 
-## There are two **Tools > Custom Tools > Custom Views**
+## There are two **Tools > Custom Tools > Bamboo Views**
 - Bamboo Views Updater
 - Bamboo Views Uninstaller
 
@@ -8,7 +8,7 @@ These two affect all three sets of views.
 ## Update the Bamboo Views from the Github source (since ver 7)<a id="update"></a>
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Bamboo Views Update**
 - Click the **OK** on the **Bamboo Views Update** dialog
 - Restart Paratext
@@ -20,7 +20,7 @@ There are several ways to do this.
 ### Automated methods:
 - Use the Unistaller from the **Apps > Apps & Features** Recommended.
 - The uninstall exe can also be found in **C:\Users\Public\Bamboo-Views** folder.
-- Use the Bamboo Views Uninstaller found in Paratext's **Tools > Custom Tools > Custom Views > Bamboo Views Uninstaller**
+- Use the Bamboo Views Uninstaller found in Paratext's **Tools > Custom Tools > Bamboo Views > Bamboo Views Uninstaller**
 
 
 ### Manual methods:

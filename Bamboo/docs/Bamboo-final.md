@@ -40,7 +40,7 @@ Bamboo Views contains four sets of views. Each set can be shown or hidden. The t
 
 
 
-## There are two **Tools > Custom Tools > Custom Views**
+## There are two **Tools > Custom Tools > Bamboo Views**
 - Bamboo Views Updater
 - Bamboo Views Uninstaller
 
@@ -49,7 +49,7 @@ These two affect all three sets of views.
 ## Update the Bamboo Views from the Github source (since ver 7)<a id="update"></a>
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Bamboo Views Update**
 - Click the **OK** on the **Bamboo Views Update** dialog
 - Restart Paratext
@@ -61,7 +61,7 @@ There are several ways to do this.
 ### Automated methods:
 - Use the Unistaller from the **Apps > Apps & Features** Recommended.
 - The uninstall exe can also be found in **C:\Users\Public\Bamboo-Views** folder.
-- Use the Bamboo Views Uninstaller found in Paratext's **Tools > Custom Tools > Custom Views > Bamboo Views Uninstaller**
+- Use the Bamboo Views Uninstaller found in Paratext's **Tools > Custom Tools > Bamboo Views > Bamboo Views Uninstaller**
 
 
 ### Manual methods:
@@ -94,7 +94,7 @@ This additional tool for Paratext is designed to help content creators and check
 ![TNDD table view](../images/TNDD-table-view.png)
 
 
-## There are two TNDD Views controls **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+## There are two TNDD Views controls **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 - Hide TNDD Views 
 - Show TNDD Views 
 
@@ -102,7 +102,7 @@ This additional tool for Paratext is designed to help content creators and check
 ### Hiding TNDD Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Hide TNDD Views**
 - Click the **OK** on the **Hide TNDD Views** dialog
 - Restart Paratext
@@ -110,7 +110,7 @@ This additional tool for Paratext is designed to help content creators and check
 ### Show TNDD Views that were previously hidden
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Show TNDD Views**
 - Click the **OK** on the **Show TNDD Views** dialog
 - Restart Paratext
@@ -155,14 +155,14 @@ This additional tool for Paratext is designed to help content creators and check
 ![TNND auto hide setup](../images/TNND-auto-hide-setup.png)
 - This will enable you to keep your normal workspace uncluttered, but the **TNND-tag-errrors** view or the **TNND-count-words view** will be easy to access from the right-hand column:
 
-## There are two TNND Views controls **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+## There are two TNND Views controls **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 - TNND Hide Views 
 - TNND Show Views 
 
 ### Hiding TNND Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **TNND Hide Views**
 - Click the **OK** on the **TNND Hide Views** dialog
 - Restart Paratext
@@ -170,7 +170,7 @@ This additional tool for Paratext is designed to help content creators and check
 ### Show TNND Views tha were previously hidden
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **TNND Show Views**
 - Click the **OK** on the **TNND Show Views** dialog
 - Restart Paratext
@@ -186,7 +186,7 @@ The views come in two forms.
 - **USX-column-view** -- This view shows each element on a new line.
 - **USX-paragraph-view** -- This view shows each character element inline in a paragraph.
 
-## There are two USX Views controls **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+## There are two USX Views controls **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 - Hide USX Views 
 - Show USX Views 
 
@@ -201,7 +201,7 @@ The views come in one form.
 - **SFM-highlighter-view** -- This view highlights inline parts of the SFM.
 
 ## There are two SFM Views controls
-### **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+### **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 
 - Hide SFM Views 
 - Show SFM Views 

@@ -12,7 +12,7 @@ This additional tool for Paratext is designed to help content creators and check
 - **TNDD-word-count-1st-mng-line** - This counts words per sentence. It marks sentence counts of more than 17 in orange and more than 30 words in tomato-red. Now includes chapter:verse and verse segment to ease comparison.
 - **TNDD-word-count-2nd-mng-line** - This counts words per sentence. It marks sentence counts of more than 17 in orange and more than 30 words in tomato-red. If there is no 2nd meaning line then the 1st meaning line is included. Now includes chapter:verse and verse segment to ease comparison.
 
-## There are two TNDD Views controls **Tools > Custom Tools > Custom Views** 
+## There are two TNDD Views controls **Tools > Custom Tools > Bamboo Views** 
 
 Only one of the following should be visible at any time.
 
@@ -22,7 +22,7 @@ Only one of the following should be visible at any time.
 ### Hiding TNDD Views
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Hide TNDD Views**
 - Click the **OK** on the **Hide TNDD Views** dialog
 - Restart Paratext
@@ -30,7 +30,7 @@ Only one of the following should be visible at any time.
 ### Show TNDD Views that were previously hidden
 - In Paratext click on the hamburger icon in any project.
 - In the **Tools** menu hover over or click on **Custom tools**
-- In  **Custom tools** click on **Custom Views**
+- In  **Custom tools** click on **Bamboo Views**
 - Click on **Show TNDD Views**
 - Click the **OK** on the **Show TNDD Views** dialog
 - Restart Paratext

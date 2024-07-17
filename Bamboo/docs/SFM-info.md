@@ -8,7 +8,7 @@ The views come in one form.
 - **SFM-highlighter-view** -- This view highlights inline parts of the SFM.
 
 ## There are two SFM Views controls
-### **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+### **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 
 - Hide SFM Views 
 - Show SFM Views 

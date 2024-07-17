@@ -8,7 +8,7 @@ The views come in two forms.
 - **USX-column-view** -- This view shows each element on a new line.
 - **USX-paragraph-view** -- This view shows each character element inline in a paragraph.
 
-## There are two USX Views controls **Tools > Custom Tools > Custom Views** though only one will be visible at any time.
+## There are two USX Views controls **Tools > Custom Tools > Bamboo Views** though only one will be visible at any time.
 - Hide USX Views 
 - Show USX Views 
 
