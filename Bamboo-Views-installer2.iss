@@ -65,27 +65,29 @@ Source: "Bamboo\Uninstall*.cmd";    DestDir: "{#MAppData}"  ;   Components: main
 Source: "Bamboo\Install*.cmd";      DestDir: "{#MAppData}"  ;   Components: main;
 Source: "Bamboo\Views\*.x*";        DestDir: "{#MyViewsData}" ; Components: main;
 Source: "Bamboo\cms\*.*";           DestDir: "{#MycmsData}"  ;  Components: main;
-Source: "Bamboo\cms\*.py";           DestDir: "{#MPP}\cms"  ;    Components: main;
+Source: "Bamboo\cms\Bamboo*.*";     DestDir: "{#MycmsData}"  ;  Components: main;
+Source: "Bamboo\cms\Bamboo*.pdf";     DestDir: "{#MPP}\cms"  ;  Components: main;
+Source: "Bamboo\cms\*.py";          DestDir: "{#MPP}\cms"  ;    Components: main;
 
 ; TNDD
 Source: "Bamboo\Views\TNDD*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tndd;
-Source: "Bamboo\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tndd;
-Source: "Bamboo\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\Views" ; Tasks: usx sfm tnnd;
+Source: "Bamboo\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete tnxd tndd;
+Source: "Bamboo\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: usx sfm tnnd;
 
 ; TNND
 Source: "Bamboo\Views\TNND*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tnnd;
-Source: "Bamboo\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tnnd;
-Source: "Bamboo\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\Views" ; Tasks: usx sfm tndd;
+Source: "Bamboo\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete tnxd tnnd;
+Source: "Bamboo\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: usx sfm tndd;
 
 ; USX
 Source: "Bamboo\Views\USX*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete usx;
-Source: "Bamboo\cms\USX_Views_hide.cms"; DestDir: "{#MPP}\Views" ; Tasks: complete usx;
-Source: "Bamboo\cms\USX_Views_show.cms"; DestDir: "{#MPP}\Views" ; Tasks: tnxd tndd tnnd;
+Source: "Bamboo\cms\USX_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete usx;
+Source: "Bamboo\cms\USX_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: tnxd tndd tnnd;
 
 ; SFM
 Source: "Bamboo\Views\SFM*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete sfm;
-Source: "Bamboo\cms\SFM_Views_hide.cms"; DestDir: "{#MPP}\Views" ; Tasks: complete sfm;
-Source: "Bamboo\cms\SFM_Views_show.cms"; DestDir: "{#MPP}\Views" ; Tasks: tnxd tndd tnnd;
+Source: "Bamboo\cms\SFM_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete sfm;
+Source: "Bamboo\cms\SFM_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: tnxd tndd tnnd;
 
 
 [Languages]
