@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
    <xsl:variable name="sq">'</xsl:variable>
    <xsl:variable name="dq">"</xsl:variable>
+   <xsl:variable name="project">TNND</xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
    <xsl:variable name="validvlet">abcdefghij</xsl:variable>
@@ -31,8 +32,15 @@
    <xsl:variable name="rdq">”</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
    <xsl:variable name="rsq">’</xsl:variable>
+   <xsl:variable name="version">7</xsl:variable>
+   <xsl:variable name="view"> tag errors view </xsl:variable>
+   <xsl:variable name="modified"> Modified: </xsl:variable>
+   <xsl:variable name="moddate">2024-06-19</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
+         <xsl:element name="h4">
+            <xsl:value-of select="concat('Version: ',$version,' ',$project,$view,$modified,$moddate)"/>
+         </xsl:element>
          <xsl:call-template name="style"/>
       </xsl:if>
       <xsl:element name="div">
@@ -70,6 +78,25 @@
          <xsl:apply-templates select="node()"/>
       </xsl:element>
    </xsl:template>
+   <xsl:template match="cell">
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:text>cell </xsl:text>
+            <xsl:value-of select="@style"/>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:apply-templates select="node()"/>
+      </xsl:element>
+   </xsl:template>
+   <xsl:template match="verse">
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="@style"/>
+         </xsl:attribute>
+         <xsl:value-of select="concat('\',@style,' ')"/>
+         <xsl:value-of select="@number"/>
+      </xsl:element>
+   </xsl:template>
    <xsl:template match="*[@style = 'b' or @style = 'rem']">
       <xsl:element name="div">
          <xsl:element name="span">
@@ -83,27 +110,25 @@
    </xsl:template>
    <xsl:template name="style">
       <style type="text/css">
-			.usx {line-height:1.8;}
-			.mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
-			.sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
-			.sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
-			.ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
-			.mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
-                 
-                
-			::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
-			.s5 {background:lightcyan;}
-			.v {background:navy;color:white;font-weight:bold;}
-			.c {font-size:140%;background:green;color:white;font-weight:bold;}
-			.rem {background:lightgreen;color:darkgreen;}
-			.table {border:2pt solid purple;border-left:10pt solid purple;width:auto;}
-			.tec, .sbx {font-weight:bold;}
-			.tei, .trs {font-style:italic;}
-			.teu {text-decoration: underline;}
-			.tre {text-decoration: underline;font-style:italic;}
-			.linkref {color:grey;}
-			.f {background:lightgrey}
-            .quote-error-f {background:orange;border-top:2pt solid red;}
+.usx {line-height:1.8;}
+.mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center}
+.sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%}
+.sla, .pvr {border-left:10pt solid orange;padding-left:3pt;font-size:120%}
+.ml1 {border-left:20pt solid lightblue;padding-left:3pt;padding-left:1em}
+.mlor {border-left:30pt solid yellow;padding-left:3pt;padding-left:1em}
+::after {background:thistle;padding-left:4pt;color:black;font-weight:normal;}
+.s5 {background:lightcyan;}
+.v {background:navy;color:white;font-weight:bold;padding-right:5px;}
+.c {font-size:140%;background:green;color:white;font-weight:bold;}
+.rem {background:lightgreen;color:darkgreen;}
+.table {border:2pt solid purple;border-left:10pt solid purple;width:auto;}
+.tec, .sbx {font-weight:bold;}
+.tei, .trs {font-style:italic;}
+.teu {text-decoration: underline;}
+.tre {text-decoration: underline;font-style:italic;}
+.linkref {color:grey;}
+.f {background:lightgrey}
+.quote-error-f {background:orange;border-top:2pt solid red;}
 .quote-error-f:after {content:'This double quote in the above \\f footnote, is preceeded by an opening double quote, it should either be single quoted or there is some preceding error.';}
 .quote-error-n1 {background:orange;border-top:2pt solid red;}
 .quote-error-n1:after {content:'This double quote in the above \\n1 paragraph, is preceeded by an opening double quote, it should either be single quoted or there is some preceding error.';}
@@ -429,6 +454,43 @@
       </xsl:comment>
       <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
       <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
+      <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="containspart" select="contains(.,'Part')"/>
+      <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="containssection" select="contains(.,'Section')"/>
+      <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="countpretable" select="count(parent::*/preceding-sibling::table)"/>
+      <xsl:comment> countpretable = <xsl:value-of select="concat($sq,$countpretable,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="hastrdivision"
+                    select="contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0"/>
+      <xsl:comment> hastrdivision = <xsl:value-of select="concat($sq,$hastrdivision,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="hastrparagraph"
+                    select="contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0"/>
+      <xsl:comment> hastrparagraph = <xsl:value-of select="concat($sq,$hastrparagraph,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="hastrpart"
+                    select="contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0"/>
+      <xsl:comment> hastrpart = <xsl:value-of select="concat($sq,$hastrpart,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="hastrsection"
+                    select="contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0"/>
+      <xsl:comment> hastrsection = <xsl:value-of select="concat($sq,$hastrsection,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="parentpostsib" select="parent::*/following-sibling::*[1]/@style"/>
+      <xsl:comment> parentpostsib = <xsl:value-of select="concat($sq,$parentpostsib,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
+      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="parentpresib2" select="parent::*/preceding-sibling::*[2]/@style"/>
+      <xsl:comment> parentpresib2 = <xsl:value-of select="concat($sq,$parentpresib2,$sq,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
