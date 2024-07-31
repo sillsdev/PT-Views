@@ -15,6 +15,7 @@
     <xsl:template match="/">
         <style type="text/css">
 body {line-height:1.2;}
+div {white-space: normal;}
 .id {color:darkred;}
 .char {background:khaki;}
 .jmp {}

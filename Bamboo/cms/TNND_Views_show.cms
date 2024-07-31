@@ -1,6 +1,6 @@
 \check TNND Show Views
 \submenu Bamboo Views
-\script TNND_Views_show.py
+\script TNND_Views_toggle.py
 \description (Ignore the "Input Project" box above.) This tool will show hidden TNND Views in the Views menus, after Paratext is restarted. There are two TNND views. \n\n TNND Views aids Translation Notes Development content creators and checkers in viewing the data in various ways.
 \helpFile Bamboo-Views-Documentation.pdf
 \noText

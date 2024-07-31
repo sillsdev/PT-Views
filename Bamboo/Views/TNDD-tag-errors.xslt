@@ -40,7 +40,7 @@
    <xsl:variable name="version">7</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-07-29</xsl:variable>
+   <xsl:variable name="moddate">2024-07-31</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
@@ -115,6 +115,7 @@
    </xsl:template>
    <xsl:template name="style">
       <style type="text/css">
+div {white-space: normal;}
 .usx {line-height:1.8;}
 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center;}
 .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%;}
@@ -139,8 +140,12 @@
 .err-char-sbx--82-3::after {content:'The chapter number in this \\sbx is incorrect. #82.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-sbx-mid-83-5 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-sbx-mid-83-5::after {content:'The hyphen in the \\sbx verse range in this paragraph should be an en dash. #83.5';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-fr-mid-83-8 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-fr-mid-83-8::after {content:'The hyphen in the sub-verse range in this \\fr should be an en dash. #83.8';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-fr-mid-83-9 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-fr-mid-83-9::after {content:'The hyphen in the verse range in this \\fr should be an en dash. #83.9';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-post-12 {background:orange;border-right:4pt solid red;}
-.err-char-imp-post-12::after {content:'This \\imp SFM should be followed like this \\imp...\\imp*\\bk ⌋\\bk* #12';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-imp-post-12::after {content:'This implied bracket sequence is incomplete or incorrect (it should be: \\brk ⌊\\brk*\\imp...\\imp*\\bk ⌋\\bk*) #12';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-pre-13 {background:orange;border-left:4pt solid red;}
 .err-char-imp-pre-13::after {content:'This \\imp...\\imp* should be preceded by \\bk ⌊\\bk* or a \\rgi and a space. #13';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-rgi-pre-15 {background:orange;border-left:4pt solid red;}
@@ -172,7 +177,7 @@
 .err-char-brk-post-4 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-4::after {content:'This \\brk* SFM should only occur immediately before an \\imp SFM. #4';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-pre-7 {background:orange;border-left:4pt solid red;}
-.err-char-brk-pre-7::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM. Except if in a \\ros ...\\ros*. #7';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-brk-pre-7::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM, except if in a \\ros ...\\ros*. #7';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-5 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp. #5';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---23 {background:orange;}
@@ -185,8 +190,6 @@
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...). #56';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-57::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...). #57';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para-sl2--83-32 {background:peachpuff;}
-.err-para-sl2--83-32::after {content:'The hyphen in the sub-verse range in this \\sl1 should be an en dash. #83.32';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para---43 {background:peachpuff;}
 .err-para---43::after {content:'This paragraph marker is empty, and may not be allowed here. #43';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-pvr-pre-71 {background:peachpuff;border-top:2pt solid red;}
@@ -224,13 +227,15 @@
 .err-para-sl1--82-1 {background:peachpuff;}
 .err-para-sl1--82-1::after {content:'The chapter number in this \\sl1 is incorrect. #82.1';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--82-2 {background:peachpuff;}
-.err-para-sl1--82-2::after {content:'The verse number in this \\sl1 is incorrect. #82.2';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1--82-2::after {content:'The verse number in this \\sl1 is incorrect, unless you have purposely disjointed verse parts or covering a span of verses. #82.2';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--83-3 {background:peachpuff;}
-.err-para-sl1--83-3::after {content:'The hyphen in the sub-verse range in this \\sl1 should be an en dash. #83.3';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1--83-3::after {content:'The hyphen in the verse range in this \\sl1 should be an en dash. #83.3';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1--83-32 {background:peachpuff;}
+.err-para-sl1--83-32::after {content:'The hyphen in the sub-verse range in this \\sl1 should be an en dash. #83.32';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--68 {background:peachpuff;}
 .err-para-sl1--68::after {content:'The verse reference in \\sl1 appears to have a space in it. #68';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1-pre-69 {background:peachpuff;border-top:2pt solid red;}
-.err-para-sl1-pre-69::after {content:'Before an \\sl1 can only be a \\p, \\b3, \\ml1, \\mt9 (Psalm 119 only), \\ntn (only for a note to the MTT about the following text), \\pvr (short note to the MTT), \\sla (only to show a whole verse in an alternate source text). #69';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1-pre-69::after {content:'Before an \\sl1 can only be a \\p, \\b3, \\ml1, \\mt9 (Psalm 119 only), \\ntn (only for a note to the MTT about the following text), \\pvr (short note to the MTT), \\sla (only to show a whole verse in an alternate source text), or a \\b (above a new paragraph mark in the \\ml1 line). #69';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--51 {background:peachpuff;}
 .err-para-sl1--51::after {content:'This paragraph is missing a \\tbb __\\tbb* after the verse reference. #51';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1-post-41 {background:peachpuff;border-bottom:2pt solid red;}
@@ -369,6 +374,62 @@
          </xsl:if>
       </xsl:element>
    </xsl:template>
+   <!-- char @style=fr -->
+   <xsl:template match="char[@style = 'fr']">
+      <xsl:comment>
+         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+      </xsl:comment>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="concat(@style,' ',name())"/>
+            <xsl:if test="preceding::chapter"><!--common char errors--><!--ref 23 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---23</xsl:text>
+               </xsl:if>
+               <!--ref 24 - rank=0-->
+               <xsl:if test="not(@style = 'ros' or @closed)">
+                  <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
+                     <xsl:text> err-char---24</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 20 - rank=11-->
+               <xsl:if test="@closed = 'false'">
+                  <xsl:if test="substring(@style,1,1) != 'f'">
+                     <xsl:text> err-char---20</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--specific char errors-->
+               <!--ref 83.8 - rank=-->
+               <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$numb,''),$validvlet,$validvletsub),'$-$')">
+                     <xsl:text> err-char-fr-mid-83-8</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 83.9 - rank=-->
+               <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                     <xsl:text> err-char-fr-mid-83-9</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+         </xsl:element>
+         <xsl:apply-templates select="node()"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:element name="span">
+               <xsl:attribute name="class">
+                  <xsl:value-of select="concat(@style,' ',name())"/>
+               </xsl:attribute>
+               <xsl:value-of select="concat('\',@style,'*')"/>
+            </xsl:element>
+         </xsl:if>
+      </xsl:element>
+   </xsl:template>
    <!-- char @style=imp -->
    <xsl:template match="char[@style = 'imp']">
       <xsl:comment>
@@ -399,7 +460,7 @@
                   <xsl:text> err-char-imp-post-12</xsl:text>
                </xsl:if>
                <!--ref 13 - rank=8-->
-               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'brk' or @style = 'rgi'])">
+               <xsl:if test="not(preceding-sibling::node()[1][@style = 'rem' or @style = 'brk' or @style = 'rgi'])">
                   <xsl:text> err-char-imp-pre-13</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -849,38 +910,6 @@
          </xsl:if>
       </xsl:element>
    </xsl:template>
-   <!-- para @style=sl2 -->
-   <xsl:template match="para[@style = 'sl2']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="div">
-         <xsl:attribute name="class">
-            <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
-                     <xsl:text> err-para---43</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--specific para errors-->
-               <!--ref 83.32 - rank=-->
-               <xsl:if test="contains(translate(text()[1],$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$numb,''),$letlc,$letsub),'$-$')">
-                     <xsl:text> err-para-sl2--83-32</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-         </xsl:element>
-         <xsl:apply-templates select="node()"/>
-      </xsl:element>
-   </xsl:template>
    <!-- para @style= -->
    <xsl:template match="para">
       <xsl:comment>
@@ -1165,12 +1194,18 @@
                      <xsl:text> err-para-sl1--83-3</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref 83.32 - rank=-->
+               <xsl:if test="contains(translate(text()[1],$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$numb,''),$letlc,$letsub),'$-$')">
+                     <xsl:text> err-para-sl1--83-32</xsl:text>
+                  </xsl:if>
+               </xsl:if>
                <!--ref 68 - rank=3-->
                <xsl:if test="contains(text()[1],' ')">
                   <xsl:text> err-para-sl1--68</xsl:text>
                </xsl:if>
                <!--ref 69 - rank=3-->
-               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1' or @style = 'mt9' or @style = 'ntn' or @style = 'p' or @style = 'pvr' or @style = 'sla' or name() = 'table' or @style = 'b3'])">
+               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1' or @style = 'mt9' or @style = 'ntn' or @style = 'p' or @style = 'pvr' or @style = 'sla' or name() = 'table' or @style = 'b3' or @style = 'b'])">
                   <xsl:text> err-para-sl1-pre-69</xsl:text>
                </xsl:if>
                <!--ref 51 - rank=5-->

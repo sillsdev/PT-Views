@@ -5,8 +5,8 @@
 import os
 
 # Define batch files
-actionbatchfile = "C:\Users\Public\PT-Bamboo-View\user-views-action.cmd"
-batchfile = "C:\Users\Public\PT-Bamboo-View\Bamboo-views-manager.cmd"
+actionbatchfile = "C:\Users\Public\PT-Bamboo-Views\user-views-action.cmd"
+batchfile = "C:\Users\Public\PT-Bamboo-Views\Bamboo-views-manager.cmd"
 
 # setup variables for the ACTION batch file.
 commandstring = "echo set action=toggle> " + actionbatchfile
