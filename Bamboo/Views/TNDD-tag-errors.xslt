@@ -40,7 +40,7 @@
    <xsl:variable name="version">7</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-07-31</xsl:variable>
+   <xsl:variable name="moddate">2024-08-05</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
@@ -141,9 +141,13 @@ div {white-space: normal;}
 .err-char-sbx-mid-83-5 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-sbx-mid-83-5::after {content:'The hyphen in the \\sbx verse range in this paragraph should be an en dash. #83.5';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-fr-mid-83-8 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-fr-mid-83-8::after {content:'The hyphen in the sub-verse range in this \\fr should be an en dash. #83.8';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-fr-mid-83-8::after {content:'The hyphen in the verse range in this \\fr should be an en dash. #83.8';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-fr-mid-83-9 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-fr-mid-83-9::after {content:'The hyphen in the verse range in this \\fr should be an en dash. #83.9';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ft-mid-83-11 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-ft-mid-83-11::after {content:'The hyphen in the verse range in this \\ft should be an en dash. #83.11';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ft-mid-83-12 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-ft-mid-83-12::after {content:'The hyphen in the verse range in this \\ft should be an en dash. #83.12';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-post-12 {background:orange;border-right:4pt solid red;}
 .err-char-imp-post-12::after {content:'This implied bracket sequence is incomplete or incorrect (it should be: \\brk ⌊\\brk*\\imp...\\imp*\\bk ⌋\\bk*) #12';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-pre-13 {background:orange;border-left:4pt solid red;}
@@ -231,7 +235,7 @@ div {white-space: normal;}
 .err-para-sl1--83-3 {background:peachpuff;}
 .err-para-sl1--83-3::after {content:'The hyphen in the verse range in this \\sl1 should be an en dash. #83.3';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--83-32 {background:peachpuff;}
-.err-para-sl1--83-32::after {content:'The hyphen in the sub-verse range in this \\sl1 should be an en dash. #83.32';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1--83-32::after {content:'The hyphen in the verse range in this \\sl1 should be an en dash. #83.32';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--68 {background:peachpuff;}
 .err-para-sl1--68::after {content:'The verse reference in \\sl1 appears to have a space in it. #68';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1-pre-69 {background:peachpuff;border-top:2pt solid red;}
@@ -409,6 +413,62 @@ div {white-space: normal;}
                <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
                   <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
                      <xsl:text> err-char-fr-mid-83-9</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+         </xsl:element>
+         <xsl:apply-templates select="node()"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:element name="span">
+               <xsl:attribute name="class">
+                  <xsl:value-of select="concat(@style,' ',name())"/>
+               </xsl:attribute>
+               <xsl:value-of select="concat('\',@style,'*')"/>
+            </xsl:element>
+         </xsl:if>
+      </xsl:element>
+   </xsl:template>
+   <!-- char @style=ft -->
+   <xsl:template match="char[@style = 'ft']">
+      <xsl:comment>
+         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+      </xsl:comment>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="concat(@style,' ',name())"/>
+            <xsl:if test="preceding::chapter"><!--common char errors--><!--ref 23 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---23</xsl:text>
+               </xsl:if>
+               <!--ref 24 - rank=0-->
+               <xsl:if test="not(@style = 'ros' or @closed)">
+                  <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
+                     <xsl:text> err-char---24</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 20 - rank=11-->
+               <xsl:if test="@closed = 'false'">
+                  <xsl:if test="substring(@style,1,1) != 'f'">
+                     <xsl:text> err-char---20</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--specific char errors-->
+               <!--ref 83.11 - rank=-->
+               <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                     <xsl:text> err-char-ft-mid-83-11</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 83.12 - rank=-->
+               <xsl:if test="contains(translate(text(),$numb,$numbsub),'#:#')">
+                  <xsl:if test="contains(translate(translate(text(),$numb,$numbsub),$validvlet,$validvletsub),'#$-$')">
+                     <xsl:text> err-char-ft-mid-83-12</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -1190,13 +1250,13 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 83.3 - rank=-->
                <xsl:if test="contains(translate(text()[1],$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$letlc,''),$numb,$numbsub),'#-#')">
+                  <xsl:if test="contains(translate(translate(text()[1],$letlc,''),$numb,$numbsub),'#-#')">
                      <xsl:text> err-para-sl1--83-3</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 83.32 - rank=-->
                <xsl:if test="contains(translate(text()[1],$numb,$numbsub),'#:#')">
-                  <xsl:if test="contains(translate(translate(.,$numb,''),$letlc,$letsub),'$-$')">
+                  <xsl:if test="contains(translate(translate(text()[1],$numb,$numbsub),$letlc,$letsub),'#$-$')">
                      <xsl:text> err-para-sl1--83-32</xsl:text>
                   </xsl:if>
                </xsl:if>
