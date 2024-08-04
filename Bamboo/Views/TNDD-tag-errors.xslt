@@ -293,11 +293,6 @@ div {white-space: normal;}
    <xsl:template match="*[@style = 'tec']" mode="fntext"/>
    <xsl:template match="table">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">table<!--ref 65 - rank=5--><xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'sl1' or @style = 'pvr'])">
                <xsl:if test="$prechapter != 119">
@@ -312,21 +307,10 @@ div {white-space: normal;}
    <xsl:template match="char[@style = 'sbx']">
       <xsl:variable name="sbxc"
                     select="normalize-space(translate(substring-before(text(),':'),$letulc,''))"/>
-      <xsl:comment> sbxc = <xsl:value-of select="concat($sq,$sbxc,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sbxv"
                     select="translate(substring-after(text(),':'),$validvletpunc,'')"/>
-      <xsl:comment> sbxv = <xsl:value-of select="concat($sq,$sbxv,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -380,9 +364,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=fr -->
    <xsl:template match="char[@style = 'fr']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -436,9 +417,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=ft -->
    <xsl:template match="char[@style = 'ft']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -492,9 +470,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=imp -->
    <xsl:template match="char[@style = 'imp']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -544,9 +519,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=rgi -->
    <xsl:template match="char[@style = 'rgi']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -604,9 +576,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=rgm -->
    <xsl:template match="char[@style = 'rgm']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -660,9 +629,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=tbb -->
    <xsl:template match="char[@style = 'tbb']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -717,11 +683,6 @@ div {white-space: normal;}
    <!-- char @style=ros -->
    <xsl:template match="char[@style = 'ros']">
       <xsl:variable name="style" select="@style"/>
-      <xsl:comment> style = <xsl:value-of select="concat($sq,$style,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -774,14 +735,7 @@ div {white-space: normal;}
    <!-- char @style=brk -->
    <xsl:template match="char[@style = 'brk']">
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
-      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -857,9 +811,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style= -->
    <xsl:template match="char">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -916,9 +867,6 @@ div {white-space: normal;}
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -972,9 +920,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style= -->
    <xsl:template match="para">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1004,9 +949,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=pvr -->
    <xsl:template match="para[@style = 'pvr']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1056,9 +998,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=sla -->
    <xsl:template match="para[@style = 'sla']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1090,9 +1029,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=gn -->
    <xsl:template match="para[@style = 'gn']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1124,9 +1060,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=b -->
    <xsl:template match="para[@style = 'b']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1170,9 +1103,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=mlor -->
    <xsl:template match="para[@style = 'mlor']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1211,25 +1141,12 @@ div {white-space: normal;}
    <!-- para @style=sl1 -->
    <xsl:template match="para[@style = 'sl1']">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sl1v"
                     select="translate(substring-after(text()[1],':'),$validvletpunc,'')"/>
-      <xsl:comment> sl1v = <xsl:value-of select="concat($sq,$sl1v,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sl1c" select="substring-before(text()[1],':')"/>
-      <xsl:comment> sl1c = <xsl:value-of select="concat($sq,$sl1c,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="precleanverse"
                     select="translate($preverse,concat($validvletpunc,'-—'),'')"/>
-      <xsl:comment> precleanverse = <xsl:value-of select="concat($sq,$precleanverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1291,9 +1208,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=ml1 -->
    <xsl:template match="para[@style = 'ml1']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1353,9 +1267,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=p -->
    <xsl:template match="para[@style = 'p']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1397,9 +1308,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- cell @style= -->
    <xsl:template match="cell">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1421,9 +1329,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- cell @style=tc1 -->
    <xsl:template match="cell[@style = 'tc1']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1459,8 +1364,6 @@ div {white-space: normal;}
    <!-- row @style=tr -->
    <xsl:template match="row[@style = 'tr']">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>

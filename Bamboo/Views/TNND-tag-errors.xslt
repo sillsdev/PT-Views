@@ -401,93 +401,42 @@ div {white-space: normal;}
    <xsl:template match="*[@style = 'tec']" mode="fntext"/>
    <xsl:template match="table">
       <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
-      <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countfolls5pretable"
                     select="count(following::*[@style = 's5'][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolls5pretable = <xsl:value-of select="concat($sq,$countfolls5pretable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countfolltabledivision"
                     select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Division')][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolltabledivision = <xsl:value-of select="concat($sq,$countfolltabledivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countfolltablesection"
                     select="count(following::table[descendant::*[@style = 'sbx']][contains(descendant::*[@style = 'sbx'],'Section')][1]/preceding-sibling::table)"/>
-      <xsl:comment> countfolltablesection = <xsl:value-of select="concat($sq,$countfolltablesection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countposttablewithdivision"
                     select="count(following::table[contains(descendant::*[@style = 'tc1'],'Division')])"/>
-      <xsl:comment> countposttablewithdivision = <xsl:value-of select="concat($sq,$countposttablewithdivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countposttablewithparagraph"
                     select="count(following::table[contains(descendant::*[@style = 'tc1'],'Paragraph')])"/>
-      <xsl:comment> countposttablewithparagraph = <xsl:value-of select="concat($sq,$countposttablewithparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countposttablewithsection"
                     select="count(following::table[contains(descendant::*[@style = 'tc1'],'Section')])"/>
-      <xsl:comment> countposttablewithsection = <xsl:value-of select="concat($sq,$countposttablewithsection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasfollowingtable" select="count(following::table) &gt; 0"/>
-      <xsl:comment> hasfollowingtable = <xsl:value-of select="concat($sq,$hasfollowingtable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="notposttabledivision"
                     select="not(contains(following-sibling::table[1],'Division'))"/>
-      <xsl:comment> notposttabledivision = <xsl:value-of select="concat($sq,$notposttabledivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="notposttableparagraph"
                     select="not(contains(following-sibling::table[1],'Paragraph'))"/>
-      <xsl:comment> notposttableparagraph = <xsl:value-of select="concat($sq,$notposttableparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="notposttablesection"
                     select="not(contains(following-sibling::table[1],'Section'))"/>
-      <xsl:comment> notposttablesection = <xsl:value-of select="concat($sq,$notposttablesection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
-      <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containspart" select="contains(.,'Part')"/>
-      <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containssection" select="contains(.,'Section')"/>
-      <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpretable" select="count(parent::*/preceding-sibling::table)"/>
-      <xsl:comment> countpretable = <xsl:value-of select="concat($sq,$countpretable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrdivision"
                     select="contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrdivision = <xsl:value-of select="concat($sq,$hastrdivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrparagraph"
                     select="contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrparagraph = <xsl:value-of select="concat($sq,$hastrparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrpart"
                     select="contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrpart = <xsl:value-of select="concat($sq,$hastrpart,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrsection"
                     select="contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrsection = <xsl:value-of select="concat($sq,$hastrsection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpostsib" select="parent::*/following-sibling::*[1]/@style"/>
-      <xsl:comment> parentpostsib = <xsl:value-of select="concat($sq,$parentpostsib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
-      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresib2" select="parent::*/preceding-sibling::*[2]/@style"/>
-      <xsl:comment> parentpresib2 = <xsl:value-of select="concat($sq,$parentpresib2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">table<!--ref 6.1 - rank=--><xsl:if test="$containspart and $hasfollowingtable">
                <xsl:if test="$notposttabledivision">
@@ -519,63 +468,28 @@ div {white-space: normal;}
    <!-- para @style=s5 -->
    <xsl:template match="para[@style = 's5']">
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="strlenb4chap"
                     select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasreordered" select="contains(.,'reordered)')"/>
-      <xsl:comment> hasreordered = <xsl:value-of select="concat($sq,$hasreordered,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastbb" select="boolean(child::*[@style = 'tbb'])"/>
-      <xsl:comment> hastbb = <xsl:value-of select="concat($sq,$hastbb,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasvlet"
                     select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
-      <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasvsub"
                     select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')"/>
-      <xsl:comment> hasvsub = <xsl:value-of select="concat($sq,$hasvsub,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="numbfirst"
                     select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvlet"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
-      <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvr1"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
-      <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -667,9 +581,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style= -->
    <xsl:template match="para">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -720,15 +631,8 @@ div {white-space: normal;}
    <!-- para @style=qp -->
    <xsl:template match="para[@style = 'qp']">
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -773,151 +677,66 @@ div {white-space: normal;}
 fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr10"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr3"
                     select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr4"
                     select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr5"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr6"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr7"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr8"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff3"
                     select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff4"
                     select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff5"
                     select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff6"
                     select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff7"
                     select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff8"
                     select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff9"
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1050,18 +869,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=gj -->
    <xsl:template match="para[@style = 'gj']">
       <xsl:variable name="countjmp" select="count(*[@style = 'jmp'])"/>
-      <xsl:comment> countjmp = <xsl:value-of select="concat($sq,$countjmp,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countnode" select="count(node())"/>
-      <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1109,14 +919,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <xsl:template match="para[@style = 'b2']">
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="nodecount" select="count(node())"/>
-      <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1159,11 +962,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=b -->
    <xsl:template match="para[@style = 'b']">
       <xsl:variable name="nodecount" select="count(node())"/>
-      <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1213,185 +1011,80 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="curtec"
                     select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr10"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr3"
                     select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr4"
                     select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr5"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr6"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr7"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr8"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countteu" select="count(*[@style = 'teu'])"/>
-      <xsl:comment> countteu = <xsl:value-of select="concat($sq,$countteu,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="positiontec" select="positiontec"/>
-      <xsl:comment> positiontec = <xsl:value-of select="concat($sq,$positiontec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postcharn1tec"
                     select="translate(substring(substring-after($pren1tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn1tec = <xsl:value-of select="concat($sq,$postcharn1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="precharn1tec"
                     select="translate(substring(substring-before($pren1tec,$curtec),string-length(substring-before($pren1tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff3"
                     select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff4"
                     select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff5"
                     select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff6"
                     select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff7"
                     select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff8"
                     select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff9"
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1543,214 +1236,93 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="curtec"
                     select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr10"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr3"
                     select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr4"
                     select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr5"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr6"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr7"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr8"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren2tec"
                     select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren2"
                     select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
-      <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
-      <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecverpreellipsis"
                     select="substring-before(substring-after($curtec,')'),'…')"/>
-      <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
-      <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
-      <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecversion"
                     select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
-      <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postcharn2tec"
                     select="translate(substring(substring-after($pren2tec,$curtec),1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> postcharn2tec = <xsl:value-of select="concat($sq,$postcharn2tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="precharn2tec"
                     select="translate(substring(substring-before($pren2tec,$curtec),string-length(substring-before($pren2tec,$curtec)), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> precharn2tec = <xsl:value-of select="concat($sq,$precharn2tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preellipsisstring"
                     select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff3"
                     select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff4"
                     select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff5"
                     select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff6"
                     select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff7"
                     select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff8"
                     select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff9"
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -1922,227 +1494,98 @@ fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="curtec"
                     select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
-      <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr10"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr3"
                     select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr4"
                     select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr5"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr6"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr7"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr8"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren2"
                     select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren3"
                     select="count(preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren3 = <xsl:value-of select="concat($sq,$countpren3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="counttec" select="count(*[@style = 'tec'])"/>
-      <xsl:comment> counttec = <xsl:value-of select="concat($sq,$counttec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="counttrs" select="count(*[@style = 'trs'])"/>
-      <xsl:comment> counttrs = <xsl:value-of select="concat($sq,$counttrs,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecpostellipsis" select="substring-after($curtec,'…')"/>
-      <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
-      <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtecverpreellipsis"
                     select="substring-before(substring-after($curtec,')'),'…')"/>
-      <xsl:comment> curtecverpreellipsis = <xsl:value-of select="concat($sq,$curtecverpreellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curtei" select="*[@style = 'tei']/text()"/>
-      <xsl:comment> curtei = <xsl:value-of select="concat($sq,$curtei,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecchild" select="boolean(child::*[@style = 'tec'])"/>
-      <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecellipsis" select="contains(*[@style = 'tec'][1],'…')"/>
-      <xsl:comment> hastecellipsis = <xsl:value-of select="concat($sq,$hastecellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastecversion"
                     select="starts-with(translate(*[@style = 'tec'][1],$letucnumb,$letucnumbsub),'($$$') or  starts-with(translate(*[@style = 'tec'][1],'ALT','alt'),'(alt:')"/>
-      <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="lenchildtec" select="string-length(*[@style = 'tec']/text())"/>
-      <xsl:comment> lenchildtec = <xsl:value-of select="concat($sq,$lenchildtec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="node1tec" select="node()[1][@style = 'tec']"/>
-      <xsl:comment> node1tec = <xsl:value-of select="concat($sq,$node1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preellipsisstring"
                     select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren2tec"
                     select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren3tec"
                     select="preceding::*[@style = 'n3'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren3tec = <xsl:value-of select="concat($sq,$pren3tec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="validtecfirst"
                     select="substring(translate(*[@style = 'tec']/text(),concat($letulc,'('),concat($letulcsub,'$')),1,1)"/>
-      <xsl:comment> validtecfirst = <xsl:value-of select="concat($sq,$validtecfirst,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff3"
                     select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff4"
                     select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff5"
                     select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff6"
                     select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff7"
                     select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff8"
                     select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff9"
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -2311,72 +1754,33 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=s3 -->
    <xsl:template match="para[@style = 's3']">
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="strlenb4chap"
                     select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasspacecref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hassubvrange"
                     select="contains(translate($refcolonv,$validvlet,$validvletsub),'$–$')"/>
-      <xsl:comment> hassubvrange = <xsl:value-of select="concat($sq,$hassubvrange,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasvlet"
                     select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
-      <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
-      <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="lastchartype"
                     select="translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)"/>
-      <xsl:comment> lastchartype = <xsl:value-of select="concat($sq,$lastchartype,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5text" select="preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> pres5text = <xsl:value-of select="concat($sq,$pres5text,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvlet"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
-      <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvr1"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvr2" select="substring-after($refcolonv,'–')"/>
-      <xsl:comment> refcolonvr2 = <xsl:value-of select="concat($sq,$refcolonvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="reftype"
                     select="translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub)"/>
-      <xsl:comment> reftype = <xsl:value-of select="concat($sq,$reftype,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
-      <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refwordschapcolon"
                     select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -2459,88 +1863,37 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=b3 -->
    <xsl:template match="para[@style = 'b3']">
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="values5beforev"
                     select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curverse" select="verse/@number"/>
-      <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
-      <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
-      <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
-      <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
-      <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5beforevhasvr2"
                     select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5hasendashvr2"
                     select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5hasleftround"
                     select="contains(following::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5v"
                     select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
-      <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsib2" select="postsib2"/>
-      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
-      <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
-      <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5hasendashvr2"
                     select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5hasleftround"
                     select="contains(preceding::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5v"
                     select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
-      <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -2609,92 +1962,39 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=p -->
    <xsl:template match="para[@style = 'p']">
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="values5beforev"
                     select="following::*[@style = 'v'][1]/preceding::*[@style = 's5'][1]/text()"/>
-      <xsl:comment> values5beforev = <xsl:value-of select="concat($sq,$values5beforev,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curverse" select="verse/@number"/>
-      <xsl:comment> curverse = <xsl:value-of select="concat($sq,$curverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curvr1" select="substring-before(verse/@number,'-')"/>
-      <xsl:comment> curvr1 = <xsl:value-of select="concat($sq,$curvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curvr2" select="substring-after(verse/@number,'-')"/>
-      <xsl:comment> curvr2 = <xsl:value-of select="concat($sq,$curvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasvhyphen" select="contains(verse/@number,'-')"/>
-      <xsl:comment> hasvhyphen = <xsl:value-of select="concat($sq,$hasvhyphen,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5beforevhaslrb" select="contains($values5beforev,'(')"/>
-      <xsl:comment> posts5beforevhaslrb = <xsl:value-of select="concat($sq,$posts5beforevhaslrb,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5beforevhasvr2"
                     select="contains(translate($values5beforev,$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5beforevhasvr2 = <xsl:value-of select="concat($sq,$posts5beforevhasvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5hasendashvr2"
                     select="contains(translate(following::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> posts5hasendashvr2 = <xsl:value-of select="concat($sq,$posts5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5hasleftround"
                     select="contains(following::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> posts5hasleftround = <xsl:value-of select="concat($sq,$posts5hasleftround,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posts5v"
                     select="substring-after(translate(following::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> posts5v = <xsl:value-of select="concat($sq,$posts5v,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsib" select="following-sibling::*[1]/@style"/>
-      <xsl:comment> postsib = <xsl:value-of select="concat($sq,$postsib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsib2" select="postsib2"/>
-      <xsl:comment> postsib2 = <xsl:value-of select="concat($sq,$postsib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posttable" select="following-sibling::*[1][name() = 'table'] "/>
-      <xsl:comment> posttable = <xsl:value-of select="concat($sq,$posttable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="posttable2" select="following-sibling::*[2][name() = 'table'] "/>
-      <xsl:comment> posttable2 = <xsl:value-of select="concat($sq,$posttable2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5hasendashvr2"
                     select="contains(translate(preceding::*[@style = 's5'][1],$validcvnumblet,$validcvnumbletsub),'–#')"/>
-      <xsl:comment> pres5hasendashvr2 = <xsl:value-of select="concat($sq,$pres5hasendashvr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5hasleftround"
                     select="contains(preceding::*[@style = 's5'][1],'(')"/>
-      <xsl:comment> pres5hasleftround = <xsl:value-of select="concat($sq,$pres5hasleftround,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pres5v"
                     select="substring-after(translate(preceding::*[@style = 's5'][1],$validvletendash,''),':')"/>
-      <xsl:comment> pres5v = <xsl:value-of select="concat($sq,$pres5v,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> presib = <xsl:value-of select="concat($sq,$presib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presib2" select="preceding-sibling::*[2]/@style"/>
-      <xsl:comment> presib2 = <xsl:value-of select="concat($sq,$presib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverser1" select="substring-before($preverse,'-')"/>
-      <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
-      <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
-      <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -2763,17 +2063,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- para @style=gra -->
    <xsl:template match="para[@style = 'gra']">
       <xsl:variable name="countf" select="count(*[@style = 'f'])"/>
-      <xsl:comment> countf = <xsl:value-of select="concat($sq,$countf,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countfig" select="count(*[@style = 'fig'])"/>
-      <xsl:comment> countfig = <xsl:value-of select="concat($sq,$countfig,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countnode" select="count(node())"/>
-      <xsl:comment> countnode = <xsl:value-of select="concat($sq,$countnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -2831,153 +2122,66 @@ fnstring = <xsl:value-of select="$fnstring"/>
 fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
-      <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr10"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr2"
                     select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr3"
                     select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr4"
                     select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr5"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr6"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr7"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr8"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="dqstr9"
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
-      <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
-      <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
-      <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
-      <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff1"
                     select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
-      <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff2"
                     select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff3"
                     select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff4"
                     select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff5"
                     select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff6"
                     select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff7"
                     select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff8"
                     select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="sqdiff9"
                     select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3117,44 +2321,17 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <xsl:template match="figure[@style = 'fig']">
       <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
-      <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascoloncvref" select="contains(@ref,':')"/>
-      <xsl:comment> hascoloncvref = <xsl:value-of select="concat($sq,$hascoloncvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasspaceinref" select="contains(@ref,' ')"/>
-      <xsl:comment> hasspaceinref = <xsl:value-of select="concat($sq,$hasspaceinref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refattchap" select="substring-before(@ref,':')"/>
-      <xsl:comment> refattchap = <xsl:value-of select="concat($sq,$refattchap,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refattchapdot" select="substring-before(@ref,'.')"/>
-      <xsl:comment> refattchapdot = <xsl:value-of select="concat($sq,$refattchapdot,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refattdotverse" select="substring-after(@ref,'.')"/>
-      <xsl:comment> refattdotverse = <xsl:value-of select="concat($sq,$refattdotverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refattverse" select="substring-after(@ref,':')"/>
-      <xsl:comment> refattverse = <xsl:value-of select="concat($sq,$refattverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refchapter" select="refchapter"/>
-      <xsl:comment> refchapter = <xsl:value-of select="concat($sq,$refchapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refverse" select="refverse"/>
-      <xsl:comment> refverse = <xsl:value-of select="concat($sq,$refverse,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3207,17 +2384,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <xsl:template match="link[@style = 'jmp']">
       <xsl:variable name="containsclickhere" select="contains(.,'Click here')"/>
-      <xsl:comment> containsclickhere = <xsl:value-of select="concat($sq,$containsclickhere,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
-      <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="gjparent" select="parent::para[@style = 'gj']"/>
-      <xsl:comment> gjparent = <xsl:value-of select="concat($sq,$gjparent,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:text>\jmp </xsl:text>
          <xsl:apply-templates select="node()"/>
@@ -3232,48 +2400,23 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- char @style=sbx -->
    <xsl:template match="char[@style = 'sbx']">
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="strlenb4chap"
                     select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="chappos"
                     select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
-      <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasspacecref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="numbfirst"
                     select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvr1"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refwordschapcolon"
                     select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3333,9 +2476,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- char @style= -->
    <xsl:template match="char">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3383,42 +2523,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <xsl:template match="char[@style = 'tec']">
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren2"
                     select="count(preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren2 = <xsl:value-of select="concat($sq,$countpren2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpresibnode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countpresibnode = <xsl:value-of select="concat($sq,$countpresibnode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpretec" select="count(preceding-sibling::*[@style = 'tec'])"/>
-      <xsl:comment> countpretec = <xsl:value-of select="concat($sq,$countpretec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasellipsis" select="contains(node()[not(self::*)],'…')"/>
-      <xsl:comment> hasellipsis = <xsl:value-of select="concat($sq,$hasellipsis,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
-      <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="lastchar2" select="substring(.,string-length(.) - 1,1)"/>
-      <xsl:comment> lastchar2 = <xsl:value-of select="concat($sq,$lastchar2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postellipsisstring"
                     select="normalize-space(concat(' ',substring-after(translate(node()[not(self::*)],':',''),'…'),' '))"/>
-      <xsl:comment> postellipsisstring = <xsl:value-of select="concat($sq,$postellipsisstring,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preellipsisstring"
                     select="normalize-space(concat(' ',substring-before(node()[not(self::*)],'…'),' '))"/>
-      <xsl:comment> preellipsisstring = <xsl:value-of select="concat($sq,$preellipsisstring,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3484,67 +2601,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <xsl:template match="char[@style = 'trs']">
       <xsl:variable name="ellipsiscount"
                     select="string-length(.)-string-length(translate(.,'…',''))"/>
-      <xsl:comment> ellipsiscount = <xsl:value-of select="concat($sq,$ellipsiscount,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pretec" select="concat(' ',preceding::*[@style = 'tec'][1])"/>
-      <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split2ellipsisstring1" select="substring-before(.,'…')"/>
-      <xsl:comment> split2ellipsisstring1 = <xsl:value-of select="concat($sq,$split2ellipsisstring1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split2ellipsisstring2" select="substring-after(.,'…')"/>
-      <xsl:comment> split2ellipsisstring2 = <xsl:value-of select="concat($sq,$split2ellipsisstring2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="tecstringposttrs" select="substring-after($pretec,.)"/>
-      <xsl:comment> tecstringposttrs = <xsl:value-of select="concat($sq,$tecstringposttrs,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="tecstringpretrs" select="substring-before($pretec,.)"/>
-      <xsl:comment> tecstringpretrs = <xsl:value-of select="concat($sq,$tecstringpretrs,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split3ellipsisstring2"
                     select="substring-before($split2ellipsisstring2,'…')"/>
-      <xsl:comment> split3ellipsisstring2 = <xsl:value-of select="concat($sq,$split3ellipsisstring2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split3ellipsisstring3"
                     select="substring-after($split2ellipsisstring2,'…')"/>
-      <xsl:comment> split3ellipsisstring3 = <xsl:value-of select="concat($sq,$split3ellipsisstring3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split4ellipsisstring3"
                     select="substring-before($split3ellipsisstring3,'…')"/>
-      <xsl:comment> split4ellipsisstring3 = <xsl:value-of select="concat($sq,$split4ellipsisstring3,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="split4ellipsisstring4"
                     select="substring-after($split3ellipsisstring3,'…')"/>
-      <xsl:comment> split4ellipsisstring4 = <xsl:value-of select="concat($sq,$split4ellipsisstring4,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="curspfield" select="concat(' ',.)"/>
-      <xsl:comment> curspfield = <xsl:value-of select="concat($sq,$curspfield,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="teccharposttrs"
                     select="translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)"/>
-      <xsl:comment> teccharposttrs = <xsl:value-of select="concat($sq,$teccharposttrs,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="teccharpretrs"
                     select="translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)"/>
-      <xsl:comment> teccharpretrs = <xsl:value-of select="concat($sq,$teccharpretrs,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3611,32 +2691,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- char @style=tei -->
    <xsl:template match="char[@style = 'tei']">
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
-      <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpren1 = <xsl:value-of select="concat($sq,$countpren1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpres5"
                     select="count(preceding::*[@style = 's5'][1]/preceding-sibling::*)"/>
-      <xsl:comment> countpres5 = <xsl:value-of select="concat($sq,$countpres5,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
-      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresibpos" select="count(parent::*/preceding-sibling::*)"/>
-      <xsl:comment> parentpresibpos = <xsl:value-of select="concat($sq,$parentpresibpos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pren1tec"
                     select="preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
-      <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3680,15 +2743,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <xsl:template match="char[@style = 'fr']">
       <xsl:variable name="hasbadcvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#.#')"/>
-      <xsl:comment> hasbadcvref = <xsl:value-of select="concat($sq,$hasbadcvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3728,9 +2784,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- char @style=tbb -->
    <xsl:template match="char[@style = 'tbb']">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3783,27 +2836,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- char @style=rgi -->
    <xsl:template match="char[@style = 'rgi']">
       <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
-      <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
-      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
-      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pretextlastchar"
                     select="substring($presibtext1,string-length($presibtext1),1)"/>
-      <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
-      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3852,27 +2890,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- char @style=rgm -->
    <xsl:template match="char[@style = 'rgm']">
       <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
-      <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
-      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
-      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pretextlastchar"
                     select="substring($presibtext1,string-length($presibtext1),1)"/>
-      <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
-      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -3921,74 +2944,33 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- cell @style=tc1 -->
    <xsl:template match="cell[@style = 'tc1']">
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="strlenb4chap"
                     select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="chappos"
                     select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
-      <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containsparagraph" select="contains(.,'Paragraph')"/>
-      <xsl:comment> containsparagraph = <xsl:value-of select="concat($sq,$containsparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countprenode" select="count(preceding-sibling::node())"/>
-      <xsl:comment> countprenode = <xsl:value-of select="concat($sq,$countprenode,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countsbx" select="count(*[@style = 'sbx'])"/>
-      <xsl:comment> countsbx = <xsl:value-of select="concat($sq,$countsbx,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="counttbb" select="count(*[@style = 'tbb'])"/>
-      <xsl:comment> counttbb = <xsl:value-of select="concat($sq,$counttbb,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hasspacecref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="notmultirowtable"
                     select="not(parent::*[@style = 'tr']/preceding-sibling::*[@style = 'tr']) or not(parent::*[@style = 'tr']/following-sibling::*[@style = 'tr'])"/>
-      <xsl:comment> notmultirowtable = <xsl:value-of select="concat($sq,$notmultirowtable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="notsbxchild" select="not(child::*[@style = 'sbx'])"/>
-      <xsl:comment> notsbxchild = <xsl:value-of select="concat($sq,$notsbxchild,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="numbfirst"
                     select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="pos" select="pos"/>
-      <xsl:comment> pos = <xsl:value-of select="concat($sq,$pos,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvnumb"
                     select="translate(substring-after(text(),':'),$validvlet,'')"/>
-      <xsl:comment> refcolonvnumb = <xsl:value-of select="concat($sq,$refcolonvnumb,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refcolonvr1"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refwordschapcolon"
                     select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -4061,9 +3043,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- cell @style= -->
    <xsl:template match="cell">
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -4090,42 +3069,20 @@ fnstring = <xsl:value-of select="$fnstring"/>
    <!-- row @style=tr -->
    <xsl:template match="row[@style = 'tr']">
       <xsl:variable name="containsdivision" select="contains(.,'Division')"/>
-      <xsl:comment> containsdivision = <xsl:value-of select="concat($sq,$containsdivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containspart" select="contains(.,'Part')"/>
-      <xsl:comment> containspart = <xsl:value-of select="concat($sq,$containspart,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="containssection" select="contains(.,'Section')"/>
-      <xsl:comment> containssection = <xsl:value-of select="concat($sq,$containssection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="countpretable" select="count(parent::*/preceding-sibling::table)"/>
-      <xsl:comment> countpretable = <xsl:value-of select="concat($sq,$countpretable,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrdivision"
                     select="contains(*[1]/*[1]/text(),'Division') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrdivision = <xsl:value-of select="concat($sq,$hastrdivision,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrparagraph"
                     select="contains(*[1]/text(),'Paragraph') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrparagraph = <xsl:value-of select="concat($sq,$hastrparagraph,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrpart"
                     select="contains(*[1]/*[1]/text(),'Part') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrpart = <xsl:value-of select="concat($sq,$hastrpart,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="hastrsection"
                     select="contains(*[1]/*[1]/text(),'Section') and count(following-sibling::*) = 0"/>
-      <xsl:comment> hastrsection = <xsl:value-of select="concat($sq,$hastrsection,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpostsib" select="parent::*/following-sibling::*[1]/@style"/>
-      <xsl:comment> parentpostsib = <xsl:value-of select="concat($sq,$parentpostsib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresib" select="parent::*/preceding-sibling::*[1]/@style"/>
-      <xsl:comment> parentpresib = <xsl:value-of select="concat($sq,$parentpresib,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="parentpresib2" select="parent::*/preceding-sibling::*[2]/@style"/>
-      <xsl:comment> parentpresib2 = <xsl:value-of select="concat($sq,$parentpresib2,$sq,' ')"/>
-      </xsl:comment>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
@@ -4150,8 +3107,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <xsl:template match="verse[@style = 'v']">
       <xsl:variable name="parent" select="parent::*/@style"/>
-      <xsl:comment> parent = <xsl:value-of select="concat($sq,$parent,$sq,' ')"/>
-      </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="@style"/>
