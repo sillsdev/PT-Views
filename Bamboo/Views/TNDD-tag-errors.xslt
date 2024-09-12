@@ -40,7 +40,7 @@
    <xsl:variable name="version">7</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-09-10</xsl:variable>
+   <xsl:variable name="moddate">2024-09-11</xsl:variable>
    <xsl:variable name="postrsq">”,.</xsl:variable>
    <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
@@ -270,11 +270,11 @@ div {white-space: normal;}
 .err-para-ml1-mid-88-31 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-31::after {content:'This \\ml1 does not start with a left single quote like the \\sl1, or you have changed it to an indirect quote.  [D88.31]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-32 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-ml1-mid-88-32::after {content:'This \\ml1 starts with a left single quote when the \\sl1 does not, or you have changed it to an indirect quote.  [D88.32]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-32::after {content:'This \\ml1 starts with a left single quote when the \\sl1 does not, or you have changed it to a direct quote.  [D88.32]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-33 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-33::after {content:'This \\ml1 has no left single quote when the \\sl1 starts with one, or you have changed it to an indirect quote.  [D88.33]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-34 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-ml1-mid-88-34::after {content:'This \\ml1 starts with a left single quote but the \\sl1 has none, or you have changed it to an indirect quote.  [D88.34]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-34::after {content:'This \\ml1 starts with a left single quote but the \\sl1 has none, or you have changed it to a direct quote.  [D88.34]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-53 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-53::after {content:'This \\ml1 starts with a left single quote when the \\sl1 ends with a left double quote.  [D88.53]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-12 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -294,25 +294,37 @@ div {white-space: normal;}
 .err-para-ml1-mid-88-41 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-41::after {content:'This \\ml1 does not have a right single quote like the \\sl1, or you have changed it to an indirect quote.  [D88.41]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-42 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-ml1-mid-88-42::after {content:'This \\ml1 has a right  single quote when the \\sl1 does not, or you have changed it to an indirect quote.  [D88.42]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-42::after {content:'This \\ml1 has a right  single quote when the \\sl1 does not, or you have changed it to a direct quote.  [D88.42]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-43 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-43::after {content:'This \\ml1 does not have a right single quote like the \\sl1, or you have changed it to an indirect quote.  [D88.43]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-44 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-44::after {content:'This \\ml1 has a right  single quote when the \\sl1 does not, or you have changed it to a direct quote.  [D88.44]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-21 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-21::after {content:'This \\ml1 does not end with a right double quote like the \\sl1, or you have changed it to an indirect quote.  [D88.21]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-23 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-23::after {content:'This \\ml1 does not end with a right double quote like the \\sl1, or you have changed it to an indirect quote.  [D88.23]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1--26 {background:peachpuff;}
 .err-para-ml1--26::after {content:'A Pilcrow character ¶ should be followed by a \\tbb at the start of this paragraph  [D26]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1--29 {background:peachpuff;}
 .err-para-ml1--29::after {content:'The \\tbb SFM should be second after a ¶ paragraph marker  [D29]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-22 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-ml1-mid-88-22::after {content:'This \\ml1 ends with a right double quote when the \\sl1 does not, or you have changed it to an indirect quote.  [D88.22]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-22::after {content:'This \\ml1 ends with a right double quote when the \\sl1 does not, or you have changed it to a direct quote.  [D88.22]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-24 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-24::after {content:'This \\ml1 ends with a right double quote when the \\sl1 does not, or you have changed it to a direct quote.  [D88.24]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-51 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-51::after {content:'This \\ml1 starts with a left double quote when the \\sl1 starts with a left double single quote.  [D88.51]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-52 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-ml1-mid-88-52::after {content:'This \\ml1 starts with a left single quote when the \\sl1 starts with a left double quote.  [D88.52]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-52::after {content:'This \\ml1 starts with a left double quote when the \\sl1 starts with a left single quote.  [D88.52]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-54 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-54::after {content:'This \\ml1 starts with a left single quote when the \\sl1 starts with a left double quote.  [D88.54]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-55 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-55::after {content:'This \\ml1 ends with a right double quote when the \\sl1 ends with a right single quote.  [D88.55]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1-mid-88-56 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-ml1-mid-88-56::after {content:'This \\ml1 ends with a right single quote when the \\sl1 ends with a right double quote.  [D88.56]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-57 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-57::after {content:'This \\ml1 ends with a right double quote when the \\sl1 ends with a right single quote.  [D88.57]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-ml1-mid-88-58 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-ml1-mid-88-58::after {content:'This \\ml1 ends with a right single quote when the \\sl1 ends with a right double quote.  [D88.58]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ml1--33 {background:peachpuff;}
 .err-para-ml1--33::after {content:'This \\ml1 should not be empty. If there is no content, remove it and the \\mlor preceding it.  [D33]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-p-pre-62 {background:peachpuff;border-top:2pt solid red;}
@@ -1598,6 +1610,10 @@ div {white-space: normal;}
       <xsl:variable name="curlasttextlen" select="string-length($curlastnodetext)"/>
       <xsl:comment> curlasttextlen = <xsl:value-of select="concat($sq,$curlasttextlen,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="curlastnodetextb4lb"
+                    select="substring-before($curlastnodetext,' (')"/>
+      <xsl:comment> curlastnodetextb4lb = <xsl:value-of select="concat($sq,$curlastnodetextb4lb,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="curRsqcount"
                     select="string-length(.) - string-length(translate(., $rsq, ''))"/>
       <xsl:comment> curRsqcount = <xsl:value-of select="concat($sq,$curRsqcount,$sq,' ')"/>
@@ -1632,6 +1648,14 @@ div {white-space: normal;}
       <xsl:variable name="curlastchar"
                     select="substring($curlastnodetext,$curlasttextlen,1)"/>
       <xsl:comment> curlastchar = <xsl:value-of select="concat($sq,$curlastchar,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="curlastnodetextb4lblen"
+                    select="string-length($curlastnodetextb4lb)"/>
+      <xsl:comment> curlastnodetextb4lblen = <xsl:value-of select="concat($sq,$curlastnodetextb4lblen,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="curlastcharb4lb"
+                    select="substring($curlastnodetext,$curlastnodetextb4lblen,1)"/>
+      <xsl:comment> curlastcharb4lb = <xsl:value-of select="concat($sq,$curlastcharb4lb,$sq,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -1675,7 +1699,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref 88.34 - rank=0-->
-               <xsl:if test="$curfirstchar != '¶' and $curfirstcharposttab = $lsq">
+               <xsl:if test="$curfirstchar != '¶' and $curfirstchar = $lsq">
                   <xsl:if test="$presl1textposttbbchar1 != $lsq and $presl1textposttbbchar1 != $ldq">
                      <xsl:text> err-para-ml1-mid-88-34</xsl:text>
                   </xsl:if>
@@ -1728,20 +1752,38 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 88.41 - rank=5-->
                <xsl:if test="$presl1textcharlast = $rsq">
-                  <xsl:if test="$curlastchar != $rsq and $curlastchar != $rdq">
+                  <xsl:if test="$curlastchar != $rsq and $curlastchar != $rdq and $curlastchar != ')'">
                      <xsl:text> err-para-ml1-mid-88-41</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 88.42 - rank=5-->
                <xsl:if test="$curlastchar = $rsq">
-                  <xsl:if test="$presl1textcharlast != $rsq and $presl1textcharlast != $rdq">
+                  <xsl:if test="$presl1textcharlast != $rsq and $presl1textcharlast != $rdq and $curlastchar != ')'">
                      <xsl:text> err-para-ml1-mid-88-42</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.43 - rank=5-->
+               <xsl:if test="$curlastchar = ')' and $presl1textcharlast = $rsq">
+                  <xsl:if test="$curlastcharb4lb != $rsq and $curlastcharb4lb != $rdq">
+                     <xsl:text> err-para-ml1-mid-88-43</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.44 - rank=5-->
+               <xsl:if test="$curlastchar = ')' and $curlastcharb4lb = $rsq">
+                  <xsl:if test="$presl1textcharlast != $rsq and $presl1textcharlast != $rdq">
+                     <xsl:text> err-para-ml1-mid-88-44</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 88.21 - rank=6-->
                <xsl:if test="$presl1textcharlast = $rdq">
-                  <xsl:if test="$curlastchar != $rdq and $curlastchar != $rsq">
+                  <xsl:if test="$curlastchar != $rdq and $curlastchar != $rsq and $curlastchar != ')'">
                      <xsl:text> err-para-ml1-mid-88-21</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.23 - rank=6-->
+               <xsl:if test="$curlastchar = ')' and $presl1textcharlast = $rdq">
+                  <xsl:if test="$curlastcharb4lb != $rdq and $curlastcharb4lb != $rsq">
+                     <xsl:text> err-para-ml1-mid-88-23</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 26 - rank=8-->
@@ -1756,8 +1798,14 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 88.22 - rank=8-->
                <xsl:if test="$curlastchar = $rdq">
-                  <xsl:if test="$presl1textcharlast != $rdq and $presl1textcharlast != $rsq">
+                  <xsl:if test="$presl1textcharlast != $rdq and $presl1textcharlast != $rsq and $curlastchar != ')'">
                      <xsl:text> err-para-ml1-mid-88-22</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.24 - rank=8-->
+               <xsl:if test="$curlastchar = ')' and $curlastcharb4lb = $rdq">
+                  <xsl:if test="$presl1textcharlast != $rdq and $presl1textcharlast != $rsq">
+                     <xsl:text> err-para-ml1-mid-88-24</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 88.51 - rank=8-->
@@ -1788,6 +1836,18 @@ div {white-space: normal;}
                <xsl:if test="$curlastchar = $rsq">
                   <xsl:if test="$presl1textcharlast = $rdq">
                      <xsl:text> err-para-ml1-mid-88-56</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.57 - rank=8-->
+               <xsl:if test="$curlastchar = ')' and $curlastcharb4lb = $rdq">
+                  <xsl:if test="$presl1textcharlast = $rsq">
+                     <xsl:text> err-para-ml1-mid-88-57</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 88.58 - rank=8-->
+               <xsl:if test="$curlastchar = ')' and $curlastcharb4lb = $rsq">
+                  <xsl:if test="$presl1textcharlast = $rdq">
+                     <xsl:text> err-para-ml1-mid-88-58</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 33 - rank=10-->

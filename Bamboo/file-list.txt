@@ -7,11 +7,9 @@ cms\Bamboo-Views-Documentation.pdf
 cms\TNDD_Views_hide.cms
 cms\TNDD_Views_show.cms
 cms\TNDD_Views_Toggle.py
-cms\TNDD-errors-documentation.html
 cms\TNND_Views_hide.cms
 cms\TNND_Views_show.cms
 cms\TNND_Views_Toggle.py
-cms\TNND-errors-documentation.html
 cms\USX_Views_hide.cms
 cms\USX_Views_show.cms
 cms\USX_Views_Toggle.py

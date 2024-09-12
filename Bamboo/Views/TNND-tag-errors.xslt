@@ -40,7 +40,7 @@
    <xsl:variable name="version">7</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-09-10</xsl:variable>
+   <xsl:variable name="moddate">2024-09-13</xsl:variable>
    <xsl:variable name="postrsq">”,.</xsl:variable>
    <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
@@ -332,7 +332,7 @@ div {white-space: normal;}
 .err-char--mid-26-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char--mid-26-2::after {content:'This character SFM contains a straight quote mark. It should be a curly quote mark.  [N26.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--pre-40 {background:orange;border-left:4pt solid red;}
-.err-char--pre-40::after {content:'There is an erroneous \\xxx* \\xxx, where 'xxx' is the same in both cases.  [N40]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--pre-40::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [N40]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---37 {background:orange;}
 .err-char---37::after {content:'This character SFM is not closed. No end marker was found.  [N37]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-2-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -3109,7 +3109,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:text> </xsl:text>
             </xsl:if>
             <!--ref 40 - rank=9-->
-            <xsl:if test="preceding-sibling::*[1]/@style = @style">
+            <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                <xsl:if test="preceding::text()[1] = ' '">
                   <xsl:text> err-char--pre-40</xsl:text>
                </xsl:if>
@@ -3308,7 +3308,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:text> </xsl:text>
             </xsl:if>
             <!--ref 40 - rank=9-->
-            <xsl:if test="preceding-sibling::*[1]/@style = @style">
+            <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                <xsl:if test="preceding::text()[1] = ' '">
                   <xsl:text> err-char--pre-40</xsl:text>
                </xsl:if>
@@ -3475,7 +3475,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -3535,7 +3535,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -3656,7 +3656,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -3807,7 +3807,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -3898,7 +3898,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -3971,7 +3971,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4044,7 +4044,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4140,7 +4140,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4229,7 +4229,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4325,7 +4325,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4417,7 +4417,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4488,7 +4488,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4558,7 +4558,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4628,7 +4628,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
@@ -4697,7 +4697,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> </xsl:text>
                </xsl:if>
                <!--ref 40 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style">
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
                      <xsl:text> err-char--pre-40</xsl:text>
                   </xsl:if>
