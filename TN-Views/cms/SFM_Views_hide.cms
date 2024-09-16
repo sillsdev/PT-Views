@@ -1,0 +1,8 @@
+\check SFM Hide View
+\submenu TN Views
+\script SFM_View_toggle.py
+\description (Ignore the "Input Project" box above.) This tool will hide SFM View from the Views menus after Paratext is restarted. \n\n SFM Views aids those who want to highlight particular markup. You need to manually edit the CSS component in the <style type="text/css"> tag of the SFM-hilighter.xslt if the default colors do not suit you.
+\helpFile TN-Views-Documentation.pdf
+\noText
+\rank 8
+\utf8

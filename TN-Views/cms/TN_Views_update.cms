@@ -1,0 +1,8 @@
+\check TN Views Updater
+\submenu TN Views
+\script TN_Views_updater.py
+\description (Ignore the "Input Project" box above.) This tool will update TN Views TNDD and or TNND from the Internet. TNDD and TNND Views aids creators and checkers of Translation Notes Display Development and Translation Notes Development in viewing content in various ways.
+\helpFile TN-Views-Documentation.pdf
+\noText
+\rank 9
+\utf8
