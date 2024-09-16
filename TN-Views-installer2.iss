@@ -8,8 +8,6 @@
 
 #define MPP "{code:GetPTProjectFolder}"
 #define MAppData "C:\Users\Public\PT-TN-Views"
-#define MycmsData "C:\Users\Public\PT-TN-Views\cms"
-#define MyViewsData "C:\Users\Public\PT-TN-Views\Views"
 
 
 [Setup]
@@ -37,57 +35,78 @@ SolidCompression=yes
 
 [Types]
 Name: "full"; Description: "Install TN Views"
-;Name: "full"; Description: "Full installation with TNDD and TNND views in Paratext"
-;Name: "fullusx"; Description: "Full installation with TNDD, TNND and USX views in Paratext"
-;Name: "tndd"; Description: "Full installation with TNDD views in Paratext"
-;Name: "tnnd"; Description: "Full installation with TNND views in Paratext"
-;Name: "usx"; Description: "Full installation with USX views in Paratext"
 
 [Components]
 Name: main; Description: "Install essential files"; Types: full; 
-;Name: tndd; Description: "Install TNDD Views in Paratext";
-;Name: tnnd; Description: "Install TNND Views in Paratext";
-;Name: usx;  Description: "Install USX Views in Paratext"; 
-;Name: updater;  Description: "Install TN Updater";  Types: update;
 
 [Tasks]
-Name: tnxd; Description: "Make TNDD and TNND views available in Paratext"; Flags: exclusive;
-Name: complete; Description: "Make TNDD, TNND, USX and SFM views available in Paratext"; Flags: exclusive unchecked;
-Name: tndd; Description: "Make TNDD views available in Paratext"; Flags: exclusive unchecked;
-Name: tnnd; Description: "Make TNND views available in Paratext"; Flags: exclusive unchecked;
-Name: usx; Description: "Make USX views available in Paratext"; Flags: exclusive unchecked;
-Name: sfm; Description: "Make SFM views available in Paratext"; Flags: exclusive unchecked;
+Name: tnxd;     Description: "Make TNDD and TNND views available in Paratext";            Flags: exclusive;
+Name: complete; Description: "Make TNDD, TNND, USX and SFM views available in Paratext";  Flags: exclusive unchecked;
+Name: tndd;     Description: "Make TNDD views available in Paratext";                     Flags: exclusive unchecked;
+Name: tnnd;     Description: "Make TNND views available in Paratext";                     Flags: exclusive unchecked;
+Name: usx;      Description: "Make USX views available in Paratext"; Flags: exclusive unchecked;
+Name: sfm;      Description: "Make SFM views available in Paratext"; Flags: exclusive unchecked;
 
 [Files]
-; main
-Source: "TN-Views\TN-views-manager.cmd";  DestDir: "{#MAppData}" ;    Components: main;
-Source: "TN-Views\Uninstall*.cmd";    DestDir: "{#MAppData}"  ;   Components: main;
-Source: "TN-Views\Install*.cmd";      DestDir: "{#MAppData}"  ;   Components: main;
-Source: "TN-Views\Views\*.x*";        DestDir: "{#MyViewsData}" ; Components: main;
-Source: "TN-Views\cms\*.*";           DestDir: "{#MycmsData}"  ;  Components: main;
-Source: "TN-Views\cms\TN*.*";     DestDir: "{#MycmsData}"  ;  Components: main;
-Source: "TN-Views\cms\TN*.pdf";     DestDir: "{#MPP}\cms"  ;  Components: main;
-Source: "TN-Views\cms\*.py";          DestDir: "{#MPP}\cms"  ;    Components: main;
+; main install all files to install dir
+Source: "TN-Views\TN-views-manager.cmd";  DestDir: "{#MAppData}" ;        Components: main;
+Source: "TN-Views\Uninstall*.cmd";        DestDir: "{#MAppData}"  ;       Components: main;
+Source: "TN-Views\Install*.cmd";          DestDir: "{#MAppData}"  ;       Components: main;
+Source: "TN-Views\Views\*.x*";            DestDir: "{#MAppData}\Views" ;  Components: main;
+Source: "TN-Views\cms\*.*";               DestDir: "{#MAppData}\cms"  ;   Components: main;
 
-; TNDD
-Source: "TN-Views\Views\TNDD*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tndd;
-Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete tnxd tndd;
-Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: usx sfm tnnd;
+; TN to PT
+Source: "TN-Views\cms\*.pdf";           DestDir: "{#MPP}\cms"  ;    Components: main;
+Source: "TN-Views\cms\TN_*.*";            DestDir: "{#MPP}\cms"  ;    Components: main;
+Source: "TN-Views\cms\*.py";              DestDir: "{#MPP}\cms"  ;    Components: main;
 
-; TNND
-Source: "TN-Views\Views\TNND*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete tnxd tnnd;
-Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete tnxd tnnd;
-Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: usx sfm tndd;
+; tnxd tasks
+Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Tasks: tnxd;
+Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tnxd;
+Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Tasks: tnxd;
+Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tnxd;
+Source: "TN-Views\cms\USX_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tnxd;
+Source: "TN-Views\cms\SFM_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tnxd;
 
-; USX
-Source: "TN-Views\Views\USX*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete usx;
-Source: "TN-Views\cms\USX_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete usx;
-Source: "TN-Views\cms\USX_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: tnxd tndd tnnd;
 
-; SFM
-Source: "TN-Views\Views\SFM*.x*"; DestDir: "{#MPP}\Views" ; Tasks: complete sfm;
-Source: "TN-Views\cms\SFM_Views_hide.cms"; DestDir: "{#MPP}\cms" ; Tasks: complete sfm;
-Source: "TN-Views\cms\SFM_Views_show.cms"; DestDir: "{#MPP}\cms" ; Tasks: tnxd tndd tnnd;
+; complete tasks
+Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Tasks: complete;
+Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: complete;
+Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Tasks: complete;
+Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: complete;
+Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ; Tasks: complete;
+Source: "TN-Views\cms\USX_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Tasks: complete;
+Source: "TN-Views\Views\SFM*.x*";           DestDir: "{#MPP}\Views" ; Tasks: complete;
+Source: "TN-Views\cms\SFM_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Tasks: complete;
+
+; TNDD to PT
+Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Tasks: tndd;
+Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tndd;
+Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tndd;
+Source: "TN-Views\cms\SFM_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tndd;
+Source: "TN-Views\cms\USX_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tndd;
+
+
+; TNND to PT
+Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Tasks: tnnd;
+Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tnnd;
+Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: tnnd;
+Source: "TN-Views\cms\SFM_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tnnd;
+Source: "TN-Views\cms\USX_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: tnnd;
+
+; USX  tasks
+Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ; Tasks: usx;
+Source: "TN-Views\cms\USX_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Tasks: usx;
+Source: "TN-Views\cms\SFM_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: usx;
+Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: usx;
+Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: usx;
+
+; SFM tasks
+Source: "TN-Views\Views\SFM*.x*";           DestDir: "{#MPP}\Views" ; Tasks: sfm;
+Source: "TN-Views\cms\SFM_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Tasks: sfm;
+Source: "TN-Views\cms\USX_Views_show.cms";  DestDir: "{#MPP}\cms" ;   Tasks: sfm;
+Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: sfm;
+Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Tasks: sfm;
 
 
 [Languages]
