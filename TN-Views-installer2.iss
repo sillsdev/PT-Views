@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Paratext TN Views"
-#define MyAppVersion "7"
+#define MyAppVersion "8"
 #define MyAppPublisher "SIL International"
 #define MyAppURL "https://github.com/sillsdev/PT-Views/"
 
