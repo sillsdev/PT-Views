@@ -8,13 +8,13 @@ set new=0
 set prince=C:\programs\prince-15.1-win64\bin\prince.exe
 :main
 call :colorvar
-call :countnewer "%cd%\docs\TN-views.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TN-Views-custom.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TN-Views-install.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TNDD-info.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TNND-info.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\SFM-info.md" "%cd:TN=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\USX-info.md" "%cd:TN=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\TN-views.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\TN-Views-custom.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\TN-Views-install.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\TNDD-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\TNND-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\SFM-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+call :countnewer "%cd%\docs\USX-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
 if %new%. gtr 0. echo Recreating the PDF
 if %new%. gtr 0. call :pdf
 call :zip
