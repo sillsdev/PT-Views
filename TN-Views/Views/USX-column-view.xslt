@@ -11,7 +11,7 @@
     # Licence:  	<MIT>
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="version" select="'8'"/>
     <xsl:variable name="view" select="' USX column view.'"/>
     <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:template match="/*">

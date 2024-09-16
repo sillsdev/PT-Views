@@ -1,8 +1,0 @@
-\check TNDD Hide Views
-\submenu Bamboo Views
-\script TNDD_Views_toggle.py
-\description (Ignore the "Input Project" box above.) This tool will hide TNDD Views from the Views menus after Paratext is restarted. There are seven TNDD views. \n\n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways.
-\helpFile Bamboo-Views-Documentation.pdf
-\noText
-\rank 6
-\utf8
