@@ -37,7 +37,7 @@
    <xsl:variable name="rdq">”</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
    <xsl:variable name="rsq">’</xsl:variable>
-   <xsl:variable name="version">7</xsl:variable>
+   <xsl:variable name="version">8</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="moddate">2024-09-11</xsl:variable>

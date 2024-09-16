@@ -13,7 +13,7 @@
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html" version="5" indent="no"/>
-    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="version" select="'8'"/>
     <xsl:variable name="view" select="' TNDD 2nd meaning line view.'"/>
     <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:strip-space elements="*"/>

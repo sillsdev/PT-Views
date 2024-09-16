@@ -12,7 +12,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:str="http://exslt.org/strings" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl str">
     <xsl:output method="xml" version="1.0" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="version" select="'8'"/>
     <xsl:variable name="view" select="' TNDD word count 1st meaning line view.'"/>
     <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <!-- Define the color levels and colors-->

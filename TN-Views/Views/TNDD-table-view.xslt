@@ -14,7 +14,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <!-- Credits: Mark Penny for the idea; Ian McQuay for the XSLT and CSS details to make it all work! -->
     <xsl:output method="html"/>
-    <xsl:variable name="version" select="'7'"/>
+    <xsl:variable name="version" select="'8'"/>
     <xsl:variable name="view" select="' TNDD table view.'"/>
     <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:template match="/*">

@@ -1,8 +1,8 @@
 \check USX Hide View
 \submenu TN Views
-\script USX_View_toggle.py
+\script USX_Views_toggle.py
 \description (Ignore the "Input Project" box above.) This tool will hide USX View from the Views menus after Paratext is restarted. \n\n USX View aids those who want to see the USX markup with Notes overlaid.
 \helpFile TN-Views-Documentation.pdf
 \noText
-\rank 9
+\rank 8
 \utf8
