@@ -37,10 +37,10 @@
    <xsl:variable name="rdq">”</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
    <xsl:variable name="rsq">’</xsl:variable>
-   <xsl:variable name="version">8</xsl:variable>
+   <xsl:variable name="version">9</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-09-11</xsl:variable>
+   <xsl:variable name="moddate">2024-09-17</xsl:variable>
    <xsl:variable name="postrsq">”,.</xsl:variable>
    <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
@@ -479,7 +479,7 @@ div {white-space: normal;}
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -489,7 +489,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -546,7 +546,7 @@ div {white-space: normal;}
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -556,7 +556,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -613,7 +613,7 @@ div {white-space: normal;}
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -623,7 +623,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -667,16 +667,16 @@ div {white-space: normal;}
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 12 - rank=5-->
                <xsl:if test="not(following-sibling::node()[1][@style = 'rem' or @style = 'brk' or @style = 'rgi' or @style = 'rgm'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-imp-post-12</xsl:text>
                </xsl:if>
                <!--ref 13 - rank=8-->
                <xsl:if test="not(preceding-sibling::node()[1][@style = 'rem' or @style = 'brk' or @style = 'rgi'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-imp-pre-13</xsl:text>
                </xsl:if>
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -686,7 +686,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -742,12 +742,12 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 49 - rank=5-->
                <xsl:if test="not(parent::*[@style = 'imp'] or preceding-sibling::*[1][@style = 'imp'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-rgi--49</xsl:text>
                </xsl:if>
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -757,7 +757,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -814,7 +814,7 @@ div {white-space: normal;}
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -824,7 +824,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -868,20 +868,20 @@ div {white-space: normal;}
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 17 - rank=5-->
                <xsl:if test="not(text() = '__')">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-tbb--17</xsl:text>
                </xsl:if>
                <!--ref 18 - rank=5-->
                <xsl:if test="preceding-sibling::node()[1]/text() != preceding-sibling::*[1]/text()">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-tbb-pre-18</xsl:text>
                </xsl:if>
                <!--ref 19 - rank=10-->
                <xsl:if test="substring(following-sibling::node()[1],1,1) = ' '">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-tbb-post-19</xsl:text>
                </xsl:if>
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -891,7 +891,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -950,12 +950,12 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 66 - rank=5-->
                <xsl:if test="not(count(char[@style = 'brk']) = 1) and not(text())">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-ros--66</xsl:text>
                </xsl:if>
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -965,7 +965,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -1027,7 +1027,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 10 - rank=5-->
                <xsl:if test="string-length(text()) != 1">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char-brk--10</xsl:text>
                </xsl:if>
                <!--ref 4 - rank=8-->
                <xsl:if test="contains(text(),'⌊') and not(parent::*[@style = 'ros'])">
@@ -1050,7 +1050,7 @@ div {white-space: normal;}
                <!--common char errors-->
                <!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -1060,7 +1060,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -1104,7 +1104,7 @@ div {white-space: normal;}
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 23 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char---23</xsl:text>
                </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
@@ -1114,7 +1114,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-char--mid-87-2</xsl:text>
                </xsl:if>
                <!--ref 89 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -1157,7 +1157,7 @@ div {white-space: normal;}
             <xsl:value-of select="concat(@style,' ',name())"/>
             <!--ref 23 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-char---23</xsl:text>
             </xsl:if>
             <!--ref 24 - rank=0-->
             <xsl:if test="not(@style = 'ros' or @closed)">
@@ -1167,7 +1167,7 @@ div {white-space: normal;}
             </xsl:if>
             <!--ref 87.2 - rank=5-->
             <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-char--mid-87-2</xsl:text>
             </xsl:if>
             <!--ref 89 - rank=9-->
             <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
@@ -1221,7 +1221,7 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--specific para errors--><!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1229,18 +1229,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
-               </xsl:if>
-               <!--specific para errors-->
-               <!--ref 43 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
-                     <xsl:text> err-para---43</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 87.1 - rank=5-->
-               <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1269,16 +1258,16 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 71 - rank=3-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or name() = 'table' or @style = 'sl1' or @style = 'p' or @style = 'b3'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-pvr-pre-71</xsl:text>
                </xsl:if>
                <!--ref 50.1 - rank=5-->
                <xsl:if test="not(following-sibling::*[1][@style = 'sl1' or @style = 'rem' or @style = 'b2' or @style = 'b'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-pvr-post-50-1</xsl:text>
                </xsl:if>
                <!--ref 50.2 - rank=6-->
                <xsl:if test="following-sibling::*[1][@style = 'rem']">
@@ -1325,16 +1314,16 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 52 - rank=5-->
                <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'gn' or @style = 'ml1' or @style = 'sl1'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sla-post-52</xsl:text>
                </xsl:if>
                <!--ref 63 - rank=5-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'sl1' or @style = 'b2'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sla-pre-63</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1363,16 +1352,16 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 53 - rank=5-->
                <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-gn-post-53</xsl:text>
                </xsl:if>
                <!--ref 54 - rank=5-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'sl1' or @style = 'sla'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-gn-pre-54</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1401,16 +1390,16 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 86 - rank=-->
                <xsl:if test="count(node()) &gt; 0">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-b-mid-86</xsl:text>
                </xsl:if>
                <!--ref 55 - rank=5-->
                <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'p' or @style = 'sl1' or name() = 'table' or @style = 'b3' or name() = 'chapter' or @style = 'b' or substring(@style,1,2) = 'mt' or @style = 'ntn'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-b-post-55</xsl:text>
                </xsl:if>
                <!--ref 80 - rank=5-->
                <xsl:if test="preceding-sibling::*[1][@style = 'c']">
@@ -1432,7 +1421,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 58 - rank=6-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'p' or @style = 'io1' or @style = 'ml1' or @style = 'ntn' or @style = 'b' or substring(@style,1,2) = 'mt' or @style = 'pvr' or name() = 'table' or name() = 'chapter'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-b-pre-58</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1461,7 +1450,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 37 - rank=5-->
@@ -1472,11 +1461,11 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 35 - rank=7-->
                <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-mlor-post-35</xsl:text>
                </xsl:if>
                <!--ref 36 - rank=7-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-mlor-pre-36</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1522,16 +1511,16 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 82.1 - rank=-->
                <xsl:if test="$prechapter != $sl1c">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sl1--82-1</xsl:text>
                </xsl:if>
                <!--ref 82.2 - rank=-->
                <xsl:if test="$precleanverse != translate($sl1v,'-','')">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sl1--82-2</xsl:text>
                </xsl:if>
                <!--ref 83.3 - rank=-->
                <xsl:if test="contains(translate(text()[1],$numb,$numbsub),'#:#')">
@@ -1547,15 +1536,15 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 68 - rank=3-->
                <xsl:if test="contains(text()[1],' ')">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sl1--68</xsl:text>
                </xsl:if>
                <!--ref 69 - rank=3-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ml1' or @style = 'mt9' or @style = 'ntn' or @style = 'p' or @style = 'pvr' or @style = 'sla' or name() = 'table' or @style = 'b3' or @style = 'b'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sl1-pre-69</xsl:text>
                </xsl:if>
                <!--ref 51 - rank=5-->
                <xsl:if test="not(*[@style = 'tbb'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-sl1--51</xsl:text>
                </xsl:if>
                <!--ref 41 - rank=7-->
                <xsl:if test="not(child::char[@style = 'tei'])">
@@ -1671,7 +1660,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 88.11 - rank=0-->
@@ -1730,7 +1719,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 30 - rank=5-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'mlor' or @style = 'sl1' or @style = 'sla' or @style = 'gn'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-ml1-pre-30</xsl:text>
                </xsl:if>
                <!--ref 31 - rank=5-->
                <xsl:if test="(contains( preceding-sibling::*[2][@style = 'ml1']/text(),'¶') or preceding-sibling::*[2][@style = 'ml1']/*[1][@style  = 'tbb']) and preceding-sibling::*[1][@style = 'mlor']">
@@ -1788,7 +1777,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 26 - rank=8-->
                <xsl:if test="(*[@style = 'tbb'] and not(contains(text(),'¶'))) or (contains(text(),'¶') and not(*[@style = 'tbb']))">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-ml1--26</xsl:text>
                </xsl:if>
                <!--ref 29 - rank=8-->
                <xsl:if test="count(char[@style = 'tbb']) = 1">
@@ -1852,7 +1841,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 33 - rank=10-->
                <xsl:if test="string-length(text()) = 0 and count(*) = 0">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-ml1--33</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1881,12 +1870,12 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 62 - rank=5-->
                <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'b' or @style = 'b3' or @style = 'ml1' or name() = 'chapter' or name() = 'table' or @style = 'sl1' or @style = 'mt2'])">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-p-pre-62</xsl:text>
                </xsl:if>
                <!--ref 78.2 - rank=5-->
                <xsl:if test="following-sibling::*[1][name() = 'table'] and not( preceding-sibling::*[1][@style = 'c'] or preceding-sibling::*[2][@style = 'c'])">
@@ -1896,15 +1885,15 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 79 - rank=5-->
                <xsl:if test="count(verse) &gt; 0 and following-sibling::*[1][@style = 'b']">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-p-post-79</xsl:text>
                </xsl:if>
                <!--ref 40 - rank=8-->
                <xsl:if test="preceding-sibling::*[1][@style = 'p'] and child::verse">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-p-pre-40</xsl:text>
                </xsl:if>
                <!--ref 84.2 - rank=8-->
                <xsl:if test="not(verse)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-p-mid-84-2</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1933,12 +1922,12 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 87.1 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para--mid-87-1</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 84.1 - rank=8-->
                <xsl:if test="not(verse)">
-                  <xsl:text> </xsl:text>
+                  <xsl:text> err-para-b3-mid-84-1</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1967,7 +1956,7 @@ div {white-space: normal;}
             </xsl:if>
             <!--ref 87.3 - rank=5-->
             <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-cell--mid-87-3</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -2008,7 +1997,7 @@ div {white-space: normal;}
             </xsl:if>
             <!--ref 87.3 - rank=5-->
             <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-cell--mid-87-3</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -2057,11 +2046,11 @@ div {white-space: normal;}
             <xsl:value-of select="@style"/>
             <!--ref 83.6 - rank=-->
             <xsl:if test="contains(@number,'–')">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-verse-v-mid-83-6</xsl:text>
             </xsl:if>
             <!--ref 83.7 - rank=-->
             <xsl:if test="contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$-#') or contains(translate(@number,$validcvnumblet,$validcvnumbletsub),'#$')">
-               <xsl:text> </xsl:text>
+               <xsl:text> err-verse-v-mid-83-7</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:value-of select="concat('\',@style,' ',@number,' ')"/>

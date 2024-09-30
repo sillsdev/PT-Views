@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     #############################################################
-    # Name:     	usx-highlighter.xslt
+    # Name:     	TNND-highlighter.xslt
     # Purpose:  	Highlight character elements.
     # Part of:  	Paratext Views - https://github.com/sillsdev/pt-views
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
