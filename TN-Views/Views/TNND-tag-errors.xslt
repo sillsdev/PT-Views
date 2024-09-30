@@ -40,10 +40,14 @@
    <xsl:variable name="version">9</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-09-17</xsl:variable>
+   <xsl:variable name="moddate">2024-09-30</xsl:variable>
    <xsl:variable name="postrsq">”,.</xsl:variable>
    <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
+   <xsl:variable name="invalidpuncpost-f">.,?!’”</xsl:variable>
+   <xsl:variable name="invalidpuncpost-f-sub">%%%%%%</xsl:variable>
+   <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
+   <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
@@ -164,9 +168,13 @@ div {white-space: normal;}
 .err-para-s5-mid-8-23 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-s5-mid-8-23::after {content:'The first verse number in the range in this \\s5 should match the first number of current verse range.  [N8.23]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-26 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-s5-mid-8-26::after {content:'The verse number in this \\s5 must be within the current verse range.  [N8.26]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-mid-8-26::after {content:'The verse number in this \\s5 must be within the preceding \\v verse range.  [N8.26]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-27 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-s5-mid-8-27::after {content:'The verse numbers in this \\s5 must be within the current verse range.  [N8.27]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-mid-8-27::after {content:'The verse numbers in this \\s5 verse range must be within the verse range of the preceding \\v.  [N8.27]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-pre-8-31 {background:peachpuff;border-top:2pt solid red;}
+.err-para-s5-pre-8-31::after {content:'This first \\s5 of the set should include the first verse in the \\v verse range here.  [N8.31]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-pre-8-32 {background:peachpuff;border-top:2pt solid red;}
+.err-para-s5-pre-8-32::after {content:'  [N8.32]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-s5-mid-8-3::after {content:'This \\s5 reference has invalid character(s). Numbers, colon, en dash, and letters a–j are allowed.  [N8.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-3-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -176,9 +184,9 @@ div {white-space: normal;}
 .err-para-s5-mid-8-22 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-s5-mid-8-22::after {content:'The first verse number in the range in this \\s5 should match current verse number.  [N8.22]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-pre-8-28 {background:peachpuff;border-top:2pt solid red;}
-.err-para-s5-pre-8-28::after {content:'The verse reference in this \\s5 does not match the last verse of the preceding \\p verse range.  [N8.28]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-pre-8-28::after {content:'This \\s5 is the last one in the set, the verse reference in this \\s5 does not match the last verse of the preceding \\p verse range.  [N8.28]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-pre-8-29 {background:peachpuff;border-top:2pt solid red;}
-.err-para-s5-pre-8-29::after {content:'The last verse reference in this \\s5 does not match the last verse of the preceding \\p verse range.  [N8.29]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-s5-pre-8-29::after {content:'This \\s5 is the last one in the set, the last verse reference in this \\s5 does not match the last verse of the preceding \\p verse range.  [N8.29]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-s5-mid-8-25 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-s5-mid-8-25::after {content:'This \\s5 must contain a colon between the chapter and verse.  [N8.25]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-9-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -279,8 +287,6 @@ div {white-space: normal;}
 .err-para-b3-post-7-10-2::after {content:'A \\tr needs a \\b above it (below the \\b3 \\v stuff), except @ v.1.  [N7.10.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-b3-post-15-1 {background:peachpuff;border-bottom:2pt solid red;}
 .err-para-b3-post-15-1::after {content:'The first \\s5 below should include the first verse in the \\v verse range here.  [N15.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para-b3-post-15-5 {background:peachpuff;border-bottom:2pt solid red;}
-.err-para-b3-post-15-5::after {content:'The last \\s5 below (in this verse range) should include the last verse in this \\v verse range.  [N15.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-b3-mid-1-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-b3-mid-1-1::after {content:'A \\b3 paragraph must contain a \\v.  [N1.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-p-post-7-1-2 {background:peachpuff;border-bottom:2pt solid red;}
@@ -305,6 +311,10 @@ div {white-space: normal;}
 .err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign.  [N22.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-27-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-27-4::after {content:'Quotes within quotes of scholars need to be adjusted to single quotes and so forth through the levels of quotes.   [N27.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-post-C03 {background:orange;border-right:4pt solid red;}
+.err-note-f-post-C03::after {content:'There must be a space after the end of the footnote (\\f*).  [NC03]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-post-C02 {background:orange;border-right:4pt solid red;}
+.err-note-f-post-C02::after {content:'Footnotes always occur after punctuation.  [NC02]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-pre-22-2-1 {background:orange;border-left:4pt solid red;}
 .err-figure-fig-pre-22-2-1::after {content:'The \\fig must be the first item in a \\gra paragraph.  [N22.2.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-mid-22-7 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -331,14 +341,14 @@ div {white-space: normal;}
 .err-char--mid-9-6::after {content:'The hyphen in a verse range in this paragraph should be an en dash.  [N9.6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-30 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char--mid-30::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that the space should be after the numeral in a \\ros.  [N30]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char---38 {background:orange;}
-.err-char---38::after {content:'This character SFM is empty  [N38]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---C05 {background:orange;}
+.err-char---C05::after {content:'This character SFM is empty  [NC05]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-26-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char--mid-26-2::after {content:'This character SFM contains a straight quote mark. It should be a curly quote mark.  [N26.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char--pre-40 {background:orange;border-left:4pt solid red;}
-.err-char--pre-40::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [N40]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char---37 {background:orange;}
-.err-char---37::after {content:'This character SFM is not closed. No end marker was found.  [N37]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--pre-C01 {background:orange;border-left:4pt solid red;}
+.err-char--pre-C01::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [NC01]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---C04 {background:orange;}
+.err-char---C04::after {content:'This character SFM is not closed. No end marker was found.  [NC04]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-2-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tec-mid-10-2-1::after {content:'The \\tec should be at the start of the paragraph (or you are not using an \\n1, \\n2, or \\n3 style).  [N10.2.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-11-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -398,11 +408,11 @@ div {white-space: normal;}
 .err-char-rgm-post-28-5 {background:orange;border-right:4pt solid red;}
 .err-char-rgm-post-28-5::after {content:'A letter should not immediately follow an \\rgm*.  [N28.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-mid-29-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-ros-mid-29-1::after {content:'The \\ros should have a space after the reference.  [N29.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-mid-29-1::after {content:'There should be a space before the \\ros*.  [N29.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-post-29-2 {background:orange;border-right:4pt solid red;}
-.err-char-ros-post-29-2::after {content:'The character after the \\ros* should not be a space.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-post-29-2::after {content:'There should not be a space after the \\ros*.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-pre-29-3 {background:orange;border-left:4pt solid red;}
-.err-char-ros-pre-29-3::after {content:'The character preceding this \\ros is not a space.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-pre-29-3::after {content:'There should be a space before this \\ros.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tre-mid-30-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tre-mid-30-2::after {content:'There is a space before the closing SFM. Best to put the space after the close, except if followed by \\teu.  [N30.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-teu-mid-30-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -569,17 +579,6 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=s5 -->
    <xsl:template match="para[@style = 's5']">
-      <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="strlenb4chap"
-                    select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countfolls5pre-p"
-                    select="count(following::*[@style = 's5'][1]/preceding-sibling::*[@style = 'p'])"/>
-      <xsl:comment> countfolls5pre-p = <xsl:value-of select="concat($sq,$countfolls5pre-p,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="currefv" select="translate(substring-after(.,':'),$letlc,'')"/>
       <xsl:comment> currefv = <xsl:value-of select="concat($sq,$currefv,$sq,' ')"/>
       </xsl:comment>
@@ -626,10 +625,6 @@ div {white-space: normal;}
                     select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$')"/>
       <xsl:comment> hasvlet = <xsl:value-of select="concat($sq,$hasvlet,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="hasvsub"
-                    select="contains(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#$–$')"/>
-      <xsl:comment> hasvsub = <xsl:value-of select="concat($sq,$hasvsub,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="numbfirst"
                     select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
       <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
@@ -649,23 +644,11 @@ div {white-space: normal;}
       <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
       <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="refcolonvlet"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$letlc,$letsub),'$')"/>
-      <xsl:comment> refcolonvlet = <xsl:value-of select="concat($sq,$refcolonvlet,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="refcolonvr1"
-                    select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
       <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
       <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
       <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="countpres5post-v"
-                    select="count(following::*[@style = 'v'][1]/preceding::*[@style = 's5'][not(self::*)])"/>
-      <xsl:comment> countpres5post-v = <xsl:value-of select="concat($sq,$countpres5post-v,$sq,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -698,19 +681,19 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 8.21 - rank=-->
                <xsl:if test="not($prevhyphen) and not($refvendash) and not($hasvlet)">
-                  <xsl:if test="$refcolonv != $preverse">
+                  <xsl:if test="$currefv != $preverse">
                      <xsl:text> err-para-s5-mid-8-21</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 8.21.2 - rank=-->
                <xsl:if test="not($prevhyphen) and not($refvendash) and $hasvlet">
-                  <xsl:if test="$refcolonvlet != $preverse">
+                  <xsl:if test="$currefv != $preverse">
                      <xsl:text> err-para-s5-mid-8-21-2</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 8.23 - rank=-->
                <xsl:if test="$prevhyphen and $refvendash and $countpres5post-p = 0">
-                  <xsl:if test="$refcolonvr1 != $preverser1">
+                  <xsl:if test="$currefv1 != $preverser1">
                      <xsl:text> err-para-s5-mid-8-23</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -746,7 +729,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref 8.22 - rank=5-->
                <xsl:if test="not($prevhyphen) and $refvendash and not($hasvlet)">
-                  <xsl:if test="$refcolonvr1 != $preverse">
+                  <xsl:if test="$currefv1 != $preverse">
                      <xsl:text> err-para-s5-mid-8-22</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -2744,12 +2727,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-para-b3-post-15-1</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 15.5 - rank=-->
-               <xsl:if test="$hasvhyphen and not($posts5beforevhaslrb) ">
-                  <xsl:if test="not(contains($values5beforev,concat(':',$curvr2)))  and not($posts5beforevhasvr2)">
-                     <xsl:text> err-para-b3-post-15-5</xsl:text>
-                  </xsl:if>
-               </xsl:if>
                <!--ref 1.1 - rank=8-->
                <xsl:if test="not(verse)">
                   <xsl:text> err-para-b3-mid-1-1</xsl:text>
@@ -3022,6 +2999,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
+      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
+      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
       <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
       </xsl:comment>
@@ -3146,24 +3129,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-char--mid-30</xsl:text>
                </xsl:if>
             </xsl:if>
-            <!--ref 38 - rank=0-->
+            <!--ref C05 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-char---38</xsl:text>
+               <xsl:text> err-char---C05</xsl:text>
             </xsl:if>
             <!--ref 26.2 - rank=5-->
             <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                <xsl:text> err-char--mid-26-2</xsl:text>
             </xsl:if>
-            <!--ref 40 - rank=9-->
+            <!--ref C01 - rank=9-->
             <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                <xsl:if test="preceding::text()[1] = ' '">
-                  <xsl:text> err-char--pre-40</xsl:text>
+                  <xsl:text> err-char--pre-C01</xsl:text>
                </xsl:if>
             </xsl:if>
-            <!--ref 37 - rank=11-->
+            <!--ref C04 - rank=11-->
             <xsl:if test="@closed = 'false'">
                <xsl:if test="substring(@style,1,1) != 'f'">
-                  <xsl:text> err-char---37</xsl:text>
+                  <xsl:text> err-char---C04</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 22.3 - rank=-->
@@ -3179,6 +3162,14 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <!--ref 27.4 - rank=-->
             <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
                <xsl:text> err-note-f-mid-27-4</xsl:text>
+            </xsl:if>
+            <!--ref C03 - rank=0-->
+            <xsl:if test="translate($postchar1,$letulcnumb,$letulcnumbsub) = '$'">
+               <xsl:text> err-note-f-post-C03</xsl:text>
+            </xsl:if>
+            <!--ref C02 - rank=5-->
+            <xsl:if test="translate($postchar1,$invalidpuncpost-f,$invalidpuncpost-f-sub) = '%'">
+               <xsl:text> err-note-f-post-C02</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -3345,24 +3336,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-char--mid-30</xsl:text>
                </xsl:if>
             </xsl:if>
-            <!--ref 38 - rank=0-->
+            <!--ref C05 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-char---38</xsl:text>
+               <xsl:text> err-char---C05</xsl:text>
             </xsl:if>
             <!--ref 26.2 - rank=5-->
             <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                <xsl:text> err-char--mid-26-2</xsl:text>
             </xsl:if>
-            <!--ref 40 - rank=9-->
+            <!--ref C01 - rank=9-->
             <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                <xsl:if test="preceding::text()[1] = ' '">
-                  <xsl:text> err-char--pre-40</xsl:text>
+                  <xsl:text> err-char--pre-C01</xsl:text>
                </xsl:if>
             </xsl:if>
-            <!--ref 37 - rank=11-->
+            <!--ref C04 - rank=11-->
             <xsl:if test="@closed = 'false'">
                <xsl:if test="substring(@style,1,1) != 'f'">
-                  <xsl:text> err-char---37</xsl:text>
+                  <xsl:text> err-char---C04</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 22.2.1 - rank=-->
@@ -3512,24 +3503,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3572,24 +3563,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
@@ -3693,24 +3684,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3844,24 +3835,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -3935,24 +3926,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4008,24 +3999,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4081,24 +4072,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4177,24 +4168,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4266,24 +4257,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4362,24 +4353,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4454,24 +4445,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4545,24 +4536,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4615,24 +4606,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4685,24 +4676,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -4754,24 +4745,24 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 38 - rank=0-->
+               <!--ref C05 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---38</xsl:text>
+                  <xsl:text> err-char---C05</xsl:text>
                </xsl:if>
                <!--ref 26.2 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-char--mid-26-2</xsl:text>
                </xsl:if>
-               <!--ref 40 - rank=9-->
+               <!--ref C01 - rank=9-->
                <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
                   <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-40</xsl:text>
+                     <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 37 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---37</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
