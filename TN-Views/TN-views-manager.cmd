@@ -55,7 +55,7 @@ if errorlevel=0 (
   )
 )
 echo.
-if '%action%' == 'updateall' echo Press enter to update this script in a new command prompt.
+if '%action%' == 'updateall' echo %yellow%Press enter to update this script in a new command prompt.%reset%
 pause
 if '%action%' == 'updateall' (
   start "Update TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
