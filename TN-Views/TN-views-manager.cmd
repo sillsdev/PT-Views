@@ -55,7 +55,11 @@ if errorlevel=0 (
   )
 )
 echo.
+if '%action%' == 'updateall' echo Press enter to update this script in a new command prompt.
 pause
+if '%action%' == 'updateall' (
+  start "Update TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
+)
 goto :eof
 
 :mpppathquery
@@ -198,6 +202,5 @@ goto :eof
   del /q "%mpppath%cms\*show*.cms"
   echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
-  start "Updating TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
 goto :eof
 
