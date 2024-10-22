@@ -172,15 +172,28 @@ goto :eof
 
 :toggle
 :: Hide or show a set of views
-  if exit "%viewspath%\%TNxD%*.xml" (
-    if not exist "%installpath%\%TNxD%\cms\%TNxD%_Views_show.cms" copy /y "%installpath%\%TNxD%\cms\%TNxD%_Views_show.cms" "%mpppath%\cms\"
-    if exist "%cmspath%\%TNxD%_Views_hide.cms" del "%cmspath%\%TNxD%_Views_hide.cms"
-    if not exist "%cmspath%\%TNxD%_Views_show.xml" copy /Y "%installpath%\cms\%TNxD%_Views_show.xml" "%cmspath%\"
+  @echo Toggle: %TNxD%
+  if exist "%viewspath%\%TNxD%*.xml" (
+    call :hideset
   ) else (
-    if exist "%cmspath%\%TNxD%_Views_show.cms" del "%cmspath%\%TNxD%_Views_show.cms"
-    if not exist "%viewspath%\%TNxD%*.xml" copy /Y "%installpath%\Views\%TNxD%*.xml" "%viewspath%\"
-    if exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% Views files showing after PT restart%reset%
-    if not exist "%cmspath%\%TNxD%_Views_hide.xml" copy /Y "%installpath%\cms\%TNxD%_Views_hide.xml" "%cmspath%\"
+    call :showset
+  )
+goto :eof
+
+:showset
+  @echo Unhiding: %TNxD%
+  del "%cmspath%\%TNxD%_Views_show.cms"
+  copy /Y "%installpath%\Views\%TNxD%*.xml" "%viewspath%\"
+  copy /Y "%installpath%\cms\%TNxD%_Views_hide.cms" "%cmspath%\"
+  @if exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% Views files showing after PT restart%reset%
+goto :eof
+
+:hideset
+  @echo Hiding: %TNxD%
+  del "%viewspath%\%TNxD%*.xml"
+  del "%cmspath%\%TNxD%_Views_hide.cms"
+  copy /y "%installpath%\cms\%TNxD%_Views_show.cms" "%cmspath%\"
+  @if not exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% views will be hidden after Paratext restart!%reset%
 goto :eof
 
 :updateall
