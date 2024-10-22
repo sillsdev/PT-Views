@@ -40,7 +40,7 @@
    <xsl:variable name="version">9</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-09-30</xsl:variable>
+   <xsl:variable name="moddate">2024-10-22</xsl:variable>
    <xsl:variable name="postrsq">”,.</xsl:variable>
    <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
@@ -163,6 +163,16 @@ div {white-space: normal;}
 .err-char-ft-mid-83-11::after {content:'The hyphen in the verse range in this \\ft should be an en dash.  [D83.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ft-mid-83-12 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-ft-mid-83-12::after {content:'The hyphen in the verse range in this \\ft should be an en dash.  [D83.12]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---24 {background:orange;}
+.err-char---24::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that the space should be after the numeral in a \\ros.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---C05-1 {background:orange;}
+.err-char---C05-1::after {content:'This character SFM is empty  [DC05.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--mid-87-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char--mid-87-2::after {content:'This character SFM contains a straight quote mark. It should be a curly quote mark.  [D87.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--pre-C01 {background:orange;border-left:4pt solid red;}
+.err-char--pre-C01::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [DC01]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---C04 {background:orange;}
+.err-char---C04::after {content:'This character SFM is not closed. No end marker was found.  [DC04]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-post-12 {background:orange;border-right:4pt solid red;}
 .err-char-imp-post-12::after {content:'This implied bracket sequence is incomplete or incorrect (it should be: \\brk ⌊\\brk*\\imp...\\imp*\\brk ⌋\\brk*)  [D12]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-pre-13 {background:orange;border-left:4pt solid red;}
@@ -187,10 +197,6 @@ div {white-space: normal;}
 .err-char-ros--83-1::after {content:'The space must be before the \\ros*, and no space after it.  [D83.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros--66 {background:orange;}
 .err-char-ros--66::after {content:'There is no embedded \\+brk in this \\ros  [D66]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char-f-post-C03 {background:orange;border-right:4pt solid red;}
-.err-char-f-post-C03::after {content:'There must be a space after the end of the footnote (\\f*).  [DC03]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char-f-post-C02 {background:orange;border-right:4pt solid red;}
-.err-char-f-post-C02::after {content:'Footnotes always occur after punctuation.  [DC02]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-pre-6 {background:orange;border-left:4pt solid red;}
 .err-char-brk-pre-6::after {content:'This \\brk SFM is not preceded by a space or quotes or left parenthesis  [D6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-9 {background:orange;border-right:4pt solid red;}
@@ -203,16 +209,8 @@ div {white-space: normal;}
 .err-char-brk-pre-7::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM, except if in a \\ros ...\\ros*.  [D7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-5 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp.  [D5]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char---23 {background:orange;}
-.err-char---23::after {content:'This character SFM is empty  [D23]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char---24 {background:orange;}
-.err-char---24::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that the space should be after the numeral in a \\ros.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char--mid-87-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char--mid-87-2::after {content:'This character SFM contains a straight quote mark. It should be a curly quote mark.  [D87.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char--pre-C01 {background:orange;border-left:4pt solid red;}
-.err-char--pre-C01::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [DC01]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char---20 {background:orange;}
-.err-char---20::after {content:'This character SFM is not closed. No end marker was found.  [D20]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note---C05-2 {background:orange;}
+.err-note---C05-2::after {content:'This note SFM is empty  [DC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
@@ -485,15 +483,15 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -505,10 +503,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -552,15 +550,15 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -572,10 +570,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -619,15 +617,15 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -639,12 +637,67 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+            </xsl:if>
+         </xsl:attribute>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('\',@style,' ')"/>
+         </xsl:element>
+         <xsl:apply-templates select="node()"/>
+         <xsl:if test="not(@closed = 'false')">
+            <xsl:element name="span">
+               <xsl:attribute name="class">
+                  <xsl:value-of select="concat(@style,' ',name())"/>
+               </xsl:attribute>
+               <xsl:value-of select="concat('\',@style,'*')"/>
+            </xsl:element>
+         </xsl:if>
+      </xsl:element>
+   </xsl:template>
+   <!-- char @style= -->
+   <xsl:template match="char">
+      <xsl:comment>
+         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
+      </xsl:comment>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:value-of select="concat(@style,' ',name())"/>
+            <xsl:if test="preceding::chapter">
+               <!--specific char errors--><!--ref 24 - rank=0-->
+               <xsl:if test="not(@style = 'ros' or @closed)">
+                  <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
+                     <xsl:text> err-char---24</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
+               </xsl:if>
+               <!--ref 87.2 - rank=5-->
+               <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
+                  <xsl:text> err-char--mid-87-2</xsl:text>
+               </xsl:if>
+               <!--ref C01 - rank=9-->
+               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
+                  <xsl:if test="preceding::text()[1] = ' '">
+                     <xsl:text> err-char--pre-C01</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref C04 - rank=11-->
+               <xsl:if test="@closed = 'false'">
+                  <xsl:if test="substring(@style,1,1) != 'f'">
+                     <xsl:text> err-char---C04</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--common char errors-->
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -682,15 +735,15 @@ div {white-space: normal;}
                   <xsl:text> err-char-imp-pre-13</xsl:text>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -702,10 +755,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -753,15 +806,15 @@ div {white-space: normal;}
                   <xsl:text> err-char-rgi--49</xsl:text>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -773,10 +826,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -820,15 +873,15 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -840,10 +893,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -887,15 +940,15 @@ div {white-space: normal;}
                   <xsl:text> err-char-tbb-post-19</xsl:text>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -907,10 +960,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -961,15 +1014,15 @@ div {white-space: normal;}
                   <xsl:text> err-char-ros--66</xsl:text>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -981,79 +1034,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-            </xsl:if>
-         </xsl:attribute>
-         <xsl:element name="span">
-            <xsl:attribute name="class">
-               <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
-            </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
-         </xsl:element>
-         <xsl:apply-templates select="node()"/>
-         <xsl:if test="not(@closed = 'false')">
-            <xsl:element name="span">
-               <xsl:attribute name="class">
-                  <xsl:value-of select="concat(@style,' ',name())"/>
-               </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
-            </xsl:element>
-         </xsl:if>
-      </xsl:element>
-   </xsl:template>
-   <!-- char @style=f -->
-   <xsl:template match="char[@style = 'f']">
-      <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
-      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
-      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:comment>
-         <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
-      </xsl:comment>
-      <xsl:element name="span">
-         <xsl:attribute name="class">
-            <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter">
-               <!--specific char errors--><!--ref C03 - rank=0-->
-               <xsl:if test="translate($postchar1,$letulcnumb,$letulcnumbsub) = '$'">
-                  <xsl:text> err-char-f-post-C03</xsl:text>
-               </xsl:if>
-               <!--ref C02 - rank=5-->
-               <xsl:if test="translate($postchar1,$invalidpuncpost-f,$invalidpuncpost-f-sub) = '%'">
-                  <xsl:text> err-char-f-post-C02</xsl:text>
-               </xsl:if>
-               <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
-               <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
-                  <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
-                     <xsl:text> err-char---24</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 87.2 - rank=5-->
-               <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> err-char--mid-87-2</xsl:text>
-               </xsl:if>
-               <!--ref C01 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
-                  <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-C01</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 20 - rank=11-->
-               <xsl:if test="@closed = 'false'">
-                  <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -1125,15 +1109,15 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--common char errors-->
-               <!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
                <!--ref 24 - rank=0-->
                <xsl:if test="not(@style = 'ros' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C05.1 - rank=0-->
+               <xsl:if test="string-length(text()) = 0 and not(*)">
+                  <xsl:text> err-char---C05-1</xsl:text>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -1145,10 +1129,10 @@ div {white-space: normal;}
                      <xsl:text> err-char--pre-C01</xsl:text>
                   </xsl:if>
                </xsl:if>
-               <!--ref 20 - rank=11-->
+               <!--ref C04 - rank=11-->
                <xsl:if test="@closed = 'false'">
                   <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
+                     <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
             </xsl:if>
@@ -1170,42 +1154,20 @@ div {white-space: normal;}
          </xsl:if>
       </xsl:element>
    </xsl:template>
-   <!-- char @style= -->
-   <xsl:template match="char">
+   <xsl:template match="note">
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter">
-               <!--specific char errors--><!--ref 23 - rank=0-->
-               <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---23</xsl:text>
-               </xsl:if>
-               <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
-                  <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
-                     <xsl:text> err-char---24</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 87.2 - rank=5-->
-               <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-                  <xsl:text> err-char--mid-87-2</xsl:text>
-               </xsl:if>
-               <!--ref C01 - rank=9-->
-               <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
-                  <xsl:if test="preceding::text()[1] = ' '">
-                     <xsl:text> err-char--pre-C01</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 20 - rank=11-->
-               <xsl:if test="@closed = 'false'">
-                  <xsl:if test="substring(@style,1,1) != 'f'">
-                     <xsl:text> err-char---20</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--common char errors-->
+            <!--ref C05.2 - rank=0-->
+            <xsl:if test="string-length(text()) = 0 and not(*)">
+               <xsl:text> err-note---C05-2</xsl:text>
+            </xsl:if>
+            <!--ref C05.2 - rank=0-->
+            <xsl:if test="string-length(text()) = 0 and not(*)">
+               <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -1214,6 +1176,8 @@ div {white-space: normal;}
             </xsl:attribute>
             <xsl:value-of select="concat('\',@style,' ')"/>
          </xsl:element>
+         <xsl:value-of select="@caller"/>
+         <xsl:text> </xsl:text>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
             <xsl:element name="span">
@@ -1238,31 +1202,9 @@ div {white-space: normal;}
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <!--ref 23 - rank=0-->
+            <!--ref C05.2 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-char---23</xsl:text>
-            </xsl:if>
-            <!--ref 24 - rank=0-->
-            <xsl:if test="not(@style = 'ros' or @closed)">
-               <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
-                  <xsl:text> err-char---24</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 87.2 - rank=5-->
-            <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
-               <xsl:text> err-char--mid-87-2</xsl:text>
-            </xsl:if>
-            <!--ref C01 - rank=9-->
-            <xsl:if test="preceding-sibling::*[1]/@style = @style and preceding-sibling::*[1]/@style != 'brk'">
-               <xsl:if test="preceding::text()[1] = ' '">
-                  <xsl:text> err-char--pre-C01</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 20 - rank=11-->
-            <xsl:if test="@closed = 'false'">
-               <xsl:if test="substring(@style,1,1) != 'f'">
-                  <xsl:text> err-char---20</xsl:text>
-               </xsl:if>
+               <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
             <!--ref 56 - rank=5-->
             <xsl:if test="parent::*[@style = 'ml1']">
