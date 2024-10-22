@@ -299,7 +299,6 @@ goto :eof
   @echo %magenta%:updateall%reset%
   call :neededdir
   call :getfile "TN-Public-list.txt"
-  call :getfile "TN-views-manager.cmd"
   call :getfile "Install_Paratext_TN_Views.cmd"
   call :getfile "Uninstall_Paratext_TN_Views.cmd"
 
@@ -313,6 +312,7 @@ goto :eof
   del /q "%mpppath%cms\*show*.cms"
   echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
+  call :getfile "TN-views-manager.cmd"
 goto :eof
 
 :copyfiles
