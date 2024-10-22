@@ -39,7 +39,7 @@
             </span>
         </div>
     </xsl:template>
-    <xsl:template match="char|note|cell">
+    <xsl:template match="char|note|cell|link">
         <xsl:element name="char">
             <xsl:attribute name="style">
                 <xsl:text>color:blue</xsl:text>
@@ -56,7 +56,7 @@
             <xsl:text>&gt;</xsl:text>
         </span>
     </xsl:template>
-    <xsl:template match="verse|fig|chapter">
+    <xsl:template match="verse|figure|chapter">
         <xsl:element name="char">
             <xsl:attribute name="style">
                 <xsl:text>color:blue</xsl:text>
