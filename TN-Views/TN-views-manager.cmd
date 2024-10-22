@@ -2,9 +2,10 @@
 :: Written by: ian_mcquay@sil.org
 :: Date updated: 2024-06-19
 @echo off
+cls
 set installpath=C:\Users\Public\PT-TN-Views
 set viewsaction=user-views-action.cmd
-set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 set action=%1
 set TNxD=%2
 @set redbg=[101m
@@ -126,11 +127,23 @@ goto :eof
 :getfile
   @echo.
   @set winfile=%~1
+  @set fileext=%~x1
   @set outfile=%installpath%\%winfile:/=\%
-  rem @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
-  @call curl --ssl-no-revoke %url-base%/%winfile% |more /P > "%outfile%" 
+  @echo Attempting: %winfile%
+  @if '%fileext%' == '.cms' (
+    @echo %green%Converting line endings from LF to CRLF%reset%
+    @call curl --ssl-no-revoke %url-base%/%winfile% | MORE /P > "%outfile%"
+  ) else if '%fileext%' == '.cmd' (
+    @echo %green%Converting line endings from LF to CRLF%reset%
+    @call curl --ssl-no-revoke %url-base%/%winfile% | MORE /P > "%outfile%"
+  ) else (
+  @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
+  )
+  @rem set /p line1=<"%outfile%"
+  @rem @FOR /F " delims=:" %%s IN (%outfile%) DO set line1=%%s
   @FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
-  @if %size%. == 14. (
+  @echo size = %size%
+  @if "%size%" == "14" (
     @echo %redbg%Error: %winfile% not found at %url-base%.%reset%
   ) else (
     @if exist "%outfile%" echo %green%Updated: %winfile%  %reset%
@@ -144,6 +157,44 @@ goto :eof
   start msedge "file://%mpppath%cms/%TNxD%-errors-documentation.html"
 goto :eof
 
+:loopfiles
+:: Description: Used to loop through a subset of files specified by the filespec from a single directory
+:: Usage: call :loopfiles sub_name file_specs [param[3-9]]
+:: Functions called: appendnumbparam, last, taskgroup. Can also use any other function.
+  rem @call :funcbegin %0 "'%~1' '%~2' '%~3' '%~4' '%~5' '%~6' '%~7' '%~8' '%~9'"
+  rem if defined fatal goto :eof
+  set grouporfunc=%~1
+  set filespec=%~2
+  set param3=%~3
+  set param4=%~4
+  set param5=%~5
+  set param6=%~6
+  set param7=%~7
+  set param8=%~8
+  set param9=%~9
+  rem set numbparam=
+  rem set appendparam=
+  if not defined grouporfunc echo %error% Missing func parameter[2]%reset%
+  if not defined grouporfunc if defined info4 echo %funcendtext% %0 
+  if not defined grouporfunc goto :eof
+  if not defined filespec echo %error% Missing filespec parameter[1]%reset%
+  if not defined filespec if defined info4 echo %funcendtext% %0 
+  if not defined filespec goto :eof
+  if not exist "%filespec%" echo %error% Missing source files %reset%
+  if not exist "%filespec%" if defined info4 echo %funcendtext% %0 
+  if not exist "%filespec%" goto :eof
+  @if defined loopfilesecho echo off
+  call :multivarlist 3 9
+  rem for /L %%v in (3,1,9) Do call :appendnumbparam numbparam par %%v
+  rem for /L %%v in (3,1,9) Do call :last par %%v
+  if defined info3 if defined numbparam set %multivar%
+  if "%grouporfunc:~0,1%" == ":" (
+      FOR /F " delims=" %%s IN ('dir /b /a:-d /o:n "%filespec%"') DO  call %grouporfunc% "%%s" %multivar:'="%
+    ) else (
+      FOR /F " delims=" %%s IN ('dir /b /a:-d /o:n "%filespec%"') DO  call :%grouporfunc% "%%s" %multivar:'="%
+  )  
+  rem @call :funcend %0
+goto :eof
 
 :loopstring
 :: Description: Loops through a list supplied in a space separated string.
@@ -248,16 +299,19 @@ goto :eof
   @echo %magenta%:updateall%reset%
   call :neededdir
   call :getfile "TN-Public-list.txt"
+  call :getfile "TN-views-manager.cmd"
+  call :getfile "Install_Paratext_TN_Views.cmd"
+  call :getfile "Uninstall_Paratext_TN_Views.cmd"
 
   rem get the files in the downloaded list
-  @call :looplist :getfile "TN-Public-list.txt"
+  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
   
   rem update the files in Views and cms folder if there already
   echo.
-  echo %green%Info: Copying support files to '%mpppath%cms' folder%reset%
+  echo %green%Info: Copying cms, py and PDF files to '%mpppath%cms' folder%reset%
   xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
-  del /y "%mpppath%cms\*show*.cms"
-  echo %green%Info: Copying views files to '%mpppath%Views' folder%reset%
+  del /q "%mpppath%cms\*show*.cms"
+  echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
 
