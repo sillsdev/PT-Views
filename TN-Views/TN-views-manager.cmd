@@ -131,17 +131,19 @@ goto :eof
   @set outfile=%installpath%\%winfile:/=\%
   @echo Attempting: %winfile%
   @if '%fileext%' == '.cms' (
-    @echo %green%Converting line endings from LF to CRLF%reset%
+    @echo %green%With line endings conversion from LF to CRLF%reset%
     @call curl --ssl-no-revoke %url-base%/%winfile% | MORE /P > "%outfile%"
   ) else if '%fileext%' == '.cmd' (
-    @echo %green%Converting line endings from LF to CRLF%reset%
+    @echo %green%With line endings conversion from LF to CRLF%reset%
     @call curl --ssl-no-revoke %url-base%/%winfile% | MORE /P > "%outfile%"
   ) else (
   @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
   )
   @rem set /p line1=<"%outfile%"
   @rem @FOR /F " delims=:" %%s IN (%outfile%) DO set line1=%%s
-  @FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
+  echo on
+  FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
+  @echo off
   @echo size = %size%
   @if "%size%" == "14" (
     @echo %redbg%Error: %winfile% not found at %url-base%.%reset%
@@ -312,7 +314,7 @@ goto :eof
   del /q "%mpppath%cms\*show*.cms"
   echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
-  call :getfile "TN-views-manager.cmd"
+  rem call :getfile "TN-views-manager.cmd"
 goto :eof
 
 :copyfiles
