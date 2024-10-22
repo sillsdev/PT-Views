@@ -12,7 +12,7 @@
    <xsl:variable name="numbsub">##########</xsl:variable>
    <xsl:variable name="validvlet">abcdefghij</xsl:variable>
    <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validvletpunc">–abcdefghij</xsl:variable>
+   <xsl:variable name="validvletpunc">–abcdefghij,</xsl:variable>
    <xsl:variable name="invalidvlet">klmnopqrstuvwxyz</xsl:variable>
    <xsl:variable name="validcvnumblet">1234567890abcdefghij</xsl:variable>
    <xsl:variable name="validcvnumbletsub">##########$$$$$$$$$$</xsl:variable>
