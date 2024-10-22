@@ -1,4 +1,7 @@
 TN-views-manager.cmd
+Install_Paratext_TN_Views.cmd
+Uninstall_Paratext_TN_Views.cmd
+update-TN-views-manager.cmd
 cms\TN_Views_uninstall.cms
 cms\TN_Views_uninstall.py
 cms\TN_Views_update.cms
@@ -13,8 +16,6 @@ cms\TNND_Views_Toggle.py
 cms\USX_Views_hide.cms
 cms\USX_Views_show.cms
 cms\USX_Views_Toggle.py
-Install_Paratext_TN_Views.cmd
-Uninstall_Paratext_TN_Views.cmd
 Views\TNDD-1st-mng-line.xml
 Views\TNDD-1st-mng-line.xslt
 Views\TNDD-2nd-mng-line.xml
