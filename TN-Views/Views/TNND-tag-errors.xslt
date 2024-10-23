@@ -8,47 +8,49 @@
    <xsl:variable name="sq">'</xsl:variable>
    <xsl:variable name="dq">"</xsl:variable>
    <xsl:variable name="project">TNND</xsl:variable>
-   <xsl:variable name="numb">1234567890</xsl:variable>
-   <xsl:variable name="numbsub">##########</xsl:variable>
-   <xsl:variable name="validvlet">abcdefghij</xsl:variable>
-   <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validvletpunc">–abcdefghij</xsl:variable>
-   <xsl:variable name="invalidvlet">klmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="validcvnumblet">1234567890abcdefghij</xsl:variable>
-   <xsl:variable name="validcvnumbletsub">##########$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validcvnumbletpunc">1234567890abcdefghij–:</xsl:variable>
-   <xsl:variable name="letlc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letuc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
-   <xsl:variable name="letsub">$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="invalidtecendpunc">.,’”</xsl:variable>
-   <xsl:variable name="invalidtecendpuncsub">%%%%</xsl:variable>
-   <xsl:variable name="invalidtecfirstpunc">‘“</xsl:variable>
-   <xsl:variable name="validreorderedcvnumbletpunc">1234567890abcdefghij–:,</xsl:variable>
-   <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
-   <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validcvnumbletendash">1234567890abcdefghij–</xsl:variable>
-   <xsl:variable name="validcvnumbletendashsub">##########$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
-   <xsl:variable name="validvletcomma">abcdefghij,</xsl:variable>
-   <xsl:variable name="puncreplace">,….“‘’”!?:—-</xsl:variable>
-   <xsl:variable name="puncreplacespace"/>
-   <xsl:variable name="ldq">“</xsl:variable>
-   <xsl:variable name="rdq">”</xsl:variable>
-   <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="rsq">’</xsl:variable>
-   <xsl:variable name="version">9</xsl:variable>
-   <xsl:variable name="view"> tag errors view </xsl:variable>
-   <xsl:variable name="modified"> Modified: </xsl:variable>
-   <xsl:variable name="moddate">2024-10-22</xsl:variable>
-   <xsl:variable name="postrsq">”,.</xsl:variable>
-   <xsl:variable name="validrsqcontext">’ </xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
    <xsl:variable name="invalidpuncpost-f">.,?!’”</xsl:variable>
    <xsl:variable name="invalidpuncpost-f-sub">%%%%%%</xsl:variable>
+   <xsl:variable name="invalidtecendpunc">.,’”</xsl:variable>
+   <xsl:variable name="invalidtecendpuncsub">%%%%</xsl:variable>
+   <xsl:variable name="invalidtecfirstpunc">‘“</xsl:variable>
+   <xsl:variable name="invalidvlet">klmnopqrstuvwxyz</xsl:variable>
+   <xsl:variable name="ldq">“</xsl:variable>
+   <xsl:variable name="letlc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+   <xsl:variable name="letsub">$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letuc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+   <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
+   <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.?!</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
+   <xsl:variable name="lsq">‘</xsl:variable>
+   <xsl:variable name="moddate">2024-10-23</xsl:variable>
+   <xsl:variable name="modified"> Modified: </xsl:variable>
+   <xsl:variable name="numb">1234567890</xsl:variable>
+   <xsl:variable name="numbsub">##########</xsl:variable>
+   <xsl:variable name="postrsq">”,.</xsl:variable>
+   <xsl:variable name="puncreplace">,….“‘’”!?:—-</xsl:variable>
+   <xsl:variable name="puncreplacespace"/>
+   <xsl:variable name="rdq">”</xsl:variable>
+   <xsl:variable name="rsq">’</xsl:variable>
+   <xsl:variable name="validcvnumblet">1234567890abcdefghij</xsl:variable>
+   <xsl:variable name="validcvnumbletendash">1234567890abcdefghij–</xsl:variable>
+   <xsl:variable name="validcvnumbletendashsub">##########$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="validcvnumbletpunc">1234567890abcdefghij–:</xsl:variable>
+   <xsl:variable name="validcvnumbletsub">##########$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="validreorderedcvnumbletpunc">1234567890abcdefghij–:,</xsl:variable>
+   <xsl:variable name="validrsqcontext">’ </xsl:variable>
+   <xsl:variable name="validvlet">abcdefghij</xsl:variable>
+   <xsl:variable name="validvletcomma">abcdefghij,</xsl:variable>
+   <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
+   <xsl:variable name="validvletpunc">–abcdefghij,</xsl:variable>
+   <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="version">9</xsl:variable>
+   <xsl:variable name="view"> tag errors view </xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
@@ -312,12 +314,16 @@ div {white-space: normal;}
 .err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign.  [N22.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-27-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-27-4::after {content:'Quotes within quotes of scholars need to be adjusted to single quotes and so forth through the levels of quotes.   [N27.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [NC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation.  [NC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-2 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-27-2::after {content:'There must be a space after the end of the footnote (\\f*).  [N27.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-1 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-27-1::after {content:'Footnotes always occur after punctuation.  [N27.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note---C05-2 {background:orange;}
-.err-note---C05-2::after {content:'This note SFM is empty  [NC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note---C05-3 {background:orange;}
+.err-note---C05-3::after {content:'This note SFM has the wrong caller  [NC05.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-pre-22-2-1 {background:orange;border-left:4pt solid red;}
 .err-figure-fig-pre-22-2-1::after {content:'The \\fig must be the first item in a \\gra paragraph.  [N22.2.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-figure-fig-mid-22-7 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -3006,8 +3012,28 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
       <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
       </xsl:comment>
+      <xsl:variable name="lastnode" select="node()[last()]"/>
+      <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="notetext" select="text()"/>
+      <xsl:comment> notetext = <xsl:value-of select="concat($sq,$notetext,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
       <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
+      <xsl:comment> lastnodelen = <xsl:value-of select="concat($sq,$lastnodelen,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="notetextlen" select="string-length($notetext)"/>
+      <xsl:comment> notetextlen = <xsl:value-of select="concat($sq,$notetextlen,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="lastnodelast4char"
+                    select="substring($lastnode,$lastnodelen - 3,4)"/>
+      <xsl:comment> lastnodelast4char = <xsl:value-of select="concat($sq,$lastnodelast4char,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="lastnodelast4charmod"
+                    select="translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)"/>
+      <xsl:comment> lastnodelast4charmod = <xsl:value-of select="concat($sq,$lastnodelast4charmod,$sq,' ')"/>
       </xsl:comment>
       <xsl:variable name="curpos" select="position()"/>
       <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
@@ -3121,9 +3147,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-note---C05-2</xsl:text>
+            <!--ref C05.3 - rank=0-->
+            <xsl:if test="@caller != '+'">
+               <xsl:text> err-note---C05-3</xsl:text>
             </xsl:if>
             <!--ref 22.3 - rank=-->
             <xsl:if test="$graparent">
@@ -3138,6 +3164,18 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <!--ref 27.4 - rank=-->
             <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
                <xsl:text> err-note-f-mid-27-4</xsl:text>
+            </xsl:if>
+            <!--ref C06.1 - rank=-->
+            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’&amp;#x200A;”')">
+               <xsl:if test="string-length($lastnodelast4charmod) = 4">
+                  <xsl:text> err-note-f-mid-C06-1</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref C06.2 - rank=-->
+            <xsl:if test="not(contains($lastnodelast4charmod,'%'))">
+               <xsl:if test="string-length($lastnodelast4charmod) = 3 or string-length($lastnodelast4charmod) = 2  or string-length($lastnodelast4charmod) = 1">
+                  <xsl:text> err-note-f-mid-C06-2</xsl:text>
+               </xsl:if>
             </xsl:if>
             <!--ref 27.2 - rank=0-->
             <xsl:if test="translate($postchar1,$letulcnumb,$letulcnumbsub) = '$'">
@@ -3264,13 +3302,13 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-note---C05-2</xsl:text>
+            <!--ref C05.3 - rank=0-->
+            <xsl:if test="@caller != '+'">
+               <xsl:text> err-note---C05-3</xsl:text>
             </xsl:if>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-note---C05-2</xsl:text>
+            <!--ref C05.3 - rank=0-->
+            <xsl:if test="@caller != '+'">
+               <xsl:text> err-note---C05-3</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">

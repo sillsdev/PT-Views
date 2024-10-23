@@ -14,9 +14,9 @@
     <xsl:variable name="view" select="' USX paragraph view.'"/>
     <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
     <xsl:template match="/*">
-            <xsl:element name="h4">
-                <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
-            </xsl:element>
+        <xsl:element name="h4">
+            <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
+        </xsl:element>
         <xsl:apply-templates select="*"/>
     </xsl:template>
     <xsl:template match="table|tr|para|book|row">
@@ -67,6 +67,9 @@
             <xsl:text>/&gt;</xsl:text>
         </xsl:element>
         <xsl:apply-templates select="node()"/>
+    </xsl:template>
+    <xsl:template match="text()">
+        <xsl:value-of select="."/>
     </xsl:template>
     <xsl:template match="@*">
         <xsl:copy>

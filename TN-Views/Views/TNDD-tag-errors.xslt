@@ -22,11 +22,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.?!</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-10-22</xsl:variable>
+   <xsl:variable name="moddate">2024-10-23</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -212,6 +214,8 @@ div {white-space: normal;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp.  [D5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note---C05-2 {background:orange;}
 .err-note---C05-2::after {content:'This note SFM is empty  [DC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
@@ -259,7 +263,7 @@ div {white-space: normal;}
 .err-para-sl1--82-1 {background:peachpuff;}
 .err-para-sl1--82-1::after {content:'The chapter number in this \\sl1 is incorrect.  [D82.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--82-2 {background:peachpuff;}
-.err-para-sl1--82-2::after {content:'The verse number in this \\sl1 is incorrect, unless you have purposely disjointed verse parts or covering a span of verses.  [D82.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-sl1--82-2::after {content:'The verse number in this \\sl1 is incorrect, unless you are covering a span of verses.  [D82.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--83-3 {background:peachpuff;}
 .err-para-sl1--83-3::after {content:'The hyphen in the verse range in this \\sl1 should be an en dash.  [D83.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-sl1--83-32 {background:peachpuff;}
@@ -1191,11 +1195,19 @@ div {white-space: normal;}
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
-      <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
+      <xsl:variable name="lastnode" select="node()[last()]"/>
+      <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
-      <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+      <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
+      <xsl:comment> lastnodelen = <xsl:value-of select="concat($sq,$lastnodelen,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="lastnodelast4char"
+                    select="substring($lastnode,string-length(.) - 3,1)"/>
+      <xsl:comment> lastnodelast4char = <xsl:value-of select="concat($sq,$lastnodelast4char,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="lastnodelast4charmod"
+                    select="translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)"/>
+      <xsl:comment> lastnodelast4charmod = <xsl:value-of select="concat($sq,$lastnodelast4charmod,$sq,' ')"/>
       </xsl:comment>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
@@ -1206,6 +1218,10 @@ div {white-space: normal;}
             <!--ref C05.2 - rank=0-->
             <xsl:if test="string-length(text()) = 0 and not(*)">
                <xsl:text> err-note---C05-2</xsl:text>
+            </xsl:if>
+            <!--ref C06.1 - rank=-->
+            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’&amp;#x200A;”')">
+               <xsl:text> err-note-f-mid-C06-1</xsl:text>
             </xsl:if>
             <!--ref 56 - rank=5-->
             <xsl:if test="parent::*[@style = 'ml1']">
