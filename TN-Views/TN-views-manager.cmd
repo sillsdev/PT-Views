@@ -156,7 +156,7 @@ goto :eof
     @call curl --ssl-no-revoke %url-base%/%winfile% | MORE /P > "%outfile%"
   ) else (
     @echo %cyan%
-  @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
+    @call curl -o "%outfile%" --ssl-no-revoke %url-base%/%winfile%
   )
   @rem set /p line1=<"%outfile%"
   @rem @FOR /F " delims=:" %%s IN (%outfile%) DO set line1=%%s

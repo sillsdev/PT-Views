@@ -6,7 +6,7 @@ set cyan=[36m
 set reset=[0m
 set filename=TN-views-manager.cmd
 set installpath=C:\Users\Public\PT-TN-Views
-set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 set cmdfile=%installpath%\%filename%
 call curl --ssl-no-revoke %url-base%/%filename% | more /P > "%cmdfile%"
 FOR /F "usebackq" %%A IN ('%cmdfile%') DO set size=%%~zA
