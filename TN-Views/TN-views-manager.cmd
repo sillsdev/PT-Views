@@ -185,7 +185,7 @@ goto :eof
   del "%cmspath%\%TNxD%_Views_show.cms"
   copy /Y "%installpath%\Views\%TNxD%*.xml" "%viewspath%\"
   copy /Y "%installpath%\cms\%TNxD%_Views_hide.cms" "%cmspath%\"
-  @if exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% Views files showing after PT restart%reset%
+  @if exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% Views files showing after Paratext restart%reset%
 goto :eof
 
 :hideset
