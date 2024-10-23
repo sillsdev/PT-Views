@@ -1,6 +1,6 @@
 :: TN Views manager
 :: Written by: ian_mcquay@sil.org
-:: Date updated: 2024-06-19
+:: Date updated: 2024-06-19; 2024-10-23
 @echo off
 cls
 set installpath=C:\Users\Public\PT-TN-Views
@@ -22,11 +22,9 @@ if not defined action (
   if exist "%installpath%\%viewsaction%" (
     rem since it exists get the variables written to it
     call "%installpath%\%viewsaction%"
+  ) 
     rem now check if there is an action to do
-    if not defined action echo %redbg% No action found from command line or from %viewsaction% %reset%
-  ) else (
-    echo %redbg% Did not find the %viewsaction% file   %reset%
-  )
+  if not defined action call :noactionmenu
 )
 
 
@@ -60,6 +58,27 @@ pause
 if '%action%' == 'updateall' (
   start "Update TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
 )
+goto :eof
+
+:noactionmenu
+  echo %redbg% No action found from command line or from %viewsaction% %reset%
+  echo.
+  echo      (i) Do you want to install/update the TN-Views?
+  echo      (u) Do you want to uninstall the TN-Views?
+  echo      (d) Do you want to see command line options?
+  echo      (x) Do you want to exit?
+  echo.
+  set /P option=Type the lowercase option letter and press Enter: 
+  if '%option%' == 'x' set action=exit
+  if '%option%' == 'i' set action=updateall
+  if '%option%' == 'u' set action=uninstall
+  if '%option%' == 'd' set action=commandlinedoc
+  if not defined action (
+    echo %yellow%  Invalid option. Choose from one of the above options.%reset%
+    timeout 5
+    cls
+    goto :noactionmenu
+  )
 goto :eof
 
 :mpppathquery
@@ -217,3 +236,14 @@ goto :eof
   xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
 
+:exit
+echo %yellow%Exiting script. No action taken.%reset%
+exit /b
+goto :eof
+
+:commandlinedoc
+  echo %yellow%Command Line Documentation%reset%
+  echo The first parameter can be one of: updateall, uninstall or toggle
+  echo The second parameter is only used to follow toggle.
+  echo The second parameter options are: TNDD, TNND, SFM or USX
+goto :eof
