@@ -5,6 +5,7 @@
                encoding="utf-8"
                omit-xml-declaration="yes"
                indent="yes"/>
+   <xsl:param name="debug"/>
    <xsl:variable name="sq">'</xsl:variable>
    <xsl:variable name="dq">"</xsl:variable>
    <xsl:variable name="project">TNDD</xsl:variable>
@@ -28,7 +29,7 @@
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-10-23</xsl:variable>
+   <xsl:variable name="moddate">2024-10-26</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -212,14 +213,18 @@ div {white-space: normal;}
 .err-char-brk-pre-7::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM, except if in a \\ros ...\\ros*.  [D7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-5 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp.  [D5]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note---C05-2 {background:orange;}
-.err-note---C05-2::after {content:'This note SFM is empty  [DC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation.  [DC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-57::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D57]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note---C05-3 {background:orange;}
+.err-note---C05-3::after {content:'This note SFM has text but no caller. The text should be in an \\ft.  [DC05.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note---C05-2 {background:orange;}
+.err-note---C05-2::after {content:'This note SFM is empty  [DC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para---43 {background:peachpuff;}
 .err-para---43::after {content:'This paragraph marker is empty, and may not be allowed here.  [D43]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-87-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -379,8 +384,10 @@ div {white-space: normal;}
    <xsl:template match="*[@style = 'tec']" mode="fntext"/>
    <xsl:template match="table">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -396,54 +403,85 @@ div {white-space: normal;}
    </xsl:template>
    <!-- char @style=sbx -->
    <xsl:template match="char[@style = 'sbx']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
-      <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="strlenb4chap"
                     select="string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))"/>
-      <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sbxc"
                     select="normalize-space(translate(substring-before(text(),':'),$letulc,''))"/>
-      <xsl:comment> sbxc = <xsl:value-of select="concat($sq,$sbxc,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sbxc = <xsl:value-of select="concat($sq,$sbxc,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sbxv"
                     select="translate(substring-after(text(),':'),$validvletpunc,'')"/>
-      <xsl:comment> sbxv = <xsl:value-of select="concat($sq,$sbxv,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sbxv = <xsl:value-of select="concat($sq,$sbxv,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="chappos"
                     select="string-length(substring-before(translate(node()[not(self::*)],$numb,$numbsub), '#'))+1"/>
-      <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> chappos = <xsl:value-of select="concat($sq,$chappos,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
-      <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="hasspacecref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),' #')"/>
-      <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> hasspacecref = <xsl:value-of select="concat($sq,$hasspacecref,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="numbfirst"
                     select="substring(translate(.,$numb,$numbsub),1,1) = '#'"/>
-      <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> numbfirst = <xsl:value-of select="concat($sq,$numbfirst,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="refchapcolon" select="substring-before(node()[not(self::*)],':')"/>
-      <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> refchapcolon = <xsl:value-of select="concat($sq,$refchapcolon,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="refcolonvr1"
                     select="substring-before(translate(substring-after(node()[not(self::*)],':'),$validvlet,''),'–')"/>
-      <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> refcolonvr1 = <xsl:value-of select="concat($sq,$refcolonvr1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="refwordschapcolon"
                     select="substring-before(substring(node()[not(self::*)],$strlenb4chap +1),':')"/>
-      <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> refwordschapcolon = <xsl:value-of select="concat($sq,$refwordschapcolon,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -496,7 +534,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -520,7 +560,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -528,13 +568,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=fr -->
    <xsl:template match="char[@style = 'fr']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -563,7 +608,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -587,7 +634,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -595,13 +642,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=ft -->
    <xsl:template match="char[@style = 'ft']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -630,7 +682,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -654,7 +708,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -662,13 +716,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style= -->
    <xsl:template match="char">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -684,7 +743,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -709,7 +770,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -717,13 +778,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=imp -->
    <xsl:template match="char[@style = 'imp']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -748,7 +814,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -772,7 +840,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -780,13 +848,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=rgi -->
    <xsl:template match="char[@style = 'rgi']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -819,7 +892,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -843,7 +918,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -851,13 +926,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=rgm -->
    <xsl:template match="char[@style = 'rgm']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -886,7 +966,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -910,7 +992,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -918,13 +1000,18 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=tbb -->
    <xsl:template match="char[@style = 'tbb']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -953,7 +1040,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -977,7 +1066,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -985,22 +1074,33 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=ros -->
    <xsl:template match="char[@style = 'ros']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:variable name="posttext" select="following::text()[1]"/>
-      <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="style" select="@style"/>
-      <xsl:comment> style = <xsl:value-of select="concat($sq,$style,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> style = <xsl:value-of select="concat($sq,$style,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="postnodechar1" select="substring($posttext,1,1)"/>
-      <xsl:comment> postnodechar1 = <xsl:value-of select="concat($sq,$postnodechar1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> postnodechar1 = <xsl:value-of select="concat($sq,$postnodechar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1027,7 +1127,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -1051,7 +1153,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -1059,19 +1161,28 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
    <!-- char @style=brk -->
    <xsl:template match="char[@style = 'brk']">
+      <xsl:variable name="embed">
+         <xsl:if test="parent::*[name() = 'char']">
+            <xsl:text>+</xsl:text>
+         </xsl:if>
+      </xsl:variable>
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
-      <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1122,7 +1233,9 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C05.1 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
-                  <xsl:text> err-char---C05-1</xsl:text>
+                  <xsl:if test="not(@closed = 'false')">
+                     <xsl:text> err-char---C05-1</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 87.2 - rank=5-->
                <xsl:if test="contains(.,$sq) or contains(.,$dq) ">
@@ -1146,7 +1259,7 @@ div {white-space: normal;}
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('\',@style,' ')"/>
+            <xsl:value-of select="concat('\',$embed,@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
          <xsl:if test="not(@closed = 'false')">
@@ -1154,25 +1267,81 @@ div {white-space: normal;}
                <xsl:attribute name="class">
                   <xsl:value-of select="concat(@style,' ',name())"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('\',@style,'*')"/>
+               <xsl:value-of select="concat('\',$embed,@style,'*')"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
    </xsl:template>
-   <xsl:template match="note">
+   <xsl:template match="note[@style = 'f']">
+      <xsl:variable name="lastnode" select="node()[last()]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="notetext" select="text()"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> notetext = <xsl:value-of select="concat($sq,$notetext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lastnodelen = <xsl:value-of select="concat($sq,$lastnodelen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="notetextlen" select="string-length($notetext)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> notetextlen = <xsl:value-of select="concat($sq,$notetextlen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="lastnodelast4char"
+                    select="substring($lastnode,$lastnodelen - 3,4)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lastnodelast4char = <xsl:value-of select="concat($sq,$lastnodelast4char,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="lastnodelast4charmod"
+                    select="translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lastnodelast4charmod = <xsl:value-of select="concat($sq,$lastnodelast4charmod,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
+            <!--ref C05.3 - rank=5-->
+            <xsl:if test="string-length(@caller) &gt; 1">
+               <xsl:text> err-note---C05-3</xsl:text>
+            </xsl:if>
+            <!--ref C05.2 - rank=10-->
+            <xsl:if test="string-length(.) = 0 and not(*) and string-length(@caller) = 0">
                <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
-               <xsl:text> err-note---C05-2</xsl:text>
+            <!--ref C06.1 - rank=-->
+            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”')">
+               <xsl:if test="string-length($lastnodelast4charmod) = 4">
+                  <xsl:text> err-note-f-mid-C06-1</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref C06.2 - rank=-->
+            <xsl:if test="not(contains($lastnodelast4charmod,'%'))">
+               <xsl:if test="string-length($lastnodelast4charmod) = 3 or string-length($lastnodelast4charmod) = 2  or string-length($lastnodelast4charmod) = 1">
+                  <xsl:text> err-note-f-mid-C06-2</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 56 - rank=5-->
+            <xsl:if test="parent::*[@style = 'ml1']">
+               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ros'])">
+                  <xsl:text> err-note-f-pre-56</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 57 - rank=5-->
+            <xsl:if test="parent::*[@style = 'ml1']">
+               <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ros'])">
+                  <xsl:text> err-note-f-post-57</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -1194,46 +1363,28 @@ div {white-space: normal;}
          </xsl:if>
       </xsl:element>
    </xsl:template>
-   <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="lastnode" select="node()[last()]"/>
-      <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
-      <xsl:comment> lastnodelen = <xsl:value-of select="concat($sq,$lastnodelen,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastnodelast4char"
-                    select="substring($lastnode,string-length(.) - 3,1)"/>
-      <xsl:comment> lastnodelast4char = <xsl:value-of select="concat($sq,$lastnodelast4char,$sq,' ')"/>
-      </xsl:comment>
-      <xsl:variable name="lastnodelast4charmod"
-                    select="translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)"/>
-      <xsl:comment> lastnodelast4charmod = <xsl:value-of select="concat($sq,$lastnodelast4charmod,$sq,' ')"/>
-      </xsl:comment>
+   <xsl:template match="note">
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
       <xsl:element name="span">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <!--ref C05.2 - rank=0-->
-            <xsl:if test="string-length(text()) = 0 and not(*)">
+            <!--ref C05.3 - rank=5-->
+            <xsl:if test="string-length(@caller) &gt; 1">
+               <xsl:text> err-note---C05-3</xsl:text>
+            </xsl:if>
+            <!--ref C05.2 - rank=10-->
+            <xsl:if test="string-length(.) = 0 and not(*) and string-length(@caller) = 0">
                <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
-            <!--ref C06.1 - rank=-->
-            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’&amp;#x200A;”')">
-               <xsl:text> err-note-f-mid-C06-1</xsl:text>
+            <!--ref C05.3 - rank=5-->
+            <xsl:if test="string-length(@caller) &gt; 1">
+               <xsl:text> err-note---C05-3</xsl:text>
             </xsl:if>
-            <!--ref 56 - rank=5-->
-            <xsl:if test="parent::*[@style = 'ml1']">
-               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 'ros'])">
-                  <xsl:text> err-note-f-pre-56</xsl:text>
-               </xsl:if>
-            </xsl:if>
-            <!--ref 57 - rank=5-->
-            <xsl:if test="parent::*[@style = 'ml1']">
-               <xsl:if test="not(following-sibling::*[1][@style = 'rem' or @style = 'ros'])">
-                  <xsl:text> err-note-f-post-57</xsl:text>
-               </xsl:if>
+            <!--ref C05.2 - rank=10-->
+            <xsl:if test="string-length(.) = 0 and not(*) and string-length(@caller) = 0">
+               <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -1275,6 +1426,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1331,6 +1483,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1369,6 +1522,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1407,6 +1561,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1467,6 +1622,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1511,6 +1667,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1523,22 +1680,32 @@ div {white-space: normal;}
    <!-- para @style=sl1 -->
    <xsl:template match="para[@style = 'sl1']">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sl1v"
                     select="translate(substring-after(text()[1],':'),$validvletpunc,'')"/>
-      <xsl:comment> sl1v = <xsl:value-of select="concat($sq,$sl1v,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sl1v = <xsl:value-of select="concat($sq,$sl1v,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sl1c" select="substring-before(text()[1],':')"/>
-      <xsl:comment> sl1c = <xsl:value-of select="concat($sq,$sl1c,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sl1c = <xsl:value-of select="concat($sq,$sl1c,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="precleanverse"
                     select="translate($preverse,concat($validvletpunc,'-—'),'')"/>
-      <xsl:comment> precleanverse = <xsl:value-of select="concat($sq,$precleanverse,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> precleanverse = <xsl:value-of select="concat($sq,$precleanverse,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1596,6 +1763,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1608,86 +1776,132 @@ div {white-space: normal;}
    <!-- para @style=ml1 -->
    <xsl:template match="para[@style = 'ml1']">
       <xsl:variable name="presl1text" select="presl1text"/>
-      <xsl:comment> presl1text = <xsl:value-of select="concat($sq,$presl1text,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1text = <xsl:value-of select="concat($sq,$presl1text,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="postRsqchar1sub"
                     select="translate(substring(substring-after(.,$rsq),1,1),$letulc,$letulcsub)"/>
-      <xsl:comment> postRsqchar1sub = <xsl:value-of select="concat($sq,$postRsqchar1sub,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> postRsqchar1sub = <xsl:value-of select="concat($sq,$postRsqchar1sub,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="Rsqmodstring" select="translate(.,$postrsq,'')"/>
-      <xsl:comment> Rsqmodstring = <xsl:value-of select="concat($sq,$Rsqmodstring,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> Rsqmodstring = <xsl:value-of select="concat($sq,$Rsqmodstring,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textlast"
                     select="preceding-sibling::*[@style = 'sl1'][1]/node()[last()]"/>
-      <xsl:comment> presl1textlast = <xsl:value-of select="concat($sq,$presl1textlast,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textlast = <xsl:value-of select="concat($sq,$presl1textlast,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textposttbb"
                     select="preceding-sibling::*[@style = 'sl1'][1]/node()[3]"/>
-      <xsl:comment> presl1textposttbb = <xsl:value-of select="concat($sq,$presl1textposttbb,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textposttbb = <xsl:value-of select="concat($sq,$presl1textposttbb,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="lasttext" select="text()[last()]"/>
-      <xsl:comment> lasttext = <xsl:value-of select="concat($sq,$lasttext,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lasttext = <xsl:value-of select="concat($sq,$lasttext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlastnodetext" select="node()[last()]"/>
-      <xsl:comment> curlastnodetext = <xsl:value-of select="concat($sq,$curlastnodetext,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlastnodetext = <xsl:value-of select="concat($sq,$curlastnodetext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1postRsqchar1sub"
                     select="translate(substring(substring-after($presl1text,$rsq),1,1),$letulc,$letulcsub)"/>
-      <xsl:comment> presl1postRsqchar1sub = <xsl:value-of select="concat($sq,$presl1postRsqchar1sub,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1postRsqchar1sub = <xsl:value-of select="concat($sq,$presl1postRsqchar1sub,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textlastlen" select="string-length($presl1textlast)"/>
-      <xsl:comment> presl1textlastlen = <xsl:value-of select="concat($sq,$presl1textlastlen,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textlastlen = <xsl:value-of select="concat($sq,$presl1textlastlen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlasttextlen" select="string-length($curlastnodetext)"/>
-      <xsl:comment> curlasttextlen = <xsl:value-of select="concat($sq,$curlasttextlen,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlasttextlen = <xsl:value-of select="concat($sq,$curlasttextlen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlastnodetextb4lb"
                     select="substring-before($curlastnodetext,' (')"/>
-      <xsl:comment> curlastnodetextb4lb = <xsl:value-of select="concat($sq,$curlastnodetextb4lb,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlastnodetextb4lb = <xsl:value-of select="concat($sq,$curlastnodetextb4lb,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curRsqcount"
                     select="string-length(.) - string-length(translate(., $rsq, ''))"/>
-      <xsl:comment> curRsqcount = <xsl:value-of select="concat($sq,$curRsqcount,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curRsqcount = <xsl:value-of select="concat($sq,$curRsqcount,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1postRsqcount"
                     select="string-length($presl1text) - string-length(translate($presl1text, $rsq, ''))"/>
-      <xsl:comment> presl1postRsqcount = <xsl:value-of select="concat($sq,$presl1postRsqcount,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1postRsqcount = <xsl:value-of select="concat($sq,$presl1postRsqcount,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="pesib1sty" select="preceding-sibling::*[1]/@style"/>
-      <xsl:comment> pesib1sty = <xsl:value-of select="concat($sq,$pesib1sty,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pesib1sty = <xsl:value-of select="concat($sq,$pesib1sty,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="precedingtext" select="preceding::text()[1]"/>
-      <xsl:comment> precedingtext = <xsl:value-of select="concat($sq,$precedingtext,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> precedingtext = <xsl:value-of select="concat($sq,$precedingtext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textchar1" select="substring($presl1textlast,1,1)"/>
-      <xsl:comment> presl1textchar1 = <xsl:value-of select="concat($sq,$presl1textchar1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textchar1 = <xsl:value-of select="concat($sq,$presl1textchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textposttbbchar1"
                     select="substring($presl1textposttbb,1,1)"/>
-      <xsl:comment> presl1textposttbbchar1 = <xsl:value-of select="concat($sq,$presl1textposttbbchar1,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textposttbbchar1 = <xsl:value-of select="concat($sq,$presl1textposttbbchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="presl1textcharlast"
                     select="substring($presl1textlast,$presl1textlastlen,1)"/>
-      <xsl:comment> presl1textcharlast = <xsl:value-of select="concat($sq,$presl1textcharlast,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textcharlast = <xsl:value-of select="concat($sq,$presl1textcharlast,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curfirstchar" select="substring(text()[1],1,1)"/>
-      <xsl:comment> curfirstchar = <xsl:value-of select="concat($sq,$curfirstchar,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curfirstchar = <xsl:value-of select="concat($sq,$curfirstchar,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curfirstcharposttab" select="substring(node()[3],1,1)"/>
-      <xsl:comment> curfirstcharposttab = <xsl:value-of select="concat($sq,$curfirstcharposttab,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curfirstcharposttab = <xsl:value-of select="concat($sq,$curfirstcharposttab,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlastchar"
                     select="substring($curlastnodetext,$curlasttextlen,1)"/>
-      <xsl:comment> curlastchar = <xsl:value-of select="concat($sq,$curlastchar,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlastchar = <xsl:value-of select="concat($sq,$curlastchar,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlastnodetextb4lblen"
                     select="string-length($curlastnodetextb4lb)"/>
-      <xsl:comment> curlastnodetextb4lblen = <xsl:value-of select="concat($sq,$curlastnodetextb4lblen,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlastnodetextb4lblen = <xsl:value-of select="concat($sq,$curlastnodetextb4lblen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="curlastcharb4lb"
                     select="substring($curlastnodetext,$curlastnodetextb4lblen,1)"/>
-      <xsl:comment> curlastcharb4lb = <xsl:value-of select="concat($sq,$curlastcharb4lb,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlastcharb4lb = <xsl:value-of select="concat($sq,$curlastcharb4lb,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1887,6 +2101,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1939,6 +2154,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -1973,6 +2189,7 @@ div {white-space: normal;}
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
+         <xsl:variable name="closed" select="''"/>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('sfm-',@style,' sfm')"/>
@@ -2054,8 +2271,10 @@ div {white-space: normal;}
    <!-- row @style=tr -->
    <xsl:template match="row[@style = 'tr']">
       <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
-      </xsl:comment>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
