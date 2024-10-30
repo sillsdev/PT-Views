@@ -29,7 +29,7 @@
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-10-26</xsl:variable>
+   <xsl:variable name="moddate">2024-10-30</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -313,8 +313,14 @@ div {white-space: normal;}
 .err-note-f-pre-22-3::after {content:'The sequence should be \\fig...\\fig*\\f...\\f*. Note no space after \\fig*.  [N22.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-22-5 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign.  [N22.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-pre-27-3 {background:orange;border-left:4pt solid red;}
+.err-note-f-pre-27-3::after {content:'There should not be a space in front of the footnote.  [N27.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-27-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-27-4::after {content:'Quotes within quotes of scholars need to be adjusted to single quotes and so forth through the levels of quotes.   [N27.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-pre-27-9 {background:orange;border-left:4pt solid red;}
+.err-note-f-pre-27-9::after {content:'The \\fq marker can only be used on the word or phrase immediately preceding the \\f marker.  [N27.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-pre-27-11 {background:orange;border-left:4pt solid red;}
+.err-note-f-pre-27-11::after {content:'The \\fq marker can only be used on the word contained inte the preceding \\trs...\\trs*.  [N27.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [NC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -3751,6 +3757,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="lastnode" select="node()[last()]"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
@@ -3764,6 +3775,18 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presibtext1last12"
+                    select="substring($presibtext1,string-length($presibtext1) - 11,12)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presibtext1last12 = <xsl:value-of select="concat($sq,$presibtext1last12,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
@@ -3982,9 +4005,25 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="@caller != '+'">
                <xsl:text> err-note-f-pre-22-5</xsl:text>
             </xsl:if>
+            <!--ref 27.3 - rank=-->
+            <xsl:if test="translate($pretextlastchar,' ','_') = '_'">
+               <xsl:text> err-note-f-pre-27-3</xsl:text>
+            </xsl:if>
             <!--ref 27.4 - rank=-->
             <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
                <xsl:text> err-note-f-mid-27-4</xsl:text>
+            </xsl:if>
+            <!--ref 27.9 - rank=-->
+            <xsl:if test="not(contains($presibtext1last12,normalize-space(*[@style = 'fq']/text())))">
+               <xsl:if test="not(preceding-sibling::*[@style = 'trs'])">
+                  <xsl:text> err-note-f-pre-27-9</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref 27.11 - rank=-->
+            <xsl:if test="not(contains(preceding-sibling::*[@style = 'trs'],normalize-space(*[@style = 'fq']/text())))">
+               <xsl:if test="preceding-sibling::*[@style = 'trs']">
+                  <xsl:text> err-note-f-pre-27-11</xsl:text>
+               </xsl:if>
             </xsl:if>
             <!--ref C06.1 - rank=-->
             <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”')">
@@ -5634,6 +5673,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:variable name="posttext" select="following::text()[1]"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="b" select="b"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> b = <xsl:value-of select="concat($sq,$b,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
