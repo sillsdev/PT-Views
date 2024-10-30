@@ -1,0 +1,44 @@
+name	value	Note	was
+ellipsis	…		
+invalidpuncpost-f	.,?!’”		
+invalidpuncpost-f-sub	%%%%%%		
+invalidtecendpunc	.,’”		teclast2bad
+invalidtecendpuncsub	%%%%		teclast2badsub
+invalidtecfirstpunc	‘“		tecfirstbad
+invalidvlet	klmnopqrstuvwxyz		invalidversepart
+ldq	“		
+letlc	abcdefghijklmnopqrstuvwxyz		
+letsub	$$$$$$$$$$$$$$$$$$$$$$$$$$		
+letuc	ABCDEFGHIJKLMNOPQRSTUVWXYZ		
+letucnumb	ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789		
+letucnumbsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$		
+letulc	ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz		
+letulcendpunc	ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.?!		
+letulcnumb	ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890		
+letulcnumbsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$		
+letulcsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$		
+letulcendpuncsub	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%		
+lsq	‘		
+moddate	2024-10-30		
+modified	 Modified: 		
+numb	1234567890		numb
+numbsub	##########		numbsub
+postrsq	”,.		
+puncreplace	,….“‘’”!?:—-		
+puncreplacespace			
+rdq	”		
+rsq	’		
+validcvnumblet	1234567890abcdefghij		validcvchar
+validcvnumbletendash	1234567890abcdefghij–		
+validcvnumbletendashsub	##########$$$$$$$$$$		
+validcvnumbletpunc	1234567890abcdefghij–:		validcvall
+validcvnumbletsub	##########$$$$$$$$$$		validcvcharsub
+validreorderedcvnumbletpunc	1234567890abcdefghij–:,		
+validrsqcontext	’ 		
+validvlet	abcdefghij		validversepart
+validvletcomma	abcdefghij,		
+validvletendash	abcdefghij–,		
+validvletpunc	–abcdefghij,		
+validvletsub	$$$$$$$$$$		validversepartsub
+version	9		
+view	 tag errors view 		

@@ -1,0 +1,610 @@
+[variables]
+title=Paratext Bamboo Views
+debugfunc=makex
+echofunc=updatedl
+outputxml=true
+tnxx=TNND
+view=Bamboo
+paratextexe=C:\Program Files\Paratext 9\Paratext.exe
+bamboopdf=Bamboo-Views-Documentation.pdf
+paratexttitle=Paratext 9.4
+projcode_list=TNND=N TNDD=D
+
+rowname=item
+
+data-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - check_data.tsv
+data_file-list=%projectpath%\source\check_data.tsv
+data-xml=%projectpath%\output\check_data.xml
+static-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - static-var.tsv
+static-var_file-list=%projectpath%\source\static-var.tsv
+sfm-var-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - sfm-var.tsv
+sfm-var_file-list=%projectpath%\source\sfm-var.tsv
+static-var-xml=%projectpath%\output\static-var.xml
+sfm-var-xml=%projectpath%\output\sfm-var.xml
+kv-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - keyvalue.tsv
+kvlist=%projectpath%\keyvalue.tsv
+varstring-dl=%USERPROFILE%\Downloads\TNND Views for Paratext - var-string.tsv
+varstring=%projectpath%\source\var-string.tsv
+#var-string_file-list=%projectpath%\source\var-string.tsv
+tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
+
+para-like_list=para cell row table
+char-like_list=char figure verse note link
+
+lev=003LEV
+
+quotecheck_list=f n1 n2 n3 ntn
+
+mypt8=D:\My Paratext 9 Projects
+ptviewssvn=%gitproject%
+
+# Concat USX to get para digraph pairs
+include-book_list=GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV
+usxpath=D:\usx-collection
+usxpath-TNDD=D:\usx-collection\TNDD
+usxpath-TNND=D:\usx-collection\TNND
+
+collectionfile=*.usx
+groupnode_list=id sl1 c
+bookorderfile=D:\My Paratext Projects\cms\book-chaps.txt
+para_list=para table book
+usxdata_list=table para note figure link char cell row verse
+xslt=
+
+showref=1
+
+combinemd_list=Bamboo-Views Bamboo-Views-install Bamboo-Views-custom TNDD-info TNND-info USX-info SFM-info created
+
+# j
+cms-dl=%USERPROFILE%\Downloads\%tnxx% Views - CMS-py-data.tsv
+cms-data-file=%projectpath%\source\%tnxx% Views - CMS-py-data.tsv
+
+# z
+documentationcss=documentation.css
+usxelem_list=book cell char note para row table
+
+# bkid
+debug=on
+
+gitproject=D:\All-SIL-Publishing\Github-sillsdev\PT-Views
+fn_file-list=D:\All-SIL-Publishing\_xrunner2_projects\Bible\ParatextViews\TNND\notes\all-footnotes.txt
+
+
+#t=:bkid
+#t=:testfast LEV
+#t=:testfast TNND XXD
+#t=:testfast TNDD XXD
+#t=:testfast REV
+
+[a]
+g=Develop tag errors
+b=Build and test TNDD
+t=:updatetsv
+t=:build-test-tag-errors TNDD
+
+[updatetsv]
+t=:updateBamboocheckdata
+t=:varstringxml
+t=:sfmvarxml
+t=:staticvarxml
+t=:checkdataxml
+
+[build-test-tag-errors]
+t=:var project %~1
+t=:tagerrorsxslt %project%
+t=:testfast %project% XXD
+
+[tagerrorsxslt]
+t=:var project %~1
+#t=:echo "%cyan%Updating TNND-tag-errors-test.xslt%reset%"
+t=:xslt data2xslt-v8.xslt "%projectpath%\output\check_data.xml" "%projectpath%\scripts\%project%-tag-errors.xslt" "project=%project%"
+t=:date
+t=:copy "%projectpath%\scripts\%project%-tag-errors.xslt" "%projectpath%\history\%project%-tag-errors-%curisodatetime%.xslt"
+t=:copy "%projectpath%\scripts\%project%-tag-errors.xslt" "%projectpath%\scripts\%project%-tag-errors.xslt.txt"
+
+[testfast]
+t=:var XXD 096XXD
+t=:var project %~1
+t=:var book %~2
+t=:ifnotdefined %book% bkid
+t=:var file !%book%!.usx
+t=:echo "%green%Info: Book = %file%%reset%"
+t=:echo "%green%Info: Project = %project%%reset%"
+t=:inputfile "%usxpath%\%project%\%file%"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 %project%-tag-errors.xslt "" "%projectpath%\output\%book%-%project%-fast.html"
+
+
+[c]
+b=Build and test TNND
+t=:updatetsv
+t=:build-test-tag-errors TNND
+
+[d]
+g=
+b=Update Paratext and Git
+t=:ptprojupdate
+
+
+[e]
+g=
+b=Retest hand edits of xslt
+t=:var XXD 096XXD
+t=:testfast TNDD XXD
+t=:testfast TNND XXD
+
+[f]
+g=
+b=Do all above steps
+t=:a
+t=:build-test-tag-errors TNND
+t=:d
+
+[k]
+g=
+b=Test tag errors xsltms TNDD and TNND
+t=:testms TNDD XXD
+t=:testms TNND XXD
+#t=:testfast JHN
+#t=:testfast LEV
+#t=:testfast GEN
+
+#b=b. Update git project and PT
+#t=:updateviews
+
+[testms]
+t=:var XXD 096XXD
+t=:var project %~1
+t=:var book %~2
+t=:ifnotdefined %book% call :bkid
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\%project%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct
+t=:xsltms %project%-tag-errors.xslt  "" ""  "debug=on"
+t=:outputfile "%projectpath%\output\%project%-%book%-ms.html" start
+
+
+
+[l]
+g=
+b=Update Paratext and Git project
+t=:autoit CloseTitle.au3 "%paratexttitle%"
+t=:updategitlocal
+t=:updateviews TNDD
+t=:updateviews TNND
+t=:start "%paratextexe%"
+
+[ptprojupdate]
+t=:var project TNND
+t=:autoit CloseTitle.au3 "%paratexttitle%"
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%mypt8%\Views\"
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%gitproject%\TN-Views\Views\"
+t=:var project TNDD
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%mypt8%\Views\"
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%gitproject%\TN-Views\Views\"
+t=:start "%paratextexe%"
+
+[updategitlocal]
+# copy to git Xrunner2 project
+t=:update "%projectpath%\project.txt" "%gitproject%\xrunner2\Bamboo\"
+t=:update "%projectpath%\source\*.tsv" "%gitproject%\xrunner2\Bamboo\source\"
+t=:update "%projectpath%\scripts\*.xslt" "%gitproject%\xrunner2\Bamboo\scripts\"
+# the following use the previous target path
+t=:update "%projectpath%\scripts\*.cct"
+t=:update "%projectpath%\scripts\data-url.cmd"
+t=:update "%projectpath%\scripts\CloseTitle.au3"
+
+[updateviews]
+t=:var project %~1
+# Update info PDF
+#t=:md2pdf "%gitproject%\%project%\info.md"
+#t=:move "%gitproject%\%project%\info.pdf" "%gitproject%\Bamboo\cms\%project%-info.PDF"
+# Update tag-errors to git local
+t=:var subproj TN-Views
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%gitproject%\TN-Views\Views"
+# Update to My PT 9 projects
+t=:update "%projectpath%\scripts\%project%-tag-errors.xslt" "%mypt8%\Views\"
+#t=:copy "%projectpath%\scripts\%project%-tag-errors.xslt" "%mypt8%\Views\%project%-tag-errors.xslt.txt"
+t=:update "%gitproject%\TN-Views\cms\*.*" "%mypt8%\cms\"
+
+[n]
+label=
+b=Update XXD USX file
+t=:loopstring updateusx "TNDD TNND" "XXD" "D:\usx-collection\"
+
+[updateusx]
+t=:ptbook %~1 "%~2" "%~3%~1"
+
+[o]
+label=
+b=Compile installer and zip
+t=:makezip
+t=:innocomp
+
+[makezip]
+# 2023-11-07 updated 2024-05-25
+t=:date
+t=:appendfile "%gitproject%\Bamboo\TNDD-info.md" "%gitproject%\tmp\final.md" first
+t=:appendtofile "%isodatetime%+10" "%gitproject%\tmp\final.md"
+t=:command "mdpdf '%gitproject%\tmp\final.md' '%gitproject%\TNND\cms\TNDD-info.pdf'"
+t=:appendfile "%gitproject%\Bamboo\TNND-info.md" "%gitproject%\tmp\final.md" first
+t=:appendtofile "%isodatetime%+10" "%gitproject%\tmp\final.md"
+t=:command "mdpdf '%gitproject%\tmp\final.md' '%gitproject%\TNND\cms\TNND-info.pdf'"
+t=:appendfile "%gitproject%\Bamboo\USX-info.md" "%gitproject%\tmp\final.md" first
+t=:appendtofile "%isodatetime%+10" "%gitproject%\tmp\final.md"
+t=:command "mdpdf '%gitproject%\tmp\final.md' '%gitproject%\TNND\cms\USX-info.pdf'"
+t=:ifexist "%gitproject%\Installers\%view%-Views.zip" del "%gitproject%\Installers\%view%-Views.zip"
+t=:command "7z a -tzip '%gitproject%\Installers\%view%-Views.zip' @%gitproject%\%view%\file-list.txt" "%gitproject%" "%gitproject%\Installers\%view%-Views.zip"
+
+[innocomp]
+# 2023-11-07
+t=:command "'%innocompiler%' /Qp '%gitproject%\TNND-setup.iss'"
+
+
+[t]
+b=Create Rules documentation
+t=:docset TNND
+t=:docset TNDD
+
+[docset]
+t=:var set %~1
+t=:xslt document-rules-v2.xslt "%projectpath%\output\struc-data.xml" "" "viewset=%set%"
+t=:outputfile "%projectpath%\output\%set%-errors-documentation.html" start
+
+[w]
+b=test all TNND books
+t=:xslt combine-usx-files.xslt blank.xml "%projectpath%\output\TNND.xml" "project=TNND"
+#t=:xslt TNND-tag-errors
+
+
+[z-old]
+#t=:cct var-string2xsltvar-v0.cct "%projectpath%\source\var-string.tsv" "%projectpath%\output\var-strings.xslt"
+#t=:makex "%projectpath%\test-make.make" temake
+#t=:xslt data2xslt-cur.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-cur.xslt"
+#t=:xslt data2xslt-v6.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v6.xslt"
+#t=:xslt data2xslt-v5.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v5.xslt"
+#t=:xslt data2xslt-v4.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v4.xslt"
+#t=:xslt data2xslt-v3.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\tag-err-v3.xslt"
+#t=:updatetagerrors
+#t=:xslt sort-sfm-var.xslt "%projectpath%\output\sfm-var.xml" "%projectpath%\output\sfm-var-test.xml"
+#t=:xslt data2xslt-v6.xslt "%projectpath%\output\check_data.xml" "%projectpath%\output\TNND-tag-errors-t1.xslt"
+#t=:xsltms test-exslt.xslt "%projectpath%\source\test-match.xml" "%projectpath%\output\exslt-test.txt"
+#t=:update "%projectpath%\scripts\TNND-tag-errors.xslt" "%projectpath%\tmp\"
+#t=:update "%projectpath%\project.txt" "%projectpath%\tmp\"
+#t=:sub :test "%projectpath%\project.txt" "%gitproject%\xrunner2\TNND\"
+#t=:update "%projectpath%\project.txt" "%projectpath%\tmp\"
+#t=:update "%projectpath%\*.tsv"
+#t=:md2pdf "%gitproject%\TNND\info.md" "%gitproject%\TNND\cms\TNND-info.PDF"
+#t=:move "%gitproject%\TNND\info.pdf" "%gitproject%\TNND\cms\TNND-info.PDF"
+
+
+[update-test]
+t=:var book %~1
+t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"
+t=:test %book%
+#t=:inputfile 
+#t=:cct remove-nl-from-para.cct "!%book%!" "!%book%!"
+#t=:xslt1 %tnxx%-tag-errors.xslt "!%book%!"
+#t=:outputfile "%projectpath%\output%book%.html" start
+
+[makecombinedpdf]
+t=:var finalmd "%gitproject%\Bamboo\docs\Bamboo-final.md"
+t=:date
+t=:autoit CloseTitle.au3 "%bamboopdf%"
+t=:appendtofile "Created: %curisodatetime%+10" "%gitproject%\Bamboo\docs\created.md" first
+t=:ifexist "%finalmd%" del "%finalmd%"
+t=:loopstring doccombine "%combinemd_list%"
+t=:command "mdpdf '%finalmd%' '%gitproject%\Bamboo\cms\Bamboo-Views-Documentation.pdf'"
+
+[doccombine]
+t=:appendfile "%gitproject%\Bamboo\docs\%~1.md" "%finalmd%"
+
+[testacts]
+t=:var project TNND
+t=:var ACT 044ACT
+t=:testfast %project% ACT
+
+[testactsms]
+t=:var project TNND
+t=:var ACT 044ACT
+t=:testms %project% ACT
+
+[innocomp]
+# 2023-11-07
+t=:command "'%innocompiler%' /Qp '%gitproject%\TNND-setup.iss'"
+
+[hide]
+#t=:command "'%rdwrtp8%' -r %tnxx% %book% 0 '!%book%!' -x" ""  "!%book%!"
+
+[bkid]
+t=:var GEN 001GEN
+t=:var EXO 002EXO
+t=:var LEV 003LEV
+t=:var NUM 004NUM
+t=:var DEU 005DEU
+t=:var JOS 006JOS
+t=:var JDG 007JDG
+t=:var RUT 008RUT
+t=:var 1SA 0091SA
+t=:var 2SA 0102SA
+t=:var 1KI 0111KI
+t=:var 2KI 0122KI
+t=:var 1CH 0131CH
+t=:var 2CH 0142CH
+t=:var EZR 015EZR
+t=:var NEH 016NEH
+t=:var EST 017EST
+t=:var JOB 018JOB
+t=:var PSA 019PSA
+t=:var PRO 020PRO
+t=:var ECC 021ECC
+t=:var SNG 022SNG
+t=:var ISA 023ISA
+t=:var JER 024JER
+t=:var LAM 025LAM
+t=:var EZK 026EZK
+t=:var DAN 027DAN
+t=:var HOS 028HOS
+t=:var JOL 029JOL
+t=:var AMO 030AMO
+t=:var OBA 031OBA
+t=:var JON 032JON
+t=:var MIC 033MIC
+t=:var NAM 034NAM
+t=:var HAB 035HAB
+t=:var ZEP 036ZEP
+t=:var HAG 037HAG
+t=:var ZEC 038ZEC
+t=:var MAL 039MAL
+t=:var MAT 040MAT
+t=:var MRK 041MRK
+t=:var LUK 042LUK
+t=:var JHN 043JHN
+t=:var ACT 044ACT
+t=:var ROM 045ROM
+t=:var 1CO 0461CO
+t=:var 2CO 0472CO
+t=:var GAL 048GAL
+t=:var EPH 049EPH
+t=:var PHP 050PHP
+t=:var COL 051COL
+t=:var 1TH 0521TH
+t=:var 2TH 0532TH
+t=:var 1TI 0541TI
+t=:var 2TI 0552TI
+t=:var TIT 056TIT
+t=:var PHM 057PHM
+t=:var HEB 058HEB
+t=:var JAS 059JAS
+t=:var 1PE 0601PE
+t=:var 2PE 0612PE
+t=:var 1JN 0621JN
+t=:var 2JN 0632JN
+t=:var 3JN 0643JN
+t=:var JUD 065JUD
+t=:var REV 066REV
+t=:var XXA 093XXA
+t=:var XXB 094XXB
+t=:var XXC 095XXC
+t=:var XXD 096XXD
+t=:var XXE 097XXE
+t=:var GLO 109GLO
+
+[oldstuffbelow]
+
+[buildtagerrors]
+t=:inputfile "%data-xml%"
+t=:xslt data2xslt-v4.xslt
+t=:outputfile "%tagerrors%"
+
+[buildtagerrors2]
+t=:make %scripts%/ TNND-tag-errors.make
+
+[updatedl]
+t=:dldata2xml "%static-var-dl%" "%static-var_file-list%"
+t=:dldata2xml "%sfm-var-dl%" "%sfm-var_file-list%"
+t=:dldata2xml "%data-dl%" "%data_file-list%"
+t=:dldataxslt "%varstring-dl%" "%varstring%"
+
+[updatedl2]
+t=:dldatamove "%static-var-dl%" "%static-var_file-list%"
+t=:dldatamove "%sfm-var-dl%" "%sfm-var_file-list%"
+t=:dldatamove "%data-dl%" "%data_file-list%"
+t=:dldatamove"%varstring-dl%" "%varstring%"
+
+
+[dldata2xml]
+t=:name "%~2"
+t=:ifexist "%~1" move /y "%~1" "%~2"
+t=:cct tsv2xml-v2.cct "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%.xml"
+#t=:tsv2xml "%~2" "%projectpath%\output\%name:TNND Views for Paratext - =%"
+
+[dldatamove]
+t=:name "%~2"
+t=:ifexist "%~1" move /y "%~1" "%~2"
+
+[dldataxslt]
+t=:ifexist "%~1" move /y "%~1" "%~2"
+t=:cct list2xsltvar-v2.cct "%~2" "%projectpath%\scripts\var-string.xslt"
+
+[updateviews-pre-make]
+t=:autoit CloseTitle.au3 "%paratexttitle%"
+t=:wait 2
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%mypt8%\Views\%tnxx%-tag-errors.xslt.txt"
+t=:copy "%projectpath%\scripts\%tnxx%-tag-errors.xslt" "%ptviewssvn%\%tnxx%\%tnxx%-tag-errors.xslt"
+t=:copy "%projectpath%\output\%tnxx%-errors-documentation.html" "%ptviewssvn%\%tnxx%\cms\%tnxx%-errors-documentation.html" 
+t=:start "%paratextexe%"
+
+[e-hide]
+label=Paratext 
+b=e. Update and test Paratext
+t=:updateviews
+
+[f-hide]
+b=f. Make tag errors and update PT
+t=:updatetagerrors
+#t=:updatedl
+#t=:buildtagerrors
+t=:updateviews
+
+[g-hide]
+label=
+b=make test xslt of data TSV and test
+t=:ifexist "%data-dl%" move /y "%data-dl%" "%data_file-list%"
+t=:inputfile "%data_file-list%"
+t=:cct tsv2xml-v2.cct
+t=:outputfile "%projectpath%\output\data.xml"
+t=:xslt data2xslt-test-v4.xslt
+t=:outputfile "%projectpath%\scripts\%tnxx%-test-errors.xslt"
+t=:copy "%projectpath%\scripts\%tnxx%-test-errors.xslt" "%mypt8%\Views\%tnxx%-test-errors.xslt"
+#t=:testfast GEN
+
+[h-hide]
+b=test close Paratext
+t=:autoit CloseTitle.au3 "%paratexttitle%"
+t=:wait 30
+
+[donothing]
+t=:echo "do nothing"
+
+[BambooTagerrorsupdate] depreciated
+t=:var target %~1
+t=:updateBamboocheckdata
+t=:varstringxml
+t=:sfmvarxml
+t=:staticvarxml
+t=:checkdataxml
+t=:tagerrorsxslt %project%
+
+[staticvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\static-var.tsv" "%projectpath%\output\static-var.xml"
+
+[varstringxml]
+t=:cct list2xsltvar-v2.cct "%projectpath%\source\var-string.tsv" "%projectpath%\scripts\var-string.xslt"
+
+[sfmvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\sfm-var.tsv" 
+t=:xslt sort-sfm-var.xslt "" "%projectpath%\output\sfm-var.xml"
+
+
+[checkdataxml]
+#t=:echo "%cyan%Updating check_data.xml%reset%"
+t=:cct tsv2xml-v2.cct "%projectpath%\source\check_data.tsv" "%projectpath%\output\check_data.xml"
+
+
+[updateBamboocheckdata]
+# get url from data-url.cmd file as they contain ampersand that does not work in Xrunner var.
+t=:cmd "call '%projectpath%\scripts\data-url.cmd'"
+t=:curl %checkdatatsvurl% "%projectpath%\source\check_data.tsv"
+t=:curl %sfmvartsvurl% "%projectpath%\source\sfm-var.tsv"
+t=:curl %varstringtsvurl% "%projectpath%\source\var-string.tsv"
+t=:curl %staticvartsvurl% "%projectpath%\source\static-var.tsv"
+
+[updateBamboodata]
+t=:cmd "call '%projectpath%\scripts\data-url.cmd'"
+t=:curl %checkdatatsvurl% "%projectpath%\source\check_data.tsv"
+t=:checkdataxml
+
+[testtnddslow]
+t=:bkid
+t=:testmsxslt TNDD TNDD-tag-errors
+
+#===============================================================================
+[test1]
+t=:var XXD 096XXD
+t=:var project TNDD
+t=:var book XXD
+t=:var file !%book%!.usx
+t=:echo "%green%Info: Book = %file%%reset%"
+t=:echo "%green%Info: Project = %project%%reset%"
+t=:inputfile "%usxpath%\%project%\%file%"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 %project%-tag-errors-v0.xslt "" "%projectpath%\output\%book%-%project%-old.html"
+
+
+[testtndd]
+t=:testfast TNDD XXD
+
+[test3]
+t=:a
+t=:b
+t=:d
+
+[test4]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\sfm-var.tsv" "%projectpath%\check\sfm-var-v2.xml"
+t=:cct tsv2xml-v4.cct "%projectpath%\source\sfm-var.tsv" "%projectpath%\check\sfm-var-v4.xml"
+
+[test5]
+#t=:updategitlocal
+t=:start :bkid
+t=:tagerrorsxslt TNDD
+t=:ptprojupdate
+
+[==================================================================================================]
+
+[sub]
+s1=testtndd testtnnd testusx makecombinedpdf
+s2=updateBamboodata b testtndd testtnddslow
+s3=testacts testactsms
+s5=testusxhighlighter testTNNDxslt
+
+[testtnddwordcount]
+t=:bkid
+t=:testfastxslt TNDD TNDD-word-count-1st-mng-line
+t=:testfastxslt TNDD TNDD-word-count-2nd-mng-line
+
+[testtnddok]
+t=:testmsxslt TNDD TNDD-1st-mng-line
+t=:testmsxslt TNDD TNDD-2nd-mng-line
+t=:testmsxslt TNDD TNDD-3rd-mng-line
+t=:testmsxslt TNDD TNDD-table-view
+t=:testmsxslt TNDD TNDD-tag-errors
+
+[testtnnd]
+t=:bkid
+#t=:testmsxslt TNND TNND-tag-errors
+t=:testmsxslt TNND TNND-word-count
+
+[testusx]
+t=:bkid
+t=:testfastxslt TNND USX-column-view
+t=:testfastxslt TNND USX-paragraph-view
+
+[testmsxslt]
+t=:var project %~1
+t=:var xslt %~2
+t=:var book XXD
+t=:echo "Book = !%book%!"
+t=:inputfile "%usxpath%\%project%\!%book%!.usx"
+t=:cct remove-nl-from-para.cct
+t=:xsltms %xslt%.xslt  "" ""  "debug=on"
+t=:outputfile "%projectpath%\output\%project%-%book%-ms-%xslt%.html" start
+
+[testfastxslt]
+t=:var project %~1
+t=:var xslt %~2
+t=:var book XXD
+t=:var file !%book%!.usx
+t=:echo "%green%Info: Book = %file%%reset%"
+t=:echo "%green%Info: Project = %project%%reset%"
+t=:inputfile "%usxpath%\%project%\%file%"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 %xslt%.xslt "" "%projectpath%\output\%book%-%project%-fast-%xslt%.html"
+
+[testusxhighlighter]
+t=:var XXD 096XXD
+t=:var project TNND
+t=:var book MRK
+t=:var file !%book%!.usx
+t=:inputfile "%usxpath%\%project%\%file%"
+#t=:cct remove-nl-from-para.cct
+#t=:xslt1 SFM-hilighter.xslt "" "%projectpath%\output\%book%-%project%-fast-hilighter.html"
+t=:xsltms TNND-hilighter3.xslt "" "%projectpath%\output\%book%-%project%-ms-hilighter.html"
+#t=:inputfile "%usxpath%\%project%\%file%"
+#t=:cct remove-nl-from-para.cct
+#t=:xsltms TNND-hilighter2.xslt "" "%projectpath%\output\%book%-%project%-ms-hilighter.html"
+
+[testTNNDxslt]
+t=:var project TNND
+t=:testfast %project% XXD

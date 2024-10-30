@@ -1,0 +1,23 @@
+begin    >   store(nul) use(pre)
+
+group(pre)
+'<xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>' > use(main)
+
+group(main)
+'<xsl:template '                        >   endstore nl '===========' nl store(nul) use(getsfm)
+'<xsl:variable name="'                  >   endstore use(varname)
+'$'                                     >   endstore dup use(endvar)
+
+
+group(getsfm)
+'[@style = '                            >   endstore
+"'"                                     >   nl store(nul) use(main)
+'">'                                    >   store(nul) use(main)
+
+group(varname)
+'"'                                     >   tab store(nul) use(main)
+
+group(endvar)
+'"'                                     >   tab store(nul) use(main)
+','                                     >   tab store(nul) use(main)
+')'                                     >   tab store(nul) use(main)

@@ -1,0 +1,562 @@
+grp	sfm	name	value	order	note	was
+TNND	b	nodecount		m		
+TNND	b2	hascvref		m		
+TNND	b2	nodecount		m		
+TNND	b3	ancestor		m		
+TNND	b3	curverse		m		
+TNND	b3	curvr1		m		
+TNND	b3	curvr2		m		
+TNND	b3	hasvhyphen		m		
+TNND	b3	posts5beforevhaslrb		m		
+TNND	b3	posts5beforevhasvr2		m		
+TNND	b3	posts5hasendashvr2		m		
+TNND	b3	posts5hasleftround		m		
+TNND	b3	posts5v		m		
+TNND	b3	postsib		m		
+TNND	b3	postsib2		m		following-sibling::*[1]/@style
+TNND	b3	posttable		m		following-sibling::*[1][name() = 'table'] 
+TNND	b3	posttable2		m		
+TNND	b3	pres5hasendashvr2		m		
+TNND	b3	pres5hasleftround		m		
+TNND	b3	pres5v		m		
+TNND	b3	presib		m		preceding-sibling::*[1]/@style
+TNND	b3	presib2		m		preceding-sibling::*[2]/@style
+TNND	b3	preverse		a		
+TNND	b3	preverser1		m		
+TNND	b3	preverser2		m		
+TNND	b3	prevhyphen		m		
+TNND	b3	values5beforev		a		
+TNND	f	curpos		m		position()
+TNND	f	dqstr1		a		
+TNND	f	dqstr10		a		
+TNND	f	dqstr2		a		
+TNND	f	dqstr3		a		
+TNND	f	dqstr4		a		
+TNND	f	dqstr5		a		
+TNND	f	dqstr6		a		
+TNND	f	dqstr7		a		
+TNND	f	dqstr8		a		
+TNND	f	dqstr9		a		
+TNND	f	graparent		m		parent::para[@style = 'gra']
+TNND	f	indqstr1		m		
+TNND	f	indqstr10		m		
+TNND	f	indqstr2		m		
+TNND	f	indqstr3		m		
+TNND	f	indqstr4		m		
+TNND	f	indqstr5		m		
+TNND	f	indqstr6		m		
+TNND	f	indqstr7		m		
+TNND	f	indqstr8		m		
+TNND	f	indqstr9		m		
+TNND	f	ldqstr1		n		
+TNND	f	ldqstr10		n		
+TNND	f	ldqstr2		n		
+TNND	f	ldqstr3		n		
+TNND	f	ldqstr4		n		
+TNND	f	ldqstr5		n		
+TNND	f	ldqstr6		n		
+TNND	f	ldqstr7		n		
+TNND	f	ldqstr8		n		
+TNND	f	ldqstr9		n		
+TNND	f	sqdiff1		o		
+TNND	f	sqdiff10		o		
+TNND	f	sqdiff2		o		
+TNND	f	sqdiff3		o		
+TNND	f	sqdiff4		o		
+TNND	f	sqdiff5		o		
+TNND	f	sqdiff6		o		
+TNND	f	sqdiff7		o		
+TNND	f	sqdiff8		o		
+TNND	f	sqdiff9		o		
+TNND	fig	curpos		m		position()
+TNND	fig	graparent		m		parent::para[@style = 'gra']
+TNND	fig	hascoloncvref		m		
+TNND	fig	hasspaceinref		m		
+TNND	fig	prechapter		m		preceding::chapter[1]/@number
+TNND	fig	preverse		m		preceding::verse[1]/@number
+TNND	fig	refattchap		m		
+TNND	fig	refattchapdot		m		
+TNND	fig	refattdotverse		m		
+TNND	fig	refattverse		m		
+TNND	fig	refchapter		m		substring-before(@ref,':')
+TNND	fig	refverse		m		substring-after(@ref,':')
+TNND	fr	hasbadcvref		m		
+TNND	fr	hascvref		m		
+TNND	gj	countjmp		m		count(*[@style = 'jmp'])
+TNND	gj	countnode		m		count(node())
+TNND	gj	hascvref		m		
+TNND	gra	countf		m		count(*[@style = 'f'])
+TNND	gra	countfig		m		count(*[@style = 'fig'])
+TNND	gra	countnode		m		count(node())
+TNND	jmp	containsclickhere		m		
+TNND	jmp	curpos		m		position()
+TNND	jmp	gjparent		m		parent::para[@style = 'gj']
+TNND	n1	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+TNND	n1	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+TNND	n1	countpresibnode		m		
+TNND	n1	counttec		m		
+TNND	n1	countteu		m		
+TNND	n1	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n1	dqstr1		a		
+TNND	n1	dqstr10		a		
+TNND	n1	dqstr2		a		
+TNND	n1	dqstr3		a		
+TNND	n1	dqstr4		a		
+TNND	n1	dqstr5		a		
+TNND	n1	dqstr6		a		
+TNND	n1	dqstr7		a		
+TNND	n1	dqstr8		a		
+TNND	n1	dqstr9		a		
+TNND	n1	hastecchild		m		
+TNND	n1	indqstr1		m		
+TNND	n1	indqstr10		m		
+TNND	n1	indqstr2		m		
+TNND	n1	indqstr3		m		
+TNND	n1	indqstr4		m		
+TNND	n1	indqstr5		m		
+TNND	n1	indqstr6		m		
+TNND	n1	indqstr7		m		
+TNND	n1	indqstr8		m		
+TNND	n1	indqstr9		m		
+TNND	n1	ldqstr1		n		
+TNND	n1	ldqstr10		n		
+TNND	n1	ldqstr2		n		
+TNND	n1	ldqstr3		n		
+TNND	n1	ldqstr4		n		
+TNND	n1	ldqstr5		n		
+TNND	n1	ldqstr6		n		
+TNND	n1	ldqstr7		n		
+TNND	n1	ldqstr8		n		
+TNND	n1	ldqstr9		n		
+TNND	n1	positiontec		m		
+TNND	n1	postcharn1tec		m		
+TNND	n1	precharn1tec		m		
+TNND	n1	pren1tec		b		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+TNND	n1	sqdiff1		o		
+TNND	n1	sqdiff10		o		
+TNND	n1	sqdiff2		o		
+TNND	n1	sqdiff3		o		
+TNND	n1	sqdiff4		o		
+TNND	n1	sqdiff5		o		
+TNND	n1	sqdiff6		o		
+TNND	n1	sqdiff7		o		
+TNND	n1	sqdiff8		o		
+TNND	n1	sqdiff9		o		
+TNND	n2	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+TNND	n2	countpren2		m		count(preceding-sibling::*[@style = 'n2'][1]/preceding-sibling::*)
+TNND	n2	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+TNND	n2	countpresibnode		m		
+TNND	n2	counttec		m		
+TNND	n2	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n2	curtecpostellipsis		m		
+TNND	n2	curtecpreellipsis		m		
+TNND	n2	curtecver		a		
+TNND	n2	curtecverpreellipsis		m		
+TNND	n2	curtei		m		
+TNND	n2	dqstr1		a		
+TNND	n2	dqstr10		a		
+TNND	n2	dqstr2		a		
+TNND	n2	dqstr3		a		
+TNND	n2	dqstr4		a		
+TNND	n2	dqstr5		a		
+TNND	n2	dqstr6		a		
+TNND	n2	dqstr7		a		
+TNND	n2	dqstr8		a		
+TNND	n2	dqstr9		a		
+TNND	n2	hastecchild		m		
+TNND	n2	hastecellipsis		m		
+TNND	n2	hastecversion		m		
+TNND	n2	indqstr1		m		
+TNND	n2	indqstr10		m		
+TNND	n2	indqstr2		m		
+TNND	n2	indqstr3		m		
+TNND	n2	indqstr4		m		
+TNND	n2	indqstr5		m		
+TNND	n2	indqstr6		m		
+TNND	n2	indqstr7		m		
+TNND	n2	indqstr8		m		
+TNND	n2	indqstr9		m		
+TNND	n2	ldqstr1		n		
+TNND	n2	ldqstr10		n		
+TNND	n2	ldqstr2		n		
+TNND	n2	ldqstr3		n		
+TNND	n2	ldqstr4		n		
+TNND	n2	ldqstr5		n		
+TNND	n2	ldqstr6		n		
+TNND	n2	ldqstr7		n		
+TNND	n2	ldqstr8		n		
+TNND	n2	ldqstr9		n		
+TNND	n2	postcharn2tec		m		
+TNND	n2	precharn2tec		m		
+TNND	n2	preellipsisstring		m		
+TNND	n2	pren1tec		m		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+TNND	n2	pren2tec		b		preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
+TNND	n2	sqdiff1		o		
+TNND	n2	sqdiff10		o		
+TNND	n2	sqdiff2		o		
+TNND	n2	sqdiff3		o		
+TNND	n2	sqdiff4		o		
+TNND	n2	sqdiff5		o		
+TNND	n2	sqdiff6		o		
+TNND	n2	sqdiff7		o		
+TNND	n2	sqdiff8		o		
+TNND	n2	sqdiff9		o		
+TNND	n3	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+TNND	n3	countpren2		m		
+TNND	n3	countpren3		m		count(preceding-sibling::*[@style = 'n3'][1]/preceding-sibling::*)
+TNND	n3	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+TNND	n3	countpresibnode		m		
+TNND	n3	counttec		m		
+TNND	n3	counttrs		m		
+TNND	n3	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n3	curtecpostellipsis		m		
+TNND	n3	curtecpreellipsis		m		
+TNND	n3	curtecver		a		
+TNND	n3	curtecverpreellipsis		m		
+TNND	n3	curtei		m		
+TNND	n3	dqstr1		a		
+TNND	n3	dqstr10		a		
+TNND	n3	dqstr2		a		
+TNND	n3	dqstr3		a		
+TNND	n3	dqstr4		a		
+TNND	n3	dqstr5		a		
+TNND	n3	dqstr6		a		
+TNND	n3	dqstr7		a		
+TNND	n3	dqstr8		a		
+TNND	n3	dqstr9		a		
+TNND	n3	hastecchild		m		
+TNND	n3	hastecellipsis		m		
+TNND	n3	hastecversion		m		
+TNND	n3	indqstr1		m		
+TNND	n3	indqstr10		m		
+TNND	n3	indqstr2		m		
+TNND	n3	indqstr3		m		
+TNND	n3	indqstr4		m		
+TNND	n3	indqstr5		m		
+TNND	n3	indqstr6		m		
+TNND	n3	indqstr7		m		
+TNND	n3	indqstr8		m		
+TNND	n3	indqstr9		m		
+TNND	n3	ldqstr1		n		
+TNND	n3	ldqstr10		n		
+TNND	n3	ldqstr2		n		
+TNND	n3	ldqstr3		n		
+TNND	n3	ldqstr4		n		
+TNND	n3	ldqstr5		n		
+TNND	n3	ldqstr6		n		
+TNND	n3	ldqstr7		n		
+TNND	n3	ldqstr8		n		
+TNND	n3	ldqstr9		n		
+TNND	n3	lenchildtec		m		
+TNND	n3	node1tec		m		node()[1][@style = 'tec']
+TNND	n3	preellipsisstring		m		
+TNND	n3	pren1tec		m		preceding-sibling::*[@style = 'n1'][1]/*[@style = 'tec'][1]/text()
+TNND	n3	pren2tec		m		preceding-sibling::*[@style = 'n2'][1]/*[@style = 'tec'][1]/text()
+TNND	n3	pren3tec		m		preceding-sibling::*[@style = 'n3'][1]/*[@style = 'tec'][1]/text()
+TNND	n3	sqdiff1		o		
+TNND	n3	sqdiff10		o		
+TNND	n3	sqdiff2		o		
+TNND	n3	sqdiff3		o		
+TNND	n3	sqdiff4		o		
+TNND	n3	sqdiff5		o		
+TNND	n3	sqdiff6		o		
+TNND	n3	sqdiff7		o		
+TNND	n3	sqdiff8		o		
+TNND	n3	sqdiff9		o		
+TNND	n3	validtecfirst		m		
+TNND	ntn	dqstr1		a		
+TNND	ntn	dqstr10		a		
+TNND	ntn	dqstr2		a		
+TNND	ntn	dqstr3		a		
+TNND	ntn	dqstr4		a		
+TNND	ntn	dqstr5		a		
+TNND	ntn	dqstr6		a		
+TNND	ntn	dqstr7		a		
+TNND	ntn	dqstr8		a		
+TNND	ntn	dqstr9		a		
+TNND	ntn	hascvref		m		
+TNND	ntn	indqstr1		m		
+TNND	ntn	indqstr10		m		
+TNND	ntn	indqstr2		m		
+TNND	ntn	indqstr3		m		
+TNND	ntn	indqstr4		m		
+TNND	ntn	indqstr5		m		
+TNND	ntn	indqstr6		m		
+TNND	ntn	indqstr7		m		
+TNND	ntn	indqstr8		m		
+TNND	ntn	indqstr9		m		
+TNND	ntn	ldqstr1		n		
+TNND	ntn	ldqstr10		n		
+TNND	ntn	ldqstr2		n		
+TNND	ntn	ldqstr3		n		
+TNND	ntn	ldqstr4		n		
+TNND	ntn	ldqstr5		n		
+TNND	ntn	ldqstr6		n		
+TNND	ntn	ldqstr7		n		
+TNND	ntn	ldqstr8		n		
+TNND	ntn	ldqstr9		n		
+TNND	ntn	sqdiff1		o		
+TNND	ntn	sqdiff10		o		
+TNND	ntn	sqdiff2		o		
+TNND	ntn	sqdiff3		o		
+TNND	ntn	sqdiff4		o		
+TNND	ntn	sqdiff5		o		
+TNND	ntn	sqdiff6		o		
+TNND	ntn	sqdiff7		o		
+TNND	ntn	sqdiff8		o		
+TNND	ntn	sqdiff9		o		
+TNND	p	ancestor		m		
+TNND	p	curverse		m		
+TNND	p	curvr1		m		
+TNND	p	curvr2		m		
+TNND	p	hascvref		m		
+TNND	p	hasvhyphen		m		
+TNND	p	posts5beforevhaslrb		m		
+TNND	p	posts5beforevhasvr2		m		
+TNND	p	posts5hasendashvr2		m		
+TNND	p	posts5hasleftround		m		
+TNND	p	posts5v		m		
+TNND	p	postsib		m		following-sibling::*[1]/@style
+TNND	p	postsib2		m		
+TNND	p	posttable		m		following-sibling::*[1][name() = 'table'] 
+TNND	p	posttable2		m		
+TNND	p	pres5hasendashvr2		m		
+TNND	p	pres5hasleftround		m		
+TNND	p	pres5v		m		
+TNND	p	presib		m		preceding-sibling::*[1]/@style
+TNND	p	presib2		m		preceding-sibling::*[2]/@style
+TNND	p	preverse		a		
+TNND	p	preverser1		m		
+TNND	p	preverser2		m		
+TNND	p	prevhyphen		m		
+TNND	p	values5beforev		a		
+TNND	qns	ancestor		m		
+TNND	qp	ancestor		m		
+TNND	qp	hascvref		m		
+TNND	s3	hascvref		m		
+TNND	s3	hasspacecref		m		
+TNND	s3	hassubvrange		m		
+TNND	s3	hasvlet		m		
+TNND	s3	lastchar		m		substring(.,string-length(.),1)
+TNND	s3	lastchartype		m		
+TNND	s3	prechapter		m		preceding::chapter[1]/@number
+TNND	s3	pres5text		m		
+TNND	s3	preverse		m		preceding::verse[1]/@number
+TNND	s3	prevhyphen		m		
+TNND	s3	refcolonv		a		
+TNND	s3	refcolonvlet		m		
+TNND	s3	refcolonvr1		m		
+TNND	s3	refcolonvr2		m		
+TNND	s3	reftype		m		
+TNND	s3	refvendash		m		
+TNND	s3	refwordschapcolon		m		
+TNND	s3	strlenb4chap		a		
+TNND	s5	hascvref		m	8.1	
+TNND	s5	hasreordered		m	8.3 8.3.1 8.3.2	
+TNND	s5	hastbb		m	8.3.1 8.3.2	
+TNND	s5	hasvlet		m	8.21, 8.21.2, 8.22	
+TNND	s5	numbfirst		m	8.1	
+TNND	s5	prechapter		m	8.1	preceding::chapter[1]/@number
+TNND	s5	preverse		m	8.21, 8.21.2, 8.22, 8.23, 8.26, 8.27, 8.28, 8.29	preceding::verse[1]/@number
+TNND	s5	preverser1		m	8.23, 8.26, 8.27	
+TNND	s5	prevhyphen		m	8.21, 8.21.2, 8.22, 8.23, 8.26, 8.27, 8.28, 8.29	
+TNND	s5	refchapcolon		m	8.1	substring-before(.,':')
+TNND	s5	refvendash		m	8.21, 8.21.2, 8.22, 8.23, 8.26, 8.27, 8.28, 8.29	
+TNND	sbx	chappos		m		
+TNND	sbx	hascvref		m		
+TNND	sbx	hasspacecref		m		
+TNND	sbx	numbfirst		m		
+TNND	sbx	prechapter		m		preceding::chapter[1]/@number
+TNND	sbx	preverse		m		preceding::verse[1]/@number
+TNND	sbx	refchapcolon		m		
+TNND	sbx	refcolonv		a		
+TNND	sbx	refcolonvr1		m		substring-before(substring-after(text(),':'),'–')
+TNND	sbx	refwordschapcolon		m		
+TNND	sbx	strlenb4chap		a		
+TNND	table	containsparagraph		m		
+TNND	table	countfolls5pretable		m		
+TNND	table	countfolltabledivision		m		
+TNND	table	countfolltablesection		m		
+TNND	table	countposttablewithdivision		m		
+TNND	table	countposttablewithparagraph		m		
+TNND	table	countposttablewithsection		m		
+TNND	table	hasfollowingtable		m		
+TNND	table	notposttabledivision		m		
+TNND	table	notposttableparagraph		m		
+TNND	table	notposttablesection		m		
+TNND	table	presib		m		
+TNND	table	presib2		m		
+TNND	tc1	chappos		m		
+TNND	tc1	containsparagraph		m		
+TNND	tc1	countprenode		m		
+TNND	tc1	countsbx		m		
+TNND	tc1	counttbb		m		
+TNND	tc1	hascvref		m		
+TNND	tc1	hasspacecref		m		
+TNND	tc1	notmultirowtable		m		
+TNND	tc1	notsbxchild		m		
+TNND	tc1	numbfirst		m		
+TNND	tc1	pos		m		position()
+TNND	tc1	prechapter		m		preceding::chapter[1]/@number
+TNND	tc1	preverse		m		preceding::verse[1]/@number
+TNND	tc1	refchapcolon		m		
+TNND	tc1	refcolonv		a		
+TNND	tc1	refcolonvnumb		m		
+TNND	tc1	refcolonvr1		m		substring-before(substring-after(text(),':'),'–')
+TNND	tc1	refwordschapcolon		m		
+TNND	tc1	strlenb4chap		a		
+TNND	tec	countpren1		m		
+TNND	tec	countpren2		m		
+TNND	tec	countpres5		m		
+TNND	tec	countpresibnode		m		
+TNND	tec	countpretec		m		
+TNND	tec	hasellipsis		m		
+TNND	tec	lastchar		m		substring(.,string-length(.),1)
+TNND	tec	lastchar2		m		substring(.,string-length(.) - 1,1)
+TNND	tec	postellipsisstring		m		
+TNND	tec	preellipsisstring		m		
+TNND	tei	ancestor		m		
+TNND	tei	countpren1		m		
+TNND	tei	countpres5		m		
+TNND	tei	parent		m		
+TNND	tei	parentpresib		m		
+TNND	tei	parentpresibpos		m		
+TNND	tei	pren1tec		m		
+TNND	tr	containsdivision		m		
+TNND	tr	containspart		m		
+TNND	tr	containssection		m		
+TNND	tr	countpretable		m		
+TNND	tr	hastrdivision		m		
+TNND	tr	hastrparagraph		m		
+TNND	tr	hastrpart		m		
+TNND	tr	hastrsection		m		
+TNND	tr	parentpostsib		m		
+TNND	tr	parentpresib		m		
+TNND	tr	parentpresib2		m		
+TNND	trs	ancestor		m		
+TNND	trs	countpren1		m		count(preceding-sibling::*[@style = 'n1'][1]/preceding-sibling::*)
+TNND	trs	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
+TNND	trs	curspfield		m		
+TNND	trs	ellipsiscount		a		
+TNND	trs	parent		m		
+TNND	trs	pretec		a		
+TNND	trs	split2ellipsisstring1		b		
+TNND	trs	split2ellipsisstring2		b		
+TNND	trs	split3ellipsisstring2		c		
+TNND	trs	split3ellipsisstring3		c		
+TNND	trs	split4ellipsisstring3		d		
+TNND	trs	split4ellipsisstring4		d		
+TNND	trs	teccharposttrs		m		
+TNND	trs	teccharpretrs		m		
+TNND	trs	tecstringposttrs		b		
+TNND	trs	tecstringpretrs		b		
+TNND	v	parent		o		parent::*/@style
+TNND	rgi	presibnode1		b		
+TNND	rgi	presibtext1		b		
+TNND	rgm	presibnode1		b		
+TNND	rgm	presibtext1		b		
+TNND	rgi	pretextlastchar		c		
+TNND	rgm	pretextlastchar		c		
+TNND	rgi	postsibnode1		b		
+TNND	rgm	postsibnode1		b		
+TNND	rgi	postsibtext1		b		
+TNND	rgm	postsibtext1		b		
+TNND	rgi	postchar1		c		
+TNND	rgm	postchar1		c		
+TNDD	brk	postsibnode1		c		
+TNDD	brk	presibnode1		c		
+TNDD	sl1	prechapter		c		
+TNDD	sl1	preverse		c		
+TNDD	tr	prechapter		c		
+TNDD	sl1	sl1v		c		
+TNDD	sl1	sl1c		c		
+TNDD	ros	style		c		
+TNDD	sbx	sbxc		c		
+TNDD	sbx	sbxv		c		
+TNDD	sbx	preverse		c		
+TNDD	sbx	prechapter		c		
+TNDD	sl1	precleanverse		e		
+TNND	ros	postnodechar1		c		
+TNND	ros	posttext		a		
+TNDD	ros	postnodechar1		c		
+TNDD	ros	posttext		a		
+TNND	ros	lastchar		c		
+TNND	teu	lastchar		c		
+TNND	tre	lastchar		c		
+TNND	ord	precedingtext		a		
+TNND	ord	lenpretext		b		
+TNND	ord	precedingchar		c		
+TNND	ord	preceding2char		c		
+TNND	brk	postsibnode1		c		
+TNND	brk	presibnode1		c		
+TNDD	sbx	chappos		m		
+TNDD	sbx	hascvref		m		
+TNDD	sbx	hasspacecref		m		
+TNDD	sbx	numbfirst		m		
+TNDD	sbx	refchapcolon		m		
+TNDD	sbx	refcolonv		a		
+TNDD	sbx	refcolonvr1		m		
+TNDD	sbx	refwordschapcolon		m		
+TNDD	sbx	strlenb4chap		a		
+TNDD	ml1	presl1text		a		
+TNDD	ml1	postRsqchar1sub		a		
+TNDD	ml1	presl1postRsqchar1sub		b		
+TNDD	ml1	curRsqcount		c		
+TNDD	ml1	presl1postRsqcount		c		
+TNDD	ml1	Rsqmodstring		a		
+TNDD	ml1	pesib1sty		c		
+TNND	ml1	pesib1sty		c		
+TNDD	ml1	precedingtext		c		
+TNND	ml1	precedingtext		c		
+TNDD	ml1	presl1textlast		a		
+TNDD	ml1	presl1textposttbb		a		
+TNDD	ml1	presl1textlastlen		b		
+TNDD	ml1	presl1textchar1		c		
+TNDD	ml1	presl1textposttbbchar1		c		
+TNDD	ml1	presl1textcharlast		c		
+TNDD	ml1	curfirstchar		c		
+TNDD	ml1	curfirstcharposttab		c		
+TNDD	ml1	curlasttextlen		b		
+TNDD	ml1	curlastchar		c		
+TNDD	ml1	lasttext		a		
+TNDD	ml1	curlastnodetext		a		
+TNND	n2	curtecpostellipsisparse1		b		
+TNND	n2	curtecpostellipsisparse2		c		
+TNND	n2	curtecpostellipsisparse3		d		
+TNND	n2	curtecpostellipsisparse4		d		
+TNND	n2	counttecellipsis		b		
+TNND	n2	tec1ellipsis1		e		
+TNND	n2	tec2ellipsis2		e		
+TNND	n2	tec3ellipsis3		e		
+TNND	n2	tec4ellipsis4		e		
+TNND	n2	tec1ellipsis2		e		
+TNND	n2	tec2ellipsis3		e		
+TNND	n2	tec3ellipsis4		e		
+TNND	n2	tec4ellipsis5		e		
+TNDD	ml1	curlastnodetextb4lb		b		
+TNDD	ml1	curlastnodetextb4lblen		c		
+TNDD	ml1	curlastcharb4lb		d		
+TNND	ros	pretextlastchar		c		
+TNND	ros	b		a		
+TNND	s5	currefv		a	8.21, 8.21.2, 8.26	
+TNND	s5	currefv1		b	8.22, 8.23,  8.27,	
+TNND	s5	currefv2		b	8.27, 8.29	
+TNND	s5	countpres5post-p		a	8.23	
+TNND	s5	preverser2		m	8.26, 8.27, 8.28, 8.29	
+TNND	s5	countsib2next-s5		c	8.28, 8.29	
+TNND	s5	countsib2next-p		c	8.28, 8.29  next p or b3	
+TNND	s5	curpos		a	used by countsib2next-s5	
+TNND	s5	countnext-s5		a	8.28, 8.29	
+TNND	s5	countnext-p		a	8.28, 8.29 next p or b3	
+TNND	f	postsibtext1		a		
+TNND	f	postchar1		b		
+TNND	f	pretextlastchar		b		
+TNND	f	presibtext1		a		
+TNND	f	presibtext1last12		b		
+TNND	ros	presibtext1		a		
+TN	f	lastnodelast4char		c		
+TN	f	lastnode		a		
+TN	f	lastnodelen		b		
+TN	f	lastnodelast4charmod		d		
+TN	f	notetext		a		
+TN	f	notetextlen		b		
