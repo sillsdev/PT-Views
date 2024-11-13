@@ -23,13 +23,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.?!</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789).?!</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-10-30</xsl:variable>
+   <xsl:variable name="moddate">2024-11-14</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -4026,7 +4026,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
             </xsl:if>
             <!--ref C06.1 - rank=-->
-            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”')">
+            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”' or substring($lastnodelast4charmod,3,2) = '$%')">
                <xsl:if test="string-length($lastnodelast4charmod) = 4">
                   <xsl:text> err-note-f-mid-C06-1</xsl:text>
                </xsl:if>
@@ -5373,7 +5373,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref 39 - rank=5-->
                <xsl:if test="contains(text(),'⌋') and not(position() = last()) and not(parent::cell)">
-                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’)','_++++++++++') = '+')">
+                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’…)','_+++++++++++') = '+')">
                      <xsl:text> err-char-brk-post-39</xsl:text>
                   </xsl:if>
                </xsl:if>
