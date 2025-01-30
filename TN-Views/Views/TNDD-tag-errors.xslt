@@ -23,13 +23,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.?!</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789…).?!</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-10-26</xsl:variable>
+   <xsl:variable name="moddate">2025-01-30</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -168,7 +168,7 @@ div {white-space: normal;}
 .err-char-ft-mid-83-12 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-ft-mid-83-12::after {content:'The hyphen in the verse range in this \\ft should be an en dash.  [D83.12]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---24 {background:orange;}
-.err-char---24::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that the space should be after the numeral in a \\ros.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---24::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that after a  \\ros* it should be a “narrow no-break-space” \u202F.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---C05-1 {background:orange;}
 .err-char---C05-1::after {content:'This character SFM is empty  [DC05.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-87-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -197,10 +197,10 @@ div {white-space: normal;}
 .err-char-tbb-pre-18::after {content:'There should not be a space before a \tbb SFM  [D18]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tbb-post-19 {background:orange;border-right:4pt solid red;}
 .err-char-tbb-post-19::after {content:'There should not be a space after a \tbb* SFM  [D19]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char-ros--83-1 {background:orange;}
-.err-char-ros--83-1::after {content:'The space must be before the \\ros*, and no space after it.  [D83.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros--66 {background:orange;}
 .err-char-ros--66::after {content:'There is no embedded \\+brk in this \\ros  [D66]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-post-83-2 {background:orange;border-right:4pt solid red;}
+.err-char-ros-post-83-2::after {content:'There should be a “narrow no-break-space” \u202F after the \\ros*.  [D83.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-pre-6 {background:orange;border-left:4pt solid red;}
 .err-char-brk-pre-6::after {content:'This \\brk SFM is not preceded by a space or quotes or left parenthesis  [D6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-9 {background:orange;border-right:4pt solid red;}
@@ -214,9 +214,9 @@ div {white-space: normal;}
 .err-char-brk-post-5 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp.  [D5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation.  [DC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
@@ -527,7 +527,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -601,7 +601,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -675,7 +675,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -736,7 +736,7 @@ div {white-space: normal;}
             <xsl:value-of select="concat(@style,' ',name())"/>
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -807,7 +807,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -885,7 +885,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -959,7 +959,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -1033,7 +1033,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -1108,19 +1108,17 @@ div {white-space: normal;}
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
             <xsl:if test="preceding::chapter">
-               <!--specific char errors--><!--ref 83.1 - rank=-->
-               <xsl:if test="not(substring(node()[last()],string-length(text()[last()]),1) = ' ' )  or $postnodechar1 = ' '">
-                  <xsl:if test="not(child::*[@style = 'brk'])">
-                     <xsl:text> err-char-ros--83-1</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 66 - rank=5-->
+               <!--specific char errors--><!--ref 66 - rank=5-->
                <xsl:if test="not(count(char[@style = 'brk']) = 1) and not(text())">
                   <xsl:text> err-char-ros--66</xsl:text>
                </xsl:if>
+               <!--ref 83.2 - rank=5-->
+               <xsl:if test="$postnodechar1 != ' '">
+                  <xsl:text> err-char-ros-post-83-2</xsl:text>
+               </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -1226,7 +1224,7 @@ div {white-space: normal;}
                </xsl:if>
                <!--common char errors-->
                <!--ref 24 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @closed)">
+               <xsl:if test="not(@closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char---24</xsl:text>
                   </xsl:if>
@@ -1320,7 +1318,7 @@ div {white-space: normal;}
                <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
             <!--ref C06.1 - rank=-->
-            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”')">
+            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”' or substring($lastnodelast4charmod,3,2) = '$%')">
                <xsl:if test="string-length($lastnodelast4charmod) = 4">
                   <xsl:text> err-note-f-mid-C06-1</xsl:text>
                </xsl:if>
