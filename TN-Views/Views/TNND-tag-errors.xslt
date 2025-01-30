@@ -356,7 +356,7 @@ div {white-space: normal;}
 .err-char--mid-9-6 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char--mid-9-6::after {content:'The hyphen in a verse range in this paragraph should be an en dash.  [N9.6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-30 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char--mid-30::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that the space should be after the numeral in a \\ros.  [N30]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--mid-30::after {content:'There is a space before the closing SFM. Best to put the space after the close, for a \\ros the character after the \\ros* should be a \\u202F (Narrow no-break-space).  [N30]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---C05-1 {background:orange;}
 .err-char---C05-1::after {content:'This character SFM is empty  [NC05.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-26-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -425,10 +425,8 @@ div {white-space: normal;}
 .err-char-rgm-pre-28-2::after {content:'The \\rgm should be immediately after the word it modifies.  [N28.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-rgm-post-28-5 {background:orange;border-right:4pt solid red;}
 .err-char-rgm-post-28-5::after {content:'A letter should not immediately follow an \\rgm*.  [N28.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char-ros-mid-29-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-ros-mid-29-1::after {content:'There should not be a space before the \\ros*.  [N29.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-post-29-2 {background:orange;border-right:4pt solid red;}
-.err-char-ros-post-29-2::after {content:'There should be a no breaking space after the \\ros*.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-post-29-2::after {content:'There should be a “narrow no-break-space” after the \\ros*.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-pre-29-3 {background:orange;border-left:4pt solid red;}
 .err-char-ros-pre-29-3::after {content:'There should be a space or ellipsis before this \\ros.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tre-mid-30-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -4406,7 +4404,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -4473,7 +4471,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -4621,7 +4619,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -4813,7 +4811,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -4925,7 +4923,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5009,7 +5007,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5089,7 +5087,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5176,7 +5174,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5287,7 +5285,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5387,7 +5385,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5502,7 +5500,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5613,7 +5611,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5704,12 +5702,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
             <xsl:if test="preceding::chapter">
-               <!--specific char errors--><!--ref 29.1 - rank=5-->
-               <xsl:if test="$lastchar = ' '">
-                  <xsl:text> err-char-ros-mid-29-1</xsl:text>
-               </xsl:if>
-               <!--ref 29.2 - rank=5-->
-               <xsl:if test="$postnodechar1 != '&amp;#X202F;'">
+               <!--specific char errors--><!--ref 29.2 - rank=5-->
+               <xsl:if test="$postnodechar1 != ' '">
                   <xsl:text> err-char-ros-post-29-2</xsl:text>
                </xsl:if>
                <!--ref 29.3 - rank=5-->
@@ -5726,7 +5720,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5805,7 +5799,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5884,7 +5878,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
@@ -5960,7 +5954,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref 30 - rank=0-->
-               <xsl:if test="not(@style = 'ros' or @style = 'teu' or @style = 'tre' or @closed)">
+               <xsl:if test="not(@style = 'teu' or @style = 'tre' or @closed)">
                   <xsl:if test="substring(node()[last()],string-length(text()[last()]),1) = ' '   and not(count(following-sibling::node()) = 0) ">
                      <xsl:text> err-char--mid-30</xsl:text>
                   </xsl:if>
