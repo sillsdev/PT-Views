@@ -23,13 +23,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789).?!</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789…).?!</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2024-11-14</xsl:variable>
+   <xsl:variable name="moddate">2025-01-30</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -322,9 +322,9 @@ div {white-space: normal;}
 .err-note-f-pre-27-11 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-27-11::after {content:'The \\fq marker can only be used on the word contained inte the preceding \\trs...\\trs*.  [N27.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation.  [NC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [NC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation.  [NC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [NC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-2 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-27-2::after {content:'There must be a space after the end of the footnote (\\f*).  [N27.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-1 {background:orange;border-right:4pt solid red;}
@@ -412,7 +412,7 @@ div {white-space: normal;}
 .err-char-brk--34 {background:orange;}
 .err-char-brk--34::after {content:'This \\brk SFM can contain only ⌊ or ⌋ but this does not match either of those.  [N34]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-39 {background:orange;border-right:4pt solid red;}
-.err-char-brk-post-39::after {content:'This \\brk SFM is not followed by a space or punctuation  [N39]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-brk-post-39::after {content:'This \\brk SFM is not followed by a space or punctuation or a \\f  [N39]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-pre-33 {background:orange;border-left:4pt solid red;}
 .err-char-brk-pre-33::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM, except if in a \\ros ...\\ros*.  [N33]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-rgi-pre-28-1 {background:orange;border-left:4pt solid red;}
@@ -426,9 +426,9 @@ div {white-space: normal;}
 .err-char-rgm-post-28-5 {background:orange;border-right:4pt solid red;}
 .err-char-rgm-post-28-5::after {content:'A letter should not immediately follow an \\rgm*.  [N28.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-mid-29-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-ros-mid-29-1::after {content:'There should be a space before the \\ros*.  [N29.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-mid-29-1::after {content:'There should not be a space before the \\ros*.  [N29.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-post-29-2 {background:orange;border-right:4pt solid red;}
-.err-char-ros-post-29-2::after {content:'There should not be a space after the \\ros*.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-post-29-2::after {content:'There should be a no breaking space after the \\ros*.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-pre-29-3 {background:orange;border-left:4pt solid red;}
 .err-char-ros-pre-29-3::after {content:'There should be a space or ellipsis before this \\ros.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tre-mid-30-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -4005,10 +4005,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="@caller != '+'">
                <xsl:text> err-note-f-pre-22-5</xsl:text>
             </xsl:if>
-            <!--ref 27.3 - rank=-->
-            <xsl:if test="translate($pretextlastchar,' ','_') = '_'">
-               <xsl:text> err-note-f-pre-27-3</xsl:text>
-            </xsl:if>
             <!--ref 27.4 - rank=-->
             <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
                <xsl:text> err-note-f-mid-27-4</xsl:text>
@@ -5373,7 +5369,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref 39 - rank=5-->
                <xsl:if test="contains(text(),'⌋') and not(position() = last()) and not(parent::cell)">
-                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’…)','_+++++++++++') = '+')">
+                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’…)','_+++++++++++') = '+' or following-sibling::*[name() = 'note'])">
                      <xsl:text> err-char-brk-post-39</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -5709,11 +5705,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:value-of select="concat(@style,' ',name())"/>
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 29.1 - rank=5-->
-               <xsl:if test="$lastchar != ' '">
+               <xsl:if test="$lastchar = ' '">
                   <xsl:text> err-char-ros-mid-29-1</xsl:text>
                </xsl:if>
                <!--ref 29.2 - rank=5-->
-               <xsl:if test="$postnodechar1 = ' '">
+               <xsl:if test="$postnodechar1 != '&amp;#X202F;'">
                   <xsl:text> err-char-ros-post-29-2</xsl:text>
                </xsl:if>
                <!--ref 29.3 - rank=5-->
