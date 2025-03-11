@@ -53,11 +53,23 @@ if errorlevel=0 (
   )
 )
 echo.
-if '%action%' == 'updateall' echo %yellow%Press enter to update this script in a new command prompt.%reset%
-pause
-if '%action%' == 'updateall' (
+if '%action%' == 'updateall' call :checkupdatemanager
+goto :eof
+
+:checkupdatemanager
+  echo %yellow% Do you also want to update this script, the TN Views manager?%reset%
+  echo.
+  echo      (y) Do you want to update the TN-Views-manager?
+  echo      (n) Skip?
+  echo.
+  set /P option=Type the lowercase option letter and press Enter: 
+  if '%option%' == 'y' set action=updatemanager
+  if '%option%' == 'n' goto :eof
+  if not defined action 
+goto :eof
+
+:updatemanager
   start "Update TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
-)
 goto :eof
 
 :noactionmenu
