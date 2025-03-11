@@ -1,5 +1,5 @@
 @echo off
-echo Updating the TN-views-manager.cmd from SIL source file.
+echo Updating the TN-views-manager.cmd from SIL source file on Github.
 echo The file being replaced is renamed "TN-views-manager.cmd.old"
 echo.
 set manager=C:\Users\Public\PT-TN-Views\TN-views-manager.cmd

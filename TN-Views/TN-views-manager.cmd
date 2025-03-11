@@ -226,8 +226,8 @@ goto :eof
   call :cmsclean "USX*.cms"
 
   rem get the files in the downloaded list
-  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
   call :getfile "TN-Public-list.txt"
+  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
   call :getfile "Install_Paratext_TN_Views.cmd"
   call :getfile "Uninstall_Paratext_TN_Views.cmd"
 
