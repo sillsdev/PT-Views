@@ -27,7 +27,6 @@ if not defined action (
   if not defined action call :noactionmenu
 )
 
-
 :main
 @echo.
 @echo %magenta%Paratext TN Views manager%reset%
@@ -57,7 +56,8 @@ if '%action%' == 'updateall' call :checkupdatemanager
 goto :eof
 
 :checkupdatemanager
-  echo %yellow% Do you also want to update this script, the TN Views manager?%reset%
+  echo %yellow%This script can't update itself.%reset%
+  echo %yellow% Do you also want to update this TN-views-manager script?%reset%
   echo.
   echo      (y) Do you want to update the TN-Views-manager?
   echo      (n) Skip?
@@ -65,7 +65,11 @@ goto :eof
   set /P option=Type the lowercase option letter and press Enter: 
   if '%option%' == 'y' set action=updatemanager
   if '%option%' == 'n' goto :eof
-  if not defined action 
+    if not defined action (
+    echo %yellow%  Invalid option. Choose from one of the above options.%reset%
+    timeout 5
+    cls
+    goto :checkupdatemanager 
 goto :eof
 
 :updatemanager
