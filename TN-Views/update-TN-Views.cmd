@@ -1,10 +1,13 @@
 ::@echo off
-@echo Updating the TN-views files from SIL source file on Github.
+@set magenta=[35m
+@set green=[32m
+@set cyan=[36m
+@set yellow=[33m
+@echo %magenta%Updating the TN-views files from SIL source file on Github.%reset%
 @echo.
 set manager="TN-views-manager.cmd"
-@echo %manager%
 pushd "C:\Users\Public\PT-TN-Views"
-@if not exist %manager% echo File not found 
+@if not exist %manager% echo %yellow%File not found %reset%
 call %manager% updateall
 popd
 echo.
