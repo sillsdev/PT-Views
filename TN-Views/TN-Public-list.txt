@@ -41,3 +41,5 @@ Views/USX-paragraph-view.xml
 Views/USX-paragraph-view.xslt
 Views/SFM-hilighter.xslt
 Views/SFM-hilighter.xml
+update-TN-Views.cmd
+update-TN-views-manager.cmd
