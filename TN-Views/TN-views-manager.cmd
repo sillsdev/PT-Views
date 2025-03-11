@@ -220,12 +220,17 @@ goto :eof
 :: Usage: call :updateall
   @echo %magenta%:updateall%reset%
   call :neededdir
+  rem remove related CMS files
+  call :cmsclean "TN*.cms"
+  call :cmsclean "SFM*.cms"
+  call :cmsclean "USX*.cms"
+
+  rem get the files in the downloaded list
+  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
   call :getfile "TN-Public-list.txt"
   call :getfile "Install_Paratext_TN_Views.cmd"
   call :getfile "Uninstall_Paratext_TN_Views.cmd"
 
-  rem get the files in the downloaded list
-  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
   
   rem update the files in Views and cms folder if there already
   echo.
@@ -246,4 +251,10 @@ goto :eof
   echo The first parameter can be one of: updateall, uninstall or toggle
   echo The second parameter is only used to follow toggle.
   echo The second parameter options are: TNDD, TNND, SFM or USX
+goto :eof
+
+:cmsclean
+  set filespec=%~1
+  del /q "%mpppath%cms\%filespec%"
+  del /q "%installpath%\cms\%filespec%"
 goto :eof
