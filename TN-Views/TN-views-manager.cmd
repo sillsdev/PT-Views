@@ -9,6 +9,7 @@ set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 set action=%1
 set TNxD=%2
 @set redbg=[101m
+@set red=[31m
 @set magentabg=[105m
 @set magenta=[35m
 @set green=[32m
@@ -52,8 +53,21 @@ if errorlevel=0 (
   )
 )
 echo.
-if '%action%' == 'updateall' call :checkupdatemanager
+rem get the latest version of self
+if '%action%' == 'updateall' call :getmanagerupdate
+rem replace self with latest version.
+if '%action%' == 'updateall' copy /y "%installpath%\new-%manager%" "%installpath%\%manager%"
 goto :eof
+
+:getmanagerupdate
+  pushd "%installpath%"
+  if exist "new-%manager%" del "new-%manager%"
+  call curl --ssl-no-revoke -o "%manager%" %url-base%/new-%manager%
+  echo.
+  if exist "new-%manager%" echo %green%Latest manager updated.%reset%
+  popd
+goto :eof
+
 
 :checkupdatemanager
   echo %yellow%This script can't update itself.%reset%
@@ -66,7 +80,7 @@ goto :eof
   if '%option%' == 'y' set action=updatemanager
   if '%option%' == 'n' goto :eof
     if not defined action (
-    echo %yellow%  Invalid option. Choose from one of the above options.%reset%
+    echo %red%  Invalid option. Choose from one of the above options.%reset%
     timeout 5
     cls
     goto :checkupdatemanager 
@@ -90,7 +104,7 @@ goto :eof
   if '%option%' == 'u' set action=uninstall
   if '%option%' == 'd' set action=commandlinedoc
   if not defined action (
-    echo %yellow%  Invalid option. Choose from one of the above options.%reset%
+    echo %red%  Invalid option. Choose from one of the above options.%reset%
     timeout 5
     cls
     goto :noactionmenu
