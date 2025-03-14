@@ -4,14 +4,16 @@
 :: Updated: 2024-10-23
 :: Updated: 2025-03-12 added method to ask about update.
 :: Updated: 2025-03-14 testing self update with :getmanagerupdate and end of main.
+:: Updated: 2025-03-14b removed updating manager.
 @echo off
-cls
 set installpath=C:\Users\Public\PT-TN-Views
 set manager=TN-views-manager.cmd
 set viewsaction=user-views-action.cmd
 set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 set action=%1
 set TNxD=%2
+set timepause=%3
+if not defined timepause set timepause=30
 @set redbg=[101m
 @set red=[31m
 @set magentabg=[105m
@@ -56,31 +58,7 @@ if not defined action (
       pause
     )
   )
-  echo.
-  rem get the latest version of self
-  if '%action%' == 'updateall' call :checkupdatemanager
-goto :eof
-
-:checkupdatemanager
-  echo %yellow%This script can't update itself.%reset%
-  echo %yellow% Do you also want to update this TN-views-manager script?%reset%
-  echo.
-  echo      (y) Do you want to update the TN-Views-manager?
-  echo      (n) Skip?
-  echo.
-  choice /C:yn /T:8,y
-  rem set /P option=Type the lowercase option letter and press Enter: 
-  if '%option%' == 'y' set action=updatemanager
-  if '%option%' == 'n' goto action=eof
-    if not defined action (
-    echo %red%  Invalid option. Choose from one of the above options.%reset%
-    timeout 5
-    cls
-    goto :checkupdatemanager 
-goto :eof
-
-:updatemanager
-  start "Update TN-Views-manager" "%installpath%\update-TN-Views-manager.cmd" 5
+  timeout %timepause%
 goto :eof
 
 :noactionmenu
@@ -241,7 +219,7 @@ goto :eof
 :updateall
 :: Description: Update all view from internet
 :: Usage: call :updateall
-  @echo %magenta%:updateall%reset%
+  @echo %magenta%Updating all files (except manager)%reset%
   call :neededdir
   rem remove related CMS files
   call :cmsclean "TN*.cms"

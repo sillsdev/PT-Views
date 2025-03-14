@@ -43,3 +43,4 @@ Views/SFM-hilighter.xslt
 Views/SFM-hilighter.xml
 update-TN-Views.cmd
 update-TN-views-manager.cmd
+Uninstall_Paratext_TN_Views.cmd

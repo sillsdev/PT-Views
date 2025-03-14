@@ -1,8 +1,8 @@
 \check Uninstall TN Views
 \submenu TN Views
 \script TN_Views_uninstall.py
-\description (Ignore the "Input Project" box above.) This will UNINSTALL TN Views in the Views menu and this Custom Tools > TN Views, after Paratext restart. This will uninstall all TN views: TNDD, TNND and USX. 
+\description (Ignore the "Input Project" box above.) This will UNINSTALL TN Views in the Views menu and this Custom Tools > TN Views, after Paratext restart. This will uninstall all TN views: TNDD, TNND, SFM and USX. 
 \helpFile TN-Views-Documentation.pdf
 \noText
-\rank 10
+\rank 11
 \utf8
