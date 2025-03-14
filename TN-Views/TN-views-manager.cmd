@@ -1,6 +1,9 @@
 :: TN Views manager
 :: Written by: ian_mcquay@sil.org
-:: Date updated: 2024-06-19; 2024-10-23
+:: Date updated: 2024-06-19; 
+:: Updated: 2024-10-23
+:: Updated: 2025-03-12 added method to ask about update.
+:: Updated: 2025-03-14 testing self update with :getmanagerupdate and end of main.
 @echo off
 cls
 set installpath=C:\Users\Public\PT-TN-Views
