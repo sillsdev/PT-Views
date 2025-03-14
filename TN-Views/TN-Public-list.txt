@@ -41,6 +41,6 @@ Views/USX-paragraph-view.xml
 Views/USX-paragraph-view.xslt
 Views/SFM-hilighter.xslt
 Views/SFM-hilighter.xml
-update-TN-Views.cmd
 update-TN-views-manager.cmd
 Uninstall_Paratext_TN_Views.cmd
+update-TN-Views.cmd

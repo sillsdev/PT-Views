@@ -13,7 +13,7 @@
 set manager=TN-views-manager.cmd
 set installpath=C:\Users\Public\PT-TN-Views
 set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
-set cmdfile=%installpath%\%manager%
+
 echo %green%Updating the TN-views-manager.cmd from SIL source file on Github.%reset%
 echo %green%The file being replaced is renamed "TN-views-manager.cmd.old"%reset%
 echo.
