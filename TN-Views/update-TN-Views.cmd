@@ -8,7 +8,8 @@
 set manager="TN-views-manager.cmd"
 set updatemanager="update-TN-views-manager.cmd"
 pushd "C:\Users\Public\PT-TN-Views"
-@if not exist %manager% echo %yellow%File not found %reset%
+@if not exist %manager% echo %yellow%File %manager% not found %reset% & pause
+@if not exist %updatemanager% echo %yellow%File %updatemanager% not found %reset% & pause
 call %updatemanager%
 call %manager% updateall
 popd
