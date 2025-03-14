@@ -17,4 +17,4 @@ call %updatemanager% 2
 call %manager% updateall
 popd
 echo.
-pause
+timeout 30
