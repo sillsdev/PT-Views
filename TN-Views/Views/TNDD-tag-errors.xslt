@@ -29,7 +29,7 @@
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-01-30</xsl:variable>
+   <xsl:variable name="moddate">2025-03-14</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -168,7 +168,7 @@ div {white-space: normal;}
 .err-char-ft-mid-83-12 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-ft-mid-83-12::after {content:'The hyphen in the verse range in this \\ft should be an en dash.  [D83.12]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---24 {background:orange;}
-.err-char---24::after {content:'There is a space before the closing SFM. Best to put the space after the close, except that after a  \\ros* it should be a “narrow no-break-space” \u202F.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char---24::after {content:'There is a space before the closing SFM. The space must be after the closing SFM, unless you are connecting underining between words while changing to another SFM.  [D24]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---C05-1 {background:orange;}
 .err-char---C05-1::after {content:'This character SFM is empty  [DC05.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char--mid-87-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -200,7 +200,7 @@ div {white-space: normal;}
 .err-char-ros--66 {background:orange;}
 .err-char-ros--66::after {content:'There is no embedded \\+brk in this \\ros  [D66]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-post-83-2 {background:orange;border-right:4pt solid red;}
-.err-char-ros-post-83-2::after {content:'There should be a “narrow no-break-space” \u202F after the \\ros*.  [D83.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-post-83-2::after {content:'There should be a narrow no-break-space (\\u202F) after the \\ros*. Delete the current space after the \\ros* and type in a normal space. Autocorrect will change it to the right character.  [D83.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-pre-6 {background:orange;border-left:4pt solid red;}
 .err-char-brk-pre-6::after {content:'This \\brk SFM is not preceded by a space or quotes or left parenthesis  [D6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-9 {background:orange;border-right:4pt solid red;}
