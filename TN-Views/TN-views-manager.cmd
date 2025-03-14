@@ -7,6 +7,7 @@
 @echo off
 cls
 set installpath=C:\Users\Public\PT-TN-Views
+set manager=TN-views-manager.cmd
 set viewsaction=user-views-action.cmd
 set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 set action=%1
@@ -63,11 +64,17 @@ if '%action%' == 'updateall' copy /y "%installpath%\new-%manager%" "%installpath
 goto :eof
 
 :getmanagerupdate
+  @echo %green%Attempting download of:%reset% new-%manager%
+  @echo %green%    With line endings conversion from LF to CRLF%cyan%
   pushd "%installpath%"
   if exist "new-%manager%" del "new-%manager%"
-  call curl --ssl-no-revoke -o "%manager%" %url-base%/new-%manager%
-  echo.
-  if exist "new-%manager%" echo %green%Latest manager updated.%reset%
+  call curl --ssl-no-revoke  %url-base%/%manager% | MORE /P > "new-%manager%"
+  FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
+  @if "%size%" == "14" (
+    @echo %redbg%Error: %manager% not found at %url-base%. Failed  with size = %size% %reset%
+  ) else (
+    @if exist "new-%manager%" echo %green%Updated: %manager% %reset% with size = %size%
+  )
   popd
 goto :eof
 
