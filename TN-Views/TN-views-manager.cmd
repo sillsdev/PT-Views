@@ -33,51 +33,33 @@ if not defined action (
 )
 
 :main
-@echo.
-@echo %magenta%Paratext TN Views manager%reset%
-@echo.
-set mpppath=
-set drive=
-set curdir=%cd%
-call :mpppathquery 8
+  @echo.
+  @echo %magenta%Paratext TN Views manager%reset%
+  @echo.
+  set mpppath=
+  set drive=
+  set curdir=%cd%
+  call :mpppathquery 8
 
-@echo %green%Paratext path found at:%reset% %mpppath%
-@echo.
-if errorlevel=0 (
-    call :%action%
-) else (
-    @echo Checking for Paratext 9 settings
-    call :mpppathquery 9
+  @echo %green%Paratext path found at:%reset% %mpppath%
+  @echo.
   if errorlevel=0 (
-    call :runaction
+      call :%action%
   ) else (
-    echo Neither Paratext 8 or 9 installation found.
-    echo No files copied!
-    pause
+      @echo Checking for Paratext 9 settings
+      call :mpppathquery 9
+    if errorlevel=0 (
+      call :runaction
+    ) else (
+      echo Neither Paratext 8 or 9 installation found.
+      echo No files copied!
+      pause
+    )
   )
-)
-echo.
-rem get the latest version of self
-if '%action%' == 'updateall' call :getmanagerupdate
-rem replace self with latest version.
-if '%action%' == 'updateall' copy /y "%installpath%\new-%manager%" "%installpath%\%manager%"
+  echo.
+  rem get the latest version of self
+  if '%action%' == 'updateall' call :checkupdatemanager
 goto :eof
-
-:getmanagerupdate
-  @echo %green%Attempting download of:%reset% new-%manager%
-  @echo %green%    With line endings conversion from LF to CRLF%cyan%
-  pushd "%installpath%"
-  if exist "new-%manager%" del "new-%manager%"
-  call curl --ssl-no-revoke  %url-base%/%manager% | MORE /P > "new-%manager%"
-  FOR /F "usebackq" %%A IN ('%outfile%') DO @set size=%%~zA
-  @if "%size%" == "14" (
-    @echo %redbg%Error: %manager% not found at %url-base%. Failed  with size = %size% %reset%
-  ) else (
-    @if exist "new-%manager%" echo %green%Updated: %manager% %reset% with size = %size%
-  )
-  popd
-goto :eof
-
 
 :checkupdatemanager
   echo %yellow%This script can't update itself.%reset%
@@ -86,9 +68,10 @@ goto :eof
   echo      (y) Do you want to update the TN-Views-manager?
   echo      (n) Skip?
   echo.
-  set /P option=Type the lowercase option letter and press Enter: 
+  choice /C:yn /T:8,y
+  rem set /P option=Type the lowercase option letter and press Enter: 
   if '%option%' == 'y' set action=updatemanager
-  if '%option%' == 'n' goto :eof
+  if '%option%' == 'n' goto action=eof
     if not defined action (
     echo %red%  Invalid option. Choose from one of the above options.%reset%
     timeout 5

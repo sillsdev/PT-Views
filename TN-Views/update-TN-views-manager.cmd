@@ -1,10 +1,16 @@
 :: update-TN-views-manager.cmd
-@echo on
+@echo off
+@set redbg=[101m
 @set red=[31m
 @set magenta=[35m
 @set green=[32m
 @set cyan=[36m
 @set yellow=[33m
+@set reset=[0m
+set timepause=%1
+if not defined timepause set timepause=30
+echo %magenta%Update TN Views manager.%reset%
+echo.
 echo %green%Updating the TN-views-manager.cmd from SIL source file on Github.%reset%
 echo %green%The file being replaced is renamed "TN-views-manager.cmd.old"%reset%
 echo.
@@ -24,4 +30,4 @@ ren "%manager%" "%manager%.old"
   )
 
 popd
-timeout 30
+timeout %timepause%
