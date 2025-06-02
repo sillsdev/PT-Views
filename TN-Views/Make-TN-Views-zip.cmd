@@ -2,21 +2,22 @@
 :: Make Views.zip of files to be installed
 :: Written by: Ian McQuay
 :: Date: 2019-12-10
-set view=bamboo
+set view=TN-Views
 set info2=on
 set new=0
 set prince=C:\programs\prince-15.1-win64\bin\prince.exe
 :main
-call :colorvar
-call :countnewer "%cd%\docs\TN-views.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TN-Views-custom.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TN-Views-install.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TNDD-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\TNND-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\SFM-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-call :countnewer "%cd%\docs\USX-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
-if %new%. gtr 0. echo Recreating the PDF
-if %new%. gtr 0. call :pdf
+::call :colorvar
+::call :countnewer "%cd%\docs\TN-views.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\TN-Views-custom.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\TN-Views-install.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\TNDD-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\TNND-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\SFM-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::call :countnewer "%cd%\docs\USX-info.md" "%cd:TN-Views=%Installers\TN-Views.zip"
+::if %new%. gtr 0. echo Recreating the PDF
+::if %new%. gtr 0. call :pdf
+call :pdf
 call :zip
 pause
 goto :eof
@@ -35,7 +36,7 @@ goto :eof
 call :date
 call :created
 copy docs\TN-Views.md+docs\TN-Views-install.md+docs\TN-Views-custom.md+docs\TNDD-info.md+docs\TNND-info.md+docs\USX-info.md+docs\SFM-info.md+docs\credits.md+docs\created.md tmp\%view%-final.md
-call mdpdf tmp\TN-final.md cms\TN-Views-Documentation.pdf
+call mdpdf tmp\%view%-final.md cms\%view%-Documentation.pdf
 :: mdpdf is a nodejs script https://github.com/BlueHatbRit/mdpdf
 rem call make-TN-index.ps
 set readme=readme.md
@@ -97,7 +98,7 @@ goto :eof
 :: Functions called: funcend funcbegin
 :: Created: 2016-05-04
 :: Modified: 2024-09-11
-  @call :funcbegin %0 "'%~1' '%~2' '%~3'"
+::  @call :funcbegin %0 "'%~1' '%~2' '%~3'"
   call :getdatetime
   Set _mm=%_mm:~-2%
   Set _dd=%_dd:~-2%
@@ -122,7 +123,7 @@ goto :eof
   set curyy=%_yyyy:~2%
   set curmm=%_mm%
   set curdd=%_dd%
-  @call :funcend %0
+::  @call :funcend %0
 goto :eof
 
 :colorvar
