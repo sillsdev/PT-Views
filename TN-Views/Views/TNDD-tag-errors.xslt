@@ -9,6 +9,9 @@
    <xsl:variable name="sq">'</xsl:variable>
    <xsl:variable name="dq">"</xsl:variable>
    <xsl:variable name="project">TNDD</xsl:variable>
+   <xsl:variable name="translatetextswitch">1</xsl:variable>
+   <xsl:variable name="translatefind"> </xsl:variable>
+   <xsl:variable name="translatereplace">˽</xsl:variable>
    <xsl:variable name="ellipsis">…</xsl:variable>
    <xsl:variable name="invalidpuncpost-f">.,?!’”</xsl:variable>
    <xsl:variable name="invalidpuncpost-f-sub">%%%%%%</xsl:variable>
@@ -23,13 +26,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789…).?!</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[(…)]/ :–-“‘.?! ” ’</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
+   <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-03-14</xsl:variable>
+   <xsl:variable name="moddate">2025-06-12</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -50,14 +53,20 @@
    <xsl:variable name="validvletendash">abcdefghij–,</xsl:variable>
    <xsl:variable name="validvletpunc">–abcdefghij,</xsl:variable>
    <xsl:variable name="validvletsub">$$$$$$$$$$</xsl:variable>
-   <xsl:variable name="version">9</xsl:variable>
+   <xsl:variable name="version">9.5</xsl:variable>
    <xsl:variable name="view"> tag errors view </xsl:variable>
+   <xsl:variable name="test">+ </xsl:variable>
+   <xsl:variable name="N29-2find">+ …</xsl:variable>
+   <xsl:variable name="N29-2replace">_++</xsl:variable>
    <xsl:template match="chapter[@number]">
       <xsl:if test="count(preceding::chapter[@number]) = 0">
          <xsl:call-template name="style"/>
       </xsl:if>
       <xsl:element name="h4">
          <xsl:value-of select="concat('Version: ',$version,' ',$project,$view,$modified,$moddate)"/>
+      </xsl:element>
+      <xsl:element name="div">
+         <xsl:value-of select="concat('In this view, the ',substring($translatereplace,1,1),' character represents the narrow no-break space.')"/>
       </xsl:element>
       <xsl:element name="div">
          <xsl:attribute name="class">
@@ -127,6 +136,7 @@
    <xsl:template name="style">
       <style type="text/css">
 div {white-space: normal;}
+h4 {margin: 1em 0 1em 0;}
 .usx {line-height:1.8;}
 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center;}
 .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%;}
@@ -217,6 +227,8 @@ div {white-space: normal;}
 .err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C06-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C06-3::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
@@ -225,6 +237,10 @@ div {white-space: normal;}
 .err-note---C05-3::after {content:'This note SFM has text but no caller. The text should be in an \\ft.  [DC05.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note---C05-2 {background:orange;}
 .err-note---C05-2::after {content:'This note SFM is empty  [DC05.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C07-1::after {content:'Right single quotes should be separated from right double quotes by a \\u202F narrow no-break space.  [DC07.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C07-3::after {content:'Left double quotes should be separated from left single quotes by a \\u202F narrow no-break space.  [DC07.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para---43 {background:peachpuff;}
 .err-para---43::after {content:'This paragraph marker is empty, and may not be allowed here.  [D43]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-87-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -375,8 +391,25 @@ div {white-space: normal;}
 .err-verse-v-mid-83-7::after {content:'A \\v cannot have verse parts in it.  [D83.7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 </style>
    </xsl:template>
+   <xsl:template match="text()">
+      <xsl:choose>
+         <xsl:when test="$translatetextswitch = '1'">
+            <xsl:value-of select="translate(.,$translatefind,$translatereplace)"/>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:value-of select="."/>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
    <xsl:template match="text()" mode="fntext">
-      <xsl:value-of select="."/>
+      <xsl:choose>
+         <xsl:when test="$translatetextswitch = '1'">
+            <xsl:value-of select="translate(.,$translatefind,$translatereplace)"/>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:value-of select="."/>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
    <xsl:template match="*" mode="fntext">
       <xsl:apply-templates select="node()" mode="fntext"/>
@@ -1291,16 +1324,16 @@ div {white-space: normal;}
          <xsl:comment> notetextlen = <xsl:value-of select="concat($sq,$notetextlen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="lastnodelast4char"
-                    select="substring($lastnode,$lastnodelen - 3,4)"/>
+      <xsl:variable name="lastnodelast5char"
+                    select="substring($lastnode,$lastnodelen - 4,5)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnodelast4char = <xsl:value-of select="concat($sq,$lastnodelast4char,$sq,' ')"/>
+         <xsl:comment> lastnodelast5char = <xsl:value-of select="concat($sq,$lastnodelast5char,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="lastnodelast4charmod"
-                    select="translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)"/>
+      <xsl:variable name="lastnodelast5charmod"
+                    select="translate($lastnodelast5char,$letulcendpunc,$letulcendpuncsub)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnodelast4charmod = <xsl:value-of select="concat($sq,$lastnodelast4charmod,$sq,' ')"/>
+         <xsl:comment> lastnodelast5charmod = <xsl:value-of select="concat($sq,$lastnodelast5charmod,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -1318,15 +1351,21 @@ div {white-space: normal;}
                <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
             <!--ref C06.1 - rank=-->
-            <xsl:if test="not($lastnodelast4charmod = '$$$%' or $lastnodelast4charmod = '$$%”' or $lastnodelast4charmod = '%’ ”' or substring($lastnodelast4charmod,3,2) = '$%')">
-               <xsl:if test="string-length($lastnodelast4charmod) = 4">
+            <xsl:if test="not(contains($lastnodelast5charmod,'$%'))">
+               <xsl:if test="string-length($lastnodelast5char)  = 5">
                   <xsl:text> err-note-f-mid-C06-1</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref C06.2 - rank=-->
-            <xsl:if test="not(contains($lastnodelast4charmod,'%'))">
-               <xsl:if test="string-length($lastnodelast4charmod) = 3 or string-length($lastnodelast4charmod) = 2  or string-length($lastnodelast4charmod) = 1">
+            <xsl:if test="not(contains($lastnodelast5charmod,'%'))">
+               <xsl:if test="string-length($lastnodelast5char) &lt; 5 and string-length($lastnodelast5char) &gt; 0">
                   <xsl:text> err-note-f-mid-C06-2</xsl:text>
+               </xsl:if>
+            </xsl:if>
+            <!--ref C06.3 - rank=-->
+            <xsl:if test="contains($lastnodelast5charmod,'$%$')">
+               <xsl:if test="string-length($lastnodelast5char)  = 5">
+                  <xsl:text> err-note-f-mid-C06-3</xsl:text>
                </xsl:if>
             </xsl:if>
             <!--ref 56 - rank=5-->
@@ -1412,7 +1451,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--specific para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--specific para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1442,7 +1489,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1499,7 +1554,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1538,7 +1601,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1577,7 +1648,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1638,7 +1717,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1710,7 +1797,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -1906,7 +2001,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -2117,7 +2220,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
@@ -2170,7 +2281,15 @@ div {white-space: normal;}
       <xsl:element name="div">
          <xsl:attribute name="class">
             <xsl:value-of select="concat(@style,' ',name())"/>
-            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref 43 - rank=0-->
+            <xsl:if test="preceding::chapter"><!--common para errors--><!--ref C07.1 - rank=-->
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+                  <xsl:text> err-para--mid-C07-1</xsl:text>
+               </xsl:if>
+               <!--ref C07.3 - rank=-->
+               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+                  <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
                      <xsl:text> err-para---43</xsl:text>
