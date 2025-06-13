@@ -35,7 +35,7 @@ goto :eof
 :pdf
 call :date
 call :created
-copy docs\TN-Views.md+docs\TN-Views-install.md+docs\TN-Views-custom.md+docs\TNDD-info.md+docs\TNND-info.md+docs\USX-info.md+docs\SFM-info.md+docs\credits.md+docs\created.md tmp\%view%-final.md
+copy docs\TN-Views.md+docs\TN-Views-install.md+docs\TN-Views-custom.md+docs\TNDD-info.md+docs\TNND-info.md+docs\USX-info.md+docs\SFM-info.md+docs\credits.md+docs\release-notes.md+docs\created.md tmp\%view%-final.md
 call mdpdf tmp\%view%-final.md cms\%view%-Documentation.pdf
 :: mdpdf is a nodejs script https://github.com/BlueHatbRit/mdpdf
 rem call make-TN-index.ps
