@@ -26,13 +26,13 @@
    <xsl:variable name="letucnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</xsl:variable>
    <xsl:variable name="letucnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</xsl:variable>
-   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[(…)]/ :–-“‘.?! ” ’</xsl:variable>
+   <xsl:variable name="letulcendpunc">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[(…)]/:–-“‘.?!  ” ’˽</xsl:variable>
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-06-12</xsl:variable>
+   <xsl:variable name="moddate">2025-06-13</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -66,7 +66,9 @@
          <xsl:value-of select="concat('Version: ',$version,' ',$project,$view,$modified,$moddate)"/>
       </xsl:element>
       <xsl:element name="div">
-         <xsl:value-of select="concat('In this view, the ',substring($translatereplace,1,1),' character represents the narrow no-break space.')"/>
+         <b>
+            <xsl:value-of select="concat('In this view, the ',substring($translatereplace,1,1),' character represents the narrow no-break space.')"/>
+         </b>
       </xsl:element>
       <xsl:element name="div">
          <xsl:attribute name="class">
@@ -136,7 +138,7 @@
    <xsl:template name="style">
       <style type="text/css">
 div {white-space: normal;}
-h4 {margin: 1em 0 1em 0;}
+h4 {margin: 1em 0 4pt 0;}
 .usx {line-height:1.8;}
 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center;}
 .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%;}
@@ -223,12 +225,12 @@ h4 {margin: 1em 0 1em 0;}
 .err-char-brk-pre-7::after {content:'This \\brk SFM should only occur immediately after an \\imp* or \\rgi* SFM, except if in a \\ros ...\\ros*.  [D7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-5 {background:orange;border-right:4pt solid red;}
 .err-char-brk-post-5::after {content:'There should not be a space between this \\brk and the following \\imp.  [D5]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note-f-mid-C06-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note-f-mid-C06-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-2::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note-f-mid-C06-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-C06-3::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f--C06-1 {background:orange;}
+.err-note-f--C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [DC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C07-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C07-2::after {content:'Right double quotes should be separated from right single quotes by a \\u202F narrow no-break space.  [DC07.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C07-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C07-4::after {content:'Left single quotes should be separated from left double quotes by a \\u202F narrow no-break space.  [DC07.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-56 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-56::after {content:'This footnote is not in the standard example footnote formatting for TNDD (\\ros \\+brk...).  [D56]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-57 {background:orange;border-right:4pt solid red;}
@@ -241,6 +243,8 @@ h4 {margin: 1em 0 1em 0;}
 .err-para--mid-C07-1::after {content:'Right single quotes should be separated from right double quotes by a \\u202F narrow no-break space.  [DC07.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C07-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C07-3::after {content:'Left double quotes should be separated from left single quotes by a \\u202F narrow no-break space.  [DC07.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08::after {content:'The three periods should be an ellipsis.  [DC08]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para---43 {background:peachpuff;}
 .err-para---43::after {content:'This paragraph marker is empty, and may not be allowed here.  [D43]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-87-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -1304,36 +1308,21 @@ h4 {margin: 1em 0 1em 0;}
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="lastnode" select="node()[last()]"/>
+      <xsl:variable name="fnstringmod"
+                    select="translate(.,$letulcendpunc,$letulcendpuncsub)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnode = <xsl:value-of select="concat($sq,$lastnode,$sq,' ')"/>
+         <xsl:comment> fnstringmod = <xsl:value-of select="concat($sq,$fnstringmod,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="notetext" select="text()"/>
+      <xsl:variable name="fnstringmod2" select="translate($fnstringmod,'˽','')"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> notetext = <xsl:value-of select="concat($sq,$notetext,$sq,' ')"/>
+         <xsl:comment> fnstringmod2 = <xsl:value-of select="concat($sq,$fnstringmod2,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="lastnodelen" select="string-length($lastnode)"/>
+      <xsl:variable name="fnstringmodlastchar"
+                    select="substring($fnstringmod2,string-length($fnstringmod2),1)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnodelen = <xsl:value-of select="concat($sq,$lastnodelen,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="notetextlen" select="string-length($notetext)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> notetextlen = <xsl:value-of select="concat($sq,$notetextlen,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="lastnodelast5char"
-                    select="substring($lastnode,$lastnodelen - 4,5)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnodelast5char = <xsl:value-of select="concat($sq,$lastnodelast5char,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="lastnodelast5charmod"
-                    select="translate($lastnodelast5char,$letulcendpunc,$letulcendpuncsub)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> lastnodelast5charmod = <xsl:value-of select="concat($sq,$lastnodelast5charmod,$sq,' ')"/>
+         <xsl:comment> fnstringmodlastchar = <xsl:value-of select="concat($sq,$fnstringmodlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -1351,22 +1340,16 @@ h4 {margin: 1em 0 1em 0;}
                <xsl:text> err-note---C05-2</xsl:text>
             </xsl:if>
             <!--ref C06.1 - rank=-->
-            <xsl:if test="not(contains($lastnodelast5charmod,'$%'))">
-               <xsl:if test="string-length($lastnodelast5char)  = 5">
-                  <xsl:text> err-note-f-mid-C06-1</xsl:text>
-               </xsl:if>
+            <xsl:if test="$fnstringmodlastchar != '%'">
+               <xsl:text> err-note-f--C06-1</xsl:text>
             </xsl:if>
-            <!--ref C06.2 - rank=-->
-            <xsl:if test="not(contains($lastnodelast5charmod,'%'))">
-               <xsl:if test="string-length($lastnodelast5char) &lt; 5 and string-length($lastnodelast5char) &gt; 0">
-                  <xsl:text> err-note-f-mid-C06-2</xsl:text>
-               </xsl:if>
+            <!--ref C07.2 - rank=-->
+            <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:text> err-note-f-mid-C07-2</xsl:text>
             </xsl:if>
-            <!--ref C06.3 - rank=-->
-            <xsl:if test="contains($lastnodelast5charmod,'$%$')">
-               <xsl:if test="string-length($lastnodelast5char)  = 5">
-                  <xsl:text> err-note-f-mid-C06-3</xsl:text>
-               </xsl:if>
+            <!--ref C07.4 - rank=-->
+            <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:text> err-note-f-mid-C07-4</xsl:text>
             </xsl:if>
             <!--ref 56 - rank=5-->
             <xsl:if test="parent::*[@style = 'ml1']">
@@ -1459,6 +1442,10 @@ h4 {margin: 1em 0 1em 0;}
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
+               </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
@@ -1496,6 +1483,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -1562,6 +1553,10 @@ h4 {margin: 1em 0 1em 0;}
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
+               </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
@@ -1609,6 +1604,10 @@ h4 {margin: 1em 0 1em 0;}
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
+               </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
@@ -1655,6 +1654,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -1724,6 +1727,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -1804,6 +1811,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -2008,6 +2019,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
@@ -2228,6 +2243,10 @@ h4 {margin: 1em 0 1em 0;}
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
+               </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
                   <xsl:if test="not(@style = 'b' or @style = 'b2' or @style = 'ntn' or @style = 'mt9' or @style = 'rem')">
@@ -2288,6 +2307,10 @@ h4 {margin: 1em 0 1em 0;}
                <!--ref C07.3 - rank=-->
                <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
+               </xsl:if>
+               <!--ref C08 - rank=-->
+               <xsl:if test="contains(.,'...')">
+                  <xsl:text> err-para--mid-C08</xsl:text>
                </xsl:if>
                <!--ref 43 - rank=0-->
                <xsl:if test="string-length(text()) = 0 and not(*)">
