@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Paratext TN Views"
-#define MyAppVersion "9"
+#define MyAppVersion "8"
 #define MyAppPublisher "SIL International"
 #define MyAppURL "https://github.com/sillsdev/PT-Views/"
 
@@ -29,25 +29,19 @@ DisableProgramGroupPage=Yes
 LicenseFile=LICENSE
 InfoAfterFile=TN-Views\installed.md
 OutputDir=Installers
-OutputBaseFilename=Paratext-TN-Views-types-unsigned
+OutputBaseFilename=Paratext-TN-Views-components-unsigned
 Compression=lzma
 SolidCompression=yes
 
 [Types]
-Name: "tnxd"; Description: "Install TNND and TNDD Views."
-Name: "tndd"; Description: "Install TNDD Views only."
-Name: "tnnd"; Description: "Install TNND Views only."
-Name: "usx"; Description: "Install USX Views only."
-Name: "sfm"; Description: "Install SFM Views only."
-Name: "usxsfm"; Description: "Install SFM & USX Views."
-Name: "complete";  Description: "Install TNDD, TNND, SFM and USX Views" 
+Name: "custom"; Description: "Install TN Views"
 
 [Components]
-Name: main;     Description: "Install essential files"; Types: tnxd tndd tnnd usx sfm usxsfm complete;
-Name: tndd;     Description: "Make TNDD views available in Paratext"; Types: tnnd tnxd complete; 
-Name: tnnd;     Description: "Make TNND views available in Paratext"; Types: tndd tnxd complete;  
-Name: usx;      Description: "Make USX views available in Paratext"; Types: usx usxsfm complete; 
-Name: sfm;      Description: "Make SFM views available in Paratext"; Types: sfm usxsfm complete;
+Name: main;     Description: "Install essential files"; Types: custom; Flags: fixed; 
+Name: tndd;     Description: "Make TNDD views available in Paratext";  Types: custom;
+Name: tnnd;     Description: "Make TNND views available in Paratext";  Types: custom;
+Name: usx;      Description: "Make USX views available in Paratext";
+Name: sfm;      Description: "Make SFM views available in Paratext"; 
 
 [Files]
 ; main install all files to install dir
@@ -64,10 +58,12 @@ Source: "TN-Views\cms\TN_*.*";            DestDir: "{#MPP}\cms"  ;    Components
 ; TNDD to PT
 Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Components: tndd;
 Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tndd;
+Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Components: tndd;
 
 ; TNND to PT
 Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Components: tnnd;
 Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tnnd;
+Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Components: tnnd;
 
 ; USX  tasks
 Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ; Components: usx;

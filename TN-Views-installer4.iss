@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Paratext TN Views"
-#define MyAppVersion "9"
+#define MyAppVersion "8"
 #define MyAppPublisher "SIL International"
 #define MyAppURL "https://github.com/sillsdev/PT-Views/"
 
@@ -64,10 +64,12 @@ Source: "TN-Views\cms\TN_*.*";            DestDir: "{#MPP}\cms"  ;    Components
 ; TNDD to PT
 Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Components: tndd;
 Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tndd;
+Source: "TN-Views\cms\TNDD_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Components: tndd;
 
 ; TNND to PT
 Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Components: tnnd;
 Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tnnd;
+Source: "TN-Views\cms\TNND_Views_show.cms"; DestDir: "{#MPP}\cms" ;   Components: tnnd;
 
 ; USX  tasks
 Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ; Components: usx;

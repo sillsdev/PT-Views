@@ -1,0 +1,162 @@
+[Config]
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.CompileOnBackground=0
+Compilator.ProgSaveAll=0
+Compilator.ProgRunSelection=0
+Compilator.LogType=0
+Compilator.LogEncoding=0
+DefaultDir=D:\All-SIL-Publishing\Github-sillsdev\PT-Views\TN-Views
+DefaultCP=65001
+LogtoEnd=1
+DontOpen=0
+AbsolutePath=0
+FileFormat=0
+ProjectFilesOnly=0
+Extensions=*.*
+[Project tree]
+TN-Views
+	+TN-Views
+		+cms
+			TN-Views\cms\SFM_Views_hide.cms
+			TN-Views\cms\SFM_Views_show.cms
+			TN-Views\cms\SFM_Views_toggle.py
+			TN-Views\cms\TN_Views_uninstall.cms
+			TN-Views\cms\TN_Views_uninstall.py
+			TN-Views\cms\TN_Views_update.cms
+			TN-Views\cms\TN_Views_update.py
+			TN-Views\cms\TNDD_Views_hide.cms
+			TN-Views\cms\TNDD_Views_show.cms
+			TN-Views\cms\TNDD_Views_toggle.py
+			TN-Views\cms\TNND_Views_hide.cms
+			TN-Views\cms\TNND_Views_show.cms
+			TN-Views\cms\TNND_Views_toggle.py
+			TN-Views\cms\TN-Views-Documentation.pdf
+			TN-Views\cms\USX_Views_hide.cms
+			TN-Views\cms\USX_Views_show.cms
+			TN-Views\cms\USX_Views_toggle.py
+		-docs
+			TN-Views\docs\created.md
+			TN-Views\docs\credits.md
+			TN-Views\docs\files.txt
+			TN-Views\docs\SFM-info.md
+			TN-Views\docs\TNDD-info.md
+			TN-Views\docs\TNDD-info.md.bak
+			TN-Views\docs\TN-final.md
+			TN-Views\docs\TNND-info.md
+			TN-Views\docs\TN-Views.md
+			TN-Views\docs\TN-Views-custom.md
+			TN-Views\docs\TN-Views-install.md
+			TN-Views\docs\USX-info.md
+			TN-Views\docs\USX-info.md.bak
+		-images
+			TN-Views\images\SFM-View-css.png
+			TN-Views\images\TNDD-auto-hide-setup.png
+			TN-Views\images\TNDD-ctrl-e.png
+			TN-Views\images\TNDD-proj-view-list.png
+			TN-Views\images\TNDD-table-view.png
+			TN-Views\images\TNND-auto-hide-setup.png
+			TN-Views\images\TNND-ctrl-e.png
+			TN-Views\images\TNND-proj-view-list.png
+			TN-Views\images\views-list-proj-view-sml.png
+		-Views
+			TN-Views\Views\SFM-hilighter.xml
+			TN-Views\Views\SFM-hilighter.xslt
+			TN-Views\Views\TNDD-1st-mng-line.xml
+			TN-Views\Views\TNDD-1st-mng-line.xslt
+			TN-Views\Views\TNDD-2nd-mng-line.xml
+			TN-Views\Views\TNDD-2nd-mng-line.xslt
+			TN-Views\Views\TNDD-3rd-mng-line.xml
+			TN-Views\Views\TNDD-3rd-mng-line.xslt
+			TN-Views\Views\TNDD-table-view.xml
+			TN-Views\Views\TNDD-table-view.xslt
+			TN-Views\Views\TNDD-tag-errors.xml
+			TN-Views\Views\TNDD-tag-errors.xslt
+			TN-Views\Views\TNDD-word-count-1st-mng-line.xml
+			TN-Views\Views\TNDD-word-count-1st-mng-line.xslt
+			TN-Views\Views\TNDD-word-count-2nd-mng-line.xml
+			TN-Views\Views\TNDD-word-count-2nd-mng-line.xslt
+			TN-Views\Views\TNND-hilighter.xml
+			TN-Views\Views\TNND-hilighter.xslt
+			TN-Views\Views\TNND-tag-errors.xml
+			TN-Views\Views\TNND-tag-errors.xslt
+			TN-Views\Views\TNND-word-count.xml
+			TN-Views\Views\TNND-word-count.xslt
+			TN-Views\Views\USX-column-view.xml
+			TN-Views\Views\USX-column-view.xslt
+			TN-Views\Views\USX-paragraph-view.xml
+			TN-Views\Views\USX-paragraph-view.xslt
+		TN-Views\file-list.txt
+		TN-Views\Install_Paratext_TN_Views.cmd
+		TN-Views\installed.md
+		TN-Views\Make-TN-Views-zip.cmd
+		TN-Views\readme.md
+		TN-Views\ReleaseNotes.md
+		TN-Views\TN-Public-list.txt
+		TN-Views\TN-views-manager.cmd
+		TN-Views\Uninstall_Paratext_TN_Views.cmd
+		TN-Views\update-TN-Views.cmd
+		TN-Views\update-TN-views-manager.cmd
+		TN-Views\user-views-manager.cmd
+		TN-Views\ut-fixlf.cmd
+		TN-Views\ut-getfile.cmd
+[Open project files]
+0=TN-Views\TN-views-manager.cmd
+1=TN-Views\Install_Paratext_TN_Views.cmd
+2=TN-Views\update-TN-views-manager.cmd
+3=TN-Views\update-TN-Views.cmd
+4=TN-Views\cms\TN_Views_update.cms
+5=TN-Views\cms\TN_Views_uninstall.cms
+6=TN-Views\cms\TN_Views_manager_Updater.cms
+7=TN-Views\cms\TN_Views_manager_updater.py
+8=TN-Views\cms\TN_Views_update.py
+9=..\..\..\My Paratext 9 Projects\cms\TN_Views_update.py
+10=C:\Users\Public\PT-TN-Views\user-views-action.cmd
+11=C:\Users\Public\PT-TN-Views\update-TN-Views-manager.cmd
+12=C:\Users\Public\PT-TN-Views\TN-views-manager.cmd
+13=TN-Views\TN-Public-list.txt
+[Selected Project Files]
+Main=
+Selected=TN-Views\update-TN-Views.cmd
+[TN-Views\TN-views-manager.cmd]
+TopLine=1
+Caret=1,13
+[TN-Views\Install_Paratext_TN_Views.cmd]
+TopLine=1
+Caret=18,3
+[TN-Views\update-TN-views-manager.cmd]
+TopLine=13
+Caret=1,17
+[TN-Views\update-TN-Views.cmd]
+TopLine=7
+Caret=11,20
+[TN-Views\cms\TN_Views_update.cms]
+TopLine=1
+Caret=1,1
+[TN-Views\cms\TN_Views_uninstall.cms]
+TopLine=1
+Caret=208,4
+[TN-Views\cms\TN_Views_manager_Updater.cms]
+TopLine=1
+Caret=223,4
+[TN-Views\cms\TN_Views_manager_updater.py]
+TopLine=1
+Caret=1,1
+[TN-Views\cms\TN_Views_update.py]
+TopLine=1
+Caret=30,11
+[..\..\..\My Paratext 9 Projects\cms\TN_Views_update.py]
+TopLine=5
+Caret=1,12
+[C:\Users\Public\PT-TN-Views\user-views-action.cmd]
+TopLine=1
+Caret=1,2
+[C:\Users\Public\PT-TN-Views\update-TN-Views-manager.cmd]
+TopLine=5
+Caret=1,11
+[C:\Users\Public\PT-TN-Views\TN-views-manager.cmd]
+TopLine=58
+Caret=1,63
+[TN-Views\TN-Public-list.txt]
+TopLine=37
+Caret=1,46
