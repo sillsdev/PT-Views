@@ -35,19 +35,14 @@ SolidCompression=yes
 
 [Types]
 Name: "tnxd"; Description: "Install TNND and TNDD Views."
-Name: "tndd"; Description: "Install TNDD Views only."
-Name: "tnnd"; Description: "Install TNND Views only."
-Name: "usx"; Description: "Install USX Views only."
-Name: "sfm"; Description: "Install SFM Views only."
-Name: "usxsfm"; Description: "Install SFM & USX Views."
-Name: "complete";  Description: "Install TNDD, TNND, SFM and USX Views" 
+Name: "custom"; Description: "Custom Installation";  Flags: iscustom
 
 [Components]
-Name: main;     Description: "Install essential files"; Types: tnxd tndd tnnd usx sfm usxsfm complete;
-Name: tndd;     Description: "Make TNDD views available in Paratext"; Types: tnnd tnxd complete; 
-Name: tnnd;     Description: "Make TNND views available in Paratext"; Types: tndd tnxd complete;  
-Name: usx;      Description: "Make USX views available in Paratext"; Types: usx usxsfm complete; 
-Name: sfm;      Description: "Make SFM views available in Paratext"; Types: sfm usxsfm complete;
+Name: main;     Description: "Install essential files"; Types: tnxd custom; Flags: fixed
+Name: tndd;     Description: "Make TNDD views available in Paratext"; Types: tnxd  custom; 
+Name: tnnd;     Description: "Make TNND views available in Paratext"; Types: tnxd custom;  
+Name: usx;      Description: "Make USX views available in Paratext"; Types:  custom; 
+Name: sfm;      Description: "Make SFM views available in Paratext"; Types:  custom;
 
 [Files]
 ; main install all files to install dir
