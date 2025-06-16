@@ -104,9 +104,9 @@ call :remove del "%viewspath%\USX*.*"        "USX Views files deleted!"
 call :remove del "%cmspath%\TN*.*"       "TNxD cms files deleted!"
 call :remove del "%cmspath%\SFM*.*"         "SFM cms files deleted!"
 call :remove del "%cmspath%\USX*.*"          "USX cms files deleted!"
-call :remove "rmdir /s" "%installpath%\" "Public\PT-Paratext-Views folder removed!"
-echo %green%All TN Views files removed.%reset%
-timeout 30
+echo %green%All TN Views support files will be removed.%reset%
+timeout 10
+rmdir /S/Q "%installpath%\" "Public\PT-Paratext-Views folder removed!"
 goto :eof
 
 :install

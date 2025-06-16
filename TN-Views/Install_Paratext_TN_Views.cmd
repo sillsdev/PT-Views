@@ -22,7 +22,7 @@ call curl --ssl-no-revoke %url-base%/%manager% | more /P > "%manager%"
 FOR /F "usebackq" %%A IN ('%manager%') DO set size=%%~zA
 if %size%. gtr 16. (
   echo %green%Info: %manager% updated!%reset% size = %size% 
-  call "%manager%" updateall
+  call "%manager%" update
 ) else (
   echo %redbg%Error: %manager% not found at %url-base%.%reset%
 )

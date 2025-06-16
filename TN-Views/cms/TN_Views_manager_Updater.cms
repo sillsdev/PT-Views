@@ -1,8 +1,0 @@
-\check TN Views manager Updater
-\submenu TN Views
-\script TN_Views_manager_updater.py
-\description (Ignore the "Input Project" box above.) This tool will update TN Views manager from the Internet. The manager is an essential script in most operations and in updating many other files. It can't update itself.
-\helpFile TN-Views-Documentation.pdf
-\noText
-\rank 10
-\utf8

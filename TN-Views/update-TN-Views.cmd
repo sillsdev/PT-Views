@@ -7,13 +7,24 @@
 @set cyan=[36m
 @set yellow=[33m
 @echo %magenta%Updating the TN-views files from SIL source file on Github.%reset%
-@echo.
-set manager="TN-views-manager.cmd"
-set updatemanager="update-TN-views-manager.cmd"
+echo %magenta%Update TN Views manager.%reset%
+echo.
+set manager=TN-views-manager.cmd
+set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 pushd "C:\Users\Public\PT-TN-Views"
-@if not exist %manager% echo %yellow%File %manager% not found %reset% & pause
-@if not exist %updatemanager% echo %yellow%File %updatemanager% not found %reset% & pause
-call %updatemanager% 2
+  if exist "%manager%.old" del "%manager%.old"
+  ren "%manager%" "%manager%.old"
+  @echo %green%Attempting download of:%reset% %manager%
+  @echo %green%    With line endings conversion from LF to CRLF%cyan%
+  call curl --ssl-no-revoke  %url-base%/%manager% | MORE /P > "%manager%"
+  FOR /F "usebackq" %%A IN ('%manager%') DO @set size=%%~zA
+  @if "%size%" == "14" (
+    @echo %redbg%Error: %manager% not found at %url-base%. Failed  with size = %size% %reset%
+  ) else (
+    @if exist "%manager%" echo %green%Updated: %manager% %reset% with size = %size%
+  )
+@echo.
+@if not exist %manager% (echo %yellow%File %manager% not found %reset% & pause ) else (echo %green%Now running views update through TN-views-manager.cmd%reset%)
 call %manager% update
 popd
 echo.
