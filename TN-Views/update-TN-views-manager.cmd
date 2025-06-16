@@ -17,8 +17,8 @@ echo.
 set manager=TN-views-manager.cmd
 set url-base=https://raw.githubusercontent.com/sillsdev/PT-Views/master/TN-Views
 pushd "C:\Users\Public\PT-TN-Views"
-if exist "%manager%.old" del "%manager%.old"
-ren "%manager%" "%manager%.old"
+  if exist "%manager%.old" del "%manager%.old"
+  ren "%manager%" "%manager%.old"
   @echo %green%Attempting download of:%reset% %manager%
   @echo %green%    With line endings conversion from LF to CRLF%cyan%
   call curl --ssl-no-revoke  %url-base%/%manager% | MORE /P > "%manager%"

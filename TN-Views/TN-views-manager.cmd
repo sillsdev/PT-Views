@@ -104,11 +104,9 @@ call :remove del "%viewspath%\USX*.*"        "USX Views files deleted!"
 call :remove del "%cmspath%\TN*.*"       "TNxD cms files deleted!"
 call :remove del "%cmspath%\SFM*.*"         "SFM cms files deleted!"
 call :remove del "%cmspath%\USX*.*"          "USX cms files deleted!"
-call :remove del "%installpath%\Views\*.*"  "Views base files removed!"
-call :remove del "%installpath%\cms\*.*"    "CMS base files removed!"
-call :remove del "%installpath%\*.*"      "TN Views core file deleted!"
-call :remove "rmdir /s /q" "%installpath%\" "Public\PT-Paratext-Views folder removed!"
+call :remove "rmdir /s" "%installpath%\" "Public\PT-Paratext-Views folder removed!"
 echo %green%All TN Views files removed.%reset%
+timeout 30
 goto :eof
 
 :install
@@ -140,8 +138,6 @@ set message=%~3
 if exist "%file%" %action% "%file%"
 if not exist "%file%" echo %green% %message% %reset%
 goto :eof
-
-
 
 :getfile
   @echo.
@@ -185,7 +181,7 @@ goto :eof
 
 :neededdir
   if not exist "%installpath%\cms\" md "%installpath%\cms\"
-  if not exist "%installpath%\Views\cms\" md "%installpath%\Views\cms\"
+  if not exist "%installpath%\Views\" md "%installpath%\Views\"
   if not exist "%viewspath%" md  "%viewspath%"
   if not exist "%cmspath%" md  "%cmspath%"
 goto :eof
@@ -216,6 +212,28 @@ goto :eof
   @if not exist "%viewspath%\%TNxD%*.xml" echo %green%%TNxD% views will be hidden after Paratext restart!%reset%
 goto :eof
 
+:update
+:: Description: Update all installed Views
+:: Usage: call :instalupdate
+  call :getfile "TN-main-list.txt"
+  if exist "%installpath%\TN-TNDD-list.txt" call :getfile "TN-TNDD-list.txt"
+  if exist "%installpath%\TN-TNND-list.txt" call :getfile "TN-TNND-list.txt"
+  if exist "%installpath%\TN-SFM-list.txt" call :getfile "TN-SFM-list.txt"
+  if exist "%installpath%\TN-USX-list.txt" call :getfile "TN-USX-list.txt"
+::  @call :loopfiles :getfile "%installpath%\cms\*.*"
+  call :looplist :getfile "%installpath%\TN-main-list.txt"
+  @if exist "%installpath%\TN-TNDD-list.txt" call :looplist :getfile "%installpath%\TN-TNDD-list.txt"
+  @if exist "%installpath%\TN-TNND-list.txt" call :looplist :getfile "%installpath%\TN-TNND-list.txt"
+  @if exist "%installpath%\TN-SFM-list.txt" call :looplist :getfile "%installpath%\TN-SFM-list.txt"
+  @if exist "%installpath%\TN-USX-list.txt" call :looplist :getfile "%installpath%\TN-USX-list.txt"
+::  @call :loopfiles :getfile "%installpath%\Views\*.*"
+  echo.
+  echo %green%Info: Copying cms, py and PDF files to '%mpppath%cms' folder%reset%
+  xcopy /D/Q/Y/U "%installpath%\cms\*.*" "%mpppath%cms"
+  echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
+  xcopy /D/Q/Y/U "%installpath%\Views\*.*" "%mpppath%Views"
+goto :eof
+
 :updateall
 :: Description: Update all view from internet
 :: Usage: call :updateall
@@ -226,15 +244,14 @@ goto :eof
 
   rem get the files in the downloaded list
   call :getfile "TN-Public-list.txt"
-  @call :looplist :getfile "%installpath%\TN-Public-list.txt"
+  @call :looplist :getfiletest "%installpath%\TN-Public-list.txt"
   
   rem update the files in Views and cms folder if there already
   echo.
   echo %green%Info: Copying cms, py and PDF files to '%mpppath%cms' folder%reset%
-  xcopy /D/Q/Y "%installpath%\cms\*.*" "%mpppath%cms"
-  del /q "%mpppath%cms\*show*.cms"
+  xcopy /D/Q/Y/U "%installpath%\cms\*.*" "%mpppath%cms"
   echo %green%Info: Copying XSLT and xml files to '%mpppath%Views' folder%reset%
-  xcopy /D/Q/Y "%installpath%\Views\*.*" "%mpppath%Views"
+  xcopy /D/Q/Y/U "%installpath%\Views\*.*" "%mpppath%Views"
 goto :eof
 
 :exit
@@ -251,6 +268,6 @@ goto :eof
 
 :cmsclean
   set filespec=%~1
-  del /q "%mpppath%cms\%filespec%"
+  rem del /q "%mpppath%cms\%filespec%"
   del /q "%installpath%\cms\%filespec%"
 goto :eof

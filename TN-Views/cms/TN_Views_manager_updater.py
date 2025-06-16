@@ -9,7 +9,7 @@ actionbatchfile = "C:\Users\Public\PT-TN-Views\user-views-action.cmd"
 batchfile = "C:\Users\Public\PT-TN-Views\update-TN-views-manager.cmd"
 
 # setup variables for the ACTION batch file.
-commandstring = "echo set action=updateall> " + actionbatchfile
+commandstring = "echo set action=update> " + actionbatchfile
 os.system(commandstring)
 # Run the batch file to do the action
 os.startfile(batchfile)

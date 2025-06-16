@@ -14,7 +14,7 @@ pushd "C:\Users\Public\PT-TN-Views"
 @if not exist %manager% echo %yellow%File %manager% not found %reset% & pause
 @if not exist %updatemanager% echo %yellow%File %updatemanager% not found %reset% & pause
 call %updatemanager% 2
-call %manager% updateall
+call %manager% update
 popd
 echo.
 timeout 30
