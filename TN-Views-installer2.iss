@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Paratext TN Views"
-#define MyAppVersion "9"
+#define MyAppVersion "10"
 #define MyAppPublisher "SIL International"
 #define MyAppURL "https://github.com/sillsdev/PT-Views/"
 
@@ -38,39 +38,50 @@ Name: "tnxd"; Description: "Install TNND and TNDD Views."
 Name: "custom"; Description: "Custom Installation";  Flags: iscustom
 
 [Components]
-Name: main;     Description: "Install essential files"; Types: tnxd custom; Flags: fixed
-Name: tndd;     Description: "Make TNDD views available in Paratext"; Types: tnxd  custom; 
-Name: tnnd;     Description: "Make TNND views available in Paratext"; Types: tnxd custom;  
-Name: usx;      Description: "Make USX views available in Paratext"; Types:  custom; 
-Name: sfm;      Description: "Make SFM views available in Paratext"; Types:  custom;
+Name: main;     Description: "Install essential files";                 Types: tnxd custom;   Flags: fixed
+Name: tndd;     Description: "Make TNDD views available in Paratext";   Types: tnxd  custom; 
+Name: tnnd;     Description: "Make TNND views available in Paratext";   Types: tnxd custom;  
+Name: usx;      Description: "Make USX views available in Paratext";    Types:  custom; 
+Name: sfm;      Description: "Make SFM views available in Paratext";    Types:  custom;
 
 [Files]
 ; main install all files to install dir
-Source: "TN-Views\TN-views-manager.cmd";  DestDir: "{#MAppData}" ;        Components: main;
-Source: "TN-Views\Uninstall*.cmd";        DestDir: "{#MAppData}"  ;       Components: main;
-Source: "TN-Views\Install*.cmd";          DestDir: "{#MAppData}"  ;       Components: main;
-Source: "TN-Views\Views\*.x*";            DestDir: "{#MAppData}\Views" ;  Components: main;
-Source: "TN-Views\cms\*.*";               DestDir: "{#MAppData}\cms"  ;   Components: main;
+Source: "TN-Views\TN-views-manager.cmd";    DestDir: "{#MAppData}";     Components: main;
+Source: "TN-Views\Uninstall*.cmd";          DestDir: "{#MAppData}";     Components: main;
+Source: "TN-Views\Install*.cmd";            DestDir: "{#MAppData}";     Components: main;
+Source: "TN-Views\update*.cmd";             DestDir: "{#MAppData}";     Components: main;
 
 ; TN to PT
-Source: "TN-Views\cms\*.pdf";             DestDir: "{#MPP}\cms"  ;    Components: main;
-Source: "TN-Views\cms\TN_*.*";            DestDir: "{#MPP}\cms"  ;    Components: main;
+Source: "TN-Views\cms\*.pdf";               DestDir: "{#MPP}\cms"  ;    Components: main;
+Source: "TN-Views\cms\TN_*.*";              DestDir: "{#MPP}\cms"  ;    Components: main;
 
 ; TNDD to PT
-Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ; Components: tndd;
-Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tndd;
+Source: "TN-Views\Views\TNDD-*.x*";         DestDir: "{#MAppData}\Views" ;  Components: tndd; 
+Source: "TN-Views\cms\TNDD_Views_*.*";      DestDir: "{#MAppData}\cms" ;    Components: tndd;
+Source: "TN-Views\cms\TNDD_Views_hide.cms"; DestDir: "{#MPP}\cms" ;         Components: tndd;
+Source: "TN-Views\Views\TNDD*.x*";          DestDir: "{#MPP}\Views" ;       Components: tndd; 
+Source: "TN-Views\TN-TNDD-list.txt";        DestDir: "{#MAppData}";         Components: tndd;
 
 ; TNND to PT
-Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ; Components: tnnd;
-Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;   Components: tnnd;
+Source: "TN-Views\Views\TNND-*.x*";         DestDir: "{#MAppData}\Views" ;  Components: tnnd; 
+Source: "TN-Views\cms\TNND_Views_*.*";      DestDir: "{#MAppData}\cms" ;    Components: tnnd;
+Source: "TN-Views\Views\TNND*.x*";          DestDir: "{#MPP}\Views" ;       Components: tnnd;
+Source: "TN-Views\cms\TNND_Views_hide.cms"; DestDir: "{#MPP}\cms" ;         Components: tnnd;
+Source: "TN-Views\TN-TNND-list.txt";        DestDir: "{#MAppData}";         Components: tnnd;
 
 ; USX  tasks
-Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ; Components: usx;
-Source: "TN-Views\cms\USX_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Components: usx;
+Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MAppData}\Views" ;  Components: usx; 
+Source: "TN-Views\cms\USX_*.*";             DestDir: "{#MAppData}\cms" ;    Components: usx;
+Source: "TN-Views\Views\USX*.x*";           DestDir: "{#MPP}\Views" ;       Components: usx;
+Source: "TN-Views\cms\USX_Views_hide.cms";  DestDir: "{#MPP}\cms" ;         Components: usx;
+Source: "TN-Views\TN-USX-list.txt";         DestDir: "{#MAppData}";         Components: usx;
 
 ; SFM tasks
-Source: "TN-Views\Views\SFM*.x*";           DestDir: "{#MPP}\Views" ; Components: sfm;
-Source: "TN-Views\cms\SFM_Views_hide.cms";  DestDir: "{#MPP}\cms" ;   Components: sfm;
+Source: "TN-Views\Views\SFM*.x*";           DestDir: "{#MAppData}\Views" ;  Components: sfm; 
+Source: "TN-Views\cms\SFM_*.*";             DestDir: "{#MAppData}\cms" ;    Components: sfm;
+Source: "TN-Views\Views\SFM*.x*";           DestDir: "{#MPP}\Views" ;       Components: sfm;
+Source: "TN-Views\cms\SFM_Views_hide.cms";  DestDir: "{#MPP}\cms" ;         Components: sfm;
+Source: "TN-Views\TN-SFM-list.txt";         DestDir: "{#MAppData}";         Components: sfm;
 
 
 [Languages]
