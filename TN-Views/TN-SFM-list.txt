@@ -1,0 +1,5 @@
+cms/SFM_Views_toggle.py
+cms/SFM_Views_hide.cms
+cms/SFM_Views_show.cms
+Views/SFM-hilighter.xslt
+Views/SFM-hilighter.xml

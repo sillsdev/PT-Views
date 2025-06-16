@@ -1,0 +1,7 @@
+cms/USX_Views_hide.cms
+cms/USX_Views_show.cms
+cms/USX_Views_toggle.py
+Views/USX-column-view.xml
+Views/USX-column-view.xslt
+Views/USX-paragraph-view.xml
+Views/USX-paragraph-view.xslt
