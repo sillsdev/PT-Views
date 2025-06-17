@@ -7,6 +7,7 @@ TN Views contains four sets of views. Each set can be shown or hidden. The three
 - SFM Views - For anyone who wants to highlight particular items of SFM.
 
 ## Contents
+- [Update TN Views](#update)
 - [Installing TN Views](#install)
 - [Updating TN Views](#udate)
 - [Uninstalling TN Views](#uninstall)
