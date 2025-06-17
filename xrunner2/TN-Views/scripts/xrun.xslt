@@ -3,14 +3,14 @@
     <xsl:variable name="projecthome" select="'D:\All-SIL-Publishing\_xrunner2_projects'"/>
     <xsl:variable name="xrunnerpath" select="'C:\programs\xrunner2'"/>
     <xsl:variable name="xrunini" select="'C:\programs\xrunner2\setup\xrun.ini'"/>
-    <xsl:variable name="xrunnersvn" select="'D:\All-SIL-Publishing\github-SILAsiaPub\xrunner2'"/>
+
     <xsl:variable name="java" select="'D:\programs\javafx\bin\java.exe'"/>
     <xsl:variable name="iconv" select="'D:\programs\gnuwin32\bin\iconv.exe'"/>
     <xsl:variable name="xml" select="'D:\programs\xmlstarlet\xml.exe'"/>
     <xsl:variable name="xalan" select="'D:\programs\xalan-j\xalan.jar'"/>
     <xsl:variable name="zip" select="'C:\Program Files\7-Zip\7z.exe'"/>
     <xsl:variable name="editor" select="'C:\programs\pspad\PSPad.exe'"/>
-    <xsl:variable name="npp" select="'C:\Program Files (x86)\Notepad++\notepad++.exe'"/>
+    <xsl:variable name="npp" select="'C:\Program Files\Notepad++\notepad++.exe'"/>
     <xsl:variable name="foxe" select="'C:\Program Files (x86)\firstobject\foxe.exe'"/>
     <xsl:variable name="xmleditor" select="'C:\Program Files (x86)\firstobject\foxe.exe'"/>
     <xsl:variable name="encodingchecker" select="'tools\gnuwin32\bin\file.exe'"/>
@@ -46,4 +46,7 @@
     <xsl:variable name="md2html" select="'C:\programs\xrunner2\tools\bin\md2html.exe'"/>
     <xsl:variable name="patch" select="'C:\programs\xrunner2\tools\bin\patch.exe'"/>
     <xsl:variable name="epubcheckjar" select="'C:\programs\xrunner2\tools\epubcheck\epubcheck.jar'"/>
+    <xsl:variable name="latex2html" select="'C:\Strawberry\perl\site\bin\latexmlc.bat'"/>
+    <xsl:variable name="latex2xml" select="'C:\Strawberry\perl\site\bin\latexml.bat'"/>
+
 </xsl:stylesheet>

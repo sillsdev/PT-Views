@@ -116,6 +116,7 @@ group(h30)
 nl  >   endstore dup back(1) use(row)
 
 group(ampersand)
+'&#'    >   dup
 '&'    >   '&amp;'
 '&amp;'>    dup
 '>'     >   '&gt;'

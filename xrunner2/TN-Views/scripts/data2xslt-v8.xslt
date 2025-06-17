@@ -358,8 +358,13 @@
                 <!-- Provide a style for each chapter -->
                 <gen:call-template name="style"/>
             </gen:if>
-            <gen:element name="h4">
+      <gen:element name="div">
+        <gen:attribute name="class">
+          <gen:text>build</gen:text>
+        </gen:attribute>
                 <gen:value-of select="concat('Version: ',$version,' ',$project,$view,$modified,$moddate)"/>
+        <xsl:element name="br"/>
+        <gen:value-of select="concat('In this view, the ',substring($translatereplace,1,1),' character represents the narrow no-break space.')"/>
             </gen:element>
             <gen:element name="div">
                 <gen:attribute name="class">
@@ -430,6 +435,7 @@
             <style type="text/css">
                 <xsl:text>
 div {white-space: normal;}
+.build {font-weight:bold;line-height:1.1;}
 .usx {line-height:1.8;}
 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center;}
 .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%;}
@@ -458,8 +464,25 @@ div {white-space: normal;}
                 <!-- <xsl:comment select="$g1"/> -->
             </style>
         </gen:template>
+    <gen:template match="text()">
+      <gen:choose>
+        <gen:when test="$translatetextswitch = '1'">
+          <gen:value-of select="translate(.,$translatefind,$translatereplace)"/>
+        </gen:when>
+        <gen:otherwise>
+          <gen:value-of select="."/>
+        </gen:otherwise>
+      </gen:choose>
+    </gen:template>
         <gen:template match="text()" mode="fntext">
+      <gen:choose>
+        <gen:when test="$translatetextswitch = '1'">
+          <gen:value-of select="translate(.,$translatefind,$translatereplace)"/>
+        </gen:when>
+        <gen:otherwise>
             <gen:value-of select="."/>
+        </gen:otherwise>
+      </gen:choose>
         </gen:template>
         <gen:template match="*" mode="fntext">
             <gen:apply-templates select="node()" mode="fntext"/>

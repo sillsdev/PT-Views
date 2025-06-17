@@ -4,9 +4,9 @@ debugfunc=makex
 echofunc=updatedl
 outputxml=true
 tnxx=TNND
-view=Bamboo
+view=TNviews
 paratextexe=C:\Program Files\Paratext 9\Paratext.exe
-bamboopdf=Bamboo-Views-Documentation.pdf
+bamboopdf=TN-Views-Documentation.pdf
 paratexttitle=Paratext 9.4
 projcode_list=TNND=N TNDD=D
 
@@ -83,7 +83,7 @@ t=:updatetsv
 t=:build-test-tag-errors TNDD
 
 [updatetsv]
-t=:updateBamboocheckdata
+t=:updateTNviewscheckdata
 t=:varstringxml
 t=:sfmvarxml
 t=:staticvarxml
@@ -93,6 +93,7 @@ t=:checkdataxml
 t=:var project %~1
 t=:tagerrorsxslt %project%
 t=:testfast %project% XXD
+#t=:testfast %project% REV
 
 [tagerrorsxslt]
 t=:var project %~1
@@ -112,7 +113,22 @@ t=:echo "%green%Info: Book = %file%%reset%"
 t=:echo "%green%Info: Project = %project%%reset%"
 t=:inputfile "%usxpath%\%project%\%file%"
 t=:cct remove-nl-from-para.cct
-t=:xslt1 %project%-tag-errors.xslt "" "%projectpath%\output\%book%-%project%-fast.html"
+t=:xslt1 %project%-tag-errors.xslt "" "%projectpath%\output\%book%-%project%-fast.html" "debug=on"
+
+[staticvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\static-var.tsv" "%projectpath%\output\static-var.xml"
+
+[varstringxml]
+t=:cct list2xsltvar-v2.cct "%projectpath%\source\var-string.tsv" "%projectpath%\scripts\var-string.xslt"
+
+[sfmvarxml]
+t=:cct tsv2xml-v2.cct "%projectpath%\source\sfm-var.tsv" 
+t=:xslt sort-sfm-var.xslt "" "%projectpath%\output\sfm-var.xml"
+
+
+[checkdataxml]
+#t=:echo "%cyan%Updating check_data.xml%reset%"
+t=:cct tsv2xml-v2.cct "%projectpath%\source\check_data.tsv" "%projectpath%\output\check_data.xml"
 
 
 [c]
@@ -132,6 +148,7 @@ b=Retest hand edits of xslt
 t=:var XXD 096XXD
 t=:testfast TNDD XXD
 t=:testfast TNND XXD
+#t=:testfast TNND REV
 
 [f]
 g=
@@ -186,9 +203,9 @@ t=:start "%paratextexe%"
 
 [updategitlocal]
 # copy to git Xrunner2 project
-t=:update "%projectpath%\project.txt" "%gitproject%\xrunner2\Bamboo\"
-t=:update "%projectpath%\source\*.tsv" "%gitproject%\xrunner2\Bamboo\source\"
-t=:update "%projectpath%\scripts\*.xslt" "%gitproject%\xrunner2\Bamboo\scripts\"
+t=:update "%projectpath%\project.txt" "%gitproject%\xrunner2\TN-views\"
+t=:update "%projectpath%\source\*.tsv" "%gitproject%\xrunner2\TN-views\source\"
+t=:update "%projectpath%\scripts\*.xslt" "%gitproject%\xrunner2\TN-views\scripts\"
 # the following use the previous target path
 t=:update "%projectpath%\scripts\*.cct"
 t=:update "%projectpath%\scripts\data-url.cmd"
@@ -470,30 +487,15 @@ t=:echo "do nothing"
 
 [BambooTagerrorsupdate] depreciated
 t=:var target %~1
-t=:updateBamboocheckdata
+t=:updateTNviewscheckdata
 t=:varstringxml
 t=:sfmvarxml
 t=:staticvarxml
 t=:checkdataxml
 t=:tagerrorsxslt %project%
 
-[staticvarxml]
-t=:cct tsv2xml-v2.cct "%projectpath%\source\static-var.tsv" "%projectpath%\output\static-var.xml"
 
-[varstringxml]
-t=:cct list2xsltvar-v2.cct "%projectpath%\source\var-string.tsv" "%projectpath%\scripts\var-string.xslt"
-
-[sfmvarxml]
-t=:cct tsv2xml-v2.cct "%projectpath%\source\sfm-var.tsv" 
-t=:xslt sort-sfm-var.xslt "" "%projectpath%\output\sfm-var.xml"
-
-
-[checkdataxml]
-#t=:echo "%cyan%Updating check_data.xml%reset%"
-t=:cct tsv2xml-v2.cct "%projectpath%\source\check_data.tsv" "%projectpath%\output\check_data.xml"
-
-
-[updateBamboocheckdata]
+[updateTNviewscheckdata]
 # get url from data-url.cmd file as they contain ampersand that does not work in Xrunner var.
 t=:cmd "call '%projectpath%\scripts\data-url.cmd'"
 t=:curl %checkdatatsvurl% "%projectpath%\source\check_data.tsv"
@@ -547,7 +549,8 @@ t=:ptprojupdate
 s1=testtndd testtnnd testusx makecombinedpdf
 s2=updateBamboodata b testtndd testtnddslow
 s3=testacts testactsms
-s5=testusxhighlighter testTNNDxslt
+s5=testusxhighlighter testTNNDxslt test-staticvarxml
+s6=test-pt-tnnd-tag-errors
 
 [testtnddwordcount]
 t=:bkid
@@ -608,3 +611,12 @@ t=:xsltms TNND-hilighter3.xslt "" "%projectpath%\output\%book%-%project%-ms-hili
 [testTNNDxslt]
 t=:var project TNND
 t=:testfast %project% XXD
+
+[test-staticvarxml]
+t=:staticvarxml
+
+[test-pt-tnnd-tag-errors]
+t=:testfast TNND XXD
+t=:inputfile "%usxpath%\TNND\096XXD.usx"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 TNND-tag-errors-pt.xslt "" "%projectpath%\output\XXD-TNND-fast-PT.html" "debug=on"

@@ -7,7 +7,7 @@
    <xsl:include href="inc-lookup.xslt"/>
    <xsl:param name="USERPROFILE" select="'C:\Users\india'"/>
    <xsl:variable name="projectpath"
-                 select="'D:/All-SIL-Publishing/_xrunner2_projects/_cur/ParatextViews/Bamboo'"/>
+                 select="'D:/All-SIL-Publishing/_xrunner2_projects/_cur/ParatextViews/TN-Views'"/>
    <xsl:variable name="sq">'</xsl:variable>
    <xsl:variable name="dq">"</xsl:variable>
    <xsl:variable name="true" select="tokenize('true yes on 1','\s+')"/>
@@ -17,9 +17,9 @@
    <xsl:param name="echofunc" select="'updatedl'"/>
    <xsl:param name="outputxml" select="'true'"/>
    <xsl:param name="tnxx" select="'TNND'"/>
-   <xsl:param name="view" select="'Bamboo'"/>
+   <xsl:param name="view" select="'TNviews'"/>
    <xsl:param name="paratextexe" select="'C:\Program Files\Paratext 9\Paratext.exe'"/>
-   <xsl:param name="bamboopdf" select="'Bamboo-Views-Documentation.pdf'"/>
+   <xsl:param name="bamboopdf" select="'TN-Views-Documentation.pdf'"/>
    <xsl:param name="paratexttitle" select="'Paratext 9.4'"/>
    <xsl:param name="projcode_list" select="'TNND=N TNDD=D'"/>
    <xsl:variable name="projcode" select="tokenize($projcode_list,' ')"/>
