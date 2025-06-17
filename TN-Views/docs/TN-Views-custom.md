@@ -1,7 +1,7 @@
 
 ## There are two **Tools > Custom Tools > TN Views**
 - TN Views Updater
-- TN Views Uninstaller
+- Uninstall TN Views
 
 These two affect all three sets of views.
 
