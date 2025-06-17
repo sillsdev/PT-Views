@@ -1,4 +1,4 @@
-## Update TN Views
+## Update TN Views<a id="update"></a>
 - In Paratext click Tools > Custom Tools > TN Views > Uninstall TN Views
 - Ignore "Input Project".
 - Click Ok.
