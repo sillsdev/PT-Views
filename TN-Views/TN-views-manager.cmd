@@ -5,6 +5,7 @@
 :: Updated: 2025-03-12 added method to ask about update.
 :: Updated: 2025-03-14 testing self update with :getmanagerupdate and end of main.
 :: Updated: 2025-03-14b removed updating manager.
+:: Updated: 2025-06-17 added separate install to update. Install now asks which views. Added :question
 @echo off
 set installpath=C:\Users\Public\PT-TN-Views
 set manager=TN-views-manager.cmd
@@ -64,14 +65,16 @@ goto :eof
 :noactionmenu
   echo %redbg% No action found from command line or from %viewsaction% %reset%
   echo.
-  echo      (i) Do you want to install/update the TN-Views?
-  echo      (u) Do you want to uninstall the TN-Views?
+  echo      (i) Do you want to install TN-Views?
+  echo      (p) Do you want to update TN-Views?
+  echo      (u) Do you want to uninstall TN-Views?
   echo      (d) Do you want to see command line options?
   echo      (x) Do you want to exit?
   echo.
   set /P option=Type the lowercase option letter and press Enter: 
   if '%option%' == 'x' set action=exit
-  if '%option%' == 'i' set action=updateall
+  if '%option%' == 'i' set action=install
+  if '%option%' == 'p' set action=update
   if '%option%' == 'u' set action=uninstall
   if '%option%' == 'd' set action=commandlinedoc
   if not defined action (
@@ -96,8 +99,21 @@ goto :eof
   set drive=%~3
 goto :eof
 
+:install
+  echo %green%========== Installing TN Views. ==========%reset%
+  echo.
+  echo %green%Which views do you want to install?%reset%
+  call :neededdir
+  call :question TNDD
+  call :question TNND
+  call :question SFM
+  call :question USX
+  timeout 60
+  call :update
+goto :eof
+
 :uninstall
-:: Uninstall %TNxD% files
+:: Uninstall all files!
 call :remove del "%viewspath%\TN*.*"    "TNxD Views files deleted!"
 call :remove del "%viewspath%\SFM*.*"        "SFM Views files deleted!"
 call :remove del "%viewspath%\USX*.*"        "USX Views files deleted!"
@@ -106,12 +122,8 @@ call :remove del "%cmspath%\SFM*.*"         "SFM cms files deleted!"
 call :remove del "%cmspath%\USX*.*"          "USX cms files deleted!"
 echo %green%All TN Views support files will be removed.%reset%
 timeout 10
-rmdir /S/Q "%installpath%\" "Public\PT-Paratext-Views folder removed!"
-goto :eof
-
-:install
-rem If not exist then create PT Views path and copy files
-  call :updateall
+rem the next step deletes this batch file itself. So finishes without any report.
+rmdir /S/Q "%installpath%\"
 goto :eof
 
 :test
@@ -184,6 +196,18 @@ goto :eof
   if not exist "%installpath%\Views\" md "%installpath%\Views\"
   if not exist "%viewspath%" md  "%viewspath%"
   if not exist "%cmspath%" md  "%cmspath%"
+goto :eof
+
+:question
+set type=%~1
+@echo off
+set /p answer="Do you want to install %type% views? (Y/N): "
+if /i "%answer%"=="Y" (
+    echo %green%The installer will install %type% views!%reset%
+    echo TN-%type%-list.txt> %installpath%\TN-%type%-list.txt
+) else (
+    echo %yellow%%type% views will not be installed.%reset%
+)
 goto :eof
 
 :toggle
@@ -261,7 +285,7 @@ goto :eof
 
 :commandlinedoc
   echo %yellow%Command Line Documentation%reset%
-  echo The first parameter can be one of: updateall, uninstall or toggle
+  echo The first parameter can be one of: install, update, uninstall or toggle
   echo The second parameter is only used to follow toggle.
   echo The second parameter options are: TNDD, TNND, SFM or USX
 goto :eof
