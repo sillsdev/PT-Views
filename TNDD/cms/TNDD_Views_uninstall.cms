@@ -1,8 +1,0 @@
-\check Uninstall TNDD Views
-\submenu Custom Views
-\script TNDD_Views_uninstall.py
-\description (Ignore the "Input Project" box above.) This will UNINSTALL TNDD Views in the Views menu and this Custom Tools > Custom Views, after Paratext restart. There are seven views.\n\n TNDD Views aids Translation Notes Display Development content creators and checkers in viewing the data in various ways. 
-\helpFile TNDD-info.pdf
-\noText
-\rank 4
-\utf8

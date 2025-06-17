@@ -1,1 +1,0 @@
-This folder contains Views specifically for people writing Translation Notes
