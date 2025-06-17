@@ -14,7 +14,6 @@
 - Run the installer and follow the usual steps to Install the Paratext Views. Your antivirus may tell you this program is rarely downloaded. That is true, but you can ignore the warning. (This version is signed. Older versions were not signed. )
 - Start Paratext and the new views should be available in the Ctrl+E menu or the projects hamburger menu.
 
-
 #### Option 2: Run a script to install
 - Download TN-Views.zip from the [Assets section of the latest release](https://github.com/SILAsiaPub/PT-Views/releases/latest) 
 - Close Paratext if open.
