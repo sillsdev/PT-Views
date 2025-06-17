@@ -27,9 +27,9 @@ DisableDirPage=yes
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=Yes
 LicenseFile=LICENSE
-InfoAfterFile=TN-Views\installed.md
+InfoAfterFile=TN-Views\installed.rtf
 OutputDir=Installers
-OutputBaseFilename=Paratext-TN-Views-types-unsigned
+OutputBaseFilename=Paratext-TN-Views-unsigned
 Compression=lzma
 SolidCompression=yes
 

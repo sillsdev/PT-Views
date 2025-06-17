@@ -1,12 +1,11 @@
 TN-views-manager.cmd
 Install_Paratext_TN_Views.cmd
 Uninstall_Paratext_TN_Views.cmd
-update-TN-views-manager.cmd
+cms\TN-Views-Documentation.pdf
 cms\TN_Views_uninstall.cms
 cms\TN_Views_uninstall.py
 cms\TN_Views_update.cms
 cms\TN_Views_update.py
-cms\TN-Views-Documentation.pdf
 cms\TNDD_Views_hide.cms
 cms\TNDD_Views_show.cms
 cms\TNDD_Views_Toggle.py

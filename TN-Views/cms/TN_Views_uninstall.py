@@ -10,7 +10,5 @@ batchfile = "C:\Users\Public\PT-TN-Views\TN-views-manager.cmd"
 # setup variables for the ACTION batch file.
 commandstring = "echo set action=uninstall> " + actionbatchfile
 os.system(commandstring)
-commandstring = "echo set matchstart=TNDD>> " + actionbatchfile
-os.system(commandstring)
 # Run the batch file to do the action
 os.startfile(batchfile)
