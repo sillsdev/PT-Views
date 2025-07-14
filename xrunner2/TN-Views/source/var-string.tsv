@@ -1,4 +1,5 @@
 name	string	Notes
+alltext	.	
 ancestor	ancestor::*/@style 	
 chap1char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':'),1)	
 chap2char	substring(node()[not(self::*)],string-length(substring-before(node()[not(self::*)],':')-1,2)	
@@ -65,13 +66,14 @@ currefv2	substring-after($currefv,'–')
 curRsqcount	string-length(.) - string-length(translate(., $rsq, ''))	
 curspfield	concat(' ',.)	
 curstyle	@style	
-curtec	substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)	
+curtec	substring(*[@style = 'tec'][1]/text(),1,$curteclen - 1)	
+curteclen	string-length(*[@style = 'tec'][1]/text())	
 curtecpostellipsis	substring-after($curtec,'…')	
 curtecpostellipsisparse1	substring-after($curtec,'…')	
 curtecpostellipsisparse2	substring-after($curtecpostellipsisparse1,'…')	
 curtecpostellipsisparse3	substring-after($curtecpostellipsisparse2,'…')	
 curtecpostellipsisparse4	substring-after($curtecpostellipsisparse3,'…')	
-curtecpreellipsis	substring-before($curtec,'…')	
+curtecpreellipsis	substring(substring-before($curtec,'…'),1,string-length(substring-before($curtec,'…')) - 1)	
 curtecver	normalize-space(substring-after($curtec,')'))	
 curtecverpreellipsis	substring-before(substring-after($curtec,')'),'…')	
 curtei	*[@style = 'tei']/text()	
@@ -89,7 +91,7 @@ dqstr7	substring-before(substring-after(substring-after(substring-after(substrin
 dqstr8	substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)	
 dqstr9	substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)	
 ellipsiscount	string-length(.)-string-length(translate(.,'…',''))	
-fnstring	text()	
+fnstring	.	
 gjparent	parent::para[@style = 'gj']	
 graparent	parent::para[@style = 'gra']	
 has1charchap	contains(translate(node()[not(self::*)],$numb,$numbsub),' #:')	
@@ -128,7 +130,8 @@ indqstr9	substring-after($dqstr9,$ldq)
 lastchar	substring(.,string-length(.),1)	
 lastchar2	substring(.,string-length(.) - 1,1)	
 lastnodelast4char	substring($lastnode,$lastnodelen - 3,4)	
-lastnodelast4charmod	translate($lastnodelast4char,$letulcendpunc,$letulcendpuncsub)	
+lastnodelast5char	substring($lastnode,$lastnodelen - 4,5)	
+lastnodelast5charmod	translate($lastnodelast5char,$letulcendpunc,$letulcendpuncsub)	
 lastchartype	translate(substring(.,string-length(.),1),$validcvnumblet,$validcvnumbletsub)	
 lastnode	node()[last()]	
 lastnodelen	string-length($lastnode)	
@@ -243,11 +246,11 @@ sbxv	translate(substring-after(text(),':'),$validvletpunc,'')
 sl1c	substring-before(text()[1],':')	
 sl1v	translate(substring-after(text()[1],':'),$validvletpunc,'')	
 spacecount	string-length(.)-string-length(translate(.,' ',''))	
-split2ellipsisstring1	substring-before(.,'…')	
+split2ellipsisstring1	substring(substring-before(.,'…'),1,string-length(substring-before(.,'…')) - 1)	
 split2ellipsisstring2	substring-after(.,'…')	
-split3ellipsisstring2	substring-before($split2ellipsisstring2,'…')	
+split3ellipsisstring2	substring(substring-before($split2ellipsisstring2,'…'),1,string-length(substring-before($split2ellipsisstring2,'…')) - 1)	
 split3ellipsisstring3	substring-after($split2ellipsisstring2,'…')	
-split4ellipsisstring3	substring-before($split3ellipsisstring3,'…')	
+split4ellipsisstring3	substring(substring-before($split3ellipsisstring3,'…'),1,string-length(substring-before($split3ellipsisstring3,'…')) - 1)	
 split4ellipsisstring4	substring-after($split3ellipsisstring3,'…')	
 sqdiff1	string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))	
 sqdiff10	string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))	
@@ -261,13 +264,13 @@ sqdiff8	string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ld
 sqdiff9	string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))	
 strlenb4chap	string-length(substring-before(translate(node()[not(self::*)],$validcvnumblet,$validcvnumbletsub),'#'))	
 style	@style	
-tec1ellipsis1	substring-before($curtec,$ellipsis)	
+tec1ellipsis1	substring(substring-before($curtec,$ellipsis),1,string-length(substring-before($curtec,$ellipsis)) - 1)	
 tec1ellipsis2	$curtecpostellipsisparse1	
-tec2ellipsis2	substring-before($curtecpostellipsisparse1,$ellipsis)	
+tec2ellipsis2	substring(substring-before($curtecpostellipsisparse1,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse1,$ellipsis)) - 1)	
 tec2ellipsis3	$curtecpostellipsisparse2	
-tec3ellipsis3	substring-before($curtecpostellipsisparse2,$ellipsis)	
+tec3ellipsis3	substring(substring-before($curtecpostellipsisparse2,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse2,$ellipsis)) - 1)	
 tec3ellipsis4	$curtecpostellipsisparse3	
-tec4ellipsis4	substring-before($curtecpostellipsisparse4,$ellipsis)	
+tec4ellipsis4	substring(substring-before($curtecpostellipsisparse4,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse4,$ellipsis)) - 1)	
 tec4ellipsis5	$curtecpostellipsisparse4	
 teccharposttrs	translate(substring($tecstringposttrs,1, 1),$letulc,$letulcsub)	
 teccharpretrs	translate(substring($tecstringpretrs,string-length($tecstringpretrs), 1),$letulc,$letulcsub)	
@@ -285,3 +288,6 @@ wwellipsis4-4	normalize-space(translate(concat(' ',$split4ellipsisstring4,' '),$
 z_causeserrors1	translate(substring-after(node()[not(self::*)],':'),$validvlet,'')	
 notetext	text()	
 notetextlen	string-length($notetext)	
+fnstringmod	translate(.,$letulcendpunc,$letulcendpuncsub)	
+fnstringmod2	translate($fnstringmod,'˽','')	
+fnstringmodlastchar	substring($fnstringmod2,string-length($fnstringmod2),1)	

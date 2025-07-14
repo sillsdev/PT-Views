@@ -48,5 +48,5 @@
     <xsl:variable name="epubcheckjar" select="'C:\programs\xrunner2\tools\epubcheck\epubcheck.jar'"/>
     <xsl:variable name="latex2html" select="'C:\Strawberry\perl\site\bin\latexmlc.bat'"/>
     <xsl:variable name="latex2xml" select="'C:\Strawberry\perl\site\bin\latexml.bat'"/>
-
+    <xsl:variable name="sigil" select="'C:\Program Files\Sigil\Sigil.exe'"/>
 </xsl:stylesheet>

@@ -30,9 +30,10 @@
    <xsl:variable name="letulcnumb">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</xsl:variable>
    <xsl:variable name="letulcnumbsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
    <xsl:variable name="letulcsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</xsl:variable>
+   <xsl:variable name="letulcsub2">UUUUUUUUUUUUUUUUUUUUUUUUUULLLLLLLLLLLLLLLLLLLLLLLLLL</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-06-17</xsl:variable>
+   <xsl:variable name="moddate">2025-07-11</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -138,7 +139,7 @@
    <xsl:template name="style">
       <style type="text/css">
 div {white-space: normal;}
-.build {font-weight:bold;line-height:1.1;}
+.build {font-weight:bold;line-height:1.1;padding-bottom:6pt;}
 .usx {line-height:1.8;}
 .mt, .mt2, .mt3, .mt3n, .mt4, .mt4n, .mt5, .mt6, .mt7, .mt8, .mt9, .mt10 {text-align:center;}
 .sl1 {border-left:10pt solid green;padding-left:3pt;font-size:120%;}
@@ -210,41 +211,47 @@ div {white-space: normal;}
 .err-para--mid-23-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-23-1::after {content:'This paragraph type should not be empty. Allowed are \\b, \\b2, and , if needed, \\tc2, \\tc3. \\tc4, and \\tc5.  [N23.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C07-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C07-1::after {content:'Right single quotes should be separated from right double quotes by a \\u202F narrow no-break space.  [NC07.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-1::after {content:'Right single quotes should be separated from right double quotes by a narrow no-break space. Retype the space and second quote mark and Autocorrect will turn it into a narrow no-break space.  [NC07.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C07-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C07-2::after {content:'Right double quotes should be separated from right single quotes by a \\u202F narrow no-break space.  [NC07.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-2::after {content:'Right double quotes should be separated from right single quotes by a \\u202F narrow no-break space. Retype the space and second quote mark and Autocorrect will turn it into a narrow no-break space.  [NC07.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C07-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C07-3::after {content:'Left double quotes should be separated from left single quotes by a \\u202F narrow no-break space.  [NC07.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-3::after {content:'Left double quotes should be separated from left single quotes by a \\u202F narrow no-break space. Retype the space and second quote mark and Autocorrect will turn it into a narrow no-break space.  [NC07.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C07-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C07-4::after {content:'Left single quotes should be separated from left double quotes by a \\u202F narrow no-break space.  [NC07.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C07-4::after {content:'Left single quotes should be separated from left double quotes by a \\u202F narrow no-break space. Retype the space and second quote mark and Autocorrect will turn it into a narrow no-break space.  [NC07.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-1::after {content:'The three periods should be an ellipsis.  [NC08.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-1::after {content:'The three full stops should be the ellipsis character. Retype them and Autocorrect will make it the ellipsis.  [NC08.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-15 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-15::after {content:'There should be a space between the ellipsis and the following word.  [NC08.15]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-2::after {content:'The three periods separated by space should be an ellipsis.  [NC08.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-2::after {content:'The three full stops separated by spaces should be the ellipsis character. Retype them without the spaces and Autocorrect will make it the ellipsis.  [NC08.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-3::after {content:'The three periods separated by \u202F should be an ellipsis.  [NC08.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-3::after {content:'The three full stops separated by narrow spaces should be an ellipsis. Retype them without the spaces and Autocorrect will make it the ellipsis.  [NC08.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-4::after {content:'The three periods should be an ellipsis.  [NC08.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-4::after {content:'Between words, the ellipsis must have spaces on either side.  [NC08.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-26-1 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-26-1::after {content:'This paragraph contains a straight quote mark. It should be a curly quote mark.  [N26.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para--mid-C08-5 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-5::after {content:'An ellipsis shold not be surrounded by a space on both sides.  [NC08.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-6 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-6::after {content:'An ellipsis with space before and period after is not allowed.  [NC08.6]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-7 {background:peachpuff;}
-.err-para---C08-7::after {content:'An ellipsis with space before and comma after is not allowed.  [NC08.7]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-8 {background:peachpuff;}
-.err-para---C08-8::after {content:'An ellipsis with space before and question mark after is not allowed.  [NC08.8]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-9 {background:peachpuff;}
-.err-para---C08-9::after {content:'An ellipsis with space before and exclamation mark after is not allowed.  [NC08.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-10 {background:peachpuff;}
-.err-para---C08-10::after {content:'An ellipsis with space before and double right quotes after is not allowed.  [NC08.10]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-11 {background:peachpuff;}
-.err-para---C08-11::after {content:'An ellipsis with space before and single right quote after is not allowed.  [NC08.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-12 {background:peachpuff;}
-.err-para---C08-12::after {content:'An ellipsis preceded with left quotes a space before an ellipsis is not allowed.  [NC08.12]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para---C08-13 {background:peachpuff;}
-.err-para---C08-13::after {content:'An ellipsis preceded with left quotes a space before an ellipsis is not allowed.  [NC08.13]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-6::after {content:'There should not be a space before this ellipsis.  [NC08.6]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-7 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-7::after {content:'There should not be a space before this ellipsis.  [NC08.7]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-8 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-8::after {content:'There should not be a space before this ellipsis.  [NC08.8]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-9 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-9::after {content:'There should not be a space before this ellipsis.  [NC08.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-10 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-10::after {content:'There should not be a space before this ellipsis.  [NC08.10]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-11 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-11::after {content:'There should not be a space before this ellipsis.  [NC08.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-12 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-12::after {content:'An ellipsis cannot follow a comma. Insert a space between the two.  [NC08.12]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-13 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-13::after {content:'There should not be a space between the left opening quote and the ellipsis.  [NC08.13]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-16 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-16::after {content:'There should be a space between the ellipsis and opening round bracket.  [NC08.16]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-17 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-17::after {content:'There is no sentence ending punctuation after the ellipsis.  [NC08.17]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-18 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-18::after {content:'There is no sentence ending punctuation after the ellipsis and before the end quotes.  [NC08.18]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-qp-pre-14-2 {background:peachpuff;border-top:2pt solid red;}
 .err-para-qp-pre-14-2::after {content:'Two \\qp paragraphs, one after the other, are not allowed, unless it is one example with two paragraphs, or you are illustrating parallel lines of Hebrew poetry.  [N14.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-ntn-pre-18-1 {background:peachpuff;border-top:2pt solid red;}
@@ -273,10 +280,6 @@ div {white-space: normal;}
 .err-para-n1-mid-10-1::after {content:'There should be only one \\tec per \\n1 paragraph.  [N10.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n1-mid-10-1-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-n1-mid-10-1-4::after {content:'This \\n1 paragraph is missing a \\tec, or perhaps should be a \\n2 or a \\ntn.  [N10.1.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para-n2-mid-12-7-3 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-n2-mid-12-7-3::after {content:'The contents of this \\n2 \\tec are not found in the preceding \\n1 \\tec.  [N12.7.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para-n2-mid-12-7-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para-n2-mid-12-7-4::after {content:'The contents of this \\n2 \\tec are not found in the preceding \\n1 \\tec.  [N12.7.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n2-pre-12-8-1 {background:peachpuff;border-top:2pt solid red;}
 .err-para-n2-pre-12-8-1::after {content:'There is no \\n1 preceding this \\n2. It should be an \\n1.  [N12.8.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n2-mid-10-1-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -291,8 +294,8 @@ div {white-space: normal;}
 .err-para-n2-mid-12-7-3::after {content:'The contents of this \\n2 \\tec are not found in the preceding \\n1 \\tec.  [N12.7.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n2-mid-12-7-4 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-n2-mid-12-7-4::after {content:'The contents of this \\n2 \\tec are not found in the preceding \\n1 \\tec.  [N12.7.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para-n2--12-7-5 {background:peachpuff;}
-.err-para-n2--12-7-5::after {content:'  [N12.7.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para-n2-mid-12-7-5 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para-n2-mid-12-7-5::after {content:'The contents of this \\n2 \\tec are not found in the preceding \\n1 \\tec.  [N12.7.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n2-mid-12-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para-n2-mid-12-2::after {content:'The contents of this \\n2 \\tec is a portion of the previous \\n2 \\tec. Perhaps this should be an \\n3?  [N12.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para-n3-mid-12-6-2 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -371,8 +374,18 @@ div {white-space: normal;}
 .err-note-f--C06-1::after {content:'Footnotes must end with sentence-final punctuation and no space before the \\f*.  [NC06.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-2 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-27-2::after {content:'There must be a space after the end of the footnote (\\f*).  [N27.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C08-20 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C08-20::after {content:'There should be a space between the ellipsis and the following word.  [NC08.20]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-post-27-1 {background:orange;border-right:4pt solid red;}
 .err-note-f-post-27-1::after {content:'Footnotes always occur after punctuation.  [N27.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C08-21 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C08-21::after {content:'Between words, the ellipsis must have spaces on either side.  [NC08.21]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C08-22 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C08-22::after {content:'There should be a space between the ellipsis and opening round bracket.  [NC08.22]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C08-23 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C08-23::after {content:'There is no sentence ending punctuation after the ellipsis.  [NC08.23]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-note-f-mid-C08-24 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-note-f-mid-C08-24::after {content:'There is no sentence ending punctuation after the ellipsis and before the end quotes.  [NC08.24]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note---C05-3 {background:orange;}
 .err-note---C05-3::after {content:'This note SFM has text but no caller. The text should be in an \\ft.  [NC05.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note---C05-2 {background:orange;}
@@ -409,6 +422,8 @@ div {white-space: normal;}
 .err-char--pre-C01::after {content:'There is an erroneous \\xxx* \\xxx, where ‘xxx’ is the same in both cases.  [NC01]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char---C04 {background:orange;}
 .err-char---C04::after {content:'This character SFM is not closed. No end marker was found.  [NC04]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char--post-C08-19 {background:orange;border-right:4pt solid red;}
+.err-char--post-C08-19::after {content:'There should be a space before the ellipsis following this character markup.  [NC08.19]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-2-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tec-mid-10-2-1::after {content:'The \\tec should be at the start of the paragraph (or you are not using an \\n1, \\n2, or \\n3 style).  [N10.2.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-11-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -523,6 +538,13 @@ div {white-space: normal;}
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
+   <xsl:template match="text()" mode="paratxt">
+      <xsl:value-of select="."/>
+   </xsl:template>
+   <xsl:template match="char" mode="paratxt">
+      <xsl:apply-templates select="node()" mode="paratxt"/>
+   </xsl:template>
+   <xsl:template match="note" mode="paratxt"/>
    <xsl:template match="text()" mode="fntext">
       <xsl:choose>
          <xsl:when test="$translatetextswitch = '1'">
@@ -704,6 +726,19 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=s5 -->
    <xsl:template match="para[@style = 's5']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="currefv"
                     select="translate(substring-after(text()[1],':'),$validvletcomma,'')"/>
       <xsl:if test="$debug = 'on'">
@@ -837,24 +872,30 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -865,16 +906,12 @@ div {white-space: normal;}
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -882,31 +919,43 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 8.1 - rank=-->
@@ -999,6 +1048,24 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style= -->
    <xsl:template match="para">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="alltext" select="."/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> alltext = <xsl:value-of select="concat($sq,$alltext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -1018,24 +1085,30 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1046,16 +1119,12 @@ div {white-space: normal;}
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1063,31 +1132,43 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -1103,6 +1184,24 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=qp -->
    <xsl:template match="para[@style = 'qp']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
+      <xsl:variable name="alltext" select="."/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> alltext = <xsl:value-of select="concat($sq,$alltext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="ancestor" select="ancestor::*/@style "/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> ancestor = <xsl:value-of select="concat($sq,$ancestor,$sq,' ')"/>
@@ -1133,24 +1232,30 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1161,16 +1266,12 @@ div {white-space: normal;}
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1178,31 +1279,43 @@ div {white-space: normal;}
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 14.2 - rank=-->
@@ -1223,6 +1336,19 @@ div {white-space: normal;}
    </xsl:template>
    <!-- para @style=ntn -->
    <xsl:template match="para[@style = 'ntn']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="fnstring">
          <xsl:apply-templates select="node()" mode="fntext"/>
       </xsl:variable>
@@ -1473,24 +1599,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1501,16 +1633,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1518,31 +1646,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 18.1 - rank=-->
@@ -1657,6 +1797,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=gj -->
    <xsl:template match="para[@style = 'gj']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countjmp" select="count(*[@style = 'jmp'])"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> countjmp = <xsl:value-of select="concat($sq,$countjmp,$sq,' ')"/>
@@ -1692,24 +1845,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1720,16 +1879,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1737,31 +1892,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 22.9 - rank=-->
@@ -1790,6 +1957,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=b2 -->
    <xsl:template match="para[@style = 'b2']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="hascvref"
                     select="contains(translate(node()[not(self::*)],$numb,$numbsub),'#:#')"/>
       <xsl:if test="$debug = 'on'">
@@ -1820,24 +2000,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1848,16 +2034,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1865,31 +2047,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 23.2 - rank=-->
@@ -1914,6 +2108,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=b -->
    <xsl:template match="para[@style = 'b']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="nodecount" select="count(node())"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> nodecount = <xsl:value-of select="concat($sq,$nodecount,$sq,' ')"/>
@@ -1938,24 +2145,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -1966,16 +2179,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -1983,31 +2192,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 23.3 - rank=-->
@@ -2032,16 +2253,28 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=n1 -->
    <xsl:template match="para[@style = 'n1']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="fnstring">
          <xsl:apply-templates select="node()" mode="fntext"/>
       </xsl:variable>
       <xsl:comment>
 fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+      <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+         <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
@@ -2101,6 +2334,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curtec"
+                    select="substring(*[@style = 'tec'][1]/text(),1,$curteclen - 1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="pren1tec"
@@ -2337,24 +2576,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -2365,16 +2610,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -2382,31 +2623,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 12.1 - rank=-->
@@ -2533,21 +2786,28 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=n2 -->
    <xsl:template match="para[@style = 'n2']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="fnstring">
          <xsl:apply-templates select="node()" mode="fntext"/>
       </xsl:variable>
       <xsl:comment>
 fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+      <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
+         <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
@@ -2609,6 +2869,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="curtec"
+                    select="substring(*[@style = 'tec'][1]/text(),1,$curteclen - 1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="pren2tec"
                     select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:if test="$debug = 'on'">
@@ -2624,6 +2890,11 @@ fnstring = <xsl:value-of select="$fnstring"/>
                     select="string-length($curtec) - string-length(translate($curtec,'…',''))"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> counttecellipsis = <xsl:value-of select="concat($sq,$counttecellipsis,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curtecpostellipsisparse2"
@@ -2644,25 +2915,26 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> curtecpostellipsisparse4 = <xsl:value-of select="concat($sq,$curtecpostellipsisparse4,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="tec1ellipsis1" select="substring-before($curtec,$ellipsis)"/>
+      <xsl:variable name="tec1ellipsis1"
+                    select="substring(substring-before($curtec,$ellipsis),1,string-length(substring-before($curtec,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec1ellipsis1 = <xsl:value-of select="concat($sq,$tec1ellipsis1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="tec2ellipsis2"
-                    select="substring-before($curtecpostellipsisparse1,$ellipsis)"/>
+                    select="substring(substring-before($curtecpostellipsisparse1,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse1,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec2ellipsis2 = <xsl:value-of select="concat($sq,$tec2ellipsis2,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="tec3ellipsis3"
-                    select="substring-before($curtecpostellipsisparse2,$ellipsis)"/>
+                    select="substring(substring-before($curtecpostellipsisparse2,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse2,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec3ellipsis3 = <xsl:value-of select="concat($sq,$tec3ellipsis3,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="tec4ellipsis4"
-                    select="substring-before($curtecpostellipsisparse4,$ellipsis)"/>
+                    select="substring(substring-before($curtecpostellipsisparse4,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse4,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec4ellipsis4 = <xsl:value-of select="concat($sq,$tec4ellipsis4,$sq,' ')"/>
          </xsl:comment>
@@ -2720,7 +2992,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
+      <xsl:variable name="curtecpreellipsis"
+                    select="substring(substring-before($curtec,'…'),1,string-length(substring-before($curtec,'…')) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
          </xsl:comment>
@@ -2955,24 +3228,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -2983,16 +3262,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -3000,45 +3275,45 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
-               <!--ref 12.7.3 - rank=-->
-               <xsl:if test="not(contains($pren1tec,$tec1ellipsis1) and contains($pren1tec,$tec2ellipsis2)  and contains($pren1tec,$tec3ellipsis3) and contains($pren1tec,$tec4ellipsis4)  and contains($pren1tec,$tec4ellipsis5)) ">
-                  <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $hastecellipsis and $hastecversion">
-                     <xsl:text> err-para-n2-mid-12-7-3</xsl:text>
-                  </xsl:if>
-               </xsl:if>
-               <!--ref 12.7.4 - rank=-->
-               <xsl:if test="not(contains($pren2tec,$curtecver) or contains($pren1tec,$curtecver))">
-                  <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and not($hastecellipsis) and $hastecversion">
-                     <xsl:text> err-para-n2-mid-12-7-4</xsl:text>
-                  </xsl:if>
-               </xsl:if>
                <!--ref 12.8.1 - rank=-->
                <xsl:if test="$countpres5 &gt; $countpren1">
                   <xsl:if test="child::*[@style = 'tec']">
@@ -3077,6 +3352,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="not(contains($pren1tec,$tec1ellipsis1) and contains($pren1tec,$tec2ellipsis2)  and contains($pren1tec,$tec3ellipsis3)  and contains($pren1tec,$tec3ellipsis4)) ">
                   <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $counttecellipsis = 4 and not($hastecversion)">
                      <xsl:text> err-para-n2-mid-12-7-4</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 12.7.5 - rank=5-->
+               <xsl:if test="not(contains($pren1tec,$tec1ellipsis1) and contains($pren1tec,$tec2ellipsis2)  and contains($pren1tec,$tec3ellipsis3) and contains($pren1tec,$tec4ellipsis4)  and contains($pren1tec,$tec4ellipsis5)) ">
+                  <xsl:if test="$countpres5 &lt; $countpren1 and $hastecchild and $counttecellipsis = 5 and not($hastecversion)">
+                     <xsl:text> err-para-n2-mid-12-7-5</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 12.2 - rank=8-->
@@ -3189,21 +3470,28 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=n3 -->
    <xsl:template match="para[@style = 'n3']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="fnstring">
          <xsl:apply-templates select="node()" mode="fntext"/>
       </xsl:variable>
       <xsl:comment>
 fnstring = <xsl:value-of select="$fnstring"/>
       </xsl:comment>
-      <xsl:variable name="curtec"
-                    select="substring(*[@style = 'tec'][1],1,string-length(*[@style = 'tec'][1])-1)"/>
+      <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
+         <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
@@ -3265,6 +3553,17 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="curtec"
+                    select="substring(*[@style = 'tec'][1]/text(),1,$curteclen - 1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="countpren1"
                     select="count(preceding::*[@style = 'n1'][child::*[@style = 'tec']][1]/preceding-sibling::*)"/>
       <xsl:if test="$debug = 'on'">
@@ -3309,7 +3608,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> curtecpostellipsis = <xsl:value-of select="concat($sq,$curtecpostellipsis,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="curtecpreellipsis" select="substring-before($curtec,'…')"/>
+      <xsl:variable name="curtecpreellipsis"
+                    select="substring(substring-before($curtec,'…'),1,string-length(substring-before($curtec,'…')) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curtecpreellipsis = <xsl:value-of select="concat($sq,$curtecpreellipsis,$sq,' ')"/>
          </xsl:comment>
@@ -3560,24 +3860,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -3588,16 +3894,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -3605,31 +3907,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 12.6.2 - rank=-->
@@ -3780,6 +4094,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=s3 -->
    <xsl:template match="para[@style = 's3']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="refcolonv" select="substring-after(node()[not(self::*)],':')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> refcolonv = <xsl:value-of select="concat($sq,$refcolonv,$sq,' ')"/>
@@ -3899,24 +4226,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -3927,16 +4260,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -3944,31 +4273,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 19.4 - rank=-->
@@ -4033,6 +4374,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=b3 -->
    <xsl:template match="para[@style = 'b3']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
@@ -4180,24 +4534,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -4208,16 +4568,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -4225,31 +4581,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 7.1.1 - rank=-->
@@ -4294,6 +4662,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=p -->
    <xsl:template match="para[@style = 'p']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
@@ -4447,24 +4828,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -4475,16 +4862,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -4492,31 +4875,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 7.1.2 - rank=-->
@@ -4561,6 +4956,19 @@ fnstring = <xsl:value-of select="$fnstring"/>
    </xsl:template>
    <!-- para @style=gra -->
    <xsl:template match="para[@style = 'gra']">
+      <xsl:variable name="paratxt">
+         <xsl:choose>
+            <xsl:when test="note">
+               <xsl:apply-templates select="node()" mode="paratxt"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:value-of select="."/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:comment>
+paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
+      </xsl:comment>
       <xsl:variable name="countf" select="count(*[@style = 'f'])"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> countf = <xsl:value-of select="concat($sq,$countf,$sq,' ')"/>
@@ -4595,24 +5003,30 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C07.1 - rank=-->
-               <xsl:if test="contains(.,'’”') or contains(.,'’ ”')  or contains(.,'’ ”') ">
+               <xsl:if test="contains(.,'’”') or contains(.,'’ ”') ">
                   <xsl:text> err-para--mid-C07-1</xsl:text>
                </xsl:if>
                <!--ref C07.2 - rank=-->
-               <xsl:if test="contains(.,'”’') or contains(.,'” ’') or contains(.,'” ’') ">
+               <xsl:if test="contains(.,'”’') or contains(.,'” ’') ">
                   <xsl:text> err-para--mid-C07-2</xsl:text>
                </xsl:if>
                <!--ref C07.3 - rank=-->
-               <xsl:if test="contains(.,'“‘') or contains(.,'“ ‘')  or contains(.,'“ ‘') ">
+               <xsl:if test="contains(.,'“‘')  or contains(.,'“ ‘') ">
                   <xsl:text> err-para--mid-C07-3</xsl:text>
                </xsl:if>
                <!--ref C07.4 - rank=-->
-               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “')  or contains(.,'‘ “') ">
+               <xsl:if test="contains(.,'‘“') or contains(.,'‘ “') ">
                   <xsl:text> err-para--mid-C07-4</xsl:text>
                </xsl:if>
-               <!--ref C08.1 - rank=-->
+               <!--ref C08.1 - rank=1-->
                <xsl:if test="contains(.,'...')">
                   <xsl:text> err-para--mid-C08-1</xsl:text>
+               </xsl:if>
+               <!--ref C08.15 - rank=1-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),' …$')">
+                  <xsl:if test="not(  contains(translate(.,'“‘','@@'),'@ …') ) ">
+                     <xsl:text> err-para--mid-C08-15</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref C08.2 - rank=2-->
                <xsl:if test="contains(.,'. . .')">
@@ -4623,16 +5037,12 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:text> err-para--mid-C08-3</xsl:text>
                </xsl:if>
                <!--ref C08.4 - rank=4-->
-               <xsl:if test="contains(.,' … ')">
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub),'$…$')">
                   <xsl:text> err-para--mid-C08-4</xsl:text>
                </xsl:if>
                <!--ref 26.1 - rank=5-->
                <xsl:if test="contains(text(),$sq) or contains(text(),$dq) ">
                   <xsl:text> err-para--mid-26-1</xsl:text>
-               </xsl:if>
-               <!--ref C08.5 - rank=5-->
-               <xsl:if test="contains(.,' ... ')">
-                  <xsl:text> err-para--mid-C08-5</xsl:text>
                </xsl:if>
                <!--ref C08.6 - rank=6-->
                <xsl:if test="contains(.,' ….')">
@@ -4640,31 +5050,43 @@ fnstring = <xsl:value-of select="$fnstring"/>
                </xsl:if>
                <!--ref C08.7 - rank=7-->
                <xsl:if test="contains(.,' …,')">
-                  <xsl:text> err-para---C08-7</xsl:text>
+                  <xsl:text> err-para--mid-C08-7</xsl:text>
                </xsl:if>
                <!--ref C08.8 - rank=8-->
                <xsl:if test="contains(.,' …?')">
-                  <xsl:text> err-para---C08-8</xsl:text>
+                  <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
-                  <xsl:text> err-para---C08-9</xsl:text>
+                  <xsl:text> err-para--mid-C08-9</xsl:text>
                </xsl:if>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
-                  <xsl:text> err-para---C08-10</xsl:text>
+                  <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
-                  <xsl:text> err-para---C08-11</xsl:text>
+                  <xsl:text> err-para--mid-C08-11</xsl:text>
                </xsl:if>
                <!--ref C08.12 - rank=12-->
-               <xsl:if test="contains(.,'“ …')">
-                  <xsl:text> err-para---C08-12</xsl:text>
+               <xsl:if test="contains(.,',…')">
+                  <xsl:text> err-para--mid-C08-12</xsl:text>
                </xsl:if>
                <!--ref C08.13 - rank=13-->
-               <xsl:if test="contains(.,'‘ …')">
-                  <xsl:text> err-para---C08-13</xsl:text>
+               <xsl:if test="contains(translate(.,'“‘','@@'),'@ …')">
+                  <xsl:text> err-para--mid-C08-13</xsl:text>
+               </xsl:if>
+               <!--ref C08.16 - rank=16-->
+               <xsl:if test="contains($paratxt,'…(')">
+                  <xsl:text> err-para--mid-C08-16</xsl:text>
+               </xsl:if>
+               <!--ref C08.17 - rank=17-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'L… U') or contains(translate(translate($paratxt,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+                  <xsl:text> err-para--mid-C08-17</xsl:text>
+               </xsl:if>
+               <!--ref C08.18 - rank=18-->
+               <xsl:if test="contains(translate(translate($paratxt,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+                  <xsl:text> err-para--mid-C08-18</xsl:text>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 22.8 - rank=-->
@@ -5025,9 +5447,29 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:if test="translate($postchar1,$letulcnumb,$letulcnumbsub) = '$'">
                <xsl:text> err-note-f-post-27-2</xsl:text>
             </xsl:if>
+            <!--ref C08.20 - rank=4-->
+            <xsl:if test="contains(translate(.,$letulc,$letulcsub),' …$')">
+               <xsl:text> err-note-f-mid-C08-20</xsl:text>
+            </xsl:if>
             <!--ref 27.1 - rank=5-->
             <xsl:if test="translate($postchar1,$invalidpuncpost-f,$invalidpuncpost-f-sub) = '%'">
                <xsl:text> err-note-f-post-27-1</xsl:text>
+            </xsl:if>
+            <!--ref C08.21 - rank=15-->
+            <xsl:if test="contains(translate(.,$letulc,$letulcsub),'$…$')">
+               <xsl:text> err-note-f-mid-C08-21</xsl:text>
+            </xsl:if>
+            <!--ref C08.22 - rank=16-->
+            <xsl:if test="contains(.,'…(')">
+               <xsl:text> err-note-f-mid-C08-22</xsl:text>
+            </xsl:if>
+            <!--ref C08.23 - rank=17-->
+            <xsl:if test="contains(translate(.,$letulc,$letulcsub2),'L… U') or contains(translate(translate(.,'“‘','@@'),$letulc,$letulcsub2),'L… @U')">
+               <xsl:text> err-note-f-mid-C08-23</xsl:text>
+            </xsl:if>
+            <!--ref C08.24 - rank=18-->
+            <xsl:if test="contains(translate(translate(.,'’”','@@'),$letulc,$letulcsub2),'L…@ U')">
+               <xsl:text> err-note-f-mid-C08-24</xsl:text>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -5421,6 +5863,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -5487,6 +5933,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
                <!--common char errors-->
             </xsl:if>
@@ -5636,6 +6086,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -5673,7 +6127,8 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> pretec = <xsl:value-of select="concat($sq,$pretec,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="split2ellipsisstring1" select="substring-before(.,'…')"/>
+      <xsl:variable name="split2ellipsisstring1"
+                    select="substring(substring-before(.,'…'),1,string-length(substring-before(.,'…')) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> split2ellipsisstring1 = <xsl:value-of select="concat($sq,$split2ellipsisstring1,$sq,' ')"/>
          </xsl:comment>
@@ -5694,7 +6149,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="split3ellipsisstring2"
-                    select="substring-before($split2ellipsisstring2,'…')"/>
+                    select="substring(substring-before($split2ellipsisstring2,'…'),1,string-length(substring-before($split2ellipsisstring2,'…')) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> split3ellipsisstring2 = <xsl:value-of select="concat($sq,$split3ellipsisstring2,$sq,' ')"/>
          </xsl:comment>
@@ -5706,7 +6161,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="split4ellipsisstring3"
-                    select="substring-before($split3ellipsisstring3,'…')"/>
+                    select="substring(substring-before($split3ellipsisstring3,'…'),1,string-length(substring-before($split3ellipsisstring3,'…')) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> split4ellipsisstring3 = <xsl:value-of select="concat($sq,$split4ellipsisstring3,$sq,' ')"/>
          </xsl:comment>
@@ -5828,6 +6283,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -5940,6 +6399,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6024,6 +6487,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6103,6 +6570,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -6190,6 +6661,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -6302,6 +6777,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6412,6 +6891,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -6528,6 +7011,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6639,6 +7126,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6748,6 +7239,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6826,6 +7321,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>
@@ -6906,6 +7405,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
                </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
+               </xsl:if>
             </xsl:if>
          </xsl:attribute>
          <xsl:element name="span">
@@ -6981,6 +7484,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   <xsl:if test="substring(@style,1,1) != 'f'">
                      <xsl:text> err-char---C04</xsl:text>
                   </xsl:if>
+               </xsl:if>
+               <!--ref C08.19 - rank=19-->
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+                  <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
          </xsl:attribute>

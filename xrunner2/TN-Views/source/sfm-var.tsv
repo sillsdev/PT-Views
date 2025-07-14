@@ -96,7 +96,8 @@ TNND	n1	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-si
 TNND	n1	countpresibnode		m		
 TNND	n1	counttec		m		
 TNND	n1	countteu		m		
-TNND	n1	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n1	curtec		b		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n1	curteclen		a		
 TNND	n1	dqstr1		a		
 TNND	n1	dqstr10		a		
 TNND	n1	dqstr2		a		
@@ -147,10 +148,11 @@ TNND	n2	countpren2		m		count(preceding-sibling::*[@style = 'n2'][1]/preceding-si
 TNND	n2	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-sibling::*)
 TNND	n2	countpresibnode		m		
 TNND	n2	counttec		m		
-TNND	n2	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n2	curteclen		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n2	curtec		b		
 TNND	n2	curtecpostellipsis		m		
 TNND	n2	curtecpreellipsis		m		
-TNND	n2	curtecver		a		
+TNND	n2	curtecver		c		
 TNND	n2	curtecverpreellipsis		m		
 TNND	n2	curtei		m		
 TNND	n2	dqstr1		a		
@@ -208,10 +210,11 @@ TNND	n3	countpres5		m		count(preceding-sibling::*[@style = 's5'][1]/preceding-si
 TNND	n3	countpresibnode		m		
 TNND	n3	counttec		m		
 TNND	n3	counttrs		m		
-TNND	n3	curtec		a		translate(*[@style = 'tec'][1]/text(), ':','')
+TNND	n3	curteclen		a		
+TNND	n3	curtec		b		translate(*[@style = 'tec'][1]/text(), ':','')
 TNND	n3	curtecpostellipsis		m		
 TNND	n3	curtecpreellipsis		m		
-TNND	n3	curtecver		a		
+TNND	n3	curtecver		c		
 TNND	n3	curtecverpreellipsis		m		
 TNND	n3	curtei		m		
 TNND	n3	dqstr1		a		
@@ -331,6 +334,7 @@ TNND	p	preverser2		m
 TNND	p	prevhyphen		m		
 TNND	p	values5beforev		a		
 TNND	qns	ancestor		m		
+TNND	qp	alltext		a		
 TNND	qp	ancestor		m		
 TNND	qp	hascvref		m		
 TNND	s3	hascvref		m		
@@ -551,12 +555,12 @@ TNND	s5	countnext-p		a	8.28, 8.29 next p or b3
 TNND	f	postsibtext1		a		
 TNND	f	postchar1		b		
 TNND	f	pretextlastchar		b		
+TNND	brk	pretextlastchar		b		
+TNND	brk	presibtext1		a		
 TNND	f	presibtext1		a		
 TNND	f	presibtext1last12		b		
 TNND	ros	presibtext1		a		
-TN	f	lastnodelast4char		c		
-TN	f	lastnode		a		
-TN	f	lastnodelen		b		
-TN	f	lastnodelast4charmod		d		
-TN	f	notetext		a		
-TN	f	notetextlen		b		
+TN	f	fnstringmod		d		
+TN	f	fnstringmodlastchar		m		
+TN	f	fnstringmod2		g		
+TN	para	alltext		a		

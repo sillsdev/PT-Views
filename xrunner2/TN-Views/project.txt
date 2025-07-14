@@ -28,6 +28,7 @@ varstring=%projectpath%\source\var-string.tsv
 #var-string_file-list=%projectpath%\source\var-string.tsv
 tagerrors=%projectpath%\scripts\%tnxx%-tag-errors.xslt
 
+
 para-like_list=para cell row table
 char-like_list=char figure verse note link
 
@@ -98,7 +99,7 @@ t=:testfast %project% XXD
 [tagerrorsxslt]
 t=:var project %~1
 #t=:echo "%cyan%Updating TNND-tag-errors-test.xslt%reset%"
-t=:xslt data2xslt-v8.xslt "%projectpath%\output\check_data.xml" "%projectpath%\scripts\%project%-tag-errors.xslt" "project=%project%"
+t=:xslt data2xslt-v9.xslt "%projectpath%\output\check_data.xml" "%projectpath%\scripts\%project%-tag-errors.xslt" "project=%project%"
 t=:date
 t=:copy "%projectpath%\scripts\%project%-tag-errors.xslt" "%projectpath%\history\%project%-tag-errors-%curisodatetime%.xslt"
 t=:copy "%projectpath%\scripts\%project%-tag-errors.xslt" "%projectpath%\scripts\%project%-tag-errors.xslt.txt"
@@ -548,7 +549,7 @@ t=:ptprojupdate
 [sub]
 s1=testtndd testtnnd testusx makecombinedpdf
 s2=updateBamboodata b testtndd testtnddslow
-s3=testacts testactsms
+s3=testacts testactsms test-tagerrors9 test-fast-te9
 s5=testusxhighlighter testTNNDxslt test-staticvarxml
 s6=test-pt-tnnd-tag-errors
 
@@ -620,3 +621,18 @@ t=:testfast TNND XXD
 t=:inputfile "%usxpath%\TNND\096XXD.usx"
 t=:cct remove-nl-from-para.cct
 t=:xslt1 TNND-tag-errors-pt.xslt "" "%projectpath%\output\XXD-TNND-fast-PT.html" "debug=on"
+
+[test-tagerrors9]
+t=:xslt data2xslt-v9.xslt "%projectpath%\output\check_data.xml" "%projectpath%\scripts\TNND-tag-errors-test.xslt" "project=TNND"
+
+[test-fast-te9]
+t=:var XXD 096XXD
+t=:var project TNND
+t=:var book XXD
+t=:ifnotdefined %book% bkid
+t=:var file !%book%!.usx
+t=:echo "%green%Info: Book = %file%%reset%"
+t=:echo "%green%Info: Project = %project%%reset%"
+t=:inputfile "%usxpath%\%project%\%file%"
+t=:cct remove-nl-from-para.cct
+t=:xslt1 %project%-tag-errors-test.xslt "" "%projectpath%\output\%book%-%project%-fast.html" "debug=on"
