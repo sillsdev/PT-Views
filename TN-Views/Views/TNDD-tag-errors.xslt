@@ -33,7 +33,7 @@
    <xsl:variable name="letulcsub2">UUUUUUUUUUUUUUUUUUUUUUUUUULLLLLLLLLLLLLLLLLLLLLLLLLL</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-06-28</xsl:variable>
+   <xsl:variable name="moddate">2025-07-11</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -1318,8 +1318,8 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref 9 - rank=5-->
-               <xsl:if test="contains(text(),'⌋') and not(position() = last())">
-                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’)','_++++++++++') = '+')">
+               <xsl:if test="contains(text(),'⌋') and not(position() = last()) and not(substring($presibnode1,string-length($presibnode1),1) = '-')">
+                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’)-','_+++++++++++') = '+')">
                      <xsl:text> err-char-brk-post-9</xsl:text>
                   </xsl:if>
                </xsl:if>
