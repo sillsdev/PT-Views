@@ -33,7 +33,7 @@
    <xsl:variable name="letulcsub2">UUUUUUUUUUUUUUUUUUUUUUUUUULLLLLLLLLLLLLLLLLLLLLLLLLL</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-07-11</xsl:variable>
+   <xsl:variable name="moddate">2025-09-23</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -158,8 +158,6 @@ div {white-space: normal;}
 .tre {text-decoration: underline;font-style:italic;}
 .linkref {color:grey;}
 .f {background:lightgrey}
-.quote-error-f {background:orange;border-top:2pt solid red;}
-.quote-error-f:after {content:'This double quote in the above \\f footnote, is preceeded by an opening double quote, it should either be single quoted or there is some preceding error.';}
 .quote-error-n1 {background:orange;border-top:2pt solid red;}
 .quote-error-n1:after {content:'This double quote in the above \\n1 paragraph, is preceeded by an opening double quote, it should either be single quoted or there is some preceding error.';}
 .quote-error-n2 {background:orange;border-top:2pt solid red;}
@@ -236,14 +234,14 @@ div {white-space: normal;}
 .err-para--mid-C08-7::after {content:'There should not be a space before this ellipsis.  [NC08.7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-8 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-8::after {content:'There should not be a space before this ellipsis.  [NC08.8]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para--mid-C08-25 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-25::after {content:'There should be a space between the semicolon and the ellipsis.  [NC08.25]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-26 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-26::after {content:'There should be a space between the ellipsis and the following letter.  [NC08.26]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-9 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-9::after {content:'There should not be a space before this ellipsis.  [NC08.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-10 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-10::after {content:'There should not be a space before this ellipsis.  [NC08.10]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-para--mid-C08-26 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
-.err-para--mid-C08-26::after {content:'There should be a space between the ellipsis and the following letter.  [NC08.26]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-25 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-25::after {content:'There should be a space between the semicolon and the ellipsis.  [NC08.25]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-11 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-11::after {content:'There should not be a space before this ellipsis.  [NC08.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-12 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -368,8 +366,6 @@ div {white-space: normal;}
 .err-note-f-pre-22-5::after {content:'The caller for the \\f must be a plus sign.  [N22.5]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-27-3 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-27-3::after {content:'There should not be a space in front of the footnote.  [N27.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-note-f-mid-27-4 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-note-f-mid-27-4::after {content:'Quotes within quotes of scholars need to be adjusted to single quotes and so forth through the levels of quotes.   [N27.4]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-27-9 {background:orange;border-left:4pt solid red;}
 .err-note-f-pre-27-9::after {content:'The \\fq marker can only be used on the word or phrase immediately preceding the \\f marker.  [N27.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-note-f-pre-27-11 {background:orange;border-left:4pt solid red;}
@@ -743,10 +739,16 @@ div {white-space: normal;}
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="currefv"
-                    select="translate(substring-after(text()[1],':'),$validvletcomma,'')"/>
+      <xsl:variable name="countnext-p"
+                    select="count(following-sibling::*[child::verse][1])"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> currefv = <xsl:value-of select="concat($sq,$currefv,$sq,' ')"/>
+         <xsl:comment> countnext-p = <xsl:value-of select="concat($sq,$countnext-p,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="countnext-s5"
+                    select="count(following-sibling::*[@style = 's5'][1])"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> countnext-s5 = <xsl:value-of select="concat($sq,$countnext-s5,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="countpres5post-p"
@@ -760,16 +762,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="countnext-s5"
-                    select="count(following-sibling::*[@style = 's5'][1])"/>
+      <xsl:variable name="currefv"
+                    select="translate(substring-after(text()[1],':'),$validvletcomma,'')"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> countnext-s5 = <xsl:value-of select="concat($sq,$countnext-s5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="countnext-p"
-                    select="count(following-sibling::*[child::verse][1])"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> countnext-p = <xsl:value-of select="concat($sq,$countnext-p,$sq,' ')"/>
+         <xsl:comment> currefv = <xsl:value-of select="concat($sq,$currefv,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="currefv1" select="substring-before($currefv,'–')"/>
@@ -782,16 +778,16 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> currefv2 = <xsl:value-of select="concat($sq,$currefv2,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="countsib2next-s5"
-                    select="count(following-sibling::*[@style = 's5'][1]/preceding-sibling::*[position() &gt; number($curpos)])"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> countsib2next-s5 = <xsl:value-of select="concat($sq,$countsib2next-s5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="countsib2next-p"
                     select="count(following-sibling::*[child::verse][1]/preceding-sibling::*[position() &gt; number($curpos)])"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> countsib2next-p = <xsl:value-of select="concat($sq,$countsib2next-p,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="countsib2next-s5"
+                    select="count(following-sibling::*[@style = 's5'][1]/preceding-sibling::*[position() &gt; number($curpos)])"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> countsib2next-s5 = <xsl:value-of select="concat($sq,$countsib2next-s5,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="hascvref"
@@ -837,6 +833,11 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> preverser1 = <xsl:value-of select="concat($sq,$preverser1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="prevhyphen" select="contains($preverse,'-')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> prevhyphen = <xsl:value-of select="concat($sq,$prevhyphen,$sq,' ')"/>
@@ -850,11 +851,6 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       <xsl:variable name="refvendash" select="contains(node()[not(self::*)],'–')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> refvendash = <xsl:value-of select="concat($sq,$refvendash,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="preverser2" select="substring-after($preverse,'-')"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> preverser2 = <xsl:value-of select="concat($sq,$preverser2,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -929,9 +925,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -941,9 +937,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1150,9 +1146,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -1162,9 +1158,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1305,9 +1301,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -1317,9 +1313,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1377,69 +1373,63 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
-fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:variable name="dqstr01" select="substring-before($paratxt,$rdq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+         <xsl:comment> dqstr01 = <xsl:value-of select="concat($sq,$dqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr02"
+                    select="substring-before(substring-after($paratxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr02 = <xsl:value-of select="concat($sq,$dqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr03"
+                    select="substring-before(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr03 = <xsl:value-of select="concat($sq,$dqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr04 = <xsl:value-of select="concat($sq,$dqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr05 = <xsl:value-of select="concat($sq,$dqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr06 = <xsl:value-of select="concat($sq,$dqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr07 = <xsl:value-of select="concat($sq,$dqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr08 = <xsl:value-of select="concat($sq,$dqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr09 = <xsl:value-of select="concat($sq,$dqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="hascvref"
@@ -1448,9 +1438,49 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> hascvref = <xsl:value-of select="concat($sq,$hascvref,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:variable name="indqstr01" select="substring-after($dqstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+         <xsl:comment> indqstr01 = <xsl:value-of select="concat($sq,$indqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr02" select="substring-after($dqstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr02 = <xsl:value-of select="concat($sq,$indqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr03" select="substring-after($dqstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr03 = <xsl:value-of select="concat($sq,$indqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr04" select="substring-after($dqstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr04 = <xsl:value-of select="concat($sq,$indqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr05" select="substring-after($dqstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr05 = <xsl:value-of select="concat($sq,$indqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr06" select="substring-after($dqstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr06 = <xsl:value-of select="concat($sq,$indqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr07" select="substring-after($dqstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr07 = <xsl:value-of select="concat($sq,$indqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr08" select="substring-after($dqstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr08 = <xsl:value-of select="concat($sq,$indqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr09" select="substring-after($dqstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr09 = <xsl:value-of select="concat($sq,$indqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
@@ -1458,49 +1488,49 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
+      <xsl:variable name="ldqstr01" select="ldqstr01"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
+         <xsl:comment> ldqstr01 = <xsl:value-of select="concat($sq,$ldqstr01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
+      <xsl:variable name="ldqstr02" select="ldqstr02"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
+         <xsl:comment> ldqstr02 = <xsl:value-of select="concat($sq,$ldqstr02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
+      <xsl:variable name="ldqstr03" select="ldqstr03"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
+         <xsl:comment> ldqstr03 = <xsl:value-of select="concat($sq,$ldqstr03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
+      <xsl:variable name="ldqstr04" select="ldqstr04"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
+         <xsl:comment> ldqstr04 = <xsl:value-of select="concat($sq,$ldqstr04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
+      <xsl:variable name="ldqstr05" select="ldqstr05"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
+         <xsl:comment> ldqstr05 = <xsl:value-of select="concat($sq,$ldqstr05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
+      <xsl:variable name="ldqstr06" select="ldqstr06"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
+         <xsl:comment> ldqstr06 = <xsl:value-of select="concat($sq,$ldqstr06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
+      <xsl:variable name="ldqstr07" select="ldqstr07"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
+         <xsl:comment> ldqstr07 = <xsl:value-of select="concat($sq,$ldqstr07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
+      <xsl:variable name="ldqstr08" select="ldqstr08"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
+         <xsl:comment> ldqstr08 = <xsl:value-of select="concat($sq,$ldqstr08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+      <xsl:variable name="ldqstr09" select="ldqstr09"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+         <xsl:comment> ldqstr09 = <xsl:value-of select="concat($sq,$ldqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
@@ -1508,104 +1538,64 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+      <xsl:variable name="sqdiff01"
+                    select="string-length(translate($ldqstr01,$rsq,'')) - string-length(translate($ldqstr01,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
+         <xsl:comment> sqdiff01 = <xsl:value-of select="concat($sq,$sqdiff01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
+      <xsl:variable name="sqdiff02"
+                    select="string-length(translate($ldqstr02,$rsq,'')) - string-length(translate($ldqstr02,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
+         <xsl:comment> sqdiff02 = <xsl:value-of select="concat($sq,$sqdiff02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
+      <xsl:variable name="sqdiff03"
+                    select="string-length(translate($ldqstr03,$rsq,'')) - string-length(translate($ldqstr03,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
+         <xsl:comment> sqdiff03 = <xsl:value-of select="concat($sq,$sqdiff03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
+      <xsl:variable name="sqdiff04"
+                    select="string-length(translate($ldqstr04,$rsq,'')) - string-length(translate($ldqstr04,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
+         <xsl:comment> sqdiff04 = <xsl:value-of select="concat($sq,$sqdiff04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
+      <xsl:variable name="sqdiff05"
+                    select="string-length(translate($ldqstr05,$rsq,'')) - string-length(translate($ldqstr05,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
+         <xsl:comment> sqdiff05 = <xsl:value-of select="concat($sq,$sqdiff05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
+      <xsl:variable name="sqdiff06"
+                    select="string-length(translate($ldqstr06,$rsq,'')) - string-length(translate($ldqstr06,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
+         <xsl:comment> sqdiff06 = <xsl:value-of select="concat($sq,$sqdiff06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
+      <xsl:variable name="sqdiff07"
+                    select="string-length(translate($ldqstr07,$rsq,'')) - string-length(translate($ldqstr07,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
+         <xsl:comment> sqdiff07 = <xsl:value-of select="concat($sq,$sqdiff07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
+      <xsl:variable name="sqdiff08"
+                    select="string-length(translate($ldqstr08,$rsq,'')) - string-length(translate($ldqstr08,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
+         <xsl:comment> sqdiff08 = <xsl:value-of select="concat($sq,$sqdiff08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
+      <xsl:variable name="sqdiff09"
+                    select="string-length(translate($ldqstr09,$rsq,'')) - string-length(translate($ldqstr09,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+         <xsl:comment> sqdiff09 = <xsl:value-of select="concat($sq,$sqdiff09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -1680,9 +1670,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -1692,9 +1682,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1739,85 +1729,85 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:value-of select="concat('\',@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
-         <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+         <xsl:if test="contains($indqstr01,'“') and $sqdiff01 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr01,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+         <xsl:if test="contains($indqstr02,'“') and $sqdiff02 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr02,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+         <xsl:if test="contains($indqstr03,'“') and $sqdiff03 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr03,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+         <xsl:if test="contains($indqstr04,'“') and $sqdiff04 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr04,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+         <xsl:if test="contains($indqstr05,'“') and $sqdiff05 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr05,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+         <xsl:if test="contains($indqstr06,'“') and $sqdiff06 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr06,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+         <xsl:if test="contains($indqstr07,'“') and $sqdiff07 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr07,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+         <xsl:if test="contains($indqstr08,'“') and $sqdiff08 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr08,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+         <xsl:if test="contains($indqstr09,'“') and $sqdiff09 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr09,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
          <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
@@ -1934,9 +1924,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -1946,9 +1936,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2097,9 +2087,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -2109,9 +2099,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2250,9 +2240,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -2262,9 +2252,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2326,74 +2316,68 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
-fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
       <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:variable name="dqstr01" select="substring-before($paratxt,$rdq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+         <xsl:comment> dqstr01 = <xsl:value-of select="concat($sq,$dqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr02"
+                    select="substring-before(substring-after($paratxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr02 = <xsl:value-of select="concat($sq,$dqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr03"
+                    select="substring-before(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr03 = <xsl:value-of select="concat($sq,$dqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr04 = <xsl:value-of select="concat($sq,$dqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr05 = <xsl:value-of select="concat($sq,$dqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr06 = <xsl:value-of select="concat($sq,$dqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr07 = <xsl:value-of select="concat($sq,$dqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr08 = <xsl:value-of select="concat($sq,$dqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr09 = <xsl:value-of select="concat($sq,$dqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curtec"
@@ -2440,54 +2424,54 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> hastecchild = <xsl:value-of select="concat($sq,$hastecchild,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:variable name="indqstr01" select="substring-after($dqstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+         <xsl:comment> indqstr01 = <xsl:value-of select="concat($sq,$indqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr02" select="substring-after($dqstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr02 = <xsl:value-of select="concat($sq,$indqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr03" select="substring-after($dqstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr03 = <xsl:value-of select="concat($sq,$indqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr04" select="substring-after($dqstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr04 = <xsl:value-of select="concat($sq,$indqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr05" select="substring-after($dqstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr05 = <xsl:value-of select="concat($sq,$indqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr06" select="substring-after($dqstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr06 = <xsl:value-of select="concat($sq,$indqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr07" select="substring-after($dqstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr07 = <xsl:value-of select="concat($sq,$indqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr08" select="substring-after($dqstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr08 = <xsl:value-of select="concat($sq,$indqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr09" select="substring-after($dqstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr09 = <xsl:value-of select="concat($sq,$indqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="positiontec" select="positiontec"/>
@@ -2507,9 +2491,49 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> precharn1tec = <xsl:value-of select="concat($sq,$precharn1tec,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+      <xsl:variable name="ldqstr01" select="ldqstr01"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+         <xsl:comment> ldqstr01 = <xsl:value-of select="concat($sq,$ldqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr02" select="ldqstr02"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr02 = <xsl:value-of select="concat($sq,$ldqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr03" select="ldqstr03"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr03 = <xsl:value-of select="concat($sq,$ldqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr04" select="ldqstr04"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr04 = <xsl:value-of select="concat($sq,$ldqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr05" select="ldqstr05"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr05 = <xsl:value-of select="concat($sq,$ldqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr06" select="ldqstr06"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr06 = <xsl:value-of select="concat($sq,$ldqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr07" select="ldqstr07"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr07 = <xsl:value-of select="concat($sq,$ldqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr08" select="ldqstr08"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr08 = <xsl:value-of select="concat($sq,$ldqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr09" select="ldqstr09"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr09 = <xsl:value-of select="concat($sq,$ldqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
@@ -2517,104 +2541,64 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+      <xsl:variable name="sqdiff01"
+                    select="string-length(translate($ldqstr01,$rsq,'')) - string-length(translate($ldqstr01,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
+         <xsl:comment> sqdiff01 = <xsl:value-of select="concat($sq,$sqdiff01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
+      <xsl:variable name="sqdiff02"
+                    select="string-length(translate($ldqstr02,$rsq,'')) - string-length(translate($ldqstr02,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
+         <xsl:comment> sqdiff02 = <xsl:value-of select="concat($sq,$sqdiff02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
+      <xsl:variable name="sqdiff03"
+                    select="string-length(translate($ldqstr03,$rsq,'')) - string-length(translate($ldqstr03,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
+         <xsl:comment> sqdiff03 = <xsl:value-of select="concat($sq,$sqdiff03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
+      <xsl:variable name="sqdiff04"
+                    select="string-length(translate($ldqstr04,$rsq,'')) - string-length(translate($ldqstr04,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
+         <xsl:comment> sqdiff04 = <xsl:value-of select="concat($sq,$sqdiff04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
+      <xsl:variable name="sqdiff05"
+                    select="string-length(translate($ldqstr05,$rsq,'')) - string-length(translate($ldqstr05,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
+         <xsl:comment> sqdiff05 = <xsl:value-of select="concat($sq,$sqdiff05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
+      <xsl:variable name="sqdiff06"
+                    select="string-length(translate($ldqstr06,$rsq,'')) - string-length(translate($ldqstr06,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
+         <xsl:comment> sqdiff06 = <xsl:value-of select="concat($sq,$sqdiff06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
+      <xsl:variable name="sqdiff07"
+                    select="string-length(translate($ldqstr07,$rsq,'')) - string-length(translate($ldqstr07,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
+         <xsl:comment> sqdiff07 = <xsl:value-of select="concat($sq,$sqdiff07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
+      <xsl:variable name="sqdiff08"
+                    select="string-length(translate($ldqstr08,$rsq,'')) - string-length(translate($ldqstr08,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
+         <xsl:comment> sqdiff08 = <xsl:value-of select="concat($sq,$sqdiff08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
+      <xsl:variable name="sqdiff09"
+                    select="string-length(translate($ldqstr09,$rsq,'')) - string-length(translate($ldqstr09,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+         <xsl:comment> sqdiff09 = <xsl:value-of select="concat($sq,$sqdiff09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="sqdiff10"
                     select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -2689,9 +2673,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -2701,9 +2685,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2760,85 +2744,85 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:value-of select="concat('\',@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
-         <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+         <xsl:if test="contains($indqstr01,'“') and $sqdiff01 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr01,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+         <xsl:if test="contains($indqstr02,'“') and $sqdiff02 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr02,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+         <xsl:if test="contains($indqstr03,'“') and $sqdiff03 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr03,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+         <xsl:if test="contains($indqstr04,'“') and $sqdiff04 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr04,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+         <xsl:if test="contains($indqstr05,'“') and $sqdiff05 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr05,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+         <xsl:if test="contains($indqstr06,'“') and $sqdiff06 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr06,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+         <xsl:if test="contains($indqstr07,'“') and $sqdiff07 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr07,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+         <xsl:if test="contains($indqstr08,'“') and $sqdiff08 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr08,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+         <xsl:if test="contains($indqstr09,'“') and $sqdiff09 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr09,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
          <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
@@ -2867,74 +2851,68 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
-fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
       <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:variable name="dqstr01" select="substring-before($paratxt,$rdq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+         <xsl:comment> dqstr01 = <xsl:value-of select="concat($sq,$dqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr02"
+                    select="substring-before(substring-after($paratxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr02 = <xsl:value-of select="concat($sq,$dqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr03"
+                    select="substring-before(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr03 = <xsl:value-of select="concat($sq,$dqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr04 = <xsl:value-of select="concat($sq,$dqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr05 = <xsl:value-of select="concat($sq,$dqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr06 = <xsl:value-of select="concat($sq,$dqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr07 = <xsl:value-of select="concat($sq,$dqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr08 = <xsl:value-of select="concat($sq,$dqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr09 = <xsl:value-of select="concat($sq,$dqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curtec"
@@ -2943,15 +2921,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> curtec = <xsl:value-of select="concat($sq,$curtec,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="curtecpostellipsisparse1" select="substring-after($curtec,'…')"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtecpostellipsisparse1 = <xsl:value-of select="concat($sq,$curtecpostellipsisparse1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="pren2tec"
                     select="preceding::*[@style = 'n2'][child::*[@style = 'tec']][1]/*[@style = 'tec'][1]"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> pren2tec = <xsl:value-of select="concat($sq,$pren2tec,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curtecpostellipsisparse1" select="substring-after($curtec,'…')"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtecpostellipsisparse1 = <xsl:value-of select="concat($sq,$curtecpostellipsisparse1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="counttecellipsis"
@@ -2960,15 +2938,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> counttecellipsis = <xsl:value-of select="concat($sq,$counttecellipsis,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="curtecpostellipsisparse2"
                     select="substring-after($curtecpostellipsisparse1,'…')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curtecpostellipsisparse2 = <xsl:value-of select="concat($sq,$curtecpostellipsisparse2,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curtecver" select="normalize-space(substring-after($curtec,')'))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curtecver = <xsl:value-of select="concat($sq,$curtecver,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curtecpostellipsisparse3"
@@ -2989,10 +2967,20 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> tec1ellipsis1 = <xsl:value-of select="concat($sq,$tec1ellipsis1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="tec1ellipsis2" select="$curtecpostellipsisparse1"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> tec1ellipsis2 = <xsl:value-of select="concat($sq,$tec1ellipsis2,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="tec2ellipsis2"
                     select="substring(substring-before($curtecpostellipsisparse1,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse1,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec2ellipsis2 = <xsl:value-of select="concat($sq,$tec2ellipsis2,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="tec2ellipsis3" select="$curtecpostellipsisparse2"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> tec2ellipsis3 = <xsl:value-of select="concat($sq,$tec2ellipsis3,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="tec3ellipsis3"
@@ -3001,25 +2989,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> tec3ellipsis3 = <xsl:value-of select="concat($sq,$tec3ellipsis3,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="tec3ellipsis4" select="$curtecpostellipsisparse3"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> tec3ellipsis4 = <xsl:value-of select="concat($sq,$tec3ellipsis4,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="tec4ellipsis4"
                     select="substring(substring-before($curtecpostellipsisparse4,$ellipsis),1,string-length(substring-before($curtecpostellipsisparse4,$ellipsis)) - 1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> tec4ellipsis4 = <xsl:value-of select="concat($sq,$tec4ellipsis4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="tec1ellipsis2" select="$curtecpostellipsisparse1"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> tec1ellipsis2 = <xsl:value-of select="concat($sq,$tec1ellipsis2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="tec2ellipsis3" select="$curtecpostellipsisparse2"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> tec2ellipsis3 = <xsl:value-of select="concat($sq,$tec2ellipsis3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="tec3ellipsis4" select="$curtecpostellipsisparse3"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> tec3ellipsis4 = <xsl:value-of select="concat($sq,$tec3ellipsis4,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="tec4ellipsis5" select="$curtecpostellipsisparse4"/>
@@ -3093,54 +3071,54 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:variable name="indqstr01" select="substring-after($dqstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+         <xsl:comment> indqstr01 = <xsl:value-of select="concat($sq,$indqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr02" select="substring-after($dqstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr02 = <xsl:value-of select="concat($sq,$indqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr03" select="substring-after($dqstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr03 = <xsl:value-of select="concat($sq,$indqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr04" select="substring-after($dqstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr04 = <xsl:value-of select="concat($sq,$indqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr05" select="substring-after($dqstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr05 = <xsl:value-of select="concat($sq,$indqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr06" select="substring-after($dqstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr06 = <xsl:value-of select="concat($sq,$indqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr07" select="substring-after($dqstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr07 = <xsl:value-of select="concat($sq,$indqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr08" select="substring-after($dqstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr08 = <xsl:value-of select="concat($sq,$indqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr09" select="substring-after($dqstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr09 = <xsl:value-of select="concat($sq,$indqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="postcharn2tec"
@@ -3167,9 +3145,49 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> pren1tec = <xsl:value-of select="concat($sq,$pren1tec,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+      <xsl:variable name="ldqstr01" select="ldqstr01"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+         <xsl:comment> ldqstr01 = <xsl:value-of select="concat($sq,$ldqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr02" select="ldqstr02"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr02 = <xsl:value-of select="concat($sq,$ldqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr03" select="ldqstr03"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr03 = <xsl:value-of select="concat($sq,$ldqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr04" select="ldqstr04"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr04 = <xsl:value-of select="concat($sq,$ldqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr05" select="ldqstr05"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr05 = <xsl:value-of select="concat($sq,$ldqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr06" select="ldqstr06"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr06 = <xsl:value-of select="concat($sq,$ldqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr07" select="ldqstr07"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr07 = <xsl:value-of select="concat($sq,$ldqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr08" select="ldqstr08"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr08 = <xsl:value-of select="concat($sq,$ldqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr09" select="ldqstr09"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr09 = <xsl:value-of select="concat($sq,$ldqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
@@ -3177,50 +3195,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+      <xsl:variable name="sqdiff01"
+                    select="string-length(translate($ldqstr01,$rsq,'')) - string-length(translate($ldqstr01,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+         <xsl:comment> sqdiff01 = <xsl:value-of select="concat($sq,$sqdiff01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="sqdiff10"
@@ -3229,52 +3207,52 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
+      <xsl:variable name="sqdiff02"
+                    select="string-length(translate($ldqstr02,$rsq,'')) - string-length(translate($ldqstr02,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
+         <xsl:comment> sqdiff02 = <xsl:value-of select="concat($sq,$sqdiff02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
+      <xsl:variable name="sqdiff03"
+                    select="string-length(translate($ldqstr03,$rsq,'')) - string-length(translate($ldqstr03,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
+         <xsl:comment> sqdiff03 = <xsl:value-of select="concat($sq,$sqdiff03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
+      <xsl:variable name="sqdiff04"
+                    select="string-length(translate($ldqstr04,$rsq,'')) - string-length(translate($ldqstr04,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
+         <xsl:comment> sqdiff04 = <xsl:value-of select="concat($sq,$sqdiff04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
+      <xsl:variable name="sqdiff05"
+                    select="string-length(translate($ldqstr05,$rsq,'')) - string-length(translate($ldqstr05,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
+         <xsl:comment> sqdiff05 = <xsl:value-of select="concat($sq,$sqdiff05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
+      <xsl:variable name="sqdiff06"
+                    select="string-length(translate($ldqstr06,$rsq,'')) - string-length(translate($ldqstr06,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
+         <xsl:comment> sqdiff06 = <xsl:value-of select="concat($sq,$sqdiff06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
+      <xsl:variable name="sqdiff07"
+                    select="string-length(translate($ldqstr07,$rsq,'')) - string-length(translate($ldqstr07,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
+         <xsl:comment> sqdiff07 = <xsl:value-of select="concat($sq,$sqdiff07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
+      <xsl:variable name="sqdiff08"
+                    select="string-length(translate($ldqstr08,$rsq,'')) - string-length(translate($ldqstr08,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
+         <xsl:comment> sqdiff08 = <xsl:value-of select="concat($sq,$sqdiff08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
+      <xsl:variable name="sqdiff09"
+                    select="string-length(translate($ldqstr09,$rsq,'')) - string-length(translate($ldqstr09,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
+         <xsl:comment> sqdiff09 = <xsl:value-of select="concat($sq,$sqdiff09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -3349,9 +3327,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -3361,9 +3339,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -3452,85 +3430,85 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:value-of select="concat('\',@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
-         <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+         <xsl:if test="contains($indqstr01,'“') and $sqdiff01 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr01,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+         <xsl:if test="contains($indqstr02,'“') and $sqdiff02 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr02,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+         <xsl:if test="contains($indqstr03,'“') and $sqdiff03 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr03,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+         <xsl:if test="contains($indqstr04,'“') and $sqdiff04 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr04,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+         <xsl:if test="contains($indqstr05,'“') and $sqdiff05 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr05,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+         <xsl:if test="contains($indqstr06,'“') and $sqdiff06 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr06,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+         <xsl:if test="contains($indqstr07,'“') and $sqdiff07 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr07,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+         <xsl:if test="contains($indqstr08,'“') and $sqdiff08 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr08,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+         <xsl:if test="contains($indqstr09,'“') and $sqdiff09 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr09,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
          <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
@@ -3559,74 +3537,68 @@ fnstring = <xsl:value-of select="$fnstring"/>
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
-fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
       <xsl:variable name="curteclen" select="string-length(*[@style = 'tec'][1]/text())"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curteclen = <xsl:value-of select="concat($sq,$curteclen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:variable name="dqstr01" select="substring-before($paratxt,$rdq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
+         <xsl:comment> dqstr01 = <xsl:value-of select="concat($sq,$dqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr02"
+                    select="substring-before(substring-after($paratxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr02 = <xsl:value-of select="concat($sq,$dqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr03"
+                    select="substring-before(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr03 = <xsl:value-of select="concat($sq,$dqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr04 = <xsl:value-of select="concat($sq,$dqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr05 = <xsl:value-of select="concat($sq,$dqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr06 = <xsl:value-of select="concat($sq,$dqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr07 = <xsl:value-of select="concat($sq,$dqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr08 = <xsl:value-of select="concat($sq,$dqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqstr09 = <xsl:value-of select="concat($sq,$dqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($paratxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curtec"
@@ -3717,54 +3689,54 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> hastecversion = <xsl:value-of select="concat($sq,$hastecversion,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
+      <xsl:variable name="indqstr01" select="substring-after($dqstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
+         <xsl:comment> indqstr01 = <xsl:value-of select="concat($sq,$indqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr02" select="substring-after($dqstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr02 = <xsl:value-of select="concat($sq,$indqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr03" select="substring-after($dqstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr03 = <xsl:value-of select="concat($sq,$indqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr04" select="substring-after($dqstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr04 = <xsl:value-of select="concat($sq,$indqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr05" select="substring-after($dqstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr05 = <xsl:value-of select="concat($sq,$indqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr06" select="substring-after($dqstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr06 = <xsl:value-of select="concat($sq,$indqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr07" select="substring-after($dqstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr07 = <xsl:value-of select="concat($sq,$indqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr08" select="substring-after($dqstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr08 = <xsl:value-of select="concat($sq,$indqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqstr09" select="substring-after($dqstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqstr09 = <xsl:value-of select="concat($sq,$indqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="lenchildtec" select="string-length(*[@style = 'tec']/text())"/>
@@ -3807,9 +3779,49 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> validtecfirst = <xsl:value-of select="concat($sq,$validtecfirst,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+      <xsl:variable name="ldqstr01" select="ldqstr01"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+         <xsl:comment> ldqstr01 = <xsl:value-of select="concat($sq,$ldqstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr02" select="ldqstr02"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr02 = <xsl:value-of select="concat($sq,$ldqstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr03" select="ldqstr03"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr03 = <xsl:value-of select="concat($sq,$ldqstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr04" select="ldqstr04"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr04 = <xsl:value-of select="concat($sq,$ldqstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr05" select="ldqstr05"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr05 = <xsl:value-of select="concat($sq,$ldqstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr06" select="ldqstr06"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr06 = <xsl:value-of select="concat($sq,$ldqstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr07" select="ldqstr07"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr07 = <xsl:value-of select="concat($sq,$ldqstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr08" select="ldqstr08"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr08 = <xsl:value-of select="concat($sq,$ldqstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqstr09" select="ldqstr09"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqstr09 = <xsl:value-of select="concat($sq,$ldqstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
@@ -3817,50 +3829,10 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+      <xsl:variable name="sqdiff01"
+                    select="string-length(translate($ldqstr01,$rsq,'')) - string-length(translate($ldqstr01,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+         <xsl:comment> sqdiff01 = <xsl:value-of select="concat($sq,$sqdiff01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="sqdiff10"
@@ -3869,52 +3841,52 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
+      <xsl:variable name="sqdiff02"
+                    select="string-length(translate($ldqstr02,$rsq,'')) - string-length(translate($ldqstr02,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
+         <xsl:comment> sqdiff02 = <xsl:value-of select="concat($sq,$sqdiff02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
+      <xsl:variable name="sqdiff03"
+                    select="string-length(translate($ldqstr03,$rsq,'')) - string-length(translate($ldqstr03,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
+         <xsl:comment> sqdiff03 = <xsl:value-of select="concat($sq,$sqdiff03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
+      <xsl:variable name="sqdiff04"
+                    select="string-length(translate($ldqstr04,$rsq,'')) - string-length(translate($ldqstr04,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
+         <xsl:comment> sqdiff04 = <xsl:value-of select="concat($sq,$sqdiff04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
+      <xsl:variable name="sqdiff05"
+                    select="string-length(translate($ldqstr05,$rsq,'')) - string-length(translate($ldqstr05,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
+         <xsl:comment> sqdiff05 = <xsl:value-of select="concat($sq,$sqdiff05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
+      <xsl:variable name="sqdiff06"
+                    select="string-length(translate($ldqstr06,$rsq,'')) - string-length(translate($ldqstr06,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
+         <xsl:comment> sqdiff06 = <xsl:value-of select="concat($sq,$sqdiff06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
+      <xsl:variable name="sqdiff07"
+                    select="string-length(translate($ldqstr07,$rsq,'')) - string-length(translate($ldqstr07,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
+         <xsl:comment> sqdiff07 = <xsl:value-of select="concat($sq,$sqdiff07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
+      <xsl:variable name="sqdiff08"
+                    select="string-length(translate($ldqstr08,$rsq,'')) - string-length(translate($ldqstr08,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
+         <xsl:comment> sqdiff08 = <xsl:value-of select="concat($sq,$sqdiff08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
+      <xsl:variable name="sqdiff09"
+                    select="string-length(translate($ldqstr09,$rsq,'')) - string-length(translate($ldqstr09,$lsq,''))"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
+         <xsl:comment> sqdiff09 = <xsl:value-of select="concat($sq,$sqdiff09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -3989,9 +3961,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -4001,9 +3973,9 @@ fnstring = <xsl:value-of select="$fnstring"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -4084,85 +4056,85 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:value-of select="concat('\',@style,' ')"/>
          </xsl:element>
          <xsl:apply-templates select="node()"/>
-         <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+         <xsl:if test="contains($indqstr01,'“') and $sqdiff01 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr01,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+         <xsl:if test="contains($indqstr02,'“') and $sqdiff02 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr02,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+         <xsl:if test="contains($indqstr03,'“') and $sqdiff03 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr03,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+         <xsl:if test="contains($indqstr04,'“') and $sqdiff04 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr04,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+         <xsl:if test="contains($indqstr05,'“') and $sqdiff05 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr05,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+         <xsl:if test="contains($indqstr06,'“') and $sqdiff06 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr06,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+         <xsl:if test="contains($indqstr07,'“') and $sqdiff07 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr07,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+         <xsl:if test="contains($indqstr08,'“') and $sqdiff08 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr08,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
-         <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+         <xsl:if test="contains($indqstr09,'“') and $sqdiff09 = 0">
             <xsl:text> </xsl:text>
             <xsl:element name="span">
                <xsl:attribute name="class">
                   <xsl:value-of select="concat('quote-error-',@style)"/>
                </xsl:attribute>
-               <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+               <xsl:value-of select="concat('“',substring-after($indqstr09,'“'),'”')"/>
             </xsl:element>
          </xsl:if>
          <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
@@ -4363,9 +4335,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -4375,9 +4347,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -4679,9 +4651,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -4691,9 +4663,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -4981,9 +4953,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -4993,9 +4965,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -5164,9 +5136,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
-               <!--ref C08.25 - rank=8-->
-               <xsl:if test="contains(.,';…')">
-                  <xsl:text> err-para--mid-C08-25</xsl:text>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
                </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
@@ -5176,9 +5148,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
                </xsl:if>
-               <!--ref C08.26 - rank=10-->
-               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
-                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -5236,69 +5208,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:element>
    </xsl:template>
    <xsl:template match="note[@style = 'f']">
-      <xsl:variable name="fnstring">
-         <xsl:apply-templates select="node()" mode="fntext"/>
-      </xsl:variable>
-      <xsl:comment>
-fnstring = <xsl:value-of select="$fnstring"/>
-      </xsl:comment>
-      <xsl:variable name="dqstr1" select="substring-before($fnstring,$rdq)"/>
+      <xsl:variable name="fntxt" select="."/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr1 = <xsl:value-of select="concat($sq,$dqstr1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr10"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr10 = <xsl:value-of select="concat($sq,$dqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr2"
-                    select="substring-before(substring-after($fnstring,$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr2 = <xsl:value-of select="concat($sq,$dqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr3"
-                    select="substring-before(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr3 = <xsl:value-of select="concat($sq,$dqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr4"
-                    select="substring-before(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr4 = <xsl:value-of select="concat($sq,$dqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr5"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr5 = <xsl:value-of select="concat($sq,$dqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr6"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr6 = <xsl:value-of select="concat($sq,$dqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr7"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr7 = <xsl:value-of select="concat($sq,$dqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr8"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr8 = <xsl:value-of select="concat($sq,$dqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="dqstr9"
-                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fnstring,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> dqstr9 = <xsl:value-of select="concat($sq,$dqstr9,$sq,' ')"/>
+         <xsl:comment> fntxt = <xsl:value-of select="concat($sq,$fntxt,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="postsibtext1" select="following-sibling::text()[1]"/>
@@ -5311,21 +5223,80 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="dqfnstr01" select="substring-before($fntxt,$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr01 = <xsl:value-of select="concat($sq,$dqfnstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr02"
+                    select="substring-before(substring-after($fntxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr02 = <xsl:value-of select="concat($sq,$dqfnstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr03"
+                    select="substring-before(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr03 = <xsl:value-of select="concat($sq,$dqfnstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr04 = <xsl:value-of select="concat($sq,$dqfnstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr05 = <xsl:value-of select="concat($sq,$dqfnstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr06 = <xsl:value-of select="concat($sq,$dqfnstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr07 = <xsl:value-of select="concat($sq,$dqfnstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr08 = <xsl:value-of select="concat($sq,$dqfnstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr09 = <xsl:value-of select="concat($sq,$dqfnstr09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr10 = <xsl:value-of select="concat($sq,$dqfnstr10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="pretextlastchar"
-                    select="substring($presibtext1,string-length($presibtext1),1)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="presibtext1last12"
                     select="substring($presibtext1,string-length($presibtext1) - 11,12)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> presibtext1last12 = <xsl:value-of select="concat($sq,$presibtext1last12,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="fnstringmod"
@@ -5344,175 +5315,175 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr1" select="substring-after($dqstr1,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr1 = <xsl:value-of select="concat($sq,$indqstr1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr10" select="substring-after($dqstr10,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr10 = <xsl:value-of select="concat($sq,$indqstr10,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr2" select="substring-after($dqstr2,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr2 = <xsl:value-of select="concat($sq,$indqstr2,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr3" select="substring-after($dqstr3,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr3 = <xsl:value-of select="concat($sq,$indqstr3,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr4" select="substring-after($dqstr4,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr4 = <xsl:value-of select="concat($sq,$indqstr4,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr5" select="substring-after($dqstr5,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr5 = <xsl:value-of select="concat($sq,$indqstr5,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr6" select="substring-after($dqstr6,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr6 = <xsl:value-of select="concat($sq,$indqstr6,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr7" select="substring-after($dqstr7,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr7 = <xsl:value-of select="concat($sq,$indqstr7,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr8" select="substring-after($dqstr8,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr8 = <xsl:value-of select="concat($sq,$indqstr8,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="indqstr9" select="substring-after($dqstr9,$ldq)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> indqstr9 = <xsl:value-of select="concat($sq,$indqstr9,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="fnstringmodlastchar"
                     select="substring($fnstringmod2,string-length($fnstringmod2),1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> fnstringmodlastchar = <xsl:value-of select="concat($sq,$fnstringmodlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr1" select="substring-before($indqstr1,$ldq)"/>
+      <xsl:variable name="graparent" select="parent::para[@style = 'gra']"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr1 = <xsl:value-of select="concat($sq,$ldqstr1,$sq,' ')"/>
+         <xsl:comment> graparent = <xsl:value-of select="concat($sq,$graparent,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr10" select="substring-before($indqstr10,$ldq)"/>
+      <xsl:variable name="indqfnstr01" select="substring-after($dqfnstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr10 = <xsl:value-of select="concat($sq,$ldqstr10,$sq,' ')"/>
+         <xsl:comment> indqfnstr01 = <xsl:value-of select="concat($sq,$indqfnstr01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr2" select="substring-before($indqstr2,$ldq)"/>
+      <xsl:variable name="indqfnstr02" select="substring-after($dqfnstr02,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr2 = <xsl:value-of select="concat($sq,$ldqstr2,$sq,' ')"/>
+         <xsl:comment> indqfnstr02 = <xsl:value-of select="concat($sq,$indqfnstr02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr3" select="substring-before($indqstr3,$ldq)"/>
+      <xsl:variable name="indqfnstr03" select="substring-after($dqfnstr03,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr3 = <xsl:value-of select="concat($sq,$ldqstr3,$sq,' ')"/>
+         <xsl:comment> indqfnstr03 = <xsl:value-of select="concat($sq,$indqfnstr03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr4" select="substring-before($indqstr4,$ldq)"/>
+      <xsl:variable name="indqfnstr04" select="substring-after($dqfnstr04,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr4 = <xsl:value-of select="concat($sq,$ldqstr4,$sq,' ')"/>
+         <xsl:comment> indqfnstr04 = <xsl:value-of select="concat($sq,$indqfnstr04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr5" select="substring-before($indqstr5,$ldq)"/>
+      <xsl:variable name="indqfnstr05" select="substring-after($dqfnstr05,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr5 = <xsl:value-of select="concat($sq,$ldqstr5,$sq,' ')"/>
+         <xsl:comment> indqfnstr05 = <xsl:value-of select="concat($sq,$indqfnstr05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr6" select="substring-before($indqstr6,$ldq)"/>
+      <xsl:variable name="indqfnstr06" select="substring-after($dqfnstr06,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr6 = <xsl:value-of select="concat($sq,$ldqstr6,$sq,' ')"/>
+         <xsl:comment> indqfnstr06 = <xsl:value-of select="concat($sq,$indqfnstr06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr7" select="substring-before($indqstr7,$ldq)"/>
+      <xsl:variable name="indqfnstr07" select="substring-after($dqfnstr07,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr7 = <xsl:value-of select="concat($sq,$ldqstr7,$sq,' ')"/>
+         <xsl:comment> indqfnstr07 = <xsl:value-of select="concat($sq,$indqfnstr07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr8" select="substring-before($indqstr8,$ldq)"/>
+      <xsl:variable name="indqfnstr08" select="substring-after($dqfnstr08,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr8 = <xsl:value-of select="concat($sq,$ldqstr8,$sq,' ')"/>
+         <xsl:comment> indqfnstr08 = <xsl:value-of select="concat($sq,$indqfnstr08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="ldqstr9" select="substring-before($indqstr9,$ldq)"/>
+      <xsl:variable name="indqfnstr09" select="substring-after($dqfnstr09,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> ldqstr9 = <xsl:value-of select="concat($sq,$ldqstr9,$sq,' ')"/>
+         <xsl:comment> indqfnstr09 = <xsl:value-of select="concat($sq,$indqfnstr09,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff1"
-                    select="string-length(translate($ldqstr1,$rsq,'')) - string-length(translate($ldqstr1,$lsq,''))"/>
+      <xsl:variable name="indqfnstr10" select="substring-after($dqfnstr10,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff1 = <xsl:value-of select="concat($sq,$sqdiff1,$sq,' ')"/>
+         <xsl:comment> indqfnstr10 = <xsl:value-of select="concat($sq,$indqfnstr10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff10"
-                    select="string-length(translate($ldqstr10,$rsq,'')) - string-length(translate($ldqstr10,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr01" select="substring-before($indqfnstr01,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff10 = <xsl:value-of select="concat($sq,$sqdiff10,$sq,' ')"/>
+         <xsl:comment> ldqfnstr01 = <xsl:value-of select="concat($sq,$ldqfnstr01,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff2"
-                    select="string-length(translate($ldqstr2,$rsq,'')) - string-length(translate($ldqstr2,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr02" select="substring-before($indqfnstr10,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff2 = <xsl:value-of select="concat($sq,$sqdiff2,$sq,' ')"/>
+         <xsl:comment> ldqfnstr02 = <xsl:value-of select="concat($sq,$ldqfnstr02,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff3"
-                    select="string-length(translate($ldqstr3,$rsq,'')) - string-length(translate($ldqstr3,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr03" select="substring-before($indqfnstr02,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff3 = <xsl:value-of select="concat($sq,$sqdiff3,$sq,' ')"/>
+         <xsl:comment> ldqfnstr03 = <xsl:value-of select="concat($sq,$ldqfnstr03,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff4"
-                    select="string-length(translate($ldqstr4,$rsq,'')) - string-length(translate($ldqstr4,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr04" select="substring-before($indqfnstr03,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff4 = <xsl:value-of select="concat($sq,$sqdiff4,$sq,' ')"/>
+         <xsl:comment> ldqfnstr04 = <xsl:value-of select="concat($sq,$ldqfnstr04,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff5"
-                    select="string-length(translate($ldqstr5,$rsq,'')) - string-length(translate($ldqstr5,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr05" select="substring-before($indqfnstr04,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff5 = <xsl:value-of select="concat($sq,$sqdiff5,$sq,' ')"/>
+         <xsl:comment> ldqfnstr05 = <xsl:value-of select="concat($sq,$ldqfnstr05,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff6"
-                    select="string-length(translate($ldqstr6,$rsq,'')) - string-length(translate($ldqstr6,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr06" select="substring-before($indqfnstr05,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff6 = <xsl:value-of select="concat($sq,$sqdiff6,$sq,' ')"/>
+         <xsl:comment> ldqfnstr06 = <xsl:value-of select="concat($sq,$ldqfnstr06,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff7"
-                    select="string-length(translate($ldqstr7,$rsq,'')) - string-length(translate($ldqstr7,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr07" select="substring-before($indqfnstr06,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff7 = <xsl:value-of select="concat($sq,$sqdiff7,$sq,' ')"/>
+         <xsl:comment> ldqfnstr07 = <xsl:value-of select="concat($sq,$ldqfnstr07,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff8"
-                    select="string-length(translate($ldqstr8,$rsq,'')) - string-length(translate($ldqstr8,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr08" select="substring-before($indqfnstr07,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff8 = <xsl:value-of select="concat($sq,$sqdiff8,$sq,' ')"/>
+         <xsl:comment> ldqfnstr08 = <xsl:value-of select="concat($sq,$ldqfnstr08,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="sqdiff9"
-                    select="string-length(translate($ldqstr9,$rsq,'')) - string-length(translate($ldqstr9,$lsq,''))"/>
+      <xsl:variable name="ldqfnstr09" select="substring-before($indqfnstr08,$ldq)"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> sqdiff9 = <xsl:value-of select="concat($sq,$sqdiff9,$sq,' ')"/>
+         <xsl:comment> ldqfnstr09 = <xsl:value-of select="concat($sq,$ldqfnstr09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr10" select="substring-before($indqfnstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr10 = <xsl:value-of select="concat($sq,$ldqfnstr10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff01"
+                    select="string-length(translate($ldqfnstr01,$rsq,'')) - string-length(translate($ldqfnstr01,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff01 = <xsl:value-of select="concat($sq,$sqfndiff01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff02"
+                    select="string-length(translate($ldqfnstr02,$rsq,'')) - string-length(translate($ldqfnstr02,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff02 = <xsl:value-of select="concat($sq,$sqfndiff02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff03"
+                    select="string-length(translate($ldqfnstr03,$rsq,'')) - string-length(translate($ldqfnstr03,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff03 = <xsl:value-of select="concat($sq,$sqfndiff03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff04"
+                    select="string-length(translate($ldqfnstr04,$rsq,'')) - string-length(translate($ldqfnstr04,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff04 = <xsl:value-of select="concat($sq,$sqfndiff04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff05"
+                    select="string-length(translate($ldqfnstr05,$rsq,'')) - string-length(translate($ldqfnstr05,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff05 = <xsl:value-of select="concat($sq,$sqfndiff05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff06"
+                    select="string-length(translate($ldqfnstr06,$rsq,'')) - string-length(translate($ldqfnstr06,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff06 = <xsl:value-of select="concat($sq,$sqfndiff06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff07"
+                    select="string-length(translate($ldqfnstr07,$rsq,'')) - string-length(translate($ldqfnstr07,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff07 = <xsl:value-of select="concat($sq,$sqfndiff07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff08"
+                    select="string-length(translate($ldqfnstr08,$rsq,'')) - string-length(translate($ldqfnstr08,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff08 = <xsl:value-of select="concat($sq,$sqfndiff08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff09"
+                    select="string-length(translate($ldqfnstr09,$rsq,'')) - string-length(translate($ldqfnstr09,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff09 = <xsl:value-of select="concat($sq,$sqfndiff09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff10"
+                    select="string-length(translate($ldqfnstr10,$rsq,'')) - string-length(translate($ldqfnstr10,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff10 = <xsl:value-of select="concat($sq,$sqfndiff10,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -5538,10 +5509,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <!--ref 22.5 - rank=-->
             <xsl:if test="not(@caller = '+')">
                <xsl:text> err-note-f-pre-22-5</xsl:text>
-            </xsl:if>
-            <!--ref 27.4 - rank=-->
-            <xsl:if test="(contains($indqstr1,$ldq) and $sqdiff1 = 0) or (contains($indqstr2,$ldq) and $sqdiff2 = 0) or (contains($indqstr3,$ldq) and $sqdiff3 = 0) or (contains($indqstr4,$ldq) and $sqdiff4 = 0) or (contains($indqstr5,$ldq) and $sqdiff5 = 0) or (contains($indqstr6,$ldq) and $sqdiff6 = 0) or (contains($indqstr7,$ldq) and $sqdiff7 = 0) or (contains($indqstr8,$ldq) and $sqdiff8 = 0) or (contains($indqstr9,$ldq) and $sqdiff9 = 0) or (contains($indqstr10,$ldq) and $sqdiff10 = 0)">
-               <xsl:text> err-note-f-mid-27-4</xsl:text>
             </xsl:if>
             <!--ref 27.9 - rank=-->
             <xsl:if test="not(contains($presibtext1last12,normalize-space(*[@style = 'fq']/text())))">
@@ -5606,98 +5573,327 @@ fnstring = <xsl:value-of select="$fnstring"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
-      <xsl:if test="contains($indqstr1,'“') and $sqdiff1 = 0">
+      <xsl:if test="contains($indqfnstr01,'“') and $sqfndiff01 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr1,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr01,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr2,'“') and $sqdiff2 = 0">
+      <xsl:if test="contains($indqfnstr02,'“') and $sqfndiff02 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr2,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr02,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr3,'“') and $sqdiff3 = 0">
+      <xsl:if test="contains($indqfnstr03,'“') and $sqfndiff03 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr3,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr03,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr4,'“') and $sqdiff4 = 0">
+      <xsl:if test="contains($indqfnstr04,'“') and $sqfndiff04 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr4,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr04,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr5,'“') and $sqdiff5 = 0">
+      <xsl:if test="contains($indqfnstr05,'“') and $sqfndiff05 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr5,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr05,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr6,'“') and $sqdiff6 = 0">
+      <xsl:if test="contains($indqfnstr06,'“') and $sqfndiff06 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr6,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr06,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr7,'“') and $sqdiff7 = 0">
+      <xsl:if test="contains($indqfnstr07,'“') and $sqfndiff07 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr7,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr07,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr8,'“') and $sqdiff8 = 0">
+      <xsl:if test="contains($indqfnstr08,'“') and $sqfndiff08 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr8,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr08,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr9,'“') and $sqdiff9 = 0">
+      <xsl:if test="contains($indqfnstr09,'“') and $sqfndiff09 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr9,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr09,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
-      <xsl:if test="contains($indqstr10,'“') and $sqdiff10 = 0">
+      <xsl:if test="contains($indqfnstr10,'“') and $sqfndiff10 = 0">
          <xsl:text> </xsl:text>
          <xsl:element name="span">
             <xsl:attribute name="class">
                <xsl:value-of select="concat('quote-error-',@style)"/>
             </xsl:attribute>
-            <xsl:value-of select="concat('“',substring-after($indqstr10,'“'),'”')"/>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr10,'“'),'”')"/>
          </xsl:element>
       </xsl:if>
    </xsl:template>
    <xsl:template match="note">
+      <xsl:variable name="fntxt" select="."/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> fntxt = <xsl:value-of select="concat($sq,$fntxt,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr01" select="substring-before($fntxt,$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr01 = <xsl:value-of select="concat($sq,$dqfnstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr02"
+                    select="substring-before(substring-after($fntxt,$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr02 = <xsl:value-of select="concat($sq,$dqfnstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr03"
+                    select="substring-before(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr03 = <xsl:value-of select="concat($sq,$dqfnstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr04"
+                    select="substring-before(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr04 = <xsl:value-of select="concat($sq,$dqfnstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr05"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr05 = <xsl:value-of select="concat($sq,$dqfnstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr06"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr06 = <xsl:value-of select="concat($sq,$dqfnstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr07"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr07 = <xsl:value-of select="concat($sq,$dqfnstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr08"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr08 = <xsl:value-of select="concat($sq,$dqfnstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr09"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr09 = <xsl:value-of select="concat($sq,$dqfnstr09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="dqfnstr10"
+                    select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($fntxt,$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq),$rdq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> dqfnstr10 = <xsl:value-of select="concat($sq,$dqfnstr10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr01" select="substring-after($dqfnstr01,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr01 = <xsl:value-of select="concat($sq,$indqfnstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr02" select="substring-after($dqfnstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr02 = <xsl:value-of select="concat($sq,$indqfnstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr03" select="substring-after($dqfnstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr03 = <xsl:value-of select="concat($sq,$indqfnstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr04" select="substring-after($dqfnstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr04 = <xsl:value-of select="concat($sq,$indqfnstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr05" select="substring-after($dqfnstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr05 = <xsl:value-of select="concat($sq,$indqfnstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr06" select="substring-after($dqfnstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr06 = <xsl:value-of select="concat($sq,$indqfnstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr07" select="substring-after($dqfnstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr07 = <xsl:value-of select="concat($sq,$indqfnstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr08" select="substring-after($dqfnstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr08 = <xsl:value-of select="concat($sq,$indqfnstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr09" select="substring-after($dqfnstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr09 = <xsl:value-of select="concat($sq,$indqfnstr09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="indqfnstr10" select="substring-after($dqfnstr10,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> indqfnstr10 = <xsl:value-of select="concat($sq,$indqfnstr10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curpos" select="position()"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curpos = <xsl:value-of select="concat($sq,$curpos,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr01" select="substring-before($indqfnstr01,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr01 = <xsl:value-of select="concat($sq,$ldqfnstr01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr02" select="substring-before($indqfnstr10,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr02 = <xsl:value-of select="concat($sq,$ldqfnstr02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr03" select="substring-before($indqfnstr02,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr03 = <xsl:value-of select="concat($sq,$ldqfnstr03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr04" select="substring-before($indqfnstr03,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr04 = <xsl:value-of select="concat($sq,$ldqfnstr04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr05" select="substring-before($indqfnstr04,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr05 = <xsl:value-of select="concat($sq,$ldqfnstr05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr06" select="substring-before($indqfnstr05,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr06 = <xsl:value-of select="concat($sq,$ldqfnstr06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr07" select="substring-before($indqfnstr06,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr07 = <xsl:value-of select="concat($sq,$ldqfnstr07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr08" select="substring-before($indqfnstr07,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr08 = <xsl:value-of select="concat($sq,$ldqfnstr08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr09" select="substring-before($indqfnstr08,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr09 = <xsl:value-of select="concat($sq,$ldqfnstr09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="ldqfnstr10" select="substring-before($indqfnstr09,$ldq)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> ldqfnstr10 = <xsl:value-of select="concat($sq,$ldqfnstr10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff01"
+                    select="string-length(translate($ldqfnstr01,$rsq,'')) - string-length(translate($ldqfnstr01,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff01 = <xsl:value-of select="concat($sq,$sqfndiff01,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff02"
+                    select="string-length(translate($ldqfnstr02,$rsq,'')) - string-length(translate($ldqfnstr02,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff02 = <xsl:value-of select="concat($sq,$sqfndiff02,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff03"
+                    select="string-length(translate($ldqfnstr03,$rsq,'')) - string-length(translate($ldqfnstr03,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff03 = <xsl:value-of select="concat($sq,$sqfndiff03,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff04"
+                    select="string-length(translate($ldqfnstr04,$rsq,'')) - string-length(translate($ldqfnstr04,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff04 = <xsl:value-of select="concat($sq,$sqfndiff04,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff05"
+                    select="string-length(translate($ldqfnstr05,$rsq,'')) - string-length(translate($ldqfnstr05,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff05 = <xsl:value-of select="concat($sq,$sqfndiff05,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff06"
+                    select="string-length(translate($ldqfnstr06,$rsq,'')) - string-length(translate($ldqfnstr06,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff06 = <xsl:value-of select="concat($sq,$sqfndiff06,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff07"
+                    select="string-length(translate($ldqfnstr07,$rsq,'')) - string-length(translate($ldqfnstr07,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff07 = <xsl:value-of select="concat($sq,$sqfndiff07,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff08"
+                    select="string-length(translate($ldqfnstr08,$rsq,'')) - string-length(translate($ldqfnstr08,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff08 = <xsl:value-of select="concat($sq,$sqfndiff08,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff09"
+                    select="string-length(translate($ldqfnstr09,$rsq,'')) - string-length(translate($ldqfnstr09,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff09 = <xsl:value-of select="concat($sq,$sqfndiff09,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="sqfndiff10"
+                    select="string-length(translate($ldqfnstr10,$rsq,'')) - string-length(translate($ldqfnstr10,$lsq,''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sqfndiff10 = <xsl:value-of select="concat($sq,$sqfndiff10,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:comment>
          <xsl:value-of select="concat(' ',preceding::chapter[1]/@number,':',preceding::verse[1]/@number,' ')"/>
       </xsl:comment>
@@ -5739,6 +5935,96 @@ fnstring = <xsl:value-of select="$fnstring"/>
             </xsl:element>
          </xsl:if>
       </xsl:element>
+      <xsl:if test="contains($indqfnstr01,'“') and $sqfndiff01 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr01,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr02,'“') and $sqfndiff02 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr02,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr03,'“') and $sqfndiff03 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr03,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr04,'“') and $sqfndiff04 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr04,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr05,'“') and $sqfndiff05 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr05,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr06,'“') and $sqfndiff06 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr06,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr07,'“') and $sqfndiff07 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr07,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr08,'“') and $sqfndiff08 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr08,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr09,'“') and $sqfndiff09 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr09,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
+      <xsl:if test="contains($indqfnstr10,'“') and $sqfndiff10 = 0">
+         <xsl:text> </xsl:text>
+         <xsl:element name="span">
+            <xsl:attribute name="class">
+               <xsl:value-of select="concat('quote-error-',@style)"/>
+            </xsl:attribute>
+            <xsl:value-of select="concat('“',substring-after($indqfnstr10,'“'),'”')"/>
+         </xsl:element>
+      </xsl:if>
    </xsl:template>
    <xsl:template match="figure[@style = 'fig']">
       <xsl:variable name="curpos" select="position()"/>
@@ -5980,7 +6266,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6051,7 +6337,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
                <!--common char errors-->
@@ -6203,7 +6489,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6400,7 +6686,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6516,7 +6802,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6604,7 +6890,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6688,7 +6974,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6779,7 +7065,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -6818,15 +7104,15 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> lenpretext = <xsl:value-of select="concat($sq,$lenpretext,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="precedingchar" select="substring($precedingtext,$lenpretext,1) "/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> precedingchar = <xsl:value-of select="concat($sq,$precedingchar,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="preceding2char"
                     select="substring($precedingtext,$lenpretext - 1,2) "/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> preceding2char = <xsl:value-of select="concat($sq,$preceding2char,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="precedingchar" select="substring($precedingtext,$lenpretext,1) "/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> precedingchar = <xsl:value-of select="concat($sq,$precedingchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -6894,7 +7180,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7009,7 +7295,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7038,16 +7324,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:text>+</xsl:text>
          </xsl:if>
       </xsl:variable>
-      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
@@ -7058,15 +7334,25 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="pretextlastchar"
-                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
+         <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -7128,7 +7414,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7157,16 +7443,6 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:text>+</xsl:text>
          </xsl:if>
       </xsl:variable>
-      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="postsibnode1" select="following-sibling::node()[1]"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postsibnode1 = <xsl:value-of select="concat($sq,$postsibnode1,$sq,' ')"/>
@@ -7177,15 +7453,25 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> postsibtext1 = <xsl:value-of select="concat($sq,$postsibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="pretextlastchar"
-                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:variable name="presibnode1" select="preceding-sibling::node()[1]"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
+         <xsl:comment> presibnode1 = <xsl:value-of select="concat($sq,$presibnode1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="postchar1" select="substring($postsibtext1,1,1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postchar1 = <xsl:value-of select="concat($sq,$postchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="pretextlastchar"
+                    select="substring($presibtext1,string-length($presibtext1),1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pretextlastchar = <xsl:value-of select="concat($sq,$pretextlastchar,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -7243,7 +7529,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7272,14 +7558,14 @@ fnstring = <xsl:value-of select="$fnstring"/>
             <xsl:text>+</xsl:text>
          </xsl:if>
       </xsl:variable>
-      <xsl:variable name="posttext" select="following::text()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="b" select="b"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> b = <xsl:value-of select="concat($sq,$b,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="posttext" select="following::text()[1]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="presibtext1" select="preceding-sibling::text()[1]"/>
@@ -7287,14 +7573,14 @@ fnstring = <xsl:value-of select="$fnstring"/>
          <xsl:comment> presibtext1 = <xsl:value-of select="concat($sq,$presibtext1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="postnodechar1" select="substring($posttext,1,1)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> postnodechar1 = <xsl:value-of select="concat($sq,$postnodechar1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="lastchar" select="substring(.,string-length(.),1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> lastchar = <xsl:value-of select="concat($sq,$lastchar,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="postnodechar1" select="substring($posttext,1,1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> postnodechar1 = <xsl:value-of select="concat($sq,$postnodechar1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="pretextlastchar"
@@ -7356,7 +7642,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7439,7 +7725,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7522,7 +7808,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -7602,7 +7888,7 @@ fnstring = <xsl:value-of select="$fnstring"/>
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
