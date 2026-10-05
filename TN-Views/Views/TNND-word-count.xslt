@@ -5,16 +5,16 @@
     # Purpose:  	Combine first \ml1 and make into paragraphs count words per sentence.
     # Part of:  		https://github.com/SILAsiaPub/PT-views
     # Author:   	Ian McQuay <ian_mcquay@sil.org>
-    # Created:  	2020-07-08 Modified: v2 2023-04-21, v3 2023-04-22
+    # Created:  	2020-07-08 Modified: v2 2023-04-21, v3 2023-04-22, v9 2026-10-05 
     # Copyright:	(c) 2023 SIL International
     # Licence:  	<MIT>
     ################################################################ -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:str="http://exslt.org/strings" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl str">
     <xsl:output method="xml" version="1.0" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:variable name="version" select="'8'"/>
+    <xsl:variable name="version" select="'9'"/>
     <xsl:variable name="view" select="' TNND word count view.'"/>
-    <xsl:variable name="created" select="' Modified: 2024-06-19'"/>
+    <xsl:variable name="created" select="' Modified: 2026-10-05'"/>
     <!-- Define the color levels and colors-->
     <xsl:variable name="level1" select="17"/>
     <xsl:variable name="color1" select="'orange'"/>
@@ -34,7 +34,10 @@
     <xsl:variable name="colonrdqsp" select="':” '"/>
     <!-- end followed by right single quote -->
     <xsl:variable name="periodrsqsp" select="'.’ '"/>
+    <xsl:variable name="periodrsqsprdq" select="'.’ ”'"/>
     <xsl:variable name="questrsqsp" select="'?’ '"/>
+    <xsl:variable name="questrsqsprdq" select="'?’ ”'"/>
+    <xsl:variable name="exclamrsqsprdq" select="'!’ ”'"/>
     <xsl:variable name="exclamrsqsp" select="'!’ '"/>
     <xsl:variable name="colonrsqsp" select="':’ '"/>
     <!-- end followed by " -->
@@ -58,7 +61,6 @@
     <xsl:variable name="exclamrsbsp" select="'!] '"/>
     <xsl:variable name="colonrsbsp" select="':] '"/>
     <xsl:template match="/*">
-    
         <xsl:element name="h4">
             <xsl:value-of select="concat('Version: ',$version,$view,$created)"/>
         </xsl:element>
@@ -431,12 +433,31 @@
                 </xsl:call-template>
             </xsl:when>
             <!-- handle single smart quotes after sentence end punct -->
+            <xsl:when test="contains($string,$periodrsqsprdq)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$periodrsqsprdq"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,$questrsqsprdq)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$questrsqsprdq"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($string,$exclamrsqsprdq)">
+                <xsl:call-template name="insert-token">
+                    <xsl:with-param name="string" select="$string"/>
+                    <xsl:with-param name="divider" select="$exclamrsqsprdq"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="contains($string,$periodrsqsp)">
                 <xsl:call-template name="insert-token">
                     <xsl:with-param name="string" select="$string"/>
                     <xsl:with-param name="divider" select="$periodrsqsp"/>
                 </xsl:call-template>
             </xsl:when>
+
             <xsl:when test="contains($string,$questrsqsp)">
                 <xsl:call-template name="insert-token">
                     <xsl:with-param name="string" select="$string"/>
