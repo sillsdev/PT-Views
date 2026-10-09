@@ -33,7 +33,7 @@
    <xsl:variable name="letulcsub2">UUUUUUUUUUUUUUUUUUUUUUUUUULLLLLLLLLLLLLLLLLLLLLLLLLL</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-07-11</xsl:variable>
+   <xsl:variable name="moddate">2026-10-09</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -195,7 +195,7 @@ div {white-space: normal;}
 .err-char-imp-post-12 {background:orange;border-right:4pt solid red;}
 .err-char-imp-post-12::after {content:'This implied bracket sequence is incomplete or incorrect (it should be: \\brk ⌊\\brk*\\imp...\\imp*\\brk ⌋\\brk*)  [D12]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-imp-pre-13 {background:orange;border-left:4pt solid red;}
-.err-char-imp-pre-13::after {content:'This \\imp...\\imp* should be preceded by \\bk ⌊\\bk* or a \\rgi and a space.  [D13]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-imp-pre-13::after {content:'This \\imp...\\imp* should be preceded by \\brk ⌊\\brk* or a \\rgi and a space.  [D13]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-rgi-pre-15 {background:orange;border-left:4pt solid red;}
 .err-char-rgi-pre-15::after {content:'The \\rgi should be immediately after the word it modifies.  [D15]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-rgi-post-47 {background:orange;border-right:4pt solid red;}
@@ -219,7 +219,7 @@ div {white-space: normal;}
 .err-char-brk-pre-6 {background:orange;border-left:4pt solid red;}
 .err-char-brk-pre-6::after {content:'This \\brk SFM is not preceded by a space or quotes or left parenthesis  [D6]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-9 {background:orange;border-right:4pt solid red;}
-.err-char-brk-post-9::after {content:'This \\brk SFM is not followed by a space or punctuation  [D9]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-brk-post-9::after {content:'This \\brk SFM is not followed by a space or punctuation (but a hyphen probably does not belong after the \\brk*).  [D9]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk--10 {background:orange;}
 .err-char-brk--10::after {content:'This \\brk SFM can contain only ⌊ or ⌋ but this does not match either of those.  [D10]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-brk-post-4 {background:orange;border-right:4pt solid red;}
@@ -276,10 +276,14 @@ div {white-space: normal;}
 .err-para--mid-C08-7::after {content:'There should not be a space before this ellipsis.  [DC08.7]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-8 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-8::after {content:'There should not be a space before this ellipsis.  [DC08.8]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-26 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-26::after {content:'There should be a space between the ellipsis and the following letter.  [DC08.26]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-9 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-9::after {content:'There should not be a space before this ellipsis.  [DC08.9]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-10 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-10::after {content:'There should not be a space before this ellipsis.  [DC08.10]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-para--mid-C08-25 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
+.err-para--mid-C08-25::after {content:'There should be a space between the semicolon and the ellipsis.  [DC08.25]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-11 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
 .err-para--mid-C08-11::after {content:'There should not be a space before this ellipsis.  [DC08.11]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-para--mid-C08-12 {background:peachpuff;border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;}
@@ -506,6 +510,16 @@ div {white-space: normal;}
          <xsl:comment> strlenb4chap = <xsl:value-of select="concat($sq,$strlenb4chap,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sbxc"
                     select="normalize-space(translate(substring-before(text(),':'),$letulc,''))"/>
       <xsl:if test="$debug = 'on'">
@@ -516,16 +530,6 @@ div {white-space: normal;}
                     select="translate(substring-after(text(),':'),$validvletpunc,'')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> sbxv = <xsl:value-of select="concat($sq,$sbxv,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="preverse" select="preceding::verse[1]/@number"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="prechapter" select="preceding::chapter[1]/@number"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> prechapter = <xsl:value-of select="concat($sq,$prechapter,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="chappos"
@@ -642,7 +646,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -720,7 +724,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -798,7 +802,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -863,7 +867,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
                <!--common char errors-->
@@ -938,7 +942,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1020,7 +1024,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1098,7 +1102,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1176,7 +1180,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1210,14 +1214,14 @@ div {white-space: normal;}
          <xsl:comment> posttext = <xsl:value-of select="concat($sq,$posttext,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="style" select="@style"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> style = <xsl:value-of select="concat($sq,$style,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
       <xsl:variable name="postnodechar1" select="substring($posttext,1,1)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> postnodechar1 = <xsl:value-of select="concat($sq,$postnodechar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="style" select="@style"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> style = <xsl:value-of select="concat($sq,$style,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:comment>
@@ -1265,7 +1269,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1313,13 +1317,13 @@ div {white-space: normal;}
             <xsl:if test="preceding::chapter">
                <!--specific char errors--><!--ref 6 - rank=0-->
                <xsl:if test="contains(text(),'⌊') and position() &gt; 1 and not(preceding-sibling::node()[1][@style = 'tbb']) and not(substring(following-sibling::char[1][@style = 'imp'],1,1) = '’')">
-                  <xsl:if test="not(translate(substring($presibnode1,string-length($presibnode1),1),'+ “/(‘','_+++++') = '+')">
+                  <xsl:if test="not(translate(substring($presibnode1,string-length($presibnode1),1),'+ “ /˽(‘','_+++++++') = '+')">
                      <xsl:text> err-char-brk-pre-6</xsl:text>
                   </xsl:if>
                </xsl:if>
                <!--ref 9 - rank=5-->
                <xsl:if test="contains(text(),'⌋') and not(position() = last()) and not(substring($presibnode1,string-length($presibnode1),1) = '-')">
-                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’)-','_+++++++++++') = '+')">
+                  <xsl:if test="not(translate(substring($postsibnode1,1,1),'+ ,.?!:;”’)','_++++++++++') = '+')">
                      <xsl:text> err-char-brk-post-9</xsl:text>
                   </xsl:if>
                </xsl:if>
@@ -1375,7 +1379,7 @@ div {white-space: normal;}
                   </xsl:if>
                </xsl:if>
                <!--ref C08.19 - rank=19-->
-               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'">
+               <xsl:if test="substring(following-sibling::text()[1],1,1) = '…'  and following-sibling::text()[1] = following-sibling::node()[1] and not(translate(substring(following-sibling::text()[1],2,1),'@.,?!','_@@@@') = '@' )">
                   <xsl:text> err-char--post-C08-19</xsl:text>
                </xsl:if>
             </xsl:if>
@@ -1614,6 +1618,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -1621,6 +1629,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1739,6 +1751,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -1746,6 +1762,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -1891,6 +1911,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -1898,6 +1922,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2025,6 +2053,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -2032,6 +2064,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2159,6 +2195,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -2166,6 +2206,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2315,6 +2359,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -2322,6 +2370,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2399,15 +2451,15 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> preverse = <xsl:value-of select="concat($sq,$preverse,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
+      <xsl:variable name="sl1c" select="substring-before(text()[1],':')"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> sl1c = <xsl:value-of select="concat($sq,$sl1c,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
       <xsl:variable name="sl1v"
                     select="translate(substring-after(text()[1],':'),$validvletpunc,'')"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> sl1v = <xsl:value-of select="concat($sq,$sl1v,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="sl1c" select="substring-before(text()[1],':')"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> sl1c = <xsl:value-of select="concat($sq,$sl1c,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="precleanverse"
@@ -2482,6 +2534,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -2489,6 +2545,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -2580,9 +2640,14 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       <xsl:comment>
 paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       </xsl:comment>
-      <xsl:variable name="presl1text" select="presl1text"/>
+      <xsl:variable name="curlastnodetext" select="node()[last()]"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> presl1text = <xsl:value-of select="concat($sq,$presl1text,$sq,' ')"/>
+         <xsl:comment> curlastnodetext = <xsl:value-of select="concat($sq,$curlastnodetext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="lasttext" select="text()[last()]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> lasttext = <xsl:value-of select="concat($sq,$lasttext,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="postRsqchar1sub"
@@ -2591,9 +2656,9 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> postRsqchar1sub = <xsl:value-of select="concat($sq,$postRsqchar1sub,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="Rsqmodstring" select="translate(.,$postrsq,'')"/>
+      <xsl:variable name="presl1text" select="presl1text"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> Rsqmodstring = <xsl:value-of select="concat($sq,$Rsqmodstring,$sq,' ')"/>
+         <xsl:comment> presl1text = <xsl:value-of select="concat($sq,$presl1text,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="presl1textlast"
@@ -2608,14 +2673,20 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
          <xsl:comment> presl1textposttbb = <xsl:value-of select="concat($sq,$presl1textposttbb,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="lasttext" select="text()[last()]"/>
+      <xsl:variable name="Rsqmodstring" select="translate(.,$postrsq,'')"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> lasttext = <xsl:value-of select="concat($sq,$lasttext,$sq,' ')"/>
+         <xsl:comment> Rsqmodstring = <xsl:value-of select="concat($sq,$Rsqmodstring,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
-      <xsl:variable name="curlastnodetext" select="node()[last()]"/>
+      <xsl:variable name="curlastnodetextb4lb"
+                    select="substring-before($curlastnodetext,' (')"/>
       <xsl:if test="$debug = 'on'">
-         <xsl:comment> curlastnodetext = <xsl:value-of select="concat($sq,$curlastnodetext,$sq,' ')"/>
+         <xsl:comment> curlastnodetextb4lb = <xsl:value-of select="concat($sq,$curlastnodetextb4lb,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curlasttextlen" select="string-length($curlastnodetext)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curlasttextlen = <xsl:value-of select="concat($sq,$curlasttextlen,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="presl1postRsqchar1sub"
@@ -2627,56 +2698,6 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
       <xsl:variable name="presl1textlastlen" select="string-length($presl1textlast)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> presl1textlastlen = <xsl:value-of select="concat($sq,$presl1textlastlen,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curlasttextlen" select="string-length($curlastnodetext)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curlasttextlen = <xsl:value-of select="concat($sq,$curlasttextlen,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curlastnodetextb4lb"
-                    select="substring-before($curlastnodetext,' (')"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curlastnodetextb4lb = <xsl:value-of select="concat($sq,$curlastnodetextb4lb,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="curRsqcount"
-                    select="string-length(.) - string-length(translate(., $rsq, ''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> curRsqcount = <xsl:value-of select="concat($sq,$curRsqcount,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presl1postRsqcount"
-                    select="string-length($presl1text) - string-length(translate($presl1text, $rsq, ''))"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presl1postRsqcount = <xsl:value-of select="concat($sq,$presl1postRsqcount,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="pesib1sty" select="preceding-sibling::*[1]/@style"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> pesib1sty = <xsl:value-of select="concat($sq,$pesib1sty,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="precedingtext" select="preceding::text()[1]"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> precedingtext = <xsl:value-of select="concat($sq,$precedingtext,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presl1textchar1" select="substring($presl1textlast,1,1)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presl1textchar1 = <xsl:value-of select="concat($sq,$presl1textchar1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presl1textposttbbchar1"
-                    select="substring($presl1textposttbb,1,1)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presl1textposttbbchar1 = <xsl:value-of select="concat($sq,$presl1textposttbbchar1,$sq,' ')"/>
-         </xsl:comment>
-      </xsl:if>
-      <xsl:variable name="presl1textcharlast"
-                    select="substring($presl1textlast,$presl1textlastlen,1)"/>
-      <xsl:if test="$debug = 'on'">
-         <xsl:comment> presl1textcharlast = <xsl:value-of select="concat($sq,$presl1textcharlast,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curfirstchar" select="substring(text()[1],1,1)"/>
@@ -2699,6 +2720,45 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                     select="string-length($curlastnodetextb4lb)"/>
       <xsl:if test="$debug = 'on'">
          <xsl:comment> curlastnodetextb4lblen = <xsl:value-of select="concat($sq,$curlastnodetextb4lblen,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="curRsqcount"
+                    select="string-length(.) - string-length(translate(., $rsq, ''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> curRsqcount = <xsl:value-of select="concat($sq,$curRsqcount,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="pesib1sty" select="preceding-sibling::*[1]/@style"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> pesib1sty = <xsl:value-of select="concat($sq,$pesib1sty,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="precedingtext" select="preceding::text()[1]"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> precedingtext = <xsl:value-of select="concat($sq,$precedingtext,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presl1postRsqcount"
+                    select="string-length($presl1text) - string-length(translate($presl1text, $rsq, ''))"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1postRsqcount = <xsl:value-of select="concat($sq,$presl1postRsqcount,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presl1textchar1" select="substring($presl1textlast,1,1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textchar1 = <xsl:value-of select="concat($sq,$presl1textchar1,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presl1textcharlast"
+                    select="substring($presl1textlast,$presl1textlastlen,1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textcharlast = <xsl:value-of select="concat($sq,$presl1textcharlast,$sq,' ')"/>
+         </xsl:comment>
+      </xsl:if>
+      <xsl:variable name="presl1textposttbbchar1"
+                    select="substring($presl1textposttbb,1,1)"/>
+      <xsl:if test="$debug = 'on'">
+         <xsl:comment> presl1textposttbbchar1 = <xsl:value-of select="concat($sq,$presl1textposttbbchar1,$sq,' ')"/>
          </xsl:comment>
       </xsl:if>
       <xsl:variable name="curlastcharb4lb"
@@ -2773,6 +2833,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -2780,6 +2844,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -3079,6 +3147,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -3086,6 +3158,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">
@@ -3227,6 +3303,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="contains(.,' …?')">
                   <xsl:text> err-para--mid-C08-8</xsl:text>
                </xsl:if>
+               <!--ref C08.26 - rank=8-->
+               <xsl:if test="contains(translate($paratxt,$letulc,$letulcsub2),'…L') ">
+                  <xsl:text> err-para--mid-C08-26</xsl:text>
+               </xsl:if>
                <!--ref C08.9 - rank=9-->
                <xsl:if test="contains(.,' …!')">
                   <xsl:text> err-para--mid-C08-9</xsl:text>
@@ -3234,6 +3314,10 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <!--ref C08.10 - rank=10-->
                <xsl:if test="contains(.,' …”')">
                   <xsl:text> err-para--mid-C08-10</xsl:text>
+               </xsl:if>
+               <!--ref C08.25 - rank=10-->
+               <xsl:if test="contains(.,';…')">
+                  <xsl:text> err-para--mid-C08-25</xsl:text>
                </xsl:if>
                <!--ref C08.11 - rank=11-->
                <xsl:if test="contains(.,' …’')">

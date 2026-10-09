@@ -33,7 +33,7 @@
    <xsl:variable name="letulcsub2">UUUUUUUUUUUUUUUUUUUUUUUUUULLLLLLLLLLLLLLLLLLLLLLLLLL</xsl:variable>
    <xsl:variable name="letulcendpuncsub">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%</xsl:variable>
    <xsl:variable name="lsq">‘</xsl:variable>
-   <xsl:variable name="moddate">2025-09-23</xsl:variable>
+   <xsl:variable name="moddate">2026-10-09</xsl:variable>
    <xsl:variable name="modified"> Modified: </xsl:variable>
    <xsl:variable name="numb">1234567890</xsl:variable>
    <xsl:variable name="numbsub">##########</xsl:variable>
@@ -430,8 +430,10 @@ div {white-space: normal;}
 .err-char-tec-mid-11-1::after {content:'The first character should not be punctuation unless you are specifically talking about that punctuation in this Note, or it is a short quote within a larger text.  [N11.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-20-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tec-mid-20-3::after {content:'A \\tec cannot contain a footnote (\\f ...\\f*). It must be after the \\tec*.  [N20.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
-.err-char-tec-mid-10-32 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
-.err-char-tec-mid-10-32::after {content:'The last character of this \\tec should be a colon.  [N10.32]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-tec-mid-10-32-1 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-tec-mid-10-32-1::after {content:'The last character of this \\tec should be a colon when not followed by \\ros  [N10.32.1]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-tec-mid-10-32-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
+.err-char-tec-mid-10-32-2::after {content:'The last character of this \\tec should be a colon when not followed by \\ros  [N10.32.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-pre-10-2-3 {background:orange;border-left:4pt solid red;}
 .err-char-tec-pre-10-2-3::after {content:'This \\tec should not be here. There should be only one \\tec at the start of this paragraph.  [N10.2.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tec-mid-10-31 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -487,7 +489,7 @@ div {white-space: normal;}
 .err-char-ros-post-29-2 {background:orange;border-right:4pt solid red;}
 .err-char-ros-post-29-2::after {content:'There should be a narrow no-break space (\\u202F) or an ellipsis character (…) after the \\ros*. For a narrow no-break space, type in a normal space after the \\ros* and autocorrect will change it to the right one.  [N29.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-ros-pre-29-3 {background:orange;border-left:4pt solid red;}
-.err-char-ros-pre-29-3::after {content:'There should be a space or ellipsis before this \\ros.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
+.err-char-ros-pre-29-3::after {content:'There should be a space, opeing bracket or ellipsis before this \\ros.  [N29.3]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-tre-mid-30-2 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
 .err-char-tre-mid-30-2::after {content:'There is a space before the closing SFM. Best to put the space after the close, except if followed by \\teu.  [N30.2]';border:2pt solid thistle;border-left:5pt solid tomato;}
 .err-char-teu-mid-30-3 {border-left:2pt dotted red;border-top:2pt dotted red;border-bottom:2pt dotted red;background:orange;}
@@ -1712,7 +1714,7 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                </xsl:if>
                <!--specific para errors-->
                <!--ref 18.1 - rank=-->
-               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'q1tn' or @style = 'q2tn' or @style = 'li1' or @style = 'li2' or @style = 'gra' or @style = 'gj' or @style = 'hb1'])">
+               <xsl:if test="not(preceding-sibling::*[1][@style = 'rem' or @style = 's3' or @style = 's5' or @style = 'ntn' or name() = 'table' or @style = 'n2' or @style = 'ntn' or @style = 'qp' or @style = 'qns' or @style = 'q1tn' or @style = 'q2tn' or @style = 'li1' or @style = 'li2' or @style = 'gra' or @style = 'gj' or @style = 'hb1'])">
                   <xsl:text> err-para-ntn-pre-18-1</xsl:text>
                </xsl:if>
                <!--ref 24.1 - rank=-->
@@ -6441,9 +6443,17 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                <xsl:if test="*[@style = 'f']">
                   <xsl:text> err-char-tec-mid-20-3</xsl:text>
                </xsl:if>
-               <!--ref 10.32 - rank=3-->
+               <!--ref 10.32.1 - rank=3-->
+               <xsl:if test="not(following::char[1][@style='ros'])">
+                  <xsl:if test="not($lastchar = ':')">
+                     <xsl:text> err-char-tec-mid-10-32-1</xsl:text>
+                  </xsl:if>
+               </xsl:if>
+               <!--ref 10.32.2 - rank=3-->
                <xsl:if test="not($lastchar = ':')">
-                  <xsl:text> err-char-tec-mid-10-32</xsl:text>
+                  <xsl:if test="not(following::char[1][@style='ros'])">
+                     <xsl:text> err-char-tec-mid-10-32-2</xsl:text>
+                  </xsl:if>
                </xsl:if>
                <!--ref 10.2.3 - rank=5-->
                <xsl:if test="$countpretec &gt; 0">
@@ -7601,7 +7611,7 @@ paratxt = <xsl:value-of select="concat($sq,$paratxt,$sq,' ')"/>
                   <xsl:text> err-char-ros-post-29-2</xsl:text>
                </xsl:if>
                <!--ref 29.3 - rank=5-->
-               <xsl:if test="translate($pretextlastchar,'+ …','_++') != '+'">
+               <xsl:if test="translate($pretextlastchar,'+ …(','_+++') != '+'">
                   <xsl:if test="string-length($pretextlastchar) &gt; 0">
                      <xsl:text> err-char-ros-pre-29-3</xsl:text>
                   </xsl:if>
